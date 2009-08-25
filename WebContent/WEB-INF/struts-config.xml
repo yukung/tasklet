@@ -4,6 +4,30 @@
   <data-sources>
   </data-sources>
   <form-beans>
+    <!-- ログイン情報用Form -->
+    <form-bean name="loginForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+      <form-property name="userId" type="java.lang.String"/>
+      <form-property name="password" type="java.lang.String"/>
+    </form-bean>
+    <!-- アクティビティ情報用Form -->
+    <form-bean name="addActivityForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+      <form-property name="activityName" type="java.lang.String"/>
+    </form-bean>
+    <!-- タスク一覧選択用Form -->
+    <form-bean name="checkTaskForm" type="tasklet.form.checkTaskForm"/>
+    <!-- タスク追加用Form -->
+    <form-bean name="addTaskForm" type="tasklet.form.addTaskForm"/>
+    <!-- タスク状況更新用Form -->
+    <form-bean name="updateTaskForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+      <form-property name="actualTime" type="java.lang.Double"/>
+      <form-property name="note" type="java.lang.String"/>
+    </form-bean>
+    <!-- タスク属性修正用Form -->
+    <form-bean name="modifyTaskForm" type="tasklet.form.modifyTaskForm"/>
+    <!-- メモ追加用Form -->
+    <form-bean name="addNoteForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+      <form-property name="note" type="java.lang.String"/>
+    </form-bean>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
