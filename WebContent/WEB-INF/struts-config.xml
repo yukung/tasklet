@@ -34,6 +34,9 @@
   <global-forwards>
   </global-forwards>
   <action-mappings>
+    <!-- トップページへのフォワードAction -->
+    <action path="/index" forward="/top">
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>
