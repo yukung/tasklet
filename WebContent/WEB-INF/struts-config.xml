@@ -34,7 +34,7 @@
   <global-forwards>
   </global-forwards>
   <action-mappings>
-    <!-- トップページへのフォワードAction -->
+    <!-- トップページへのForwardAction -->
     <action path="/index" forward="/top">
     </action>
   </action-mappings>

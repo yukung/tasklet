@@ -1,42 +1,61 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
  <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
        "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
 
 
-<!--
-     This is a blank Tiles definition file with a commented example.
--->
-
 <tiles-definitions>
 
-    <!-- sample tiles definitions
-    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
-        <put name="title"  value="Sample Page Title" />
-        <put name="header" value="/common/header.jsp" />
-        <put name="menu"   value=".mainMenu" />
-        <put name="footer" value="/common/footer.jsp" />
-        <put name="body"   value=".portal.body" />
+    <definition name="base" path="/jsp/layout/template.jsp">
+    	<put name="title" value="" />
+    	<put name="header" value="/jsp/layout/header.jsp" />
+    	<put name="menu" value="/jsp/layout/menu.jsp" />
+    	<put name="main" value="/" />
+    	<put name="sidebar" value="/" />
+    	<put name="footer" value="/jsp/layout/footer.jsp" />
     </definition>
 
-    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
-        <putList name="list" >
-            <add value=".menu.links" />
-            <add value=".menu.taglib.references" />
-            <add value=".menu.printer.friendly" />
-            <add value=".menu.old.documents" />
-      </putList>
+    <definition name="top" extends="base">
+    	<put name="title" value="Tasklet - タスク管理ツール" />
+    	<put name="main" value="/jsp/tiles/top.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/login.jsp" />
     </definition>
 
-    <definition name="aPage" extends=".mainLayout">
-        <put name="title"  value="Another Title" />
-        <put name="body"   value=".aPage.body" />
+    <definition name="activity" extends="base">
+    	<put name="title" value="アクティビティ一覧 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/activity.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/actOperation.jsp" />
     </definition>
 
-    end samples -->
+    <definition name="task" extends="base">
+    	<put name="title" value="タスク一覧 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/task.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/taskOperation.jsp" />
+    </definition>
 
-    <definition name="${YOUR_DEFINITION_HERE}">
+    <definition name="addTask" extends="base">
+    	<put name="title" value="タスクの追加 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/addTask.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/taskInfo.jsp" />
+    </definition>
+
+    <definition name="activity" extends="base">
+    	<put name="title" value="タスクの詳細 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/detail.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/detailInfo.jsp" />
+    </definition>
+
+    <definition name="activity" extends="base">
+    	<put name="title" value="タスクの修正 - Tasklet"/>
+    	<put name="main" value="/jsp/tiles/modify.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/modifyInfo.jsp" />
+    </definition>
+
+    <definition name="activity" extends="base">
+    	<put name="title" value="メモの追加 - Tasklet"/>
+    	<put name="main" value="/jsp/tiles/addMemo.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/memoInfo.jsp" />
     </definition>
 
 </tiles-definitions>
