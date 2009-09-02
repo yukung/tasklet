@@ -35,7 +35,14 @@
   </global-forwards>
   <action-mappings>
     <!-- トップページへのForwardAction -->
-    <action path="/index" forward="/top">
+    <action path="/index" forward="top">
+    </action>
+    <!-- 入力されたログインIDとパスワードが正しいかどうかをチェックし、正しい場合はユーザオブジェクトを生成し、sessionスコープに登録する。 -->
+    <action path="/login" name="loginForm" type="tasklet.action.LoginAction" scope="session" validate="true" input="top">
+      <forward name="success" path="/showActivities.do"/>
+      <forward name="failure" path="top"/>
+    </action>
+    <action path="/showActivities">
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
