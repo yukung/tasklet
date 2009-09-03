@@ -27,7 +27,6 @@ public class LoginAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 		DynaActionForm loginForm = (DynaActionForm) form;
 
 		String userId = (String) loginForm.get("userId");
