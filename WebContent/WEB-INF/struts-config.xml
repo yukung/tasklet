@@ -28,13 +28,22 @@
     <form-bean name="addNoteForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
       <form-property name="note" type="java.lang.String"/>
     </form-bean>
+    <!-- ユーザー情報登録Form -->
+    <form-bean name="registUserForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+      <form-property name="firstName" type="java.lang.String"/>
+      <form-property name="lastName" type="java.lang.String"/>
+      <form-property name="userId" type="java.lang.String"/>
+      <form-property name="email" type="java.lang.String"/>
+      <form-property name="password" type="java.lang.String"/>
+      <form-property name="confirm" type="java.lang.String"/>
+    </form-bean>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
   <global-forwards>
   </global-forwards>
   <action-mappings>
-    <!-- トップページへのForwardAction -->
+    <!-- トップページへ遷移する。 -->
     <action path="/index" forward="top">
     </action>
     <!-- 入力されたログインIDとパスワードが正しいかどうかをチェックし、正しい場合はユーザオブジェクトを生成し、sessionスコープに登録する。 -->
@@ -42,7 +51,15 @@
       <forward name="success" path="/showActivities.do"/>
       <forward name="failure" path="top"/>
     </action>
-    <action path="/showActivities">
+    <action path="/showActivities" forward="activities">
+    </action>
+    <!-- ユーザー登録画面に遷移する。 -->
+    <action path="/register" forward="register">
+    </action>
+    <!-- 入力されたユーザー情報から、ユーザー情報オブジェクトを生成し、データベースに追加する。 -->
+    <action path="/registUser" name="registUserForm" type="tasklet.action.registUserAction" scope="request" validate="true" input="register">
+      <forward name="success" path="registResult"/>
+      <forward name="failure" path="register"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

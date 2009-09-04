@@ -8,36 +8,31 @@ package tasklet.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.DynaActionForm;
 
 /**
- * ログイン処理を行うActionです。
+ * ユーザー情報登録を行うActionです。
  *
- * @author Yusuke
+ * @author Y.Ikeda
  *
  */
-public class LoginAction extends Action {
+public class registUserAction extends Action {
 
+	/* (非 Javadoc)
+	 * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
-		DynaActionForm loginForm = (DynaActionForm) form;
-
-		String userId = (String) loginForm.get("userId");
-		String password = (String) loginForm.get("password");
-		if (true) {
-			return mapping.findForward("success");
-		} else {
-			return mapping.findForward("failure");
-		}
+		// TODO 自動生成されたメソッド・スタブ
+		return super.execute(mapping, form, request, response);
 	}
+
+
 
 }

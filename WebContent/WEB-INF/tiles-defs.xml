@@ -22,13 +22,25 @@
     	<put name="sidebar" value="/jsp/tiles/login.jsp" />
     </definition>
 
-    <definition name="activity" extends="base">
+    <definition name="register" extends="base">
+    	<put name="title" value="ユーザー登録 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/register.jsp" />
+    	<put name="sidebar" value="/jsp/tiles/registerInfo.jsp" />
+    </definition>
+
+    <definition name="registResult" extends="base">
+    	<put name="title" value="ユーザー登録完了 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/registResult.jsp" />
+    	<put name="sidebar" value="/jsp/layout/sidebarDummy.jsp" />
+    </definition>
+
+    <definition name="activities" extends="base">
     	<put name="title" value="アクティビティ一覧 - Tasklet" />
     	<put name="main" value="/jsp/tiles/activity.jsp" />
     	<put name="sidebar" value="/jsp/tiles/actOperation.jsp" />
     </definition>
 
-    <definition name="task" extends="base">
+    <definition name="tasks" extends="base">
     	<put name="title" value="タスク一覧 - Tasklet" />
     	<put name="main" value="/jsp/tiles/task.jsp" />
     	<put name="sidebar" value="/jsp/tiles/taskOperation.jsp" />
@@ -40,19 +52,19 @@
     	<put name="sidebar" value="/jsp/tiles/taskInfo.jsp" />
     </definition>
 
-    <definition name="activity" extends="base">
+    <definition name="detail" extends="base">
     	<put name="title" value="タスクの詳細 - Tasklet" />
     	<put name="main" value="/jsp/tiles/detail.jsp" />
     	<put name="sidebar" value="/jsp/tiles/detailInfo.jsp" />
     </definition>
 
-    <definition name="activity" extends="base">
+    <definition name="modify" extends="base">
     	<put name="title" value="タスクの修正 - Tasklet"/>
     	<put name="main" value="/jsp/tiles/modify.jsp" />
     	<put name="sidebar" value="/jsp/tiles/modifyInfo.jsp" />
     </definition>
 
-    <definition name="activity" extends="base">
+    <definition name="memo" extends="base">
     	<put name="title" value="メモの追加 - Tasklet"/>
     	<put name="main" value="/jsp/tiles/addMemo.jsp" />
     	<put name="sidebar" value="/jsp/tiles/memoInfo.jsp" />
