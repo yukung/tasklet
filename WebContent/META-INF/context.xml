@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="tasklet" path="/tasklet" reloadable="true" source="org.eclipse.jst.j2ee.server:tasklet">
+	<Resource name="jdbc/tasklet" auth="Container" type="javax.sql.DataSource"
+		driverClassName="org.hsqldb.jdbcDriver"
+		url="jdbc:hsqldb:file:C:\Pleiades\workspace\tasklet\WebContent\WEB-INF\lib\db\tasklet"
+		factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory"
+		username="sa" password=""
+		maxWait="1000" maxActive="30" maxIdle="10"
+		removeAbandoned="true" removeAbondonedTimeout="60" logAbondoned="true" />
+</Context>
