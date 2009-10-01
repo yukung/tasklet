@@ -172,14 +172,14 @@ input.button {
 }
 
 /* search form */
-.searchform {
+.loginform {
 	background-color: transparent;
 	border: none;
 	margin: 0; padding: 5px 0 15px 0;
 	width: 190px;
 }
-.searchform p { margin: 0; padding: 0; }
-.searchform input.textbox {
+.loginform p { margin: 0; padding: 0; }
+.loginform input.textbox {
 	width: 120px;
 	color: #777;
 	height: 18px;
@@ -187,7 +187,7 @@ input.button {
 	border: 1px solid #E5E5E5;
 	vertical-align: top;
 }
-.searchform input.button {
+.loginform input.button {
 	width: 60px;
 	height: 24px;
 	padding: 2px 5px;

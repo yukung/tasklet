@@ -4,7 +4,7 @@
 			<div id="sidebar">
 
 				<h3>ログイン</h3>
-				<html:form action="/login" styleClass="searchform">
+				<html:form action="/login" styleClass="loginform">
 					<ul class="sidemenu">
 						<li>ユーザーID</li>
 						<li><html:text property="userId" styleClass="textbox"></html:text></li>

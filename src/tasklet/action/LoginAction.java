@@ -6,9 +6,11 @@
  */
 package tasklet.action;
 
+import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -16,10 +18,14 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 
+import tasklet.bean.User;
+import tasklet.dao.UserDao;
+import tasklet.dao.UserDaoImpl;
+
 /**
  * ログイン処理を行うActionです。
  *
- * @author Yusuke
+ * @author Y.Ikeda
  *
  */
 public class LoginAction extends Action {
@@ -33,7 +39,18 @@ public class LoginAction extends Action {
 
 		String userId = (String) loginForm.get("userId");
 		String password = (String) loginForm.get("password");
-		if (true) {
+
+		InitialContext initialContext = new InitialContext();
+		DataSource ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/tasklet");
+
+		UserDao dao = new UserDaoImpl(ds);
+		User user = dao.findUser(userId);
+
+		boolean isLogined = (user != null && userId.equals(user.getUserId()) && password.equals(user.getPassword()));
+		HttpSession session = request.getSession();
+		session.setAttribute("isLogined", isLogined);
+
+		if (isLogined) {
 			return mapping.findForward("success");
 		} else {
 			return mapping.findForward("failure");
