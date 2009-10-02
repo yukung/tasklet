@@ -11,9 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
 import tasklet.bean.User;
+import tasklet.util.ResourceManager;
 
 /**
  * ユーザ情報DAO実装クラスです。
@@ -21,16 +20,10 @@ import tasklet.bean.User;
  */
 public class UserDaoImpl implements UserDao {
 
-	/** データソース */
-	private DataSource ds;
-
 	/**
-	 * コンストラクタ
-	 * @param ds
+	 * デフォルトコンストラクタ
 	 */
-	public UserDaoImpl(DataSource ds) {
-		this.ds = ds;
-	}
+	public UserDaoImpl() {}
 
 	/* (非 Javadoc)
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
@@ -41,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 		PreparedStatement statement = null;
 
 		try {
-			connection = ds.getConnection();
+			connection = new ResourceManager().getConnection();
 
 			statement = connection.prepareStatement("SELECT * FROM tl_users WHERE user_id = ?");
 			statement.setString(1, userId);

@@ -6,12 +6,9 @@
  */
 package tasklet.action;
 
-import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
-
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -24,9 +21,7 @@ import tasklet.dao.UserDaoImpl;
 
 /**
  * ログイン処理を行うActionです。
- *
  * @author Y.Ikeda
- *
  */
 public class LoginAction extends Action {
 
@@ -40,10 +35,9 @@ public class LoginAction extends Action {
 		String userId = (String) loginForm.get("userId");
 		String password = (String) loginForm.get("password");
 
-		InitialContext initialContext = new InitialContext();
-		DataSource ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/tasklet");
+		/* ログインモデルクラスを呼び出してログイン処理する（↓の処理を委譲する） */
 
-		UserDao dao = new UserDaoImpl(ds);
+		UserDao dao = new UserDaoImpl();
 		User user = dao.findUser(userId);
 
 		boolean isLogined = (user != null && userId.equals(user.getUserId()) && password.equals(user.getPassword()));
