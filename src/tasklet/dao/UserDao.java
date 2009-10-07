@@ -17,8 +17,9 @@ public interface UserDao {
 	/**
 	 * ユーザーIDをキーにユーザ情報Beanを取得します。
 	 * @param userId
-	 * @return
+	 * @param password
+	 * @return ユーザー情報オブジェクト
 	 */
-	User findUser(String userId);
+	User findByUserIdAndPassword(String userId, String password);
 
 }

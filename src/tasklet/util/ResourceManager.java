@@ -26,16 +26,16 @@ public class ResourceManager {
 
 	/**
 	 * DataSourceからDB接続を得るメソッドです。
-	 * @return
+	 * @return Connection
 	 * @throws SQLException
 	 */
-	public Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		if (dataSource == null) {
 			try {
 				Context context = new InitialContext();
 				dataSource = (DataSource) context.lookup("java:comp/env/jdbc/taskletds");
 			} catch (NamingException e) {
-				throw new SQLException(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		return dataSource.getConnection();

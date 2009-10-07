@@ -13,6 +13,9 @@
 					</ul>
 					<html:submit value="ログイン" styleClass="button" />
 				</html:form>
+				<html:messages id="msg" message="false">
+					<bean:write name="msg" ignore="true" />
+				</html:messages>
 
 				<h3>新規登録</h3>
 				<p>新規登録は<html:link action="/register">こちら</html:link>から</p>

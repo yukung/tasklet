@@ -13,11 +13,13 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
 import tasklet.bean.User;
-import tasklet.dao.UserDao;
-import tasklet.dao.UserDaoImpl;
+import tasklet.service.accountService;
+import tasklet.service.accountServiceImpl;
 
 /**
  * ログイン処理を行うActionです。
@@ -35,20 +37,18 @@ public class LoginAction extends Action {
 		String userId = (String) loginForm.get("userId");
 		String password = (String) loginForm.get("password");
 
-		/* ログインモデルクラスを呼び出してログイン処理する（↓の処理を委譲する） */
-
-		UserDao dao = new UserDaoImpl();
-		User user = dao.findUser(userId);
-
-		boolean isLogined = (user != null && userId.equals(user.getUserId()) && password.equals(user.getPassword()));
-		HttpSession session = request.getSession();
-		session.setAttribute("isLogined", isLogined);
-
-		if (isLogined) {
+		accountService accountService = new accountServiceImpl();
+		User user = accountService.login(userId, password);
+		if (user != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
 			return mapping.findForward("success");
 		} else {
+			ActionMessages messages = new ActionMessages();
+			ActionMessage message = new ActionMessage("errors.invalid", password);
+			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
+			saveErrors(request, messages);
 			return mapping.findForward("failure");
 		}
 	}
-
 }
