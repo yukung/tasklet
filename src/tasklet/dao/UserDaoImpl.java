@@ -32,6 +32,39 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		this.source = source;
 	}
 
+	public User findByUserId(String userId) {
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			conn = source.getConnection();
+			statement = conn
+					.prepareStatement("SELECT * FROM tl_users WHERE user_id = ?");
+			statement.setString(1, userId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+
+			User user = new User();
+			user.setId(rs.getInt("id"));
+			user.setUserId(rs.getString("user_id"));
+			user.setFirstName(rs.getString("user_first_name"));
+			user.setLastName(rs.getString("user_last_name"));
+			user.setPassword(rs.getString("user_password"));
+			user.setEmail(rs.getString("user_email"));
+			return user;
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
+
 	/*
 	 * (非 Javadoc)
 	 *

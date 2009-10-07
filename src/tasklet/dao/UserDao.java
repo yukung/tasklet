@@ -15,7 +15,15 @@ import tasklet.bean.User;
 public interface UserDao {
 
 	/**
-	 * ユーザーIDをキーにユーザ情報Beanを取得します。
+	 * ユーザIDをキーにユーザ情報Beanを取得します。
+	 * @param userId
+	 * @return
+	 */
+	public User findByUserId(String userId);
+
+
+	/**
+	 * ユーザIDとパスワードをキーにユーザ情報Beanを取得します。
 	 * @param userId
 	 * @param password
 	 * @return ユーザー情報オブジェクト
