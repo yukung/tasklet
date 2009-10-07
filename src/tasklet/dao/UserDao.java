@@ -20,6 +20,6 @@ public interface UserDao {
 	 * @param password
 	 * @return ユーザー情報オブジェクト
 	 */
-	User findByUserIdAndPassword(String userId, String password);
+	public User findByUserIdAndPassword(String userId, String password);
 
 }

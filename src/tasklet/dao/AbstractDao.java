@@ -37,7 +37,7 @@ public abstract class AbstractDao {
 	 *
 	 * @param conn
 	 */
-	private void commit(Connection conn) {
+	protected void commit(Connection conn) {
 		if (conn != null) {
 			try {
 				conn.commit();
