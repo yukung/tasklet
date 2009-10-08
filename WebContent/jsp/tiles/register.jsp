@@ -4,7 +4,6 @@
 			<div id="main">
 
 				<h2>新規登録</h2>
-<%--
 				<html:form action="/registUser">
 					<p>
 						<label>姓</label>
@@ -22,8 +21,7 @@
 					</p>
 					<p>
 						<html:submit value="登録" styleClass="button" />
-						<html:reset value="リセット" />
+						<html:reset value="リセット" styleClass="button" />
 					</p>
 				</html:form>
- --%>
 			</div>
