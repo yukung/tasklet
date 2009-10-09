@@ -45,10 +45,10 @@ public class LoginAction extends Action {
 			return mapping.findForward("success");
 		} else {
 			ActionMessages messages = new ActionMessages();
-			ActionMessage message = new ActionMessage("errors.invalid", password);
+			ActionMessage message = new ActionMessage("errors.login");
 			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
 			saveErrors(request, messages);
-			return mapping.findForward("failure");
+			return mapping.getInputForward();
 		}
 	}
 }

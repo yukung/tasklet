@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:directive.include file="/jsp/includes/taglibs.jsp" />
-<%@ taglib prefix="html" uri="/tags/struts-html" %>
 <html:xhtml/>
 			<div id="sidebar">
 
