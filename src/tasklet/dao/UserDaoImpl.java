@@ -13,8 +13,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import tasklet.bean.User;
 import tasklet.common.DataAccessException;
+import tasklet.entity.User;
 
 /**
  * ユーザ情報DAO実装クラスです。

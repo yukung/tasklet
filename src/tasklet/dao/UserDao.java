@@ -6,7 +6,7 @@
  */
 package tasklet.dao;
 
-import tasklet.bean.User;
+import tasklet.entity.User;
 
 /**
  * ユーザ情報DAOインターフェースです。

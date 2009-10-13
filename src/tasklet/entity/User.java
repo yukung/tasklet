@@ -4,7 +4,7 @@
  *
  * This file is part of Tasklet.
  */
-package tasklet.bean;
+package tasklet.entity;
 
 /**
  * ユーザ情報を表すBeanクラスです。

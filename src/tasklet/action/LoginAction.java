@@ -9,7 +9,6 @@ package tasklet.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -17,7 +16,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
-import tasklet.bean.User;
+import tasklet.entity.User;
 import tasklet.service.accountService;
 import tasklet.service.accountServiceImpl;
 
@@ -25,12 +24,19 @@ import tasklet.service.accountServiceImpl;
  * ログイン処理を行うActionです。
  * @author Y.Ikeda
  */
-public class LoginAction extends Action {
+public class LoginAction extends AbstractAction {
 
+	/*
+	 * (非 Javadoc)
+	 *
+	 * @seetasklet.action.AbstractAction#doExecute(org.apache.struts.action.
+	 * ActionMapping, org.apache.struts.action.ActionForm,
+	 * javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
 
 		DynaActionForm loginForm = (DynaActionForm) form;
 

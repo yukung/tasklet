@@ -6,17 +6,18 @@
 				<ul class="sidemenu">
 					<li>姓
 						<ul>
-							<li>8文字以内</li>
+							<li>全角8文字以内</li>
 						</ul>
 					</li>
 					<li>名
 						<ul>
-							<li>8文字以内</li>
+							<li>全角8文字以内</li>
 						</ul>
 					</li>
 					<li>ユーザー名<strong>（必須）</strong>
 						<ul>
-							<li>2文字以上</li>
+							<li>半角英数字</li>
+							<li>2文字以上30文字以内</li>
 						</ul>
 					</li>
 					<li>携帯メールアドレス
@@ -26,12 +27,13 @@
 					</li>
 					<li>パスワード<strong>（必須）</strong>
 						<ul>
-							<li>6文字以上</li>
+							<li>半角英数字</li>
+							<li>6文字以上30文字以内</li>
 						</ul>
 					</li>
 					<li>パスワードの確認<strong>（必須）</strong>
 						<ul>
-							<li>同じパスワードをもう一度入力</li>
+							<li>入力したパスワードをもう一度入力</li>
 						</ul>
 					</li>
 				</ul>

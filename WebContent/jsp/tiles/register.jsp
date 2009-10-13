@@ -4,18 +4,19 @@
 
 				<h2>新規登録</h2>
 				<html:form action="/registUser">
+					<p>(*)は必須入力項目です。</p>
 					<p>
 						<label>姓</label>
 						<html:text property="firstName" />
 						<label>名</label>
 						<html:text property="lastName" />
-						<label>ユーザーID</label>
+						<label>ユーザーID(*)</label>
 						<html:text property="userId" />
 						<label>携帯メールアドレス</label>
 						<html:text property="email" />
-						<label>パスワード</label>
+						<label>パスワード(*)</label>
 						<html:password property="password" />
-						<label>パスワード確認</label>
+						<label>パスワード確認(*)</label>
 						<html:password property="confirm" />
 					</p>
 					<p>

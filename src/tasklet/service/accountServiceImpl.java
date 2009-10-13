@@ -6,8 +6,8 @@
  */
 package tasklet.service;
 
-import tasklet.bean.User;
 import tasklet.dao.UserDao;
+import tasklet.entity.User;
 import tasklet.factory.DaoFactory;
 
 /**
@@ -25,7 +25,6 @@ public class accountServiceImpl implements accountService {
 	public User login(String userId, String password) {
 		User user = userDao.findByUserIdAndPassword(userId, password);
 		if (user == null) {
-			// ユーザが存在しない例外を吐く
 			user = null;
 		}
 		return user;

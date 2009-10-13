@@ -6,7 +6,7 @@
  */
 package tasklet.service;
 
-import tasklet.bean.User;
+import tasklet.entity.User;
 
 /**
  * ユーザーアカウント関連のビジネスロジックを規定するインタフェースです。
