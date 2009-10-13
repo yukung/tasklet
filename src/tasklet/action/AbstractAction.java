@@ -21,9 +21,9 @@ import org.apache.struts.action.ActionMapping;
  * <p>
  * アクションクラスを定義する際は、このクラスをオーバーライドする必要があります。
  * </p>
- *
+ * 
  * @autho r Y.Ikeda
- *
+ * 
  */
 public abstract class AbstractAction extends Action {
 
@@ -45,16 +45,17 @@ public abstract class AbstractAction extends Action {
 
 	/**
 	 * 各アクションのエントリメソッドです。
-	 *
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return Forwardの定義名
+	 * @throws Exception
 	 */
 	public abstract ActionForward doExecute(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response);
+			HttpServletResponse response) throws Exception;
 
 	protected Log getLog() {
 		return LOG;

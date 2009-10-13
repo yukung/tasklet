@@ -16,20 +16,43 @@ import tasklet.dao.UserDaoImpl;
 
 /**
  * DAOの生成を行うFactoryクラスです。
+ * 
  * @author Y.Ikeda
- *
+ * 
  */
 public class DaoFactory {
 
+	/** シングルトンオブジェクト */
+	private static DaoFactory instance = null;
+
+	/**
+	 * シングルトンのためコンストラクタは外部から直接アクセス不可。
+	 */
+	private DaoFactory() {
+	}
+
+	/**
+	 * 当クラスのインスタンス取得時はこのメソッドを利用する。
+	 * 
+	 * @return DaoFactoryのシングルトンオブジェクト
+	 */
+	public static DaoFactory getInstance() {
+		if (instance == null) {
+			instance = new DaoFactory();
+		}
+		return instance;
+	}
+
 	/**
 	 * UserDaoを生成します。
+	 * 
 	 * @return UserDao
 	 */
-	public static UserDao createUserDao() {
+	public UserDao createUserDao() {
 		return new UserDaoImpl(getDataSource());
 	}
 
-	private static DataSource getDataSource() {
+	private DataSource getDataSource() {
 		InitialContext context = null;
 		DataSource ds = null;
 		try {

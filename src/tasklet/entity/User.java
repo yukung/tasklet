@@ -8,8 +8,9 @@ package tasklet.entity;
 
 /**
  * ユーザ情報を表すBeanクラスです。
+ * 
  * @author Y.Ikeda
- *
+ * 
  */
 public class User {
 
@@ -32,99 +33,117 @@ public class User {
 	private String email;
 
 	/**
-	 * プライマリーキーを取得します。
-	 * @return プライマリーキー
+	 * メールアドレスを取得します。
+	 * 
+	 * @return メールアドレス
 	 */
-	public int getId() {
-	    return id;
-	}
-
-	/**
-	 * プライマリーキーを設定します。
-	 * @param id プライマリーキー
-	 */
-	public void setId(int id) {
-	    this.id = id;
-	}
-
-	/**
-	 * ユーザIDを取得します。
-	 * @return ユーザID
-	 */
-	public String getUserId() {
-	    return userId;
-	}
-
-	/**
-	 * ユーザIDを設定します。
-	 * @param userId ユーザID
-	 */
-	public void setUserId(String userId) {
-	    this.userId = userId;
-	}
-
-	/**
-	 * パスワードを取得します。
-	 * @return パスワード
-	 */
-	public String getPassword() {
-	    return password;
-	}
-
-	/**
-	 * パスワードを設定します。
-	 * @param password パスワード
-	 */
-	public void setPassword(String password) {
-	    this.password = password;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
 	 * 姓を取得します。
+	 * 
 	 * @return 姓
 	 */
 	public String getFirstName() {
-	    return firstName;
+		return firstName;
 	}
 
 	/**
-	 * 姓を設定します。
-	 * @param firstName 姓
+	 * プライマリーキーを取得します。
+	 * 
+	 * @return プライマリーキー
 	 */
-	public void setFirstName(String firstName) {
-	    this.firstName = firstName;
+	public int getId() {
+		return id;
 	}
 
 	/**
 	 * 名を取得します。
+	 * 
 	 * @return 名
 	 */
 	public String getLastName() {
-	    return lastName;
+		return lastName;
 	}
 
 	/**
-	 * 名を設定します。
-	 * @param lastName 名
+	 * パスワードを取得します。
+	 * 
+	 * @return パスワード
 	 */
-	public void setLastName(String lastName) {
-	    this.lastName = lastName;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
-	 * メールアドレスを取得します。
-	 * @return メールアドレス
+	 * ユーザIDを取得します。
+	 * 
+	 * @return ユーザID
 	 */
-	public String getEmail() {
-	    return email;
+	public String getUserId() {
+		return userId;
 	}
 
 	/**
 	 * メールアドレスを設定します。
-	 * @param email メールアドレス
+	 * 
+	 * @param email
+	 *            メールアドレス
 	 */
 	public void setEmail(String email) {
-	    this.email = email;
+		this.email = email;
+	}
+
+	/**
+	 * 姓を設定します。
+	 * 
+	 * @param firstName
+	 *            姓
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * プライマリーキーを設定します。
+	 * 
+	 * @param id
+	 *            プライマリーキー
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * 名を設定します。
+	 * 
+	 * @param lastName
+	 *            名
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	/**
+	 * パスワードを設定します。
+	 * 
+	 * @param password
+	 *            パスワード
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * ユーザIDを設定します。
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }
