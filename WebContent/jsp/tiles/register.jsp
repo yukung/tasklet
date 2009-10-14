@@ -5,6 +5,7 @@
 				<h2>新規登録</h2>
 				<html:form action="/registUser">
 					<p>(*)は必須入力項目です。</p>
+					<html:errors />
 					<p>
 						<label>姓</label>
 						<html:text property="firstName" />

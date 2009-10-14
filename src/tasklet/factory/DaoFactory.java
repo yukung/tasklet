@@ -10,7 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import tasklet.common.DataAccessException;
+import tasklet.common.TaskletException;
 import tasklet.dao.UserDao;
 import tasklet.dao.UserDaoImpl;
 
@@ -65,10 +65,10 @@ public class DaoFactory {
 					context.close();
 				} catch (NamingException ex) {
 					ex.printStackTrace();
-					throw new DataAccessException();
+					throw new TaskletException();
 				}
 			}
-			throw new DataAccessException();
+			throw new TaskletException();
 		}
 		return ds;
 	}

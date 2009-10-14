@@ -37,6 +37,7 @@ public abstract class AbstractAction extends Action {
 		try {
 			return doExecute(mapping, form, request, response);
 		} catch (Exception e) {
+			// 到達しない例外? struts-config.xmlのglobal扱いのエラー?
 			LOG.error(e, e);
 			throw e;
 		}
@@ -51,11 +52,10 @@ public abstract class AbstractAction extends Action {
 	 * @param request
 	 * @param response
 	 * @return Forwardの定義名
-	 * @throws Exception
 	 */
 	public abstract ActionForward doExecute(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+			HttpServletResponse response);
 
 	protected Log getLog() {
 		return LOG;

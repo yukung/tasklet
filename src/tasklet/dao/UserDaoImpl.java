@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import tasklet.common.DataAccessException;
+import tasklet.common.TaskletException;
 import tasklet.entity.User;
 import tasklet.util.PropertyUtil;
 
@@ -70,7 +70,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			return user;
 
 		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
+			throw new TaskletException(e.getMessage(), e);
 		} finally {
 			close(rs);
 			close(statement);
@@ -115,7 +115,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			return user;
 
 		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
+			throw new TaskletException(e.getMessage(), e);
 		} finally {
 			close(rs);
 			close(statement);
@@ -128,7 +128,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 * 
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public int registUser(User user) {
+	public int registUser(User user) throws SQLException {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
@@ -150,7 +150,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			return statement.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
+			rollback(conn);
+			throw e;
 		} finally {
 			close(statement);
 			close(conn);

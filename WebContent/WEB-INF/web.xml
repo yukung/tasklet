@@ -21,12 +21,10 @@
 
 	<servlet>
 		<servlet-name>action</servlet-name>
-		<servlet-class>org.apache.struts.action.ActionServlet
-		</servlet-class>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
 		<init-param>
 			<param-name>config</param-name>
-			<param-value>/WEB-INF/struts-config.xml
-			</param-value>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
 		</init-param>
 		<init-param>
 			<param-name>debug</param-name>
@@ -50,35 +48,29 @@
 
 	<jsp-config>
 
-
 		<taglib>
 			<taglib-uri>/tags/struts-bean</taglib-uri>
-			<taglib-location>/WEB-INF/struts-bean.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
 		</taglib>
 
 		<taglib>
 			<taglib-uri>/tags/struts-html</taglib-uri>
-			<taglib-location>/WEB-INF/struts-html.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/struts-html.tld</taglib-location>
 		</taglib>
 
 		<taglib>
 			<taglib-uri>/tags/struts-logic</taglib-uri>
-			<taglib-location>/WEB-INF/struts-logic.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/struts-logic.tld</taglib-location>
 		</taglib>
 
 		<taglib>
 			<taglib-uri>/tags/struts-nested</taglib-uri>
-			<taglib-location>/WEB-INF/struts-nested.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/struts-nested.tld</taglib-location>
 		</taglib>
 
 		<taglib>
 			<taglib-uri>/tags/struts-tiles</taglib-uri>
-			<taglib-location>/WEB-INF/struts-tiles.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/struts-tiles.tld</taglib-location>
 		</taglib>
 
 		<!--
@@ -99,8 +91,7 @@
 			<el-ignored>false</el-ignored>
 			<page-encoding>UTF-8</page-encoding>
 			<scripting-invalid>false</scripting-invalid>
-			<include-prelude>/jsp/includes/taglibs.jsp
-			</include-prelude>
+			<include-prelude>/jsp/includes/taglibs.jsp</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
 

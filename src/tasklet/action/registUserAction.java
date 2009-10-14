@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
+import tasklet.common.TaskletException;
 import tasklet.entity.User;
 import tasklet.service.accountService;
 import tasklet.service.accountServiceImpl;
@@ -38,31 +39,40 @@ public class registUserAction extends AbstractAction {
 	 */
 	@Override
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			HttpServletRequest request, HttpServletResponse response) {
 
 		DynaActionForm registUserForm = (DynaActionForm) form;
 
 		User user = new User();
-		BeanUtils.copyProperties(user, registUserForm);
+		try {
+			// 入力情報をユーザーエンティティにマッピング
+			BeanUtils.copyProperties(user, registUserForm);
+		} catch (Exception e) {
+			// 入力項目とDB項目が合わない場合はエラー画面へ
+			throw new TaskletException(e.getMessage(), e);
+		}
 
 		accountService service = new accountServiceImpl();
-		boolean isSuccess = service.regist(user);
-		if (isSuccess) {
+		int resultCount = service.regist(user);
+		if (resultCount > 0) {
 			return mapping.findForward("success");
-			// ユーザー登録しました画面に遷移
+		} else if (resultCount == -1) {
+			// ユーザID重複
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage("errors.already");
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+			return mapping.getInputForward();
+		} else if (resultCount == 2) {
+			// DB項目あふれ
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage("errors.maxlength");
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+			return mapping.getInputForward();
 		} else {
-			ActionMessages messages = new ActionMessages();
-			ActionMessage message = new ActionMessage("errors.cancel");
-			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
-			saveErrors(request, messages);
+			// 更新なし
 			return mapping.getInputForward();
 		}
-		// DB登録サービスのインスタンス化
-		// DB登録
-		// ActionForward("success")
-		// 重複ユーザーIDの時はActionMessageにエラーメッセージ
-		// ActionInputForward
 	}
-
 }

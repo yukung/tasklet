@@ -6,6 +6,8 @@
  */
 package tasklet.service;
 
+import java.sql.SQLException;
+
 import tasklet.dao.UserDao;
 import tasklet.entity.User;
 import tasklet.factory.DaoFactory;
@@ -34,12 +36,25 @@ public class accountServiceImpl implements accountService {
 		return user;
 	}
 
-	public boolean regist(User user) {
-		int result = userDao.registUser(user);
-		if (result > 0) {
-			return true;
-		} else {
-			return false;
+	public int regist(User user) {
+		try {
+			// 0件は更新なし
+			return userDao.registUser(user);
+		} catch (SQLException e) {
+			int errorCode = e.getErrorCode();
+			// TODO ここのエラーハンドリングはDBMSごとにエラーコード変るのでうまく抽象化したいなぁ
+
+			System.out.println(e.getErrorCode());
+			if (errorCode == 9) {
+				// HSQLDBの一意性制約違反
+				return -1;
+			} else if (errorCode == 124) {
+				// HSQLDBの項目桁数あふれ
+				return -2;
+			} else {
+				return 0;
+			}
+
 		}
 	}
 }

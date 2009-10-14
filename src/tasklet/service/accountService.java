@@ -29,8 +29,8 @@ public interface accountService {
 	 * ユーザ情報をDBに登録します。
 	 * 
 	 * @param user
-	 * @return 登録結果
+	 * @return 登録件数
 	 */
-	public boolean regist(User user);
+	public int regist(User user);
 
 }

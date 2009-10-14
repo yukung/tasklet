@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import tasklet.common.DataAccessException;
+import tasklet.common.TaskletException;
 
 /**
  * Daoの基底クラスです。
@@ -42,7 +42,7 @@ public abstract class AbstractDao {
 			try {
 				conn.commit();
 			} catch (SQLException e) {
-				throw new DataAccessException(e.getMessage(), e);
+				throw new TaskletException(e.getMessage(), e);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public abstract class AbstractDao {
 			try {
 				conn.rollback();
 			} catch (SQLException e) {
-				throw new DataAccessException(e.getMessage(), e);
+				throw new TaskletException(e.getMessage(), e);
 			}
 		}
 	}
@@ -72,7 +72,7 @@ public abstract class AbstractDao {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				throw new DataAccessException(e.getMessage(), e);
+				throw new TaskletException(e.getMessage(), e);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ public abstract class AbstractDao {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				throw new DataAccessException(e.getMessage(), e);
+				throw new TaskletException(e.getMessage(), e);
 			}
 		}
 	}
@@ -102,7 +102,7 @@ public abstract class AbstractDao {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				throw new DataAccessException(e.getMessage(), e);
+				throw new TaskletException(e.getMessage(), e);
 			}
 		}
 	}

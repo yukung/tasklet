@@ -6,6 +6,10 @@
  */
 package tasklet.dao;
 
+
+
+import java.sql.SQLException;
+
 import tasklet.entity.User;
 
 /**
@@ -37,7 +41,8 @@ public interface UserDao {
 	 * 
 	 * @param ユーザ情報エンティティ
 	 * @return 更新件数
+	 * @throws SQLException TODO
 	 */
-	public int registUser(User user);
+	public int registUser(User user) throws SQLException;
 
 }
