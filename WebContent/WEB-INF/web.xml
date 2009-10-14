@@ -1,8 +1,24 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
+
+	<!-- エンコーディングフィルタの設定 -->
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>tasklet.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.apache.struts.action.ActionServlet
@@ -83,7 +99,8 @@
 			<el-ignored>false</el-ignored>
 			<page-encoding>UTF-8</page-encoding>
 			<scripting-invalid>false</scripting-invalid>
-			<include-prelude>/jsp/includes/taglibs.jsp</include-prelude>
+			<include-prelude>/jsp/includes/taglibs.jsp
+			</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
 
