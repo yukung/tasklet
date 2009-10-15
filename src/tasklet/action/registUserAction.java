@@ -63,16 +63,16 @@ public class registUserAction extends AbstractAction {
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
 			return mapping.getInputForward();
-		} else if (resultCount == 2) {
+		} else if (resultCount == -2) {
 			// DB項目あふれ
 			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage("errors.maxlength");
+			ActionMessage error = new ActionMessage("errors.overflow");
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
 			return mapping.getInputForward();
 		} else {
-			// 更新なし
-			return mapping.getInputForward();
+			// その他SQLエラー
+			throw new TaskletException();
 		}
 	}
 }

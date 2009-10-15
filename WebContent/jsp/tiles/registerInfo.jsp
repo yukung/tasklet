@@ -6,12 +6,12 @@
 				<ul class="sidemenu">
 					<li>姓
 						<ul>
-							<li>全角8文字以内</li>
+							<li>8文字以内</li>
 						</ul>
 					</li>
 					<li>名
 						<ul>
-							<li>全角8文字以内</li>
+							<li>8文字以内</li>
 						</ul>
 					</li>
 					<li>ユーザー名<strong>（必須）</strong>

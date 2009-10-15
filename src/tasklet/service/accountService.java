@@ -29,7 +29,13 @@ public interface accountService {
 	 * ユーザ情報をDBに登録します。
 	 * 
 	 * @param user
-	 * @return 登録件数
+	 * @return 登録件数<br>
+	 *         例外発生時は以下<br>
+	 *         <ul>
+	 *         <li>ユーザーID重複：-1</li>
+	 *         <li>DB項目あふれ：-2</li>
+	 *         <li>その他のDBエラー：0</li>
+	 *         </ul>
 	 */
 	public int regist(User user);
 

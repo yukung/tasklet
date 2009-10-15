@@ -37,19 +37,22 @@ public class accountServiceImpl implements accountService {
 	}
 
 	public int regist(User user) {
+		// TODO とりあえずベタ書き、後でリファクタリングする
 		try {
 			// 0件は更新なし
 			return userDao.registUser(user);
 		} catch (SQLException e) {
 			int errorCode = e.getErrorCode();
-			// TODO ここのエラーハンドリングはDBMSごとにエラーコード変るのでうまく抽象化したいなぁ
-
-			System.out.println(e.getErrorCode());
-			if (errorCode == 9) {
+			// TODO ここのエラーハンドリングはDBMSごとにエラーコード変るのでうまく抽象化したい
+			// TODO あと、ユーザーの同時登録の排他制御も書かないとダメ・・・先にSELECT FOR UPDATEで読むべきか
+			// HSQLDBはシリアル実行なので排他制御要らない、IDの重複も考えなくて良い
+			if (errorCode == -9) {
 				// HSQLDBの一意性制約違反
+				// TODO SELECT FOR UPDATEでユーザーIDを先読みしてチェックを入れればこのロジックは要らない？
 				return -1;
-			} else if (errorCode == 124) {
+			} else if (errorCode == -124) {
 				// HSQLDBの項目桁数あふれ
+				// TODO フレームワークのバリデーションチェックを入れればこのロジックは要らない？
 				return -2;
 			} else {
 				return 0;

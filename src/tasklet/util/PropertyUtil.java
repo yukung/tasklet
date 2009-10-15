@@ -17,9 +17,6 @@ import java.util.ResourceBundle;
  */
 public class PropertyUtil {
 
-	/** プロジェクト固有ベースネーム定数 */
-	private static final String PROJECT_PROPERTY_BASE_NAME = "tasklet";
-
 	/** プロパティ情報 */
 	private static PropertyUtil property = null;
 
