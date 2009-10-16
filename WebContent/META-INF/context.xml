@@ -2,7 +2,7 @@
 <Context docBase="tasklet" path="/tasklet" reloadable="true" source="org.eclipse.jst.j2ee.server:tasklet">
 	<Resource name="jdbc/taskletds" auth="Container" type="javax.sql.DataSource"
 		driverClassName="org.hsqldb.jdbcDriver"
-		url="jdbc:hsqldb:file:C:\Pleiades\workspace\tasklet\WebContent\WEB-INF\lib\db\tasklet"
+		url="jdbc:hsqldb:hsql://localhost/tasklet"
 		factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory"
 		username="sa" password=""
 		maxWait="1000" maxActive="30" maxIdle="10"

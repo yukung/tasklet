@@ -19,11 +19,11 @@ public interface accountService {
 	/**
 	 * ユーザIDとパスワードをキーにログインします。
 	 * 
-	 * @param userId
+	 * @param userName
 	 * @param password
 	 * @return ユーザーオブジェクト
 	 */
-	public User login(String userId, String password);
+	public User login(String userName, String password);
 
 	/**
 	 * ユーザ情報をDBに登録します。

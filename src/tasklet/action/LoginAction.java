@@ -9,6 +9,7 @@ package tasklet.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -22,13 +23,14 @@ import tasklet.service.accountServiceImpl;
 
 /**
  * ログイン処理を行うActionです。
+ * 
  * @author Y.Ikeda
  */
 public class LoginAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
-	 *
+	 * 
 	 * @seetasklet.action.AbstractAction#doExecute(org.apache.struts.action.
 	 * ActionMapping, org.apache.struts.action.ActionForm,
 	 * javax.servlet.http.HttpServletRequest,
@@ -40,11 +42,11 @@ public class LoginAction extends AbstractAction {
 
 		DynaActionForm loginForm = (DynaActionForm) form;
 
-		String userId = (String) loginForm.get("userId");
+		String userName = (String) loginForm.get("userName");
 		String password = (String) loginForm.get("password");
 
 		accountService accountService = new accountServiceImpl();
-		User user = accountService.login(userId, password);
+		User user = accountService.login(userName, password);
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);

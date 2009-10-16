@@ -28,8 +28,8 @@ public class accountServiceImpl implements accountService {
 	 * @see tasklet.service.accountService#login(java.lang.String,
 	 * java.lang.String)
 	 */
-	public User login(String userId, String password) {
-		User user = userDao.findByUserIdAndPassword(userId, password);
+	public User login(String userName, String password) {
+		User user = userDao.findByUserNameAndPassword(userName, password);
 		if (user == null) {
 			user = null;
 		}

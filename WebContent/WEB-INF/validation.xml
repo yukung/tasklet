@@ -20,7 +20,7 @@
     <formset>
 
         <form name="loginForm">
-            <field property="userId" depends="required">
+            <field property="userName" depends="required">
             	<arg0 key="ユーザーID" resource="false" />
             </field>
             <field property="password" depends="required,mask">
@@ -33,7 +33,7 @@
         </form>
 
         <form name="registUserForm">
-        	<field property="userId" depends="required,mask,minlength,maxlength">
+        	<field property="userName" depends="required,mask,minlength,maxlength">
         		<arg0 key="ユーザーID" resource="false" />
         		<arg1 name="minlength" key="${var:minlength}" resource="false" />
         		<arg1 name="maxlength" key="${var:maxlength}" resource="false" />

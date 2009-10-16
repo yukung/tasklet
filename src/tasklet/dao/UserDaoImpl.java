@@ -40,20 +40,20 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 * 
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public User findByUserId(String userId) {
+	public User findByUserName(String userName) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
 			// SQLの取得
 			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findByUserId").toString();
+					"findByUserName").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
-			statement.setString(1, userId);
+			statement.setString(1, userName);
 			rs = statement.executeQuery();
 
 			if (!rs.next()) {
@@ -61,12 +61,12 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			}
 
 			User user = new User();
-			user.setId(rs.getInt("id"));
-			user.setUserId(rs.getString("user_id"));
-			user.setFirstName(rs.getString("user_first_name"));
-			user.setLastName(rs.getString("user_last_name"));
+			user.setUserId((rs.getInt("user_id")));
+			user.setUserName((rs.getString("user_name")));
 			user.setPassword(rs.getString("user_password"));
+			user.setDisplayName(rs.getString("user_display_name"));
 			user.setEmail(rs.getString("user_email"));
+			user.setRegisteredDate(rs.getDate("user_registered"));
 			return user;
 
 		} catch (SQLException e) {
@@ -83,21 +83,21 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 * 
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public User findByUserIdAndPassword(String userId, String password) {
+	public User findByUserNameAndPassword(String userName, String password) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
 			// SQLの取得
 			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findByUserIdAndPassword").toString();
+					"findByUserNameAndPassword").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
 			// DBから取得
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
-			statement.setString(1, userId);
+			statement.setString(1, userName);
 			statement.setString(2, password);
 			rs = statement.executeQuery();
 
@@ -106,12 +106,12 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			}
 
 			User user = new User();
-			user.setId(rs.getInt("id"));
-			user.setUserId(rs.getString("user_id"));
-			user.setFirstName(rs.getString("user_first_name"));
-			user.setLastName(rs.getString("user_last_name"));
+			user.setUserId((rs.getInt("user_id")));
+			user.setUserName((rs.getString("user_name")));
 			user.setPassword(rs.getString("user_password"));
+			user.setDisplayName(rs.getString("user_display_name"));
 			user.setEmail(rs.getString("user_email"));
+			user.setRegisteredDate(rs.getDate("user_registered"));
 			return user;
 
 		} catch (SQLException e) {
@@ -141,11 +141,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			// DB更新
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getUserId());
-			statement.setString(2, user.getFirstName());
-			statement.setString(3, user.getLastName());
-			statement.setString(4, user.getPassword());
-			statement.setString(5, user.getEmail());
+			statement.setString(1, user.getUserName());
+			statement.setString(2, user.getPassword());
+			statement.setString(3, user.getDisplayName());
+			statement.setString(4, user.getEmail());
 
 			return statement.executeUpdate();
 

@@ -12,7 +12,7 @@
 						<label>名</label>
 						<html:text property="lastName" />
 						<label>ユーザーID(*)</label>
-						<html:text property="userId" />
+						<html:text property="userName" />
 						<label>携帯メールアドレス</label>
 						<html:text property="email" />
 						<label>パスワード(*)</label>

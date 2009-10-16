@@ -6,7 +6,7 @@
 				<html:form action="/login" styleClass="loginform">
 					<ul class="sidemenu">
 						<li>ユーザーID</li>
-						<li><html:text property="userId" styleClass="textbox"></html:text></li>
+						<li><html:text property="userName" styleClass="textbox"></html:text></li>
 						<li>パスワード</li>
 						<li><html:password property="password" styleClass="textbox"></html:password></li>
 					</ul>

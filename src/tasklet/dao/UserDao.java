@@ -6,8 +6,6 @@
  */
 package tasklet.dao;
 
-
-
 import java.sql.SQLException;
 
 import tasklet.entity.User;
@@ -25,7 +23,7 @@ public interface UserDao {
 	 * @param ユーザID
 	 * @return ユーザ情報エンティティ
 	 */
-	public User findByUserId(String userId);
+	public User findByUserName(String userName);
 
 	/**
 	 * ユーザIDとパスワードをキーにユーザ情報エンティティを取得します。
@@ -34,14 +32,15 @@ public interface UserDao {
 	 * @param パスワード
 	 * @return ユーザー情報オブジェクト
 	 */
-	public User findByUserIdAndPassword(String userId, String password);
+	public User findByUserNameAndPassword(String userName, String password);
 
 	/**
 	 * ユーザ情報エンティティをDBに登録します。（INSERT）
 	 * 
 	 * @param ユーザ情報エンティティ
 	 * @return 更新件数
-	 * @throws SQLException TODO
+	 * @throws SQLException
+	 *             TODO
 	 */
 	public int registUser(User user) throws SQLException;
 
