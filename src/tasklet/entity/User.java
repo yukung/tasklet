@@ -6,7 +6,7 @@
  */
 package tasklet.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * ユーザ情報を表すBeanクラスです。
@@ -19,17 +19,11 @@ public class User {
 	/** ユーザID */
 	private int userId;
 
-	/** ログイン名 */
+	/** ユーザ名 */
 	private String userName;
 
 	/** パスワード */
 	private String password;
-
-	/** 姓 */
-	private String firstName;
-
-	/** 名 */
-	private String lastName;
 
 	/** 表示名 */
 	private String displayName;
@@ -41,41 +35,21 @@ public class User {
 	private Date registeredDate;
 
 	/**
-	 * ユーザIDを取得します。
+	 * 表示名を取得します。
 	 * 
-	 * @return ユーザID
+	 * @return 表示名
 	 */
-	public int getUserId() {
-		return userId;
+	public String getDisplayName() {
+		return displayName;
 	}
 
 	/**
-	 * ユーザIDを設定します。
+	 * メールアドレスを取得します。
 	 * 
-	 * @param userId
-	 *            ユーザID
+	 * @return メールアドレス
 	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	/**
-	 * ログイン名を取得します。
-	 * 
-	 * @return ログイン名
-	 */
-	public String getUserName() {
-		return userName;
-	}
-
-	/**
-	 * ログイン名を設定します。
-	 * 
-	 * @param userName
-	 *            ログイン名
-	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
@@ -88,60 +62,30 @@ public class User {
 	}
 
 	/**
-	 * パスワードを設定します。
+	 * 登録日を取得します。
 	 * 
-	 * @param password
-	 *            パスワード
+	 * @return 登録日
 	 */
-	public void setPassword(String password) {
-		this.password = password;
+	public Date getRegisteredDate() {
+		return registeredDate;
 	}
 
 	/**
-	 * 姓を取得します。
+	 * ユーザIDを取得します。
 	 * 
-	 * @return 姓
+	 * @return ユーザID
 	 */
-	public String getFirstName() {
-		return firstName;
+	public int getUserId() {
+		return userId;
 	}
 
 	/**
-	 * 姓を設定します。
+	 * ユーザ名を取得します。
 	 * 
-	 * @param firstName
-	 *            姓
+	 * @return ユーザ名
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * 名を取得します。
-	 * 
-	 * @return 名
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * 名を設定します。
-	 * 
-	 * @param lastName
-	 *            名
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * 表示名を取得します。
-	 * 
-	 * @return 表示名
-	 */
-	public String getDisplayName() {
-		return displayName;
+	public String getUserName() {
+		return userName;
 	}
 
 	/**
@@ -155,15 +99,6 @@ public class User {
 	}
 
 	/**
-	 * メールアドレスを取得します。
-	 * 
-	 * @return メールアドレス
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
 	 * メールアドレスを設定します。
 	 * 
 	 * @param email
@@ -174,12 +109,13 @@ public class User {
 	}
 
 	/**
-	 * 登録日を取得します。
+	 * パスワードを設定します。
 	 * 
-	 * @return 登録日
+	 * @param password
+	 *            パスワード
 	 */
-	public Date getRegisteredDate() {
-		return registeredDate;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -190,6 +126,26 @@ public class User {
 	 */
 	public void setRegisteredDate(Date registeredDate) {
 		this.registeredDate = registeredDate;
+	}
+
+	/**
+	 * ユーザIDを設定します。
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * ユーザ名を設定します。
+	 * 
+	 * @param userName
+	 *            ユーザ名
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

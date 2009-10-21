@@ -27,7 +27,7 @@ import tasklet.service.accountServiceImpl;
  * 
  * @author Y.Ikeda
  */
-public class registUserAction extends AbstractAction {
+public class RegisterUserAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
@@ -41,19 +41,19 @@ public class registUserAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		DynaActionForm registUserForm = (DynaActionForm) form;
+		DynaActionForm registerUserForm = (DynaActionForm) form;
 
 		User user = new User();
 		try {
 			// 入力情報をユーザーエンティティにマッピング
-			BeanUtils.copyProperties(user, registUserForm);
+			BeanUtils.copyProperties(user, registerUserForm);
 		} catch (Exception e) {
 			// 入力項目とDB項目が合わない場合はエラー画面へ
 			throw new TaskletException(e.getMessage(), e);
 		}
 
 		accountService service = new accountServiceImpl();
-		int resultCount = service.regist(user);
+		int resultCount = service.register(user);
 		if (resultCount > 0) {
 			return mapping.findForward("success");
 		} else if (resultCount == -1) {

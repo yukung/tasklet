@@ -36,11 +36,11 @@ public class accountServiceImpl implements accountService {
 		return user;
 	}
 
-	public int regist(User user) {
+	public int register(User user) {
 		// TODO とりあえずベタ書き、後でリファクタリングする
 		try {
 			// 0件は更新なし
-			return userDao.registUser(user);
+			return userDao.registerUser(user);
 		} catch (SQLException e) {
 			int errorCode = e.getErrorCode();
 			// TODO ここのエラーハンドリングはDBMSごとにエラーコード変るのでうまく抽象化したい

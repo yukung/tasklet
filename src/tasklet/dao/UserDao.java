@@ -42,6 +42,6 @@ public interface UserDao {
 	 * @throws SQLException
 	 *             TODO
 	 */
-	public int registUser(User user) throws SQLException;
+	public int registerUser(User user) throws SQLException;
 
 }

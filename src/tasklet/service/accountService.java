@@ -37,6 +37,6 @@ public interface accountService {
 	 *         <li>その他のDBエラー：0</li>
 	 *         </ul>
 	 */
-	public int regist(User user);
+	public int register(User user);
 
 }

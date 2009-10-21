@@ -128,7 +128,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 * 
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public int registUser(User user) throws SQLException {
+	public int registerUser(User user) throws SQLException {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
@@ -145,6 +145,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getDisplayName());
 			statement.setString(4, user.getEmail());
+			// 日付はSQLでカレント日付を設定
 
 			return statement.executeUpdate();
 

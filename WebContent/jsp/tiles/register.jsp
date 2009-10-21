@@ -3,17 +3,15 @@
 			<div id="main">
 
 				<h2>新規登録</h2>
-				<html:form action="/registUser">
+				<html:form action="/registerUser">
 					<p>(*)は必須入力項目です。</p>
 					<html:errors />
 					<p>
-						<label>姓</label>
-						<html:text property="firstName" />
-						<label>名</label>
-						<html:text property="lastName" />
-						<label>ユーザーID(*)</label>
+						<label>ユーザー名(*)</label>
 						<html:text property="userName" />
-						<label>携帯メールアドレス</label>
+						<label>ニックネーム</label>
+						<html:text property="displayName" />
+						<label>メールアドレス</label>
 						<html:text property="email" />
 						<label>パスワード(*)</label>
 						<html:password property="password" />
