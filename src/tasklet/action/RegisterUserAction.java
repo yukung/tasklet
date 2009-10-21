@@ -19,8 +19,8 @@ import org.apache.struts.action.DynaActionForm;
 
 import tasklet.common.TaskletException;
 import tasklet.entity.User;
-import tasklet.service.ReAccountService;
-import tasklet.service.ReAccountServiceImpl;
+import tasklet.service.AccountService;
+import tasklet.service.AccountServiceImpl;
 
 /**
  * ユーザ登録を行うActionです。
@@ -52,7 +52,7 @@ public class RegisterUserAction extends AbstractAction {
 			throw new TaskletException(e.getMessage(), e);
 		}
 
-		ReAccountService service = new ReAccountServiceImpl();
+		AccountService service = new AccountServiceImpl();
 		int resultCount = service.register(user);
 		if (resultCount > 0) {
 			return mapping.findForward("success");

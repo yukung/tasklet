@@ -14,7 +14,7 @@ import tasklet.entity.User;
  * @author Y.Ikeda
  * 
  */
-public interface ReAccountService {
+public interface AccountService {
 
 	/**
 	 * ユーザIDとパスワードをキーにログインします。
