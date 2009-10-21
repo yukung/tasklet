@@ -18,8 +18,8 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
 import tasklet.entity.User;
-import tasklet.service.accountService;
-import tasklet.service.accountServiceImpl;
+import tasklet.service.ReAccountService;
+import tasklet.service.ReAccountServiceImpl;
 
 /**
  * ログイン処理を行うActionです。
@@ -45,8 +45,8 @@ public class LoginAction extends AbstractAction {
 		String userName = (String) loginForm.get("userName");
 		String password = (String) loginForm.get("password");
 
-		accountService accountService = new accountServiceImpl();
-		User user = accountService.login(userName, password);
+		ReAccountService ReAccountService = new ReAccountServiceImpl();
+		User user = ReAccountService.login(userName, password);
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);

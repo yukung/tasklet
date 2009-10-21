@@ -18,14 +18,14 @@ import tasklet.factory.DaoFactory;
  * @author Y.Ikeda
  * 
  */
-public class accountServiceImpl implements accountService {
+public class ReAccountServiceImpl implements ReAccountService {
 
 	private UserDao userDao = DaoFactory.getInstance().createUserDao();
 
 	/*
 	 * (非 Javadoc)
 	 * 
-	 * @see tasklet.service.accountService#login(java.lang.String,
+	 * @see tasklet.service.ReAccountService#login(java.lang.String,
 	 * java.lang.String)
 	 */
 	public User login(String userName, String password) {
