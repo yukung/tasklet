@@ -56,7 +56,7 @@
     </action>
     <!-- 入力されたユーザー情報から、ユーザー情報オブジェクトを生成し、データベースに追加する。 -->
     <action path="/registerUser" name="registerUserForm" type="tasklet.action.RegisterUserAction" scope="request" validate="true" input="register">
-      <forward name="success" path="registResult"/>
+      <forward name="success" path="registerResult"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

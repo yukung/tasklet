@@ -28,9 +28,9 @@
     	<put name="sidebar" value="/jsp/tiles/registerInfo.jsp" />
     </definition>
 
-    <definition name="registResult" extends="base">
+    <definition name="registerResult" extends="base">
     	<put name="title" value="ユーザー登録完了 - Tasklet" />
-    	<put name="main" value="/jsp/tiles/registResult.jsp" />
+    	<put name="main" value="/jsp/tiles/registerResult.jsp" />
     	<put name="sidebar" value="/jsp/tiles/registerInfo.jsp" />
     </definition>
 
