@@ -16,11 +16,14 @@ import java.util.Date;
  */
 public class User {
 
-	/** ユーザID */
-	private int userId;
+	/** ID */
+	private int id;
 
 	/** ユーザ名 */
 	private String userName;
+
+	/** メールアドレス */
+	private String email;
 
 	/** パスワード */
 	private String password;
@@ -28,55 +31,29 @@ public class User {
 	/** 表示名 */
 	private String displayName;
 
-	/** メールアドレス */
-	private String email;
-
 	/** 登録日 */
-	private Date registeredDate;
+	private Date createdOn;
+
+	/** 更新日 */
+	private Date updatedOn;
 
 	/**
-	 * 表示名を取得します。
+	 * IDを取得します。
 	 * 
-	 * @return 表示名
+	 * @return ID
 	 */
-	public String getDisplayName() {
-		return displayName;
+	public int getId() {
+		return id;
 	}
 
 	/**
-	 * メールアドレスを取得します。
+	 * IDを設定します。
 	 * 
-	 * @return メールアドレス
+	 * @param id
+	 *            ID
 	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * パスワードを取得します。
-	 * 
-	 * @return パスワード
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * 登録日を取得します。
-	 * 
-	 * @return 登録日
-	 */
-	public Date getRegisteredDate() {
-		return registeredDate;
-	}
-
-	/**
-	 * ユーザIDを取得します。
-	 * 
-	 * @return ユーザID
-	 */
-	public int getUserId() {
-		return userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**
@@ -89,13 +66,22 @@ public class User {
 	}
 
 	/**
-	 * 表示名を設定します。
+	 * ユーザ名を設定します。
 	 * 
-	 * @param displayName
-	 *            表示名
+	 * @param userName
+	 *            ユーザ名
 	 */
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * メールアドレスを取得します。
+	 * 
+	 * @return メールアドレス
+	 */
+	public String getEmail() {
+		return email;
 	}
 
 	/**
@@ -109,6 +95,15 @@ public class User {
 	}
 
 	/**
+	 * パスワードを取得します。
+	 * 
+	 * @return パスワード
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
 	 * パスワードを設定します。
 	 * 
 	 * @param password
@@ -119,33 +114,59 @@ public class User {
 	}
 
 	/**
+	 * 表示名を取得します。
+	 * 
+	 * @return 表示名
+	 */
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * 表示名を設定します。
+	 * 
+	 * @param displayName
+	 *            表示名
+	 */
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	/**
+	 * 登録日を取得します。
+	 * 
+	 * @return 登録日
+	 */
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	/**
 	 * 登録日を設定します。
 	 * 
-	 * @param registeredDate
+	 * @param createdOn
 	 *            登録日
 	 */
-	public void setRegisteredDate(Date registeredDate) {
-		this.registeredDate = registeredDate;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	/**
-	 * ユーザIDを設定します。
+	 * 更新日を取得します。
 	 * 
-	 * @param userId
-	 *            ユーザID
+	 * @return 更新日
 	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public Date getUpdatedOn() {
+		return updatedOn;
 	}
 
 	/**
-	 * ユーザ名を設定します。
+	 * 更新日を設定します。
 	 * 
-	 * @param userName
-	 *            ユーザ名
+	 * @param updatedOn
+	 *            更新日
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
-
 }

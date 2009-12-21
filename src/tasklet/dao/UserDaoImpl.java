@@ -61,12 +61,13 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			}
 
 			User user = new User();
-			user.setUserId((rs.getInt("user_id")));
+			user.setId(rs.getInt("id"));
 			user.setUserName((rs.getString("user_name")));
-			user.setPassword(rs.getString("user_password"));
-			user.setDisplayName(rs.getString("user_display_name"));
-			user.setEmail(rs.getString("user_email"));
-			user.setRegisteredDate(rs.getDate("user_registered"));
+			user.setEmail(rs.getString("email"));
+			user.setPassword(rs.getString("password"));
+			user.setDisplayName(rs.getString("display_name"));
+			user.setCreatedOn(rs.getDate("created_on"));
+			user.setUpdatedOn(rs.getDate("updated_on"));
 			return user;
 
 		} catch (SQLException e) {
@@ -106,12 +107,13 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			}
 
 			User user = new User();
-			user.setUserId((rs.getInt("user_id")));
+			user.setId((rs.getInt("id")));
 			user.setUserName((rs.getString("user_name")));
-			user.setPassword(rs.getString("user_password"));
-			user.setDisplayName(rs.getString("user_display_name"));
-			user.setEmail(rs.getString("user_email"));
-			user.setRegisteredDate(rs.getDate("user_registered"));
+			user.setEmail(rs.getString("email"));
+			user.setPassword(rs.getString("password"));
+			user.setDisplayName(rs.getString("display_name"));
+			user.setCreatedOn((rs.getDate("created_on")));
+			user.setUpdatedOn(rs.getDate("updated_on"));
 			return user;
 
 		} catch (SQLException e) {
@@ -134,7 +136,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		try {
 			// SQLの取得
 			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"registUser").toString();
+					"registerUser").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
@@ -142,10 +144,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setString(1, user.getUserName());
-			statement.setString(2, user.getPassword());
-			statement.setString(3, user.getDisplayName());
-			statement.setString(4, user.getEmail());
-			// 日付はSQLでカレント日付を設定
+			statement.setString(2, user.getEmail());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getDisplayName());
+			// 登録日、更新日はSQLでカレント日付を設定
 
 			return statement.executeUpdate();
 
