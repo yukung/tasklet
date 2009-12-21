@@ -40,7 +40,6 @@ public interface UserDao {
 	 * @param ユーザ情報エンティティ
 	 * @return 更新件数
 	 * @throws SQLException
-	 *             TODO
 	 */
 	public int registerUser(User user) throws SQLException;
 

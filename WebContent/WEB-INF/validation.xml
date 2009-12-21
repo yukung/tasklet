@@ -60,7 +60,8 @@
         		</var>
         	</field>
 
-			<field property="email" depends="email">
+			<field property="email" depends="required,email">
+				<arg0 key="メールアドレス" resource="false" />
 			</field>
 
 			<field property="password" depends="required,mask,minlength,maxlength">

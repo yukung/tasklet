@@ -49,7 +49,9 @@
     <action path="/login" name="loginForm" type="tasklet.action.LoginAction" scope="session" validate="true" input="top">
       <forward name="success" path="/showActivities.do"/>
     </action>
-    <action path="/showActivities" forward="activities">
+    <!-- データベースに保存されたアクティビティ情報から、アクティビティオブジェクトを生成し、requestスコープに登録する。 -->
+    <action path="/showActivities" type="tasklet.action.ShowActivitiesAction" scope="request" validate="false">
+      <forward name="success" path="activities"/>
     </action>
     <!-- ユーザー登録画面に遷移する。 -->
     <action path="/register" forward="register">
