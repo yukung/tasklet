@@ -31,10 +31,10 @@ public class User {
 	/** 表示名 */
 	private String displayName;
 
-	/** 登録日 */
+	/** 登録タイムスタンプ */
 	private Date createdOn;
 
-	/** 更新日 */
+	/** 更新タイムスタンプ */
 	private Date updatedOn;
 
 	/**

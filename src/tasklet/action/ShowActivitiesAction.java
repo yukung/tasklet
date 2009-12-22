@@ -33,7 +33,6 @@ public class ShowActivitiesAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO 自動生成されたメソッド・スタブ
-		// ユーザーに紐づくアクティビティ一覧を取得してフォワードする
 		return null;
 	}
 
