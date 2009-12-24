@@ -47,7 +47,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		try {
 			// SQLの取得
 			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findByUserName").toString();
+					"findUserByUserName").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
@@ -91,7 +91,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		try {
 			// SQLの取得
 			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findByUserNameAndPassword").toString();
+					"findUserByUserNameAndPassword").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
