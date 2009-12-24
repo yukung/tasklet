@@ -40,7 +40,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 * 
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public User findByUserName(String userName) {
+	public User findUserByUserName(String userName) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
@@ -84,7 +84,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 * 
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public User findByUserNameAndPassword(String userName, String password) {
+	public User findUserByUserNameAndPassword(String userName, String password) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
@@ -148,6 +148,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			statement.setString(3, user.getPassword());
 			statement.setString(4, user.getDisplayName());
 			// 登録日、更新日はSQLでカレント日付を設定
+
+			// TODO 初期登録時に、カテゴリの未分類をユーザ毎に追加する処理を追加
+			// トランザクションを考慮する必要あり
 
 			return statement.executeUpdate();
 

@@ -13,6 +13,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import tasklet.entity.Activity;
+import tasklet.entity.User;
+import tasklet.service.ActivityService;
+import tasklet.service.ActivityServiceImpl;
+
 /**
  * アクティビティ一覧を表示するアクションです。
  * 
@@ -32,8 +37,17 @@ public class ShowActivitiesAction extends AbstractAction {
 	@Override
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			// TODO ログインしていないので、トップページに戻ってログインさせるように遷移する。
+		}
+
+		ActivityService activityService = new ActivityServiceImpl();
+		Activity[] activityArray = activityService.show(user.getId());
+		request.setAttribute("activities", activityArray);
+
+		return mapping.findForward("success");
 	}
 
 }

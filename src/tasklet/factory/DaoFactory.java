@@ -11,6 +11,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import tasklet.common.TaskletException;
+import tasklet.dao.ActivityDao;
+import tasklet.dao.ActivityDaoImpl;
 import tasklet.dao.UserDao;
 import tasklet.dao.UserDaoImpl;
 
@@ -52,6 +54,15 @@ public class DaoFactory {
 		return new UserDaoImpl(getDataSource());
 	}
 
+	public ActivityDao creActivityDao() {
+		return new ActivityDaoImpl(getDataSource());
+	}
+
+	/**
+	 * データソースを取得します。
+	 * 
+	 * @return データソース
+	 */
 	private DataSource getDataSource() {
 		InitialContext context = null;
 		DataSource ds = null;

@@ -29,7 +29,7 @@ public class AccountServiceImpl implements AccountService {
 	 * java.lang.String)
 	 */
 	public User login(String userName, String password) {
-		User user = userDao.findByUserNameAndPassword(userName, password);
+		User user = userDao.findUserByUserNameAndPassword(userName, password);
 		if (user == null) {
 			user = null;
 		}

@@ -2,7 +2,14 @@
 <html:xhtml/>
 			<div id="main">
 
-				<h2>${userInfo.userId}さんのアクティビティ</h2>
+				<h2>
+				<logic:empty name="user" property="displayName" scope="session">
+				<bean:write name="user" property="userName" scope="session" />さんのアクティビティ
+				</logic:empty>
+				<logic:notEmpty name="user" property="displayName" scope="session">
+				<bean:write name="user" property="displayName" scope="session" />さんのアクティビティ
+				</logic:notEmpty>
+				</h2>
 
 				<table>
 					<tr>
@@ -14,8 +21,9 @@
 						<th>見積計</th>
 						<th>実績計</th>
 					</tr>
-					<tr class="row-a">
-						<td class="first"><a href="#">HTMLの作成</a></td>
+					<logic:iterate id="activity" name="activities" indexId="idx" scope="request">
+					<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
+						<td class="first"><bean:write name="activity" property="title" /></td>
 						<td>30%</td>
 						<td>7</td>
 						<td>0</td>
@@ -23,33 +31,7 @@
 						<td>10</td>
 						<td>8.5</td>
 					</tr>
-					<tr class="row-b">
-						<td class="first"><a href="#">プロジェクト管理ツールの導入</a></td>
-						<td>30%</td>
-						<td>7</td>
-						<td>0</td>
-						<td>85%</td>
-						<td>10</td>
-						<td>8.5</td>
-					</tr>
-					<tr class="row-a">
-						<td class="first"><a href="#">ソースコード管理システムの導入</a></td>
-						<td>30%</td>
-						<td>7</td>
-						<td>0</td>
-						<td>85%</td>
-						<td>10</td>
-						<td>8.5</td>
-					</tr>
-					<tr class="row-b">
-						<td class="first"><a href="#">開発環境の構築</a></td>
-						<td>30%</td>
-						<td>7</td>
-						<td>0</td>
-						<td>85%</td>
-						<td>10</td>
-						<td>8.5</td>
-					</tr>
+					</logic:iterate>
 				</table>
 
 				<h3>新規アクティビティ</h3>

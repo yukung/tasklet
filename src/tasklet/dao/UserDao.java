@@ -18,21 +18,21 @@ import tasklet.entity.User;
 public interface UserDao {
 
 	/**
-	 * ユーザIDをキーにユーザ情報エンティティを取得します。
+	 * ユーザ名をキーにユーザ情報エンティティを取得します。
 	 * 
-	 * @param ユーザID
+	 * @param ユーザ名
 	 * @return ユーザ情報エンティティ
 	 */
-	public User findByUserName(String userName);
+	public User findUserByUserName(String userName);
 
 	/**
-	 * ユーザIDとパスワードをキーにユーザ情報エンティティを取得します。
+	 * ユーザ名とパスワードをキーにユーザ情報エンティティを取得します。
 	 * 
-	 * @param ユーザID
+	 * @param ユーザ名
 	 * @param パスワード
 	 * @return ユーザー情報オブジェクト
 	 */
-	public User findByUserNameAndPassword(String userName, String password);
+	public User findUserByUserNameAndPassword(String userName, String password);
 
 	/**
 	 * ユーザ情報エンティティをDBに登録します。（INSERT）
