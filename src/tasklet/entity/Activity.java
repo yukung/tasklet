@@ -187,15 +187,22 @@ public class Activity {
 		return allTasks;
 	}
 
-	public Task getTask(int id) {
+	/**
+	 * タスクIDを指定してタスクを取得します。
+	 * 
+	 * @param taskId
+	 * @return タスクIDが一致したタスクを返す。<br>
+	 *         タスクIDが一致しない場合はnullを返す。
+	 */
+	public Task getTask(int taskId) {
+		Task task = null;
 		for (int i = 0; i < tasks.size(); i++) {
-			Task task = tasks.get(i);
+			task = tasks.get(i);
 			if (id == task.getId()) {
 				return task;
-			} else {
-				return null;
 			}
 		}
+		return null;
 	}
 
 	/**
