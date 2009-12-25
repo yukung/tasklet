@@ -4,9 +4,9 @@
 		<!-- menu -->
 		<div id="menu">
 			<ul>
-				<li id="current"><html:link action="/activity">ホーム</html:link></li>
-				<li>設定</li>
-				<li>ヘルプ</li>
-				<li class="last">ログアウト</li>
+				<li id="current"><html:link action="/showActivities.do">ホーム</html:link></li>
+				<li><html:link href="#">設定</html:link></li>
+				<li><html:link href="#">ヘルプ</html:link></li>
+				<li class="last"><html:link action="/logout">ログアウト</html:link></li>
 			</ul>
 		</div>

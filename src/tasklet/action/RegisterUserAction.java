@@ -54,6 +54,8 @@ public class RegisterUserAction extends AbstractAction {
 
 		AccountService service = new AccountServiceImpl();
 		int resultCount = service.register(user);
+
+		// TODO try~catch句でエラーハンドリングして、エラーはフレームワークに投げるようにリファクタリングする
 		if (resultCount > 0) {
 			return mapping.findForward("success");
 		} else if (resultCount == -1) {

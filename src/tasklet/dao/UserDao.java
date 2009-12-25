@@ -35,12 +35,21 @@ public interface UserDao {
 	public User findUserByUserNameAndPassword(String userName, String password);
 
 	/**
-	 * ユーザ情報エンティティをDBに登録します。（INSERT）
+	 * ユーザ情報エンティティをDBに登録します。
 	 * 
 	 * @param ユーザ情報エンティティ
 	 * @return 更新件数
 	 * @throws SQLException
 	 */
 	public int registerUser(User user) throws SQLException;
+
+	/**
+	 * カテゴリ「未分類」をDBに登録します。
+	 * 
+	 * @param user
+	 * @return
+	 * @throws SQLException
+	 */
+	public int registerDefaultCategory(User user) throws SQLException;
 
 }

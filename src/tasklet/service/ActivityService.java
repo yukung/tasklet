@@ -6,6 +6,8 @@
  */
 package tasklet.service;
 
+import java.util.List;
+
 import tasklet.entity.Activity;
 
 /**
@@ -20,8 +22,8 @@ public interface ActivityService {
 	 * ユーザIDに紐づいたアクティビティ一覧を取得します。
 	 * 
 	 * @param userId
-	 * @return アクティビティ一覧を格納した配列
+	 * @return アクティビティ一覧を格納したList
 	 */
-	public Activity[] show(int userId);
+	public List<Activity> show(int userId);
 
 }

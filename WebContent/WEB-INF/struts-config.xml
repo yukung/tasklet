@@ -9,6 +9,8 @@
       <form-property name="userName" type="java.lang.String"/>
       <form-property name="password" type="java.lang.String"/>
     </form-bean>
+    <!-- ログアウト情報用Form。特に属性は指定しない。 -->
+    <form-bean name="logoutForm" type="org.apache.struts.action.DynaActionForm" dynamic="true"/>
     <!-- アクティビティ情報用Form -->
     <form-bean name="addActivityForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
       <form-property name="activityName" type="java.lang.String"/>
@@ -46,12 +48,13 @@
     <action path="/index" forward="top">
     </action>
     <!-- 入力されたログインIDとパスワードが正しいかどうかをチェックし、正しい場合はユーザオブジェクトを生成し、sessionスコープに登録する。 -->
-    <action path="/login" name="loginForm" type="tasklet.action.LoginAction" scope="session" validate="true" input="top">
+    <action path="/login" name="loginForm" type="tasklet.action.LoginAction" scope="request" validate="true" input="top">
       <forward name="success" path="/showActivities.do"/>
     </action>
     <!-- データベースに保存されたアクティビティ情報から、アクティビティオブジェクトを生成し、requestスコープに登録する。 -->
     <action path="/showActivities" type="tasklet.action.ShowActivitiesAction" scope="request" validate="false">
       <forward name="success" path="activities"/>
+      <forward name="login" path="/login.do"/>
     </action>
     <!-- ユーザー登録画面に遷移する。 -->
     <action path="/register" forward="register">
@@ -59,6 +62,10 @@
     <!-- 入力されたユーザー情報から、ユーザー情報オブジェクトを生成し、データベースに追加する。 -->
     <action path="/registerUser" name="registerUserForm" type="tasklet.action.RegisterUserAction" scope="request" validate="true" input="register">
       <forward name="success" path="registerResult"/>
+    </action>
+    <!-- sessionスコープからユーザオブジェクトを削除し、ログアウト処理を行う。 -->
+    <action path="/logout" name="logoutForm" type="tasklet.action.LogoutAction" scope="request" validate="false">
+      <forward name="success" path="top"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -36,15 +36,20 @@ public class AccountServiceImpl implements AccountService {
 		return user;
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see tasklet.service.AccountService#register(tasklet.entity.User)
+	 */
 	public int register(User user) {
 		// TODO とりあえずベタ書き、後でリファクタリングする
 		try {
 			// 0件は更新なし
 			return userDao.registerUser(user);
+			// TODO userDao.registerDefaultCategory(user);
 		} catch (SQLException e) {
 			int errorCode = e.getErrorCode();
 			// TODO ここのエラーハンドリングはDBMSごとにエラーコード変るのでうまく抽象化したい
-			// TODO あと、ユーザーの同時登録の排他制御も書かないとダメ・・・先にSELECT FOR UPDATEで読むべきか
 			// HSQLDBはシリアル実行なので排他制御要らない、IDの重複も考えなくて良い
 			if (errorCode == -9) {
 				// HSQLDBの一意性制約違反

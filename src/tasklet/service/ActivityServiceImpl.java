@@ -6,6 +6,9 @@
  */
 package tasklet.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tasklet.dao.ActivityDao;
 import tasklet.entity.Activity;
 import tasklet.factory.DaoFactory;
@@ -25,12 +28,11 @@ public class ActivityServiceImpl implements ActivityService {
 	 * 
 	 * @see tasklet.service.ActivityService#show(int)
 	 */
-	public Activity[] show(int userId) {
-		Activity[] activities = activityDao.findActivitiesByUserId(userId);
+	public List<Activity> show(int userId) {
+		List<Activity> activities = activityDao.findActivitiesByUserId(userId);
 		if (activities == null) {
-			activities = new Activity[0];
+			activities = new ArrayList<Activity>();
 		}
 		return activities;
 	}
-
 }

@@ -43,7 +43,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	 * 
 	 * @see tasklet.dao.ActivityDao#findActivitiesByUserId(int)
 	 */
-	public Activity[] findActivitiesByUserId(int userId) {
+	public List<Activity> findActivitiesByUserId(int userId) {
 
 		Connection conn = null;
 		PreparedStatement statement = null;
@@ -62,9 +62,6 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			statement.setInt(2, userId);
 			rs = statement.executeQuery();
 
-			/*
-			 * if (!rs.next()) { return null; }
-			 */
 			// 結果の取り出し
 			List<Activity> activities = new ArrayList<Activity>();
 			while (rs.next()) {
@@ -80,11 +77,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 				activities.add(activity);
 			}
 
-			// Listを配列に変換
-			Activity[] activityArray = new Activity[activities.size()];
-			activities.toArray(activityArray);
-
-			return activityArray;
+			return activities;
 
 		} catch (SQLException e) {
 			throw new TaskletException(e.getMessage(), e);

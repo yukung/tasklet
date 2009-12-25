@@ -135,10 +135,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"registerUser").toString();
+			String propertyKeyUser = new StringBuilder(PROPERTY_KEY_SQL)
+					.append("registerUser").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = property.getString(propertyKeyUser);
 
 			// DB更新
 			conn = source.getConnection();
@@ -149,10 +149,40 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			statement.setString(4, user.getDisplayName());
 			// 登録日、更新日はSQLでカレント日付を設定
 
-			// TODO 初期登録時に、カテゴリの未分類をユーザ毎に追加する処理を追加
-			// トランザクションを考慮する必要あり
-
 			return statement.executeUpdate();
+
+		} catch (SQLException e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see tasklet.dao.UserDao#registerDefaultCategory(tasklet.entity.User)
+	 */
+	public int registerDefaultCategory(User user) throws SQLException {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"registerCategoryDefault").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, user.getId());
+			// カテゴリは'未分類'を固定で登録
+
+			return statement.executeUpdate(sql);
 
 		} catch (SQLException e) {
 			rollback(conn);

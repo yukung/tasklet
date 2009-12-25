@@ -6,8 +6,6 @@
  */
 package tasklet.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,18 +13,13 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import tasklet.entity.Activity;
-import tasklet.entity.User;
-import tasklet.service.ActivityService;
-import tasklet.service.ActivityServiceImpl;
-
 /**
- * アクティビティ一覧を表示するアクションです。
+ * ログアウト処理を行うアクションです。
  * 
  * @author Y.Ikeda
  * 
  */
-public class ShowActivitiesAction extends AbstractAction {
+public class LogoutAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
@@ -40,15 +33,10 @@ public class ShowActivitiesAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
-			return mapping.findForward("login");
+		if (request.getSession().getAttribute("user") != null) {
+			request.getSession().removeAttribute("user");
 		}
-
-		ActivityService activityService = new ActivityServiceImpl();
-		List<Activity> activities = activityService.show(user.getId());
-		request.setAttribute("activities", activities);
-
 		return mapping.findForward("success");
 	}
+
 }

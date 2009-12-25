@@ -6,6 +6,8 @@
  */
 package tasklet.dao;
 
+import java.util.List;
+
 import tasklet.entity.Activity;
 
 /**
@@ -22,6 +24,6 @@ public interface ActivityDao {
 	 * @param userId
 	 * @return アクティビティ一覧を格納した配列
 	 */
-	public Activity[] findActivitiesByUserId(int userId);
+	public List<Activity> findActivitiesByUserId(int userId);
 
 }
