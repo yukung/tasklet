@@ -7,6 +7,9 @@
 				<li id="current"><html:link action="/showActivities.do">ホーム</html:link></li>
 				<li><html:link href="#">設定</html:link></li>
 				<li><html:link href="#">ヘルプ</html:link></li>
+				<logic:notEmpty name="user" scope="session">
 				<li class="last"><html:link action="/logout">ログアウト</html:link></li>
+				</logic:notEmpty>
+
 			</ul>
 		</div>
