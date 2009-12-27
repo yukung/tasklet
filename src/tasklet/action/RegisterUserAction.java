@@ -42,6 +42,10 @@ public class RegisterUserAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
+		if (!isTokenValid(request, true)) {
+			return mapping.findForward("double");
+		}
+
 		DynaActionForm registerUserForm = (DynaActionForm) form;
 
 		User user = new User();
@@ -64,7 +68,5 @@ public class RegisterUserAction extends AbstractAction {
 			return mapping.getInputForward();
 		}
 		return mapping.findForward("success");
-
-		// TODO ２重送信防止およびダブルポスト防止のロジックを入れる（アクションの基底クラスに入れるべき？）
 	}
 }

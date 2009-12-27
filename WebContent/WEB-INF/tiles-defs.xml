@@ -76,4 +76,10 @@
     	<put name="sidebar" value="/jsp/layout/sidebarDummy.jsp"></put>
     </definition>
 
+    <definition name="double" extends="base">
+    	<put name="title" value="遷移エラー - Tasklet" />
+    	<put name="main" value="/jsp/tiles/flowError.jsp" />
+    	<put name="sidebar" value="/jsp/layout/sidebarDummy.jsp"></put>
+    </definition>
+
 </tiles-definitions>
