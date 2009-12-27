@@ -6,20 +6,19 @@
  */
 package tasklet.dao;
 
-import java.sql.SQLException;
 
 import tasklet.entity.User;
 
 /**
  * ユーザ情報DAOインターフェースです。
- * 
+ *
  * @author Y.Ikeda
  */
 public interface UserDao {
 
 	/**
 	 * ユーザ名をキーにユーザ情報エンティティを取得します。
-	 * 
+	 *
 	 * @param ユーザ名
 	 * @return ユーザ情報エンティティ
 	 */
@@ -27,7 +26,7 @@ public interface UserDao {
 
 	/**
 	 * ユーザ名とパスワードをキーにユーザ情報エンティティを取得します。
-	 * 
+	 *
 	 * @param ユーザ名
 	 * @param パスワード
 	 * @return ユーザー情報オブジェクト
@@ -35,21 +34,23 @@ public interface UserDao {
 	public User findUserByUserNameAndPassword(String userName, String password);
 
 	/**
-	 * ユーザ情報エンティティをDBに登録します。
-	 * 
-	 * @param ユーザ情報エンティティ
-	 * @return 更新件数
-	 * @throws SQLException
+	 * ユーザ名が既に登録されているかどうかを返します。
+	 * @param userName
+	 * @return 登録済みの場合はtrue,未登録の場合はfalse
 	 */
-	public int registerUser(User user) throws SQLException;
+	public boolean isRegistered(String userName);
+
+	/**
+	 * ユーザ情報エンティティをDBに登録します。
+	 *
+	 * @param ユーザ情報エンティティ
+	 */
+	public void registerUser(User user);
 
 	/**
 	 * カテゴリ「未分類」をDBに登録します。
-	 * 
-	 * @param user
-	 * @return
-	 * @throws SQLException
+	 * @param userId DB登録後のユーザID
 	 */
-	public int registerDefaultCategory(User user) throws SQLException;
+	public void registerDefaultCategory(int userId);
 
 }

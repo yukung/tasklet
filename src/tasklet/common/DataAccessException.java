@@ -7,28 +7,28 @@
 package tasklet.common;
 
 /**
- * Taskletアプリケーションの共通例外クラスです。
+ * Taskletアプリケーションのデータアクセス例外クラスです。
  *
  * @author Y.Ikeda
  *
  */
-public class TaskletException extends Exception {
+public class DataAccessException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public TaskletException() {
+	public DataAccessException() {
 		super();
 	}
 
-	public TaskletException(String message, Throwable cause) {
+	public DataAccessException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public TaskletException(String message) {
+	public DataAccessException(String message) {
 		super(message);
 	}
 
-	public TaskletException(Throwable cause) {
+	public DataAccessException(Throwable cause) {
 		super(cause);
 	}
 

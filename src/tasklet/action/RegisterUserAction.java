@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
+import tasklet.common.DataAccessException;
 import tasklet.common.TaskletException;
 import tasklet.entity.User;
 import tasklet.service.AccountService;
@@ -24,14 +25,14 @@ import tasklet.service.AccountServiceImpl;
 
 /**
  * ユーザ登録を行うActionです。
- * 
+ *
  * @author Y.Ikeda
  */
 public class RegisterUserAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @seetasklet.action.AbstractAction#doExecute(org.apache.struts.action.
 	 * ActionMapping, org.apache.struts.action.ActionForm,
 	 * javax.servlet.http.HttpServletRequest,
@@ -45,36 +46,25 @@ public class RegisterUserAction extends AbstractAction {
 
 		User user = new User();
 		try {
-			// 入力情報をユーザーエンティティにマッピング
+			// 入力フォーム情報をユーザエンティティにマッピング
 			BeanUtils.copyProperties(user, registerUserForm);
 		} catch (Exception e) {
-			// 入力項目とDB項目が合わない場合はエラー画面へ
-			throw new TaskletException(e.getMessage(), e);
+			// 不整合の場合はシステム例外としてStrutsに投げる
+			throw new DataAccessException(e.getMessage(), e);
 		}
 
 		AccountService service = new AccountServiceImpl();
-		int resultCount = service.register(user);
-
-		// TODO try~catch句でエラーハンドリングして、エラーはフレームワークに投げるようにリファクタリングする
-		if (resultCount > 0) {
-			return mapping.findForward("success");
-		} else if (resultCount == -1) {
-			// ユーザID重複
+		try {
+			service.register(user);
+		} catch (TaskletException e) {
 			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage("errors.already");
+			ActionMessage error = new ActionMessage(e.getMessage());
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
 			return mapping.getInputForward();
-		} else if (resultCount == -2) {
-			// DB項目あふれ
-			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage("errors.overflow");
-			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
-			saveErrors(request, errors);
-			return mapping.getInputForward();
-		} else {
-			// その他SQLエラー
-			throw new TaskletException();
 		}
+		return mapping.findForward("success");
+
+		// TODO ２重送信防止およびダブルポスト防止のロジックを入れる（アクションの基底クラスに入れるべき？）
 	}
 }

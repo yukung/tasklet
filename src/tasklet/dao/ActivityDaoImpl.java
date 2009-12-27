@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import tasklet.common.TaskletException;
+import tasklet.common.DataAccessException;
 import tasklet.entity.Activity;
 import tasklet.util.PropertyUtil;
 
@@ -80,9 +80,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			return activities;
 
 		} catch (SQLException e) {
-			throw new TaskletException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage(), e);
 		} catch (ArrayStoreException e) {
-			throw new TaskletException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage(), e);
 		} finally {
 			close(rs);
 			close(statement);

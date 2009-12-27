@@ -10,7 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import tasklet.common.TaskletException;
+import tasklet.common.DataAccessException;
 import tasklet.dao.ActivityDao;
 import tasklet.dao.ActivityDaoImpl;
 import tasklet.dao.UserDao;
@@ -54,7 +54,7 @@ public class DaoFactory {
 		return new UserDaoImpl(getDataSource());
 	}
 
-	public ActivityDao creActivityDao() {
+	public ActivityDao createActivityDao() {
 		return new ActivityDaoImpl(getDataSource());
 	}
 
@@ -76,10 +76,10 @@ public class DaoFactory {
 					context.close();
 				} catch (NamingException ex) {
 					ex.printStackTrace();
-					throw new TaskletException();
+					throw new DataAccessException();
 				}
 			}
-			throw new TaskletException();
+			throw new DataAccessException();
 		}
 		return ds;
 	}

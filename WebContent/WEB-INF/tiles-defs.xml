@@ -70,4 +70,10 @@
     	<put name="sidebar" value="/jsp/tiles/memoInfo.jsp" />
     </definition>
 
+    <definition name="error" extends="base">
+    	<put name="title" value="エラー画面 - Tasklet" />
+    	<put name="main" value="/jsp/tiles/error.jsp" />
+    	<put name="sidebar" value="/jsp/layout/sidebarDummy.jsp"></put>
+    </definition>
+
 </tiles-definitions>

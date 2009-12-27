@@ -40,6 +40,7 @@
     </form-bean>
   </form-beans>
   <global-exceptions>
+    <exception type="java.lang.Exception" key="errors.general" path="error"/>
   </global-exceptions>
   <global-forwards>
   </global-forwards>

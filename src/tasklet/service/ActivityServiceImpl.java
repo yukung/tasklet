@@ -21,7 +21,7 @@ import tasklet.factory.DaoFactory;
  */
 public class ActivityServiceImpl implements ActivityService {
 
-	private ActivityDao activityDao = DaoFactory.getInstance().creActivityDao();
+	private ActivityDao activityDao = DaoFactory.getInstance().createActivityDao();
 
 	/*
 	 * (非 Javadoc)

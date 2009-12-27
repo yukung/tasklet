@@ -15,20 +15,20 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import tasklet.common.TaskletException;
+import tasklet.common.DataAccessException;
 import tasklet.entity.User;
 import tasklet.util.PropertyUtil;
 
 /**
  * ユーザ情報DAO実装クラスです。
- * 
+ *
  * @author Y.Ikeda
  */
 public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	/**
 	 * 新しいUserDaoのインスタンスを生成します。
-	 * 
+	 *
 	 * @param source
 	 */
 	public UserDaoImpl(DataSource source) {
@@ -37,7 +37,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
 	public User findUserByUserName(String userName) {
@@ -71,7 +71,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			return user;
 
 		} catch (SQLException e) {
-			throw new TaskletException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage(), e);
 		} finally {
 			close(rs);
 			close(statement);
@@ -81,7 +81,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
 	public User findUserByUserNameAndPassword(String userName, String password) {
@@ -117,7 +117,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			return user;
 
 		} catch (SQLException e) {
-			throw new TaskletException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage(), e);
 		} finally {
 			close(rs);
 			close(statement);
@@ -127,10 +127,50 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	/*
 	 * (非 Javadoc)
-	 * 
+	 * @see tasklet.dao.UserDao#isRegistered(java.lang.String)
+	 */
+	public boolean isRegistered(String userName) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKeyUser = new StringBuilder(PROPERTY_KEY_SQL).append("isRegistered").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKeyUser);
+
+			// DBから取得
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setString(1, userName);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				return false;
+			}
+
+			if (rs.getInt("user_count") > 0) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 *
 	 * @see tasklet.dao.UserDao#findUser(java.lang.String)
 	 */
-	public int registerUser(User user) throws SQLException {
+	public void registerUser(User user) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
@@ -149,11 +189,11 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			statement.setString(4, user.getDisplayName());
 			// 登録日、更新日はSQLでカレント日付を設定
 
-			return statement.executeUpdate();
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
 			rollback(conn);
-			throw e;
+			throw new DataAccessException(e.getMessage(), e);
 		} finally {
 			close(statement);
 			close(conn);
@@ -162,11 +202,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	/*
 	 * (非 Javadoc)
-	 * 
-	 * @see tasklet.dao.UserDao#registerDefaultCategory(tasklet.entity.User)
+	 * @see tasklet.dao.UserDao#registerDefaultCategory(int)
 	 */
-	public int registerDefaultCategory(User user) throws SQLException {
-		// TODO 自動生成されたメソッド・スタブ
+	public void registerDefaultCategory(int userId) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
@@ -179,14 +217,15 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			// DB更新
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
-			statement.setInt(1, user.getId());
+			statement.setInt(1, userId);
 			// カテゴリは'未分類'を固定で登録
 
-			return statement.executeUpdate(sql);
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
 			rollback(conn);
-			throw e;
+			e.printStackTrace();
+			throw new DataAccessException(e.getMessage(), e);
 		} finally {
 			close(statement);
 			close(conn);

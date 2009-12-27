@@ -19,11 +19,11 @@ import org.apache.struts.action.ActionMapping;
 /**
  * 全てのアクションの基底クラスです。
  * <p>
- * アクションクラスを定義する際は、このクラスをオーバーライドする必要があります。
+ * アクションクラスを定義する際は、このクラスを継承する必要があります。
  * </p>
- * 
- * @autho r Y.Ikeda
- * 
+ *
+ * @author Y.Ikeda
+ *
  */
 public abstract class AbstractAction extends Action {
 
@@ -37,7 +37,6 @@ public abstract class AbstractAction extends Action {
 		try {
 			return doExecute(mapping, form, request, response);
 		} catch (Exception e) {
-			// 到達しない例外? struts-config.xmlのglobal扱いのエラー?
 			LOG.error(e, e);
 			throw e;
 		}
@@ -46,7 +45,8 @@ public abstract class AbstractAction extends Action {
 
 	/**
 	 * 各アクションのエントリメソッドです。
-	 * 
+	 * <p>アクションを定義する際は、このメソッドを必ず実装する必要があります。</p>
+	 *
 	 * @param mapping
 	 * @param form
 	 * @param request

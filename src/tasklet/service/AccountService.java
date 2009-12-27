@@ -6,19 +6,21 @@
  */
 package tasklet.service;
 
+
+import tasklet.common.TaskletException;
 import tasklet.entity.User;
 
 /**
  * ユーザアカウント関連のビジネスロジックを規定するインタフェースです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public interface AccountService {
 
 	/**
 	 * ユーザIDとパスワードをキーにログインします。
-	 * 
+	 *
 	 * @param userName
 	 * @param password
 	 * @return ユーザーオブジェクト
@@ -27,16 +29,10 @@ public interface AccountService {
 
 	/**
 	 * ユーザ情報をDBに登録します。
-	 * 
+	 *
 	 * @param user
-	 * @return 登録件数<br>
-	 *         例外発生時は以下<br>
-	 *         <ul>
-	 *         <li>ユーザーID重複：-1</li>
-	 *         <li>DB項目あふれ：-2</li>
-	 *         <li>その他のDBエラー：0</li>
-	 *         </ul>
+	 * @throws TaskletException アプリ例外
 	 */
-	public int register(User user);
+	public void register(User user) throws TaskletException;
 
 }
