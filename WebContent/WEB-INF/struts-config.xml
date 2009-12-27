@@ -9,7 +9,7 @@
       <form-property name="userName" type="java.lang.String"/>
       <form-property name="password" type="java.lang.String"/>
     </form-bean>
-    <!-- ログアウト情報用Form。特に属性は指定しない。 -->
+    <!-- ログアウト情報用Form -->
     <form-bean name="logoutForm" type="org.apache.struts.action.DynaActionForm" dynamic="true"/>
     <!-- アクティビティ情報用Form -->
     <form-bean name="addActivityForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
@@ -40,7 +40,7 @@
     </form-bean>
   </form-beans>
   <global-exceptions>
-    <exception type="java.lang.Exception" key="errors.general" path="error"/>
+    <exception type="java.lang.Exception" path="error" key="errors.general"/>
   </global-exceptions>
   <global-forwards>
   </global-forwards>
@@ -66,7 +66,7 @@
     </action>
     <!-- sessionスコープからユーザオブジェクトを削除し、ログアウト処理を行う。 -->
     <action path="/logout" name="logoutForm" type="tasklet.action.LogoutAction" scope="request" validate="false">
-      <forward name="success" path="top"/>
+      <forward name="success" path="/index.do"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
