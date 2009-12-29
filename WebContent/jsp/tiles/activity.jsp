@@ -14,6 +14,7 @@
 				<table>
 					<tr>
 						<th class="first">アクティビティ</th>
+						<th>カテゴリ</th>
 						<th>達成率</th>
 						<th>残数</th>
 						<th>超過数</th>
@@ -24,6 +25,7 @@
 					<logic:iterate id="activity" name="activities" indexId="idx" scope="request">
 					<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 						<td class="first"><bean:write name="activity" property="title" /></td>
+						<td><bean:write name="activity" property="category" /></td>
 						<td>30%</td>
 						<td>7</td>
 						<td>0</td>
