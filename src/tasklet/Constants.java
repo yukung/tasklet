@@ -1,16 +1,16 @@
-package tasklet;
 /**
  * Created 2009/09/03
  * Copyright (C) 2009  Yusuke Ikeda (ikeda.yusuke@gmail.com)
  *
  * This file is part of Tasklet.
  */
+package tasklet;
 
 /**
  * アプリ共通の定数クラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class Constants {
 

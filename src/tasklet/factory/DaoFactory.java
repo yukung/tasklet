@@ -13,14 +13,16 @@ import javax.sql.DataSource;
 import tasklet.common.DataAccessException;
 import tasklet.dao.ActivityDao;
 import tasklet.dao.ActivityDaoImpl;
+import tasklet.dao.TaskDao;
+import tasklet.dao.TaskDaoImpl;
 import tasklet.dao.UserDao;
 import tasklet.dao.UserDaoImpl;
 
 /**
  * DAOの生成を行うFactoryクラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class DaoFactory {
 
@@ -35,7 +37,7 @@ public class DaoFactory {
 
 	/**
 	 * 当クラスのインスタンス取得時はこのメソッドを利用する。
-	 * 
+	 *
 	 * @return DaoFactoryのシングルトンオブジェクト
 	 */
 	public static DaoFactory getInstance() {
@@ -47,7 +49,7 @@ public class DaoFactory {
 
 	/**
 	 * UserDaoを生成します。
-	 * 
+	 *
 	 * @return UserDao
 	 */
 	public UserDao createUserDao() {
@@ -58,9 +60,13 @@ public class DaoFactory {
 		return new ActivityDaoImpl(getDataSource());
 	}
 
+	public TaskDao createTaskDao() {
+		return new TaskDaoImpl(getDataSource());
+	}
+
 	/**
 	 * データソースを取得します。
-	 * 
+	 *
 	 * @return データソース
 	 */
 	private DataSource getDataSource() {
@@ -83,4 +89,5 @@ public class DaoFactory {
 		}
 		return ds;
 	}
+
 }

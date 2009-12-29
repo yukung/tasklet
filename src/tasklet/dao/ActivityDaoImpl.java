@@ -23,15 +23,15 @@ import tasklet.util.PropertyUtil;
 
 /**
  * アクティビティ情報DAO実装クラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 
 	/**
 	 * 新しいActivityDaoのインスタンスを生成します。
-	 * 
+	 *
 	 * @param source
 	 */
 	public ActivityDaoImpl(DataSource source) {
@@ -40,7 +40,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @see tasklet.dao.ActivityDao#findActivitiesByUserId(int)
 	 */
 	public List<Activity> findActivitiesByUserId(int userId) {

@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import tasklet.Status;
+
 /**
  * アクティビティ情報を表すBeanクラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class Activity {
 
@@ -39,6 +41,21 @@ public class Activity {
 	/** タスク一覧 */
 	private List<Task> tasks;
 
+	/** タスク残数 */
+	private String remaining;
+
+	/** 期限超過タスク数 */
+	private String excess;
+
+	/** 予実比 */
+	private String ratioOfEstimateAndActual;
+
+	/** 見積時間合計 */
+	private String estimatedTimeTotal;
+
+	/** 実績時間合計 */
+	private String actualTimeTotal;
+
 	/** 作成タイムスタンプ */
 	private Date createdOn;
 
@@ -47,7 +64,7 @@ public class Activity {
 
 	/**
 	 * IDを取得します。
-	 * 
+	 *
 	 * @return ID
 	 */
 	public int getId() {
@@ -63,7 +80,7 @@ public class Activity {
 
 	/**
 	 * IDを設定します。
-	 * 
+	 *
 	 * @param id
 	 *            ID
 	 */
@@ -73,7 +90,7 @@ public class Activity {
 
 	/**
 	 * タイトルを取得します。
-	 * 
+	 *
 	 * @return タイトル
 	 */
 	public String getTitle() {
@@ -82,7 +99,7 @@ public class Activity {
 
 	/**
 	 * タイトルを設定します。
-	 * 
+	 *
 	 * @param title
 	 *            タイトル
 	 */
@@ -92,7 +109,7 @@ public class Activity {
 
 	/**
 	 * 説明を取得します。
-	 * 
+	 *
 	 * @return 説明
 	 */
 	public String getDescription() {
@@ -101,7 +118,7 @@ public class Activity {
 
 	/**
 	 * 説明を設定します。
-	 * 
+	 *
 	 * @param description
 	 *            説明
 	 */
@@ -111,7 +128,7 @@ public class Activity {
 
 	/**
 	 * ソート順を取得します。
-	 * 
+	 *
 	 * @return ソート順
 	 */
 	public int getSeq() {
@@ -120,7 +137,7 @@ public class Activity {
 
 	/**
 	 * ソート順を設定します。
-	 * 
+	 *
 	 * @param seq
 	 *            ソート順
 	 */
@@ -130,7 +147,7 @@ public class Activity {
 
 	/**
 	 * カテゴリを取得します。
-	 * 
+	 *
 	 * @return カテゴリ
 	 */
 	public String getCategory() {
@@ -139,7 +156,7 @@ public class Activity {
 
 	/**
 	 * カテゴリを設定します。
-	 * 
+	 *
 	 * @param category
 	 *            カテゴリ
 	 */
@@ -149,7 +166,7 @@ public class Activity {
 
 	/**
 	 * 未完了フラグを取得します。
-	 * 
+	 *
 	 * @return 未完了フラグ
 	 */
 	public boolean isIncomplete() {
@@ -158,7 +175,7 @@ public class Activity {
 
 	/**
 	 * 未完了フラグを設定します。
-	 * 
+	 *
 	 * @param isIncomplete
 	 *            未完了フラグ
 	 */
@@ -168,7 +185,7 @@ public class Activity {
 
 	/**
 	 * タスク一覧をListで取得します。
-	 * 
+	 *
 	 * @return タスク一覧（List)
 	 */
 	public List<Task> getAllTasks() {
@@ -177,7 +194,7 @@ public class Activity {
 
 	/**
 	 * タスク一覧を配列で取得します。
-	 * 
+	 *
 	 * @return タスク一覧（配列）
 	 */
 	public Task[] getAllTasksArray() {
@@ -189,7 +206,7 @@ public class Activity {
 
 	/**
 	 * タスクIDを指定してタスクを取得します。
-	 * 
+	 *
 	 * @param taskId
 	 * @return タスクIDが一致したタスクを返す。<br>
 	 *         タスクIDが一致しない場合はnullを返す。
@@ -207,7 +224,7 @@ public class Activity {
 
 	/**
 	 * タスク一覧を設定します。
-	 * 
+	 *
 	 * @param tasks
 	 *            タスク一覧
 	 */
@@ -216,8 +233,64 @@ public class Activity {
 	}
 
 	/**
+	 * 達成率を取得します。
+	 * @return 達成率
+	 */
+	public String getAchievementRatio() {
+		double complete = 0;
+		int amount = tasks.size();
+		for (Task task : tasks) {
+			if (task.getStatus() == Status.FINISH) {
+				complete++;
+			}
+		}
+		double ratio = (complete / (double)amount) * 100;
+		return Double.toString(ratio);
+	}
+
+	/**
+	 * タスク残数を取得します。
+	 * @return タスク残数
+	 */
+	public String getRemaining() {
+	    return remaining;
+	}
+
+	/**
+	 * 期限超過タスク数を取得します。
+	 * @return 期限超過タスク数
+	 */
+	public String getExcess() {
+	    return excess;
+	}
+
+	/**
+	 * 予実比を取得します。
+	 * @return 予実比
+	 */
+	public String getRatioOfEstimateAndActual() {
+	    return ratioOfEstimateAndActual;
+	}
+
+	/**
+	 * 見積時間合計を取得します。
+	 * @return 見積時間合計
+	 */
+	public String getEstimatedTimeTotal() {
+	    return estimatedTimeTotal;
+	}
+
+	/**
+	 * 実績時間合計を取得します。
+	 * @return 実績時間合計
+	 */
+	public String getActualTimeTotal() {
+	    return actualTimeTotal;
+	}
+
+	/**
 	 * 作成タイムスタンプを取得します。
-	 * 
+	 *
 	 * @return 作成タイムスタンプ
 	 */
 	public Date getCreatedOn() {
@@ -226,7 +299,7 @@ public class Activity {
 
 	/**
 	 * 作成タイムスタンプを設定します。
-	 * 
+	 *
 	 * @param createdOn
 	 *            作成タイムスタンプ
 	 */
@@ -236,7 +309,7 @@ public class Activity {
 
 	/**
 	 * 更新タイムスタンプを取得します。
-	 * 
+	 *
 	 * @return 更新タイムスタンプ
 	 */
 	public Date getUpdatedOn() {
@@ -245,7 +318,7 @@ public class Activity {
 
 	/**
 	 * 更新タイムスタンプを設定します。
-	 * 
+	 *
 	 * @param updatedOn
 	 *            更新タイムスタンプ
 	 */

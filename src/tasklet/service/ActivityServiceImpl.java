@@ -10,28 +10,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tasklet.dao.ActivityDao;
+import tasklet.dao.TaskDao;
 import tasklet.entity.Activity;
 import tasklet.factory.DaoFactory;
 
 /**
  * アクティビティ関連のビジネスロジックを実行するServiceの実装クラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class ActivityServiceImpl implements ActivityService {
 
 	private ActivityDao activityDao = DaoFactory.getInstance().createActivityDao();
 
+	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
+
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @see tasklet.service.ActivityService#show(int)
 	 */
 	public List<Activity> show(int userId) {
 		List<Activity> activities = activityDao.findActivitiesByUserId(userId);
 		if (activities == null) {
 			activities = new ArrayList<Activity>();
+		} else {
+			for (Activity activity : activities) {
+				activity.setTasks(taskDao.findTasksByActivityId(activity.getId()));
+			}
 		}
 		return activities;
 	}

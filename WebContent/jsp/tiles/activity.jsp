@@ -26,7 +26,7 @@
 					<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 						<td class="first"><bean:write name="activity" property="title" /></td>
 						<td><bean:write name="activity" property="category" /></td>
-						<td>30%</td>
+						<td><bean:write name="activity" property="achievementRatio" /></td>
 						<td>7</td>
 						<td>0</td>
 						<td>85%</td>

@@ -7,12 +7,15 @@
 package tasklet.entity;
 
 import java.util.Date;
+import java.util.EnumSet;
+
+import tasklet.Status;
 
 /**
  * タスク情報を表すBeanクラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class Task {
 
@@ -29,7 +32,7 @@ public class Task {
 	private int priority;
 
 	/** ステータス */
-	private int status;
+	private Status status;
 
 	/** 期限 */
 	private Date period;
@@ -51,7 +54,6 @@ public class Task {
 
 	/**
 	 * IDを取得します。
-	 * 
 	 * @return ID
 	 */
 	public int getId() {
@@ -60,9 +62,7 @@ public class Task {
 
 	/**
 	 * IDを設定します。
-	 * 
-	 * @param id
-	 *            ID
+	 * @param id ID
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -70,7 +70,6 @@ public class Task {
 
 	/**
 	 * 紐づくアクティビティIDを取得します。
-	 * 
 	 * @return 紐づくアクティビティID
 	 */
 	public int getActivityId() {
@@ -79,9 +78,7 @@ public class Task {
 
 	/**
 	 * 紐づくアクティビティIDを設定します。
-	 * 
-	 * @param activityId
-	 *            紐づくアクティビティID
+	 * @param activityId 紐づくアクティビティID
 	 */
 	public void setActivityId(int activityId) {
 		this.activityId = activityId;
@@ -89,7 +86,6 @@ public class Task {
 
 	/**
 	 * タスク名を取得します。
-	 * 
 	 * @return タスク名
 	 */
 	public String getTitle() {
@@ -98,9 +94,7 @@ public class Task {
 
 	/**
 	 * タスク名を設定します。
-	 * 
-	 * @param title
-	 *            タスク名
+	 * @param title タスク名
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -108,7 +102,6 @@ public class Task {
 
 	/**
 	 * 優先度を取得します。
-	 * 
 	 * @return 優先度
 	 */
 	public int getPriority() {
@@ -117,9 +110,7 @@ public class Task {
 
 	/**
 	 * 優先度を設定します。
-	 * 
-	 * @param priority
-	 *            優先度
+	 * @param priority 優先度
 	 */
 	public void setPriority(int priority) {
 		this.priority = priority;
@@ -127,26 +118,44 @@ public class Task {
 
 	/**
 	 * ステータスを取得します。
-	 * 
 	 * @return ステータス
 	 */
-	public int getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
 	/**
 	 * ステータスを設定します。
-	 * 
-	 * @param status
-	 *            ステータス
+	 * @param status ステータス
 	 */
-	public void setStatus(int status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
 	/**
+	 * ステータスコードを取得します。
+	 * @return ステータスコード
+	 */
+	public int getStatusCode() {
+		return status.getCode();
+	}
+
+	/**
+	 * ステータスコードからステータスを設定します。
+	 * @param code ステータスコード
+	 */
+	public void setStatusFromCode(int code) {
+		for (Status status : EnumSet.allOf(Status.class)) {
+			if (status.getCode() == code) {
+				this.status = status;
+				return;
+			}
+		}
+		status = null;
+	}
+
+	/**
 	 * 期限を取得します。
-	 * 
 	 * @return 期限
 	 */
 	public Date getPeriod() {
@@ -155,9 +164,7 @@ public class Task {
 
 	/**
 	 * 期限を設定します。
-	 * 
-	 * @param period
-	 *            期限
+	 * @param period 期限
 	 */
 	public void setPeriod(Date period) {
 		this.period = period;
@@ -165,7 +172,6 @@ public class Task {
 
 	/**
 	 * 終了日を取得します。
-	 * 
 	 * @return 終了日
 	 */
 	public Date getFinishedOn() {
@@ -174,9 +180,7 @@ public class Task {
 
 	/**
 	 * 終了日を設定します。
-	 * 
-	 * @param finishedOn
-	 *            終了日
+	 * @param finishedOn 終了日
 	 */
 	public void setFinishedOn(Date finishedOn) {
 		this.finishedOn = finishedOn;
@@ -184,7 +188,6 @@ public class Task {
 
 	/**
 	 * 見積時間を取得します。
-	 * 
 	 * @return 見積時間
 	 */
 	public double getEstimatedTime() {
@@ -193,9 +196,7 @@ public class Task {
 
 	/**
 	 * 見積時間を設定します。
-	 * 
-	 * @param estimatedTime
-	 *            見積時間
+	 * @param estimatedTime 見積時間
 	 */
 	public void setEstimatedTime(double estimatedTime) {
 		this.estimatedTime = estimatedTime;
@@ -203,7 +204,6 @@ public class Task {
 
 	/**
 	 * 実績時間を取得します。
-	 * 
 	 * @return 実績時間
 	 */
 	public double getActualTime() {
@@ -212,9 +212,7 @@ public class Task {
 
 	/**
 	 * 実績時間を設定します。
-	 * 
-	 * @param actualTime
-	 *            実績時間
+	 * @param actualTime 実績時間
 	 */
 	public void setActualTime(double actualTime) {
 		this.actualTime = actualTime;
@@ -222,7 +220,6 @@ public class Task {
 
 	/**
 	 * 作成タイムスタンプを取得します。
-	 * 
 	 * @return 作成タイムスタンプ
 	 */
 	public Date getCreatedOn() {
@@ -231,9 +228,7 @@ public class Task {
 
 	/**
 	 * 作成タイムスタンプを設定します。
-	 * 
-	 * @param createdOn
-	 *            作成タイムスタンプ
+	 * @param createdOn 作成タイムスタンプ
 	 */
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
@@ -241,7 +236,6 @@ public class Task {
 
 	/**
 	 * 更新タイムスタンプを取得します。
-	 * 
 	 * @return 更新タイムスタンプ
 	 */
 	public Date getUpdatedOn() {
@@ -250,9 +244,7 @@ public class Task {
 
 	/**
 	 * 更新タイムスタンプを設定します。
-	 * 
-	 * @param updatedOn
-	 *            更新タイムスタンプ
+	 * @param updatedOn 更新タイムスタンプ
 	 */
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
