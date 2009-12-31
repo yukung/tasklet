@@ -1,4 +1,4 @@
-z/********************************************
+/********************************************
    AUTHOR:Erwin Aligam
    WEBSITE:http://www.styleshout.com/
    TEMPLATE NAME:Envision
@@ -126,6 +126,9 @@ td {
 }
 td.first,th.first {
 	border-left: 0px;
+}
+td.number {
+	text-align: right;
 }
 tr.row-a {
 	background: #F8F8F8;
