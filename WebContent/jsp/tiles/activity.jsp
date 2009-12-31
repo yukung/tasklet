@@ -26,12 +26,12 @@
 					<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 						<td class="first"><bean:write name="activity" property="title" /></td>
 						<td><bean:write name="activity" property="category" /></td>
-						<td><bean:write name="activity" property="achievementRatio" /></td>
-						<td>7</td>
-						<td>0</td>
-						<td>85%</td>
-						<td>10</td>
-						<td>8.5</td>
+						<td class="number"><bean:write name="activity" property="achievementRatio" /></td>
+						<td class="number">7</td>
+						<td class="number">0</td>
+						<td class="number">85%</td>
+						<td class="number">10</td>
+						<td class="number">8.5</td>
 					</tr>
 					</logic:iterate>
 				</table>
