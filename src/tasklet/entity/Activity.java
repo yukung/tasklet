@@ -6,6 +6,7 @@
  */
 package tasklet.entity;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -244,8 +245,12 @@ public class Activity {
 				complete++;
 			}
 		}
-		double ratio = (complete / (double)amount) * 100;
-		return Double.toString(ratio);
+		double ratio = (complete / (double)amount);
+		if (Double.isNaN(ratio)) {
+			ratio = 0.0;
+		}
+		NumberFormat percentInstance = NumberFormat.getPercentInstance();
+		return percentInstance.format(ratio);
 	}
 
 	/**
