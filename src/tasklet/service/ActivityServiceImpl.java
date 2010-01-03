@@ -42,4 +42,23 @@ public class ActivityServiceImpl implements ActivityService {
 		}
 		return activities;
 	}
+
+	public Activity setAcitivity(Activity activity, String userId) {
+		activity.setDescription("これはテストです。");
+		Integer count = activityDao.getMaxSequenceOfActivities(Integer.valueOf(userId).intValue());
+		if (count == null) {
+			count = Integer.valueOf(0);
+		} else {
+			count = count.intValue() + 1;
+		}
+		activity.setSeq(count);
+		activity.setIncomplete(true);
+
+		return activity;
+	}
+
+	public void add(Activity activity) {
+		// TODO 自動生成されたメソッド・スタブ
+		int activityId = activityDao.addActivities(activity);
+	}
 }

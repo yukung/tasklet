@@ -46,7 +46,7 @@ public class RegisterUserAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
-		DynaActionForm registerUserForm = (DynaActionForm) form;
+		DynaActionForm registerUserForm = (DynaActionForm)form;
 
 		User user = new User();
 		try {

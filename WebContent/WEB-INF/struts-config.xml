@@ -51,7 +51,7 @@
     </action>
     <!-- 入力されたログインIDとパスワードが正しいかどうかをチェックし、正しい場合はユーザオブジェクトを生成し、sessionスコープに登録する。 -->
     <action path="/login" name="loginForm" type="tasklet.action.LoginAction" scope="request" validate="true" input="top">
-      <forward name="success" path="/showActivities.do"/>
+      <forward name="success" redirect="true" path="/showActivities.do"/>
     </action>
     <!-- データベースに保存されたアクティビティ情報から、アクティビティオブジェクトを生成し、requestスコープに登録する。 -->
     <action path="/showActivities" type="tasklet.action.ShowActivitiesAction" scope="request" validate="false">
@@ -68,7 +68,11 @@
     </action>
     <!-- sessionスコープからユーザオブジェクトを削除し、ログアウト処理を行う。 -->
     <action path="/logout" name="nonParameterForm" type="tasklet.action.LogoutAction" scope="request" validate="false">
-      <forward name="success" path="/index.do"/>
+      <forward name="success" redirect="true" path="/index.do"/>
+    </action>
+    <!-- 入力されたアクティビティ名からアクティビティオブジェクトを生成し、データベースに保存する。 -->
+    <action path="/addActivity" name="addActivityForm" type="tasklet.action.addActivityAction" scope="request" validate="true">
+      <forward name="success" path="activities"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

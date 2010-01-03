@@ -22,15 +22,15 @@ import tasklet.service.ActivityServiceImpl;
 
 /**
  * アクティビティ一覧を表示するアクションです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class ShowActivitiesAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @seetasklet.action.AbstractAction#doExecute(org.apache.struts.action.
 	 * ActionMapping, org.apache.struts.action.ActionForm,
 	 * javax.servlet.http.HttpServletRequest,
@@ -49,6 +49,7 @@ public class ShowActivitiesAction extends AbstractAction {
 		List<Activity> activities = activityService.show(user.getId());
 		request.setAttribute("activities", activities);
 
+		saveToken(request);
 		return mapping.findForward("success");
 	}
 }

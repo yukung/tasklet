@@ -42,21 +42,6 @@ public class Activity {
 	/** タスク一覧 */
 	private List<Task> tasks;
 
-	/** タスク残数 */
-	private String remaining;
-
-	/** 期限超過タスク数 */
-	private String excess;
-
-	/** 予実比 */
-	private String ratioOfEstimateAndActual;
-
-	/** 見積時間合計 */
-	private String estimatedTimeTotal;
-
-	/** 実績時間合計 */
-	private String actualTimeTotal;
-
 	/** 作成タイムスタンプ */
 	private Date createdOn;
 
@@ -238,7 +223,7 @@ public class Activity {
 	 * @return 達成率
 	 */
 	public String getAchievementRatio() {
-		double complete = 0;
+		double complete = 0.0;
 		int amount = tasks.size();
 		for (Task task : tasks) {
 			if (task.getStatus() == Status.FINISH) {
@@ -258,15 +243,29 @@ public class Activity {
 	 * @return タスク残数
 	 */
 	public String getRemaining() {
-	    return remaining;
+		int complete = 0;
+		int amount = tasks.size();
+		for (Task task : tasks) {
+			if (task.getStatus() == Status.FINISH) {
+				complete++;
+			}
+		}
+		return Integer.toString(amount - complete);
 	}
 
 	/**
 	 * 期限超過タスク数を取得します。
 	 * @return 期限超過タスク数
 	 */
-	public String getExcess() {
-	    return excess;
+	public String getOverdue() {
+		int amount = 0;
+		Date now = new Date();
+		for (Task task : tasks) {
+			if (now.after(task.getPeriod())) {
+				amount++;
+			}
+		}
+	    return Integer.toString(amount);
 	}
 
 	/**
@@ -274,7 +273,18 @@ public class Activity {
 	 * @return 予実比
 	 */
 	public String getRatioOfEstimateAndActual() {
-	    return ratioOfEstimateAndActual;
+		double estimateTime = 0.0;
+		double actualTime = 0.0;
+		for (Task task : tasks) {
+			estimateTime += task.getEstimatedTime();
+			actualTime += task.getActualTime();
+		}
+		double ratio = actualTime / estimateTime;
+		if (Double.isNaN(ratio)) {
+			ratio = 0.0;
+		}
+		NumberFormat percentInstance = NumberFormat.getPercentInstance();
+	    return percentInstance.format(ratio);
 	}
 
 	/**
@@ -282,7 +292,11 @@ public class Activity {
 	 * @return 見積時間合計
 	 */
 	public String getEstimatedTimeTotal() {
-	    return estimatedTimeTotal;
+	    double estimatedTimeTotal = 0.0;
+	    for (Task task : tasks) {
+			estimatedTimeTotal += task.getEstimatedTime();
+		}
+	    return Double.toString(estimatedTimeTotal);
 	}
 
 	/**
@@ -290,7 +304,11 @@ public class Activity {
 	 * @return 実績時間合計
 	 */
 	public String getActualTimeTotal() {
-	    return actualTimeTotal;
+		double actualTimeTotal = 0.0;
+		for (Task task : tasks) {
+			actualTimeTotal += task.getActualTime();
+		}
+		return Double.toString(actualTimeTotal);
 	}
 
 	/**

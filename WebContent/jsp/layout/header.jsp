@@ -3,12 +3,17 @@
 		<!-- header -->
 		<div id="header">
 
-			<h1 id="logo-text"><html:link action="/index">Tasklet</html:link></h1>
+			<h1 id="logo-text">
+			<logic:empty name="user" scope="session"><html:link action="/index">Tasklet</html:link></logic:empty>
+			<logic:notEmpty name="user" scope="session"><html:link action="/showActivities.do">Tasklet</html:link></logic:notEmpty>
+			</h1>
 			<p id="slogan">your ToDo, more easy!</p>
 
 			<div id="header-links">
 			<p>
-				<html:link action="/index" styleClass="">ホーム</html:link> |
+				<logic:empty name="user" scope="session"><html:link action="/index">ホーム</html:link></logic:empty>
+				<logic:notEmpty name="user" scope="session"><html:link action="/showActivities.do">ホーム</html:link></logic:notEmpty>
+				 |
 				Contact |
 				Site Map
 			</p>

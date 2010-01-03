@@ -175,10 +175,10 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKeyUser = new StringBuilder(PROPERTY_KEY_SQL)
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL)
 					.append("registerUser").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKeyUser);
+			String sql = property.getString(propertyKey);
 
 			// DB更新
 			conn = source.getConnection();
@@ -224,7 +224,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 		} catch (SQLException e) {
 			rollback(conn);
-			e.printStackTrace();
 			throw new DataAccessException(e.getMessage(), e);
 		} finally {
 			close(statement);

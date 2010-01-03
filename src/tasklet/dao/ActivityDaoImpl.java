@@ -89,4 +89,67 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			close(conn);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.ActivityDao#getMaxSequenceOfActivities(int)
+	 */
+	public Integer getMaxSequenceOfActivities(int userId) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getMaxSequenceOfActivities").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// SQLの実行
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, userId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+
+			return new Integer(rs.getInt("max_seq"));
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.ActivityDao#addActivities(tasklet.entity.Activity)
+	 */
+	public void addActivities(Activity activity) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addActivities").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			// TODO ここから
+		} catch (SQLException e) {
+			rollback(conn);
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
 }

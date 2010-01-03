@@ -12,18 +12,33 @@ import tasklet.entity.Activity;
 
 /**
  * アクティビティ情報DAOインタフェースです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public interface ActivityDao {
 
 	/**
 	 * ユーザIDをキーにアクティビティ情報エンティティを取得します。
-	 * 
+	 *
 	 * @param userId
 	 * @return アクティビティ一覧を格納した配列
 	 */
 	public List<Activity> findActivitiesByUserId(int userId);
+
+	/**
+	 * ユーザIDをキーにアクティビティの最新順を取得します。
+	 *
+	 * @param userId
+	 * @return ユーザIDに紐づいたアクティビティの最新順を取得します。
+	 */
+	public Integer getMaxSequenceOfActivities(int userId);
+
+	/**
+	 * 画面から入力されたアクティビティ情報を元にアクティビティテーブルへ追加を行います。
+	 *
+	 * @param activity
+	 */
+	public void addActivities(Activity activity);
 
 }

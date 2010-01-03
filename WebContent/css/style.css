@@ -127,9 +127,6 @@ td {
 td.first,th.first {
 	border-left: 0px;
 }
-td.number {
-	text-align: right;
-}
 tr.row-a {
 	background: #F8F8F8;
 }
@@ -403,3 +400,4 @@ input.button {
 
 /* display and additional classes */
 .clear { clear: both; }
+.attention { color: #F00; font-weight: bold; }
