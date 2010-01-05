@@ -18,6 +18,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import tasklet.common.DataAccessException;
+import tasklet.common.TaskletException;
 import tasklet.entity.Activity;
 import tasklet.util.PropertyUtil;
 
@@ -115,7 +116,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 				return null;
 			}
 
-			return new Integer(rs.getInt("max_seq"));
+			return Integer.valueOf(rs.getInt("max_seq"));
 
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
@@ -136,18 +137,87 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addActivities").toString();
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addActivityToActivities").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
 			// DB更新
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
-			// TODO ここから
+			statement.setString(1, activity.getTitle());
+			statement.setInt(2, activity.getSeq());
+			// 未完了フラグは追加時は必ずtrueで登録される（SQL側で固定値登録）
+
+			statement.executeUpdate();
+
 		} catch (SQLException e) {
 			rollback(conn);
 			throw new DataAccessException(e.getMessage(), e);
 		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.ActivityDao#addIndexes(tasklet.entity.Activity, java.lang.Integer)
+	 */
+	public void addIndexes(int userId, int activityId) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addActivityToIndexes").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, userId);
+			statement.setInt(2, activityId);
+			// カテゴリはデフォルト「未分類」で登録
+
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			rollback(conn);
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
+
+	public int getLastActivityId(Activity activity) throws TaskletException {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getLastActivityId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB検索
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setString(1, activity.getTitle());
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				throw new TaskletException("errors.insert");
+			}
+
+			return rs.getInt("last_activity_id");
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
 			close(statement);
 			close(conn);
 		}

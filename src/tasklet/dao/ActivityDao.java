@@ -8,6 +8,7 @@ package tasklet.dao;
 
 import java.util.List;
 
+import tasklet.common.TaskletException;
 import tasklet.entity.Activity;
 
 /**
@@ -40,5 +41,20 @@ public interface ActivityDao {
 	 * @param activity
 	 */
 	public void addActivities(Activity activity);
+
+	/**
+	 * 画面から入力されたアクティビティ情報を元にインデックステーブルへ追加を行います。
+	 * @param userId
+	 * @param activityId
+	 */
+	public void addIndexes(int userId, int activityId);
+
+	/**
+	 * 最新のアクティビティIDを取得します。
+	 * @param activity
+	 * @return 最新のアクティビティID
+	 * @throws TaskletException データベース整合性エラー
+	 */
+	public int getLastActivityId(Activity activity) throws TaskletException;
 
 }

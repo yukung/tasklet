@@ -72,7 +72,7 @@
     </action>
     <!-- 入力されたアクティビティ名からアクティビティオブジェクトを生成し、データベースに保存する。 -->
     <action path="/addActivity" name="addActivityForm" type="tasklet.action.addActivityAction" scope="request" validate="true">
-      <forward name="success" path="activities"/>
+      <forward name="success" path="/showActivities.do"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

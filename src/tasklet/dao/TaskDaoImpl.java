@@ -42,7 +42,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 	 * @see tasklet.dao.TaskDao#findTasksByActivityId(int)
 	 */
 	public List<Task> findTasksByActivityId(int activityId) {
-		// TODO 自動生成されたメソッド・スタブ
+
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;

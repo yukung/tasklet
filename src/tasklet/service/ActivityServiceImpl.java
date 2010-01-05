@@ -9,6 +9,8 @@ package tasklet.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import tasklet.common.DataAccessException;
+import tasklet.common.TaskletException;
 import tasklet.dao.ActivityDao;
 import tasklet.dao.TaskDao;
 import tasklet.entity.Activity;
@@ -32,7 +34,10 @@ public class ActivityServiceImpl implements ActivityService {
 	 * @see tasklet.service.ActivityService#show(int)
 	 */
 	public List<Activity> show(int userId) {
+
 		List<Activity> activities = activityDao.findActivitiesByUserId(userId);
+
+		// アクティビティが1件も登録されていない場合、空のListを返す
 		if (activities == null) {
 			activities = new ArrayList<Activity>();
 		} else {
@@ -43,22 +48,32 @@ public class ActivityServiceImpl implements ActivityService {
 		return activities;
 	}
 
-	public Activity setAcitivity(Activity activity, String userId) {
-		activity.setDescription("これはテストです。");
-		Integer count = activityDao.getMaxSequenceOfActivities(Integer.valueOf(userId).intValue());
+	public Activity setAcitivity(Activity activity, int userId) {
+
+		activity.setDescription("これはテストです。"); // TODO 概要はとりあえず固定値登録
+		// ソート順の取得
+		Integer count = activityDao.getMaxSequenceOfActivities(userId);
 		if (count == null) {
 			count = Integer.valueOf(0);
 		} else {
 			count = count.intValue() + 1;
 		}
-		activity.setSeq(count);
-		activity.setIncomplete(true);
+		activity.setSeq(count.intValue());
+		// 未完了フラグはSQLで固定値trueで登録
 
 		return activity;
 	}
 
-	public void add(Activity activity) {
-		// TODO 自動生成されたメソッド・スタブ
-		int activityId = activityDao.addActivities(activity);
+	public void add(Activity activity, int userId) throws TaskletException {
+
+		// アクティビティ追加処理
+		try {
+			activityDao.addActivities(activity);
+			int activityId = activityDao.getLastActivityId(activity);
+			activityDao.addIndexes(userId, activityId);
+		} catch (DataAccessException e) {
+			// DB登録エラー
+			throw new TaskletException("errors.insert", e);
+		}
 	}
 }

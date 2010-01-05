@@ -42,14 +42,14 @@
 				</table>
 
 				<h3>新規アクティビティ</h3>
-				<%--
+
 				<html:form action="/addActivity">
 					<p>
 						<label>アクティビティ</label>
-						<html:text property="activity" />
+						<html:text property="activityName" />
 						<html:submit value="追加" styleClass="button" />
 					</p>
+					<html:errors />
 				</html:form>
-				 --%>
 
 			</div>

@@ -6,23 +6,23 @@
  */
 package tasklet.action;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
 import tasklet.common.DataAccessException;
+import tasklet.common.TaskletException;
 import tasklet.entity.Activity;
+import tasklet.entity.User;
 import tasklet.service.ActivityService;
 import tasklet.service.ActivityServiceImpl;
-import tasklet.util.PropertyUtil;
 
 /**
  * アクティビティを追加するアクションです。
@@ -52,14 +52,22 @@ public class addActivityAction extends AbstractAction {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
-		String userId = (String) request.getSession().getAttribute("userId");
-		ActivityService activityService = new ActivityServiceImpl();
-		activity = activityService.setAcitivity(activity, userId);
-		activityService.add(activity);
-		// TODO Activityテーブル、Indexesテーブルの登録処理
-		// TODO 例外処理
-		// TODO 次画面へフォワード
-		return null;
-	}
+		// セッションからユーザIDを取得
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
 
+		// アクティビティを登録
+		ActivityService activityService = new ActivityServiceImpl();
+		try {
+			activity = activityService.setAcitivity(activity, userId);
+			activityService.add(activity, userId);
+		} catch (TaskletException e) {
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage(e.getMessage());
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+			return mapping.findForward("success");
+		}
+		return mapping.findForward("success");
+	}
 }

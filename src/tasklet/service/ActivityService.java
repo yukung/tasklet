@@ -9,6 +9,7 @@ package tasklet.service;
 import java.util.List;
 
 
+import tasklet.common.TaskletException;
 import tasklet.entity.Activity;
 
 /**
@@ -34,13 +35,15 @@ public interface ActivityService {
 	 * @param userId
 	 * @return 新規アクティビティ追加時のパラメータをセットしたActivityオブジェクト
 	 */
-	public Activity setAcitivity(Activity activity, String userId);
+	public Activity setAcitivity(Activity activity, int userId);
 
 	/**
 	 * 新規アクティビティを追加します。
 	 *
 	 * @param activity
+	 * @param userId
+	 * @throws TaskletException アクティビティ登録時のエラー
 	 */
-	public void add(Activity activity);
+	public void add(Activity activity, int userId) throws TaskletException;
 
 }

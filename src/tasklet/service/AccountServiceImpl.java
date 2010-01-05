@@ -51,6 +51,5 @@ public class AccountServiceImpl implements AccountService {
 		userDao.registerUser(user);
 		int userId = userDao.findUserByUserName(user.getUserName()).getId();
 		userDao.registerDefaultCategory(userId);
-
 	}
 }
