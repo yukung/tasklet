@@ -66,7 +66,7 @@ public class addActivityAction extends AbstractAction {
 			ActionMessage error = new ActionMessage(e.getMessage());
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
-			return mapping.findForward("success");
+			return mapping.getInputForward();
 		}
 		return mapping.findForward("success");
 	}

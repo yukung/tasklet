@@ -41,11 +41,11 @@
 					</logic:iterate>
 				</table>
 
-				<h3>新規アクティビティ</h3>
+				<h3>新規追加</h3>
 
 				<html:form action="/addActivity">
 					<p>
-						<label>アクティビティ</label>
+						<label>アクティビティ名</label>
 						<html:text property="activityName" />
 						<html:submit value="追加" styleClass="button" />
 					</p>
