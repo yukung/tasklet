@@ -30,7 +30,7 @@ import tasklet.service.ActivityServiceImpl;
  * @author Y.Ikeda
  *
  */
-public class addActivityAction extends AbstractAction {
+public class AddActivityAction extends AbstractAction {
 
 	/* (非 Javadoc)
 	 * @see tasklet.action.AbstractAction#doExecute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
