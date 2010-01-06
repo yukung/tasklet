@@ -71,7 +71,7 @@
       <forward name="success" redirect="true" path="/index.do"/>
     </action>
     <!-- 入力されたアクティビティ名からアクティビティオブジェクトを生成し、データベースに保存する。 -->
-    <action path="/addActivity" name="addActivityForm" type="tasklet.action.addActivityAction" scope="request" validate="true" input="/showActivities.do">
+    <action path="/addActivity" name="addActivityForm" type="tasklet.action.AddActivityAction" scope="request" validate="true" input="/showActivities.do">
       <forward name="success" path="/showActivities.do"/>
     </action>
   </action-mappings>
