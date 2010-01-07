@@ -45,16 +45,25 @@ public interface ActivityDao {
 	/**
 	 * 画面から入力されたアクティビティ情報を元にインデックステーブルへ追加を行います。
 	 * @param userId
+	 * @param categoryId
 	 * @param activityId
 	 */
-	public void addIndexes(int userId, int activityId);
+	public void addIndexes(int userId, int categoryId, int activityId);
 
 	/**
-	 * 最新のアクティビティIDを取得します。
+	 * アクティビティIDの最大値を取得します。
 	 * @param activity
-	 * @return 最新のアクティビティID
+	 * @return アクティビティIDの最大値
 	 * @throws TaskletException データベース整合性エラー
 	 */
 	public int getLastActivityId(Activity activity) throws TaskletException;
+
+	/**
+	 * 引数のユーザIDに紐づくカテゴリIDの最大値を取得します。
+	 * @param userId
+	 * @return カテゴリIDの最大値
+	 * @throws TaskletException データベース整合性エラー
+	 */
+	public int getLastCategoryId(int userId) throws TaskletException;
 
 }

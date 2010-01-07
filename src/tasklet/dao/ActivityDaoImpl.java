@@ -93,6 +93,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 
 	/*
 	 * (非 Javadoc)
+	 *
 	 * @see tasklet.dao.ActivityDao#getMaxSequenceOfActivities(int)
 	 */
 	public Integer getMaxSequenceOfActivities(int userId) {
@@ -102,7 +103,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getMaxSequenceOfActivities").toString();
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"getMaxSequenceOfActivities").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
@@ -129,6 +131,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 
 	/*
 	 * (非 Javadoc)
+	 *
 	 * @see tasklet.dao.ActivityDao#addActivities(tasklet.entity.Activity)
 	 */
 	public void addActivities(Activity activity) {
@@ -137,7 +140,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addActivityToActivities").toString();
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"addActivityToActivities").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
@@ -161,15 +165,16 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 
 	/*
 	 * (非 Javadoc)
-	 * @see tasklet.dao.ActivityDao#addIndexes(tasklet.entity.Activity, java.lang.Integer)
+	 * @see tasklet.dao.ActivityDao#addIndexes(int, int, int)
 	 */
-	public void addIndexes(int userId, int activityId) {
+	public void addIndexes(int userId, int categoryId, int activityId) {
 
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addActivityToIndexes").toString();
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"addActivityToIndexes").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
@@ -177,8 +182,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, userId);
-			statement.setInt(2, activityId);
-			// カテゴリはデフォルト「未分類」で登録
+			statement.setInt(2, categoryId);
+			statement.setInt(3, activityId);
 
 			statement.executeUpdate();
 
@@ -191,6 +196,10 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.ActivityDao#getLastActivityId(tasklet.entity.Activity)
+	 */
 	public int getLastActivityId(Activity activity) throws TaskletException {
 
 		Connection conn = null;
@@ -198,7 +207,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getLastActivityId").toString();
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"getLastActivityId").toString();
 			PropertyUtil property = PropertyUtil.getInstance("sql");
 			String sql = property.getString(propertyKey);
 
@@ -213,6 +223,44 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			}
 
 			return rs.getInt("last_activity_id");
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 *
+	 * @see tasklet.dao.ActivityDao#getLastCategoryId(int)
+	 */
+	public int getLastCategoryId(int userId) throws TaskletException {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"getLastCategoryId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB検索
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, userId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				throw new DataAccessException("errors.insert");
+			}
+
+			return rs.getInt("last_category_id");
 
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);

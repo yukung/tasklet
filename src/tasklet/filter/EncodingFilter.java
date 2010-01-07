@@ -17,29 +17,29 @@ import javax.servlet.ServletResponse;
 
 /**
  * HTTPリクエストに対して文字コードを設定するフィルタです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class EncodingFilter implements Filter {
 
 	private String encoding = null;
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see javax.servlet.Filter#destroy()
+	/**
+	 * Default constructor.
+	 */
+	public EncodingFilter() {
+	}
+
+	/**
+	 * @see Filter#destroy()
 	 */
 	public void destroy() {
 		encoding = null;
-
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
-	 * javax.servlet.ServletResponse, javax.servlet.FilterChain)
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
@@ -47,13 +47,11 @@ public class EncodingFilter implements Filter {
 		chain.doFilter(request, response);
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+	/**
+	 * @see Filter#init(FilterConfig)
 	 */
-	public void init(FilterConfig config) throws ServletException {
-		encoding = config.getInitParameter("encoding");
+	public void init(FilterConfig fConfig) throws ServletException {
+		encoding = fConfig.getInitParameter("encoding");
 	}
 
 }

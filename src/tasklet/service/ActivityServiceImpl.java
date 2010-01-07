@@ -70,7 +70,8 @@ public class ActivityServiceImpl implements ActivityService {
 		try {
 			activityDao.addActivities(activity);
 			int activityId = activityDao.getLastActivityId(activity);
-			activityDao.addIndexes(userId, activityId);
+			int categoryId = activityDao.getLastCategoryId(userId);
+			activityDao.addIndexes(userId, categoryId, activityId);
 		} catch (DataAccessException e) {
 			// DB登録エラー
 			throw new TaskletException("errors.insert", e);

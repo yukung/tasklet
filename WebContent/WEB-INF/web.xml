@@ -4,8 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
-	<!-- エンコーディングフィルタの設定 -->
 	<filter>
+		<description>HTTPリクエストに対して文字コードを設定するフィルタ。</description>
+		<display-name>EncodingFilter</display-name>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>tasklet.filter.EncodingFilter</filter-class>
 		<init-param>
@@ -14,10 +15,24 @@
 		</init-param>
 	</filter>
 
+<!--	<filter>-->
+<!--		<description>セッション中にログインユーザのUserオブジェクトが存在するかどうかを調べるフィルタ。</description>-->
+<!--		<display-name>LoginFilter</display-name>-->
+<!--		<filter-name>LoginFilter</filter-name>-->
+<!--		<filter-class>tasklet.filter.LoginFilter</filter-class>-->
+<!--	</filter>-->
+
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
+
+<!--	<filter-mapping>-->
+<!--		<filter-name>LoginFilter</filter-name>-->
+<!--		<url-pattern>*.do</url-pattern>-->
+<!--		<dispatcher>REQUEST</dispatcher>-->
+<!--	</filter-mapping>-->
 
 	<servlet>
 		<servlet-name>action</servlet-name>
