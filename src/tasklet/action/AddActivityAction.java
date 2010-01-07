@@ -6,6 +6,8 @@
  */
 package tasklet.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,6 +45,14 @@ public class AddActivityAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			return mapping.findForward("login");
+		}
+
+		// セッションからユーザIDを取得
+		int userId = user.getId();
+
 		DynaActionForm addActivityForm = (DynaActionForm)form;
 
 		Activity activity = new Activity();
@@ -51,10 +61,6 @@ public class AddActivityAction extends AbstractAction {
 		} catch (Exception e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
-
-		// セッションからユーザIDを取得
-		User user = (User) request.getSession().getAttribute("user");
-		int userId = user.getId();
 
 		// アクティビティを登録
 		ActivityService activityService = new ActivityServiceImpl();
@@ -68,6 +74,13 @@ public class AddActivityAction extends AbstractAction {
 			saveErrors(request, errors);
 			return mapping.getInputForward();
 		}
+
+		// アクティビティ一覧を再取得
+		List<Activity> activities = activityService.show(userId);
+		request.setAttribute("activities", activities);
+		addActivityForm.set("activityName", "");
+
+		saveToken(request);
 		return mapping.findForward("success");
 	}
 }

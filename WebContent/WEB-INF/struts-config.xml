@@ -37,13 +37,14 @@
       <form-property name="confirm" type="java.lang.String"/>
     </form-bean>
     <!-- リクエストパラメータ無しのForm -->
-    <form-bean name="nonParameterForm" type="org.apache.struts.action.DynaActionForm" dynamic="true"/>
+    <form-bean name="noParameterForm" type="org.apache.struts.action.DynaActionForm" dynamic="true"/>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
   </global-exceptions>
   <global-forwards>
     <forward name="double" path="double"/>
+    <forward name="login" path="top"/>
   </global-forwards>
   <action-mappings>
     <!-- トップページへ遷移する。 -->
@@ -54,12 +55,11 @@
       <forward name="success" redirect="true" path="/showActivities.do"/>
     </action>
     <!-- データベースに保存されたアクティビティ情報から、アクティビティオブジェクトを生成し、requestスコープに登録する。 -->
-    <action path="/showActivities" name="addActivityForm" type="tasklet.action.ShowActivitiesAction" scope="request" validate="false">
+    <action path="/showActivities" name="noParameterForm" type="tasklet.action.ShowActivitiesAction" scope="request" validate="false">
       <forward name="success" path="activities"/>
-      <forward name="login" path="/login.do"/>
     </action>
     <!-- ユーザー登録画面に遷移する。 -->
-    <action path="/register" name="nonParameterForm" type="tasklet.action.RegisterAction" scope="request" validate="false">
+    <action path="/register" name="noParameterForm" type="tasklet.action.RegisterAction" scope="request" validate="false">
       <forward name="success" path="register"/>
     </action>
     <!-- 入力されたユーザー情報から、ユーザー情報オブジェクトを生成し、データベースに追加する。 -->
@@ -67,12 +67,12 @@
       <forward name="success" path="registerResult"/>
     </action>
     <!-- sessionスコープからユーザオブジェクトを削除し、ログアウト処理を行う。 -->
-    <action path="/logout" name="nonParameterForm" type="tasklet.action.LogoutAction" scope="request" validate="false">
+    <action path="/logout" name="noParameterForm" type="tasklet.action.LogoutAction" scope="request" validate="false">
       <forward name="success" redirect="true" path="/index.do"/>
     </action>
     <!-- 入力されたアクティビティ名からアクティビティオブジェクトを生成し、データベースに保存する。 -->
     <action path="/addActivity" name="addActivityForm" type="tasklet.action.AddActivityAction" scope="request" validate="true" input="/showActivities.do">
-      <forward name="success" path="/showActivities.do"/>
+      <forward name="success" path="activities"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
