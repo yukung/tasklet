@@ -24,7 +24,8 @@
 					</tr>
 					<logic:iterate id="activity" name="activities" indexId="idx" scope="request">
 					<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
-						<td class="first"><bean:write name="activity" property="title" /></td>
+						<bean:define id="actId" name="activity" property="id" />
+						<td class="first"><html:link href="/showTasks.do" paramId="activityId" paramName="actId"><bean:write name="activity" property="title" /></html:link></td>
 						<td><bean:write name="activity" property="category" /></td>
 						<td class="align-right"><bean:write name="activity" property="achievementRatio" /></td>
 						<td class="align-right"><bean:write name="activity" property="remaining" /></td>
