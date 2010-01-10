@@ -38,6 +38,10 @@
     </form-bean>
     <!-- リクエストパラメータ無しのForm -->
     <form-bean name="noParameterForm" type="org.apache.struts.action.DynaActionForm" dynamic="true"/>
+    <!-- アクティビティ一覧ページ切替用Bean -->
+    <form-bean name="activitiesPaginationForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
+      <form-property name="pageNo" type="java.lang.String"/>
+    </form-bean>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -72,6 +76,10 @@
     </action>
     <!-- 入力されたアクティビティ名からアクティビティオブジェクトを生成し、データベースに保存する。 -->
     <action path="/addActivity" name="addActivityForm" type="tasklet.action.AddActivityAction" scope="request" validate="true" input="/showActivities.do">
+      <forward name="success" path="activities"/>
+    </action>
+    <!-- リクエストパラメータのpageNoを元にアクティビティ一覧のページ切替を行う。 -->
+    <action path="/activitiesPagination" name="activitiesPaginationForm" type="tasklet.action.ActivitiesPaginationAction" scope="request" validate="false">
       <forward name="success" path="activities"/>
     </action>
   </action-mappings>

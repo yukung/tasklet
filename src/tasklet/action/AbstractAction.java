@@ -17,8 +17,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * 全てのアクションの基底クラスです。
  * <p>
+ * 全てのアクションの基底クラスです。<br>
  * アクションクラスを定義する際は、このクラスを継承する必要があります。
  * </p>
  *

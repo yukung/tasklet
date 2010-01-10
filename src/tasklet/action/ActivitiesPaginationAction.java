@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.DynaActionForm;
 
 import tasklet.Constants;
 import tasklet.entity.Activity;
@@ -23,20 +24,15 @@ import tasklet.service.ActivityServiceImpl;
 import tasklet.util.Pager;
 
 /**
- * アクティビティ一覧を表示するアクションです。
+ * アクティビティ一覧のページ切替を行うアクションです。
  *
  * @author Y.Ikeda
  *
  */
-public class ShowActivitiesAction extends AbstractAction {
+public class ActivitiesPaginationAction extends AbstractAction {
 
-	/*
-	 * (非 Javadoc)
-	 *
-	 * @seetasklet.action.AbstractAction#doExecute(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
+	/* (非 Javadoc)
+	 * @see tasklet.action.AbstractAction#doExecute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
@@ -47,7 +43,9 @@ public class ShowActivitiesAction extends AbstractAction {
 			return mapping.findForward("login");
 		}
 		int userId = user.getId();
-		int pageNo = 1; // 初期アクセス時は1ページ目
+
+		DynaActionForm activitiesPaginationForm = (DynaActionForm) form;
+		int pageNo = Integer.parseInt(activitiesPaginationForm.get("pageNo").toString());
 
 		ActivityService activityService = new ActivityServiceImpl();
 		long count = activityService.getCount(userId);

@@ -23,15 +23,17 @@ public interface ActivityDao {
 	 * ユーザIDをキーにアクティビティ情報エンティティを取得します。
 	 *
 	 * @param userId
+	 * @param offset 取得開始位置
+	 * @param limit 最大取得件数
 	 * @return アクティビティ一覧を格納した配列
 	 */
-	public List<Activity> findActivitiesByUserId(int userId);
+	public List<Activity> findActivitiesByUserId(int userId, int offset, int limit);
 
 	/**
 	 * ユーザIDをキーにアクティビティの最新順を取得します。
 	 *
 	 * @param userId
-	 * @return ユーザIDに紐づいたアクティビティの最新順を取得します。
+	 * @return ユーザIDに紐づいたアクティビティの最新順
 	 */
 	public Integer getMaxSequenceOfActivities(int userId);
 
@@ -65,5 +67,12 @@ public interface ActivityDao {
 	 * @throws TaskletException データベース整合性エラー
 	 */
 	public int getLastCategoryId(int userId) throws TaskletException;
+
+	/**
+	 * 引数のユーザIDに紐づくアクティビティの件数を取得します。
+	 * @param userId
+	 * @return 引数のユーザIDに紐づくアクティビティの件数
+	 */
+	public long getActivityCountByUserId(int userId);
 
 }

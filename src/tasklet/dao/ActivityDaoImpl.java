@@ -41,10 +41,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 
 	/*
 	 * (非 Javadoc)
-	 *
-	 * @see tasklet.dao.ActivityDao#findActivitiesByUserId(int)
+	 * @see tasklet.dao.ActivityDao#findActivitiesByUserId(int, int, int)
 	 */
-	public List<Activity> findActivitiesByUserId(int userId) {
+	public List<Activity> findActivitiesByUserId(int userId, int offset, int limit) {
 
 		Connection conn = null;
 		PreparedStatement statement = null;
@@ -61,6 +60,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, userId);
 			statement.setInt(2, userId);
+			statement.setInt(3, limit); // パラメータの順序に注意！！
+			statement.setInt(4, offset);
 			rs = statement.executeQuery();
 
 			// 結果の取り出し
@@ -261,6 +262,42 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			}
 
 			return rs.getInt("last_category_id");
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.ActivityDao#getActivityCountByUserId(int)
+	 */
+	public long getActivityCountByUserId(int userId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getActivityCountByUserId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB検索
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, userId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				return 0;
+			}
+
+			return rs.getLong("activities_count");
 
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);

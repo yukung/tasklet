@@ -41,6 +41,17 @@
 					</logic:iterate>
 				</table>
 
+				<logic:notEmpty name="pager" scope="request">
+				<div class="pager align-right">
+					<logic:equal name="pager" property="prev" value="true" scope="request">
+						<html:link action="/activitiesPagination" paramId="pageNo" paramName="pager" paramProperty="prevPageNo" paramScope="request" styleClass="page">&lt;&lt;前</html:link>
+					</logic:equal>
+					<logic:equal name="pager" property="next" value="true" scope="request">
+						<html:link action="/activitiesPagination" paramId="pageNo" paramName="pager" paramProperty="nextPageNo" paramScope="request" styleClass="page">次&gt;&gt;</html:link>
+					</logic:equal>
+				</div>
+				</logic:notEmpty>
+
 				<h3>新規追加</h3>
 
 				<html:form action="/addActivity">

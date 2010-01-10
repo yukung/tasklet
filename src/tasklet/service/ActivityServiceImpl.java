@@ -30,12 +30,11 @@ public class ActivityServiceImpl implements ActivityService {
 
 	/*
 	 * (非 Javadoc)
-	 *
-	 * @see tasklet.service.ActivityService#show(int)
+	 * @see tasklet.service.ActivityService#show(int, int, int)
 	 */
-	public List<Activity> show(int userId) {
+	public List<Activity> show(int userId, int offset, int limit) {
 
-		List<Activity> activities = activityDao.findActivitiesByUserId(userId);
+		List<Activity> activities = activityDao.findActivitiesByUserId(userId, offset, limit);
 
 		// アクティビティが1件も登録されていない場合、空のListを返す
 		if (activities == null) {
@@ -48,6 +47,10 @@ public class ActivityServiceImpl implements ActivityService {
 		return activities;
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.ActivityService#setAcitivity(tasklet.entity.Activity, int)
+	 */
 	public Activity setAcitivity(Activity activity, int userId) {
 
 		activity.setDescription("これはテストです。"); // TODO 概要はとりあえず固定値登録
@@ -64,6 +67,10 @@ public class ActivityServiceImpl implements ActivityService {
 		return activity;
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.ActivityService#add(tasklet.entity.Activity, int)
+	 */
 	public void add(Activity activity, int userId) throws TaskletException {
 
 		// アクティビティ追加処理
@@ -76,5 +83,13 @@ public class ActivityServiceImpl implements ActivityService {
 			// DB登録エラー
 			throw new TaskletException("errors.insert", e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.ActivityService#getCount(int)
+	 */
+	public long getCount(int userId) {
+		return activityDao.getActivityCountByUserId(userId);
 	}
 }

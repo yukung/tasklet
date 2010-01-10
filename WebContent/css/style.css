@@ -316,7 +316,7 @@ input.button {
 	list-style-image: url(../images/bullet.gif);
 }
 
-.post-footer {
+.pager {
 	background-color: #FAFAFA;
 	padding: 5px; margin: 20px 10px 10px 10px;
 	border: 1px solid #f2f2f2;
@@ -333,6 +333,10 @@ input.button {
 .post-footer .readmore {
 	background: url(../images/page.gif) no-repeat left center;
 	padding-left: 20px; margin: 0 10px 0 5px;
+}
+
+.pager .page {
+	padding-left: 5px; margin: 0 5px 0 5px;
 }
 
 /* Sidebar */

@@ -24,9 +24,11 @@ public interface ActivityService {
 	 * ユーザIDに紐づいたアクティビティ一覧を取得します。
 	 *
 	 * @param userId
+	 * @param offset 取得開始位置
+	 * @param limit 最大取得件数
 	 * @return アクティビティ一覧を格納したList
 	 */
-	public List<Activity> show(int userId);
+	public List<Activity> show(int userId, int offset, int limit);
 
 	/**
 	 * 新規アクティビティ追加時のパラメータをセットします。
@@ -45,5 +47,13 @@ public interface ActivityService {
 	 * @throws TaskletException アクティビティ登録時のエラー
 	 */
 	public void add(Activity activity, int userId) throws TaskletException;
+
+	/**
+	 * ユーザIDに紐づいたアクティビティの件数を取得します。
+	 *
+	 * @param userId
+	 * @return そのユーザが持つアクティビティの件数
+	 */
+	public long getCount(int userId);
 
 }

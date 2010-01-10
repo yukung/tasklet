@@ -19,12 +19,14 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
+import tasklet.Constants;
 import tasklet.common.DataAccessException;
 import tasklet.common.TaskletException;
 import tasklet.entity.Activity;
 import tasklet.entity.User;
 import tasklet.service.ActivityService;
 import tasklet.service.ActivityServiceImpl;
+import tasklet.util.Pager;
 
 /**
  * アクティビティを追加するアクションです。
@@ -76,8 +78,12 @@ public class AddActivityAction extends AbstractAction {
 		}
 
 		// アクティビティ一覧を再取得
-		List<Activity> activities = activityService.show(userId);
+		long count = activityService.getCount(userId);
+		int pageNo = 1; // 先頭に新規タスクが追加されるため1ページ目を再表示
+		Pager pager = new Pager(count, pageNo, Constants.ACTIVITIES_MAX_LIMIT);
+		List<Activity> activities = activityService.show(userId, pager.getOffset(), pager.getLimit());
 		request.setAttribute("activities", activities);
+		request.setAttribute("pager", pager);
 		addActivityForm.set("activityName", "");
 
 		saveToken(request);

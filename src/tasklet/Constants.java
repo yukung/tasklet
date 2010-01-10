@@ -16,4 +16,8 @@ public class Constants {
 
 	public static final String PROPERTY_KEY_SQL = "sqltable.";
 
+	public static final int ACTIVITIES_MAX_LIMIT = 5;
+
+	public static final int TASKS_MAX_LIMIT = 10;
+
 }
