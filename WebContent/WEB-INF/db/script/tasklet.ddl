@@ -55,7 +55,7 @@ CREATE TABLE tasks(
   activity_id INTEGER NOT NULL,
   title VARCHAR(255) NOT NULL,
   priority TINYINT,
-  status TINYINT,
+  status TINYINT NOT NULL,
   period DATE,
   finished_on DATE,
   estimated_time DOUBLE,

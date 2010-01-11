@@ -277,7 +277,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	 * @see tasklet.dao.ActivityDao#getActivityCountByUserId(int)
 	 */
 	public long getActivityCountByUserId(int userId) {
-		// TODO 自動生成されたメソッド・スタブ
+
 		Connection conn = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;

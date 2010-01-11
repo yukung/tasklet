@@ -14,6 +14,7 @@ package tasklet;
  */
 public enum Status {
 
+	NOT_STARTED(0,"未着手"),
 	PROCEED(1,"着手"),
 	FINISH(2,"完了");
 

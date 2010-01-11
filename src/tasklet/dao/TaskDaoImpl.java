@@ -64,6 +64,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 				Task task = new Task();
 				task.setId(rs.getInt("id"));
 				task.setActivityId(rs.getInt("activity_id"));
+				task.setTitle(rs.getString("title"));
 				task.setPriority(rs.getInt("priority"));
 				task.setStatusFromCode(rs.getInt("status"));
 				task.setPeriod(rs.getDate("period"));
@@ -76,6 +77,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			}
 
 			return tasks;
+
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		} finally {
@@ -83,6 +85,43 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			close(statement);
 			close(conn);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#getActivityTitle(int)
+	 */
+	public String getActivityTitle(int activityId) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getActivityTitle").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// SQLの実行
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, activityId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				throw new DataAccessException("errors.exist");
+			}
+
+			return rs.getString("title");
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+
 	}
 
 }

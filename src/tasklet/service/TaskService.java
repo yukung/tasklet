@@ -4,30 +4,30 @@
  *
  * This file is part of Tasklet.
  */
-package tasklet.dao;
+package tasklet.service;
 
 import java.util.List;
 
 import tasklet.entity.Task;
 
 /**
- * タスク情報DAOインタフェースです。
+ * タスク関連のビジネスロジックを規定するインタフェースです。
  *
  * @author Y.Ikeda
  *
  */
-public interface TaskDao {
+public interface TaskService {
 
 	/**
-	 * アクティビティIDをキーにタスク情報エンティティを取得します。
+	 * アクティビティIDに紐づいたタスク一覧を取得します。
 	 *
 	 * @param activityId
-	 * @return タスク情報を格納したList
+	 * @return タスク一覧を格納したList
 	 */
-	public List<Task> findTasksByActivityId(int activityId);
+	public List<Task> show(int activityId);
 
 	/**
-	 * アクティビティIDをキーにアクティビティのタイトルを取得します。
+	 * アクティビティIDに対応したアクティビティ名を取得します。
 	 *
 	 * @param activityId
 	 * @return アクティビティのタイトル

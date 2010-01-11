@@ -42,13 +42,18 @@
     <form-bean name="activitiesPaginationForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
       <form-property name="pageNo" type="java.lang.String"/>
     </form-bean>
+    <!-- タスク一覧情報用Bean -->
+    <form-bean name="showTaskForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
+      <form-property name="activityId" type="java.lang.String"/>
+      <form-property name="title" type="java.lang.String"/>
+    </form-bean>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
   </global-exceptions>
   <global-forwards>
     <forward name="double" path="double"/>
-    <forward name="login" path="top"/>
+    <forward name="login" path="top" redirect="true"/>
   </global-forwards>
   <action-mappings>
     <!-- トップページへ遷移する。 -->
@@ -81,6 +86,10 @@
     <!-- リクエストパラメータのpageNoを元にアクティビティ一覧のページ切替を行う。 -->
     <action path="/activitiesPagination" name="activitiesPaginationForm" type="tasklet.action.ActivitiesPaginationAction" scope="request" validate="false">
       <forward name="success" path="activities"/>
+    </action>
+    <!-- データベースに保存されたタスク一覧情報から、タスク一覧オブジェクトを生成し、requestスコープに登録する。 -->
+    <action path="/showTasks" name="showTaskForm" type="tasklet.action.ShowTasksAction" scope="request" validate="false">
+      <forward name="success" path="tasks"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
