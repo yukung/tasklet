@@ -127,6 +127,14 @@ td {
 td.first,th.first {
 	border-left: 0px;
 }
+/*
+td.align-center {
+	text-align: center;
+}
+td.align-right {
+	text-align: right;
+}
+*/
 tr.row-a {
 	background: #F8F8F8;
 }
@@ -397,10 +405,11 @@ input.button {
 }
 
 /* alignment classes */
-.float-left  { float: left; }
-.float-right { float: right; }
-.align-left  { text-align: left; }
-.align-right { text-align: right; }
+.float-left   { float: left; }
+.float-right  { float: right; }
+.align-left   { text-align: left; }
+.align-center { text-align: center; }
+.align-right  { text-align: right; }
 
 /* display and additional classes */
 .clear { clear: both; }

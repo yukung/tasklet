@@ -9,6 +9,7 @@ package tasklet.entity;
 import java.util.Date;
 import java.util.EnumSet;
 
+import tasklet.common.Priority;
 import tasklet.common.Status;
 
 /**
@@ -29,7 +30,7 @@ public class Task {
 	private String title;
 
 	/** 優先度 */
-	private int priority;
+	private Priority priority;
 
 	/** ステータス */
 	private Status status;
@@ -104,7 +105,7 @@ public class Task {
 	 * 優先度を取得します。
 	 * @return 優先度
 	 */
-	public int getPriority() {
+	public Priority getPriority() {
 		return priority;
 	}
 
@@ -112,8 +113,30 @@ public class Task {
 	 * 優先度を設定します。
 	 * @param priority 優先度
 	 */
-	public void setPriority(int priority) {
+	public void setPriority(Priority priority) {
 		this.priority = priority;
+	}
+
+	/**
+	 * 優先度コードを取得します。
+	 * @return 優先度コード
+	 */
+	public int getPriorityCode() {
+		return priority.getCode();
+	}
+
+	/**
+	 * 優先度コードから優先度を設定します。
+	 * @param code 優先度コード
+	 */
+	public void setPriorityFromCode(int code) {
+		for (Priority priority : EnumSet.allOf(Priority.class)) {
+			if (priority.getCode() == code) {
+				this.priority = priority;
+				return;
+			}
+		}
+		priority = null;
 	}
 
 	/**

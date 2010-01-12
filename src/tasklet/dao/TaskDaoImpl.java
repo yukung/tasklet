@@ -65,7 +65,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 				task.setId(rs.getInt("id"));
 				task.setActivityId(rs.getInt("activity_id"));
 				task.setTitle(rs.getString("title"));
-				task.setPriority(rs.getInt("priority"));
+				task.setPriorityFromCode((rs.getInt("priority")));
 				task.setStatusFromCode(rs.getInt("status"));
 				task.setPeriod(rs.getDate("period"));
 				task.setFinishedOn(rs.getDate("finished_on"));

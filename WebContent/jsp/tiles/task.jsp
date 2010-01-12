@@ -19,30 +19,36 @@
 							<th>優先度</th>
 							<th>状態</th>
 							<th>期限/完了</th>
-							<th>見積時間（h）</th>
-							<th>実績時間（h）</th>
+							<th>見積時間</th>
+							<th>実績時間</th>
 							<th>メモ</th>
 						</tr>
 						<logic:iterate id="task" name="tasks" indexId="idx" scope="request">
 						<nested:root name="task">
 						<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
-							<td class="first"><input type="checkbox" name="check" /></td>
+							<td class="first align-center"><input type="checkbox" name="check" /></td>
 							<td><a href="#"><nested:write property="title" /></a></td>
-							<td><nested:write property="priority" /></td>
-							<nested:nest property="status">
-							<td><nested:write property="statusName" /></td>
+							<td class="align-center">
+							<nested:nest property="priority">
+								<nested:write property="priorityName" />
 							</nested:nest>
-							<td>
+							</td>
+							<td class="align-center">
+							<nested:nest property="status">
+								<nested:write property="statusName" />
+							</nested:nest>
+							</td>
+							<td class="align-right">
 							<nested:empty property="finishedOn">
-								<nested:write property="period" />
+								<nested:write property="period" format="yyyy/MM/dd" />
 							</nested:empty>
 							<nested:notEmpty property="finishedOn">
-								<nested:write property="finishedOn" />
+								<nested:write property="finishedOn" format="yyyy/MM/dd" />
 							</nested:notEmpty>
 							</td>
-							<td><nested:write property="estimatedTime" /></td>
-							<td><nested:write property="actualTime" /></td>
-							<td><a href="#">1</a></td>
+							<td class="align-right"><nested:write property="estimatedTime" /></td>
+							<td class="align-right"><nested:write property="actualTime" /></td>
+							<td class="align-center"><a href="#">1</a></td>
 						</tr>
 						</nested:root>
 						</logic:iterate>
