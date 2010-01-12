@@ -17,7 +17,7 @@ public enum Priority {
 	HIGH(1,"高"),
 	NORMAL(2,"普通"),
 	LOW(3,"低"),
-	NOTHING(9,"なし");
+	NOTHING(9,"");
 
 	int code;
 	String priorityName;

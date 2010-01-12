@@ -39,12 +39,17 @@
 							</nested:nest>
 							</td>
 							<td class="align-right">
-							<nested:empty property="finishedOn">
+							<nested:notEqual property="status" value="FINISH">
+								<nested:match property="overdue" value="true">
+								<span class="attention"><nested:write property="period" format="yyyy/MM/dd" /></span>
+								</nested:match>
+								<nested:match property="overdue" value="false">
 								<nested:write property="period" format="yyyy/MM/dd" />
-							</nested:empty>
-							<nested:notEmpty property="finishedOn">
+								</nested:match>
+							</nested:notEqual>
+							<nested:equal property="status" value="FINISH">
 								<nested:write property="finishedOn" format="yyyy/MM/dd" />
-							</nested:notEmpty>
+							</nested:equal>
 							</td>
 							<td class="align-right"><nested:write property="estimatedTime" /></td>
 							<td class="align-right"><nested:write property="actualTime" /></td>

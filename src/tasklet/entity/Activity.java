@@ -8,6 +8,7 @@ package tasklet.entity;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -259,9 +260,29 @@ public class Activity {
 	 */
 	public String getOverdue() {
 		int amount = 0;
-		Date now = new Date();
+		Calendar today = Calendar.getInstance();
 		for (Task task : tasks) {
-			if (now.after(task.getPeriod())) {
+			// 期限設定なしのタスクはカウントしない
+			Date dateOfPeriod = task.getPeriod();
+			if (dateOfPeriod == null) {
+				continue;
+			}
+			// 完了タスクはカウントしない
+			if (task.getStatus() == Status.FINISH) {
+				continue;
+			}
+			Calendar period = Calendar.getInstance();
+			period.setTime(dateOfPeriod);
+
+			// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
+			// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
+			// （期日はその日の午前0時であるため）
+			// これを防ぐため、期限を1日ずらすことで今日が期限のタスクを期限オーバーに含めないようにする。
+			period.add(Calendar.DAY_OF_MONTH, 1);
+
+			int result = today.compareTo(period);
+			if (result == 1) {
+				// 戻り値が -1,0 は期限内なので除外
 				amount++;
 			}
 		}

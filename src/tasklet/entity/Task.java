@@ -6,6 +6,7 @@
  */
 package tasklet.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.EnumSet;
 
@@ -191,6 +192,30 @@ public class Task {
 	 */
 	public void setPeriod(Date period) {
 		this.period = period;
+	}
+
+	/**
+	 * 期限オーバーかどうかを返します。
+	 * @return 期限が今日よりも前の場合は true<br>
+	 * 期限が今日を含めて後の場合は false
+	 */
+	public boolean isOverdue() {
+		if (period == null) {
+			return false;
+		}
+		Calendar today = Calendar.getInstance();
+		Calendar period = Calendar.getInstance();
+		period.setTime(this.getPeriod());
+
+		// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
+		// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
+		// （期日はその日の午前0時であるため）
+		// これを防ぐため、期限を1日ずらすことで今日が期限のタスクを期限オーバーに含めないようにする。
+		period.add(Calendar.DAY_OF_MONTH, 1);
+
+		int result = today.compareTo(period);
+		// 戻り値が -1,0 は期限内
+		return result == 1 ? true : false;
 	}
 
 	/**

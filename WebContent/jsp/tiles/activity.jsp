@@ -28,12 +28,14 @@
 						<td class="align-center"><bean:write name="activity" property="category" /></td>
 						<td class="align-right"><bean:write name="activity" property="achievementRatio" /></td>
 						<td class="align-right"><bean:write name="activity" property="remaining" /></td>
+						<td class="align-right">
 						<logic:greaterThan name="activity" property="remaining" value="0">
-						<td class="align-right attention"><bean:write name="activity" property="overdue" /></td>
+							<span class="attention"><bean:write name="activity" property="overdue" /></span>
 						</logic:greaterThan>
 						<logic:equal name="activity" property="remaining" value="0">
-						<td class="align-right"><bean:write name="activity" property="overdue" /></td>
+							<bean:write name="activity" property="overdue" />
 						</logic:equal>
+						</td>
 						<td class="align-right"><bean:write name="activity" property="ratioOfEstimateAndActual" /></td>
 						<td class="align-right"><bean:write name="activity" property="estimatedTimeTotal"/></td>
 						<td class="align-right"><bean:write name="activity" property="actualTimeTotal"/></td>
