@@ -4,7 +4,7 @@
  *
  * This file is part of Tasklet.
  */
-package tasklet.common;
+package tasklet;
 
 /**
  * Taskletアプリケーションの共通例外クラスです。

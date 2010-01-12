@@ -10,7 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import tasklet.common.DataAccessException;
+import tasklet.DataAccessException;
 import tasklet.dao.ActivityDao;
 import tasklet.dao.ActivityDaoImpl;
 import tasklet.dao.TaskDao;

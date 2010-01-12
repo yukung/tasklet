@@ -4,7 +4,7 @@
  *
  * This file is part of Tasklet.
  */
-package tasklet;
+package tasklet.common;
 
 /**
  * タスクの状態を定義する列挙型です。

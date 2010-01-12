@@ -8,7 +8,7 @@ package tasklet.dao;
 
 import java.util.List;
 
-import tasklet.common.TaskletException;
+import tasklet.TaskletException;
 import tasklet.entity.Activity;
 
 /**

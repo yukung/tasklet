@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import tasklet.Constants;
+import tasklet.common.Constants;
 import tasklet.entity.Activity;
 import tasklet.entity.User;
 import tasklet.service.ActivityService;

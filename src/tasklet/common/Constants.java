@@ -4,7 +4,7 @@
  *
  * This file is part of Tasklet.
  */
-package tasklet;
+package tasklet.common;
 
 /**
  * アプリ共通の定数クラスです。

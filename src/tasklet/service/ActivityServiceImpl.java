@@ -9,8 +9,8 @@ package tasklet.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import tasklet.common.DataAccessException;
-import tasklet.common.TaskletException;
+import tasklet.DataAccessException;
+import tasklet.TaskletException;
 import tasklet.dao.ActivityDao;
 import tasklet.dao.TaskDao;
 import tasklet.entity.Activity;

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import tasklet.common.DataAccessException;
+import tasklet.DataAccessException;
 
 /**
  * Daoの基底クラスです。

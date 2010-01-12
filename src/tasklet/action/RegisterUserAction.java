@@ -17,8 +17,8 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
-import tasklet.common.DataAccessException;
-import tasklet.common.TaskletException;
+import tasklet.DataAccessException;
+import tasklet.TaskletException;
 import tasklet.entity.User;
 import tasklet.service.AccountService;
 import tasklet.service.AccountServiceImpl;

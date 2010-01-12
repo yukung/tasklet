@@ -9,7 +9,7 @@ package tasklet.entity;
 import java.util.Date;
 import java.util.EnumSet;
 
-import tasklet.Status;
+import tasklet.common.Status;
 
 /**
  * タスク情報を表すBeanクラスです。

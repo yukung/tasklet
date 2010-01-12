@@ -6,7 +6,7 @@
  */
 package tasklet.dao;
 
-import static tasklet.Constants.PROPERTY_KEY_SQL;
+import static tasklet.common.Constants.PROPERTY_KEY_SQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import tasklet.common.DataAccessException;
+import tasklet.DataAccessException;
 import tasklet.entity.Task;
 import tasklet.util.PropertyUtil;
 

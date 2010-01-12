@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import tasklet.Status;
+import tasklet.common.Status;
 
 /**
  * アクティビティ情報を表すBeanクラスです。
