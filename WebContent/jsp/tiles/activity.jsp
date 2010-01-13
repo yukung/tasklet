@@ -29,10 +29,10 @@
 						<td class="align-right"><bean:write name="activity" property="achievementRatio" /></td>
 						<td class="align-right"><bean:write name="activity" property="remaining" /></td>
 						<td class="align-right">
-						<logic:greaterThan name="activity" property="remaining" value="0">
+						<logic:greaterThan name="activity" property="overdue" value="0">
 							<span class="attention"><bean:write name="activity" property="overdue" /></span>
 						</logic:greaterThan>
-						<logic:equal name="activity" property="remaining" value="0">
+						<logic:equal name="activity" property="overdue" value="0">
 							<bean:write name="activity" property="overdue" />
 						</logic:equal>
 						</td>
