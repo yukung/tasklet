@@ -276,7 +276,7 @@ public class Activity {
 
 			// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
 			// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
-			// （期日はその日の午前0時であるため）
+			// （期日はその日の午前0時で表されるため）
 			// これを防ぐため、期限を1日ずらすことで今日が期限のタスクを期限オーバーに含めないようにする。
 			period.add(Calendar.DAY_OF_MONTH, 1);
 
