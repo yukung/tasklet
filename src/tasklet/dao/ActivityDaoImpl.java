@@ -150,7 +150,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setString(1, activity.getTitle());
-			statement.setInt(2, activity.getSeq());
+			statement.setString(2, activity.getDescription());
+			statement.setInt(3, activity.getSeq());
 			// 未完了フラグは追加時は必ずtrueで登録される（SQL側で固定値登録）
 
 			statement.executeUpdate();

@@ -26,7 +26,7 @@
 						<logic:iterate id="task" name="tasks" indexId="idx" scope="request">
 						<nested:root name="task">
 						<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
-							<td class="first align-center"><input type="checkbox" name="check" /></td>
+							<td class="first align-center"><input type="checkbox"></input></td>
 							<td><a href="#"><nested:write property="title" /></a></td>
 							<td class="align-center">
 							<nested:equal property="priority" value="HIGH">
