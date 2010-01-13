@@ -56,6 +56,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, activityId);
+			statement.setInt(2, activityId);
 			rs = statement.executeQuery();
 
 			// 結果の取り出し
@@ -73,6 +74,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 				task.setActualTime(rs.getDouble("actual_time"));
 				task.setCreatedOn(rs.getTimestamp("created_on"));
 				task.setUpdatedOn(rs.getTimestamp("updated_on"));
+				task.setMemoCount(rs.getInt("memo_count"));
 				tasks.add(task);
 			}
 

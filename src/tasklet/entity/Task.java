@@ -54,6 +54,9 @@ public class Task {
 	/** 更新タイムスタンプ */
 	private Date updatedOn;
 
+	/** タスクメモの数 */
+	private int memoCount;
+
 	/**
 	 * IDを取得します。
 	 * @return ID
@@ -209,7 +212,7 @@ public class Task {
 
 		// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
 		// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
-		// （期日はその日の午前0時であるため）
+		// （期日はその日の午前0時で表されるため）
 		// これを防ぐため、期限を1日ずらすことで今日が期限のタスクを期限オーバーに含めないようにする。
 		period.add(Calendar.DAY_OF_MONTH, 1);
 
@@ -296,5 +299,21 @@ public class Task {
 	 */
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	/**
+	 * タスクメモの数を取得します。
+	 * @return タスクメモの数
+	 */
+	public int getMemoCount() {
+	    return memoCount;
+	}
+
+	/**
+	 * タスクメモの数を設定します。
+	 * @param memoCount タスクメモの数
+	 */
+	public void setMemoCount(int memoCount) {
+	    this.memoCount = memoCount;
 	}
 }

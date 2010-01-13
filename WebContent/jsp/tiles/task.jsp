@@ -29,14 +29,15 @@
 							<td class="first align-center"><input type="checkbox" name="check" /></td>
 							<td><a href="#"><nested:write property="title" /></a></td>
 							<td class="align-center">
-							<nested:nest property="priority">
-								<nested:write property="priorityName" />
-							</nested:nest>
+							<nested:equal property="priority" value="HIGH">
+								<span class="attention"><nested:nest property="priority"><nested:write property="priorityName" /></nested:nest></span>
+							</nested:equal>
+							<nested:notEqual property="priority" value="HIGH">
+								<nested:nest property="priority"><nested:write property="priorityName" /></nested:nest>
+							</nested:notEqual>
 							</td>
 							<td class="align-center">
-							<nested:nest property="status">
-								<nested:write property="statusName" />
-							</nested:nest>
+								<nested:nest property="status"><nested:write property="statusName" /></nested:nest>
 							</td>
 							<td class="align-right">
 							<nested:notEqual property="status" value="FINISH">
@@ -53,7 +54,11 @@
 							</td>
 							<td class="align-right"><nested:write property="estimatedTime" /></td>
 							<td class="align-right"><nested:write property="actualTime" /></td>
-							<td class="align-center"><a href="#">1</a></td>
+							<td class="align-center">
+							<nested:notEqual property="memoCount" value="0">
+								<a href="#"><nested:write property="memoCount" /></a>
+							</nested:notEqual>
+							</td>
 						</tr>
 						</nested:root>
 						</logic:iterate>
