@@ -63,7 +63,7 @@
 						</nested:root>
 						</logic:iterate>
 					</table>
-					<p><a href="#">タスクの追加</a></p>
+					<p><html:link action="/entry" paramId="activityId" paramName="showTaskForm" paramProperty="activityId">タスクの追加</html:link></p>
 
 				</form>
 

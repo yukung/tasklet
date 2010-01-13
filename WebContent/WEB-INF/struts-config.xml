@@ -91,6 +91,10 @@
     <action path="/showTasks" name="showTaskForm" type="tasklet.action.ShowTasksAction" scope="request" validate="false">
       <forward name="success" path="tasks"/>
     </action>
+    <!-- タスク追加画面へ遷移する。 -->
+    <action path="/entry" name="showTaskForm" type="tasklet.action.EntryAction" scope="request" validate="false">
+      <forward name="success" path="addTask"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>
