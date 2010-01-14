@@ -33,4 +33,8 @@ public enum Status {
 	public String getStatusName() {
 		return statusName;
 	}
+
+	public String getValue() {
+		return name();
+	}
 }

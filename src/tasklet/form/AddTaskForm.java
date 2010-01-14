@@ -8,6 +8,8 @@ package tasklet.form;
 
 import org.apache.struts.validator.ValidatorForm;
 
+import tasklet.common.Priority;
+
 /**
  * @author Y.Ikeda
  *
@@ -22,13 +24,13 @@ public class AddTaskForm extends ValidatorForm {
 	private String title;
 
 	/** 優先度 */
-	private String priority;
+	private Priority priority;
 
 	/** 期限 */
 	private String period;
 
 	/** 見積時間 */
-	private String estimateTime;
+	private String estimatedTime;
 
 	/**
 	 * タスクに紐づくアクティビティIdを取得します。
@@ -66,7 +68,7 @@ public class AddTaskForm extends ValidatorForm {
 	 * 優先度を取得します。
 	 * @return 優先度
 	 */
-	public String getPriority() {
+	public Priority getPriority() {
 	    return priority;
 	}
 
@@ -74,7 +76,7 @@ public class AddTaskForm extends ValidatorForm {
 	 * 優先度を設定します。
 	 * @param priority 優先度
 	 */
-	public void setPriority(String priority) {
+	public void setPriority(Priority priority) {
 	    this.priority = priority;
 	}
 
@@ -98,16 +100,17 @@ public class AddTaskForm extends ValidatorForm {
 	 * 見積時間を取得します。
 	 * @return 見積時間
 	 */
-	public String getEstimateTime() {
-	    return estimateTime;
+	public String getEstimatedTime() {
+	    return estimatedTime;
 	}
 
 	/**
 	 * 見積時間を設定します。
-	 * @param estimateTime 見積時間
+	 * @param estimatedTime 見積時間
 	 */
-	public void setEstimateTime(String estimateTime) {
-	    this.estimateTime = estimateTime;
+	public void setEstimatedTime(String estimatedTime) {
+	    this.estimatedTime = estimatedTime;
 	}
+
 
 }

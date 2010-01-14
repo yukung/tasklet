@@ -6,7 +6,11 @@
  */
 package tasklet.form;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
 import tasklet.common.Priority;
 
 /**
@@ -24,9 +28,6 @@ public class ShowTaskForm extends ActionForm {
 
 	/** 初期選択されるプルダウンの要素 */
 	private Priority priority;
-
-	/** タスク追加画面の優先度プルダウンの要素 */
-	private Priority[] priorityList;
 
 	/**
 	 * タスクに紐づくアクティビティIDを取得します。
@@ -80,16 +81,17 @@ public class ShowTaskForm extends ActionForm {
 	 * タスク追加画面の優先度プルダウンの要素を取得します。
 	 * @return タスク追加画面の優先度プルダウンの要素
 	 */
-	public Priority[] getPriorityList() {
-	    return priorityList;
+	public Priority[] getPriorities() {
+	    return Priority.values();
 	}
 
-	/**
-	 * タスク追加画面の優先度プルダウンの要素を設定します。
-	 * @param priorityList タスク追加画面の優先度プルダウンの要素
+	/*
+	 * (非 Javadoc)
+	 * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
 	 */
-	public void setPriorityList(Priority[] priorityList) {
-	    this.priorityList = priorityList;
+	@Override
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		setPriority(Priority.NOTHING); // 優先度を「なし」に設定
 	}
 
 }

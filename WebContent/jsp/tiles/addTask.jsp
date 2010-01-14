@@ -9,16 +9,16 @@
 						<html:text property="title" />
 						<label>優先度</label>
 						<html:select name="showTaskForm" property="priority">
-							<html:optionsCollection name="showTaskForm" property="priorityList" value="priority" label="priorityName"/>
+							<html:optionsCollection name="showTaskForm" property="priorities" value="value" label="priorityName"/>
 						</html:select>
 						<label>期限</label>
-						<input type="text" value="" />
+						<html:text property="period" />
 						<label>見積時間</label>
-						<input type="text" value="" />
+						<html:text property="estimatedTime" />
 					</p>
 					<p>
-						<input type="submit" value="追加" class="button" />
-						<input type="submit" value="キャンセル" class="button" />
+						<html:submit value="追加" styleClass="button" />
+						<html:cancel value="キャンセル" styleClass="button" />
 					</p>
 				</html:form>
 

@@ -19,7 +19,6 @@ public enum Priority {
 	LOW(3,"低"),
 	NOTHING(9,"なし");
 
-	Priority priority;
 	int code;
 	String priorityName;
 
@@ -28,16 +27,16 @@ public enum Priority {
 		this.priorityName = priorityName;
 	}
 
-	public Priority getPriority() {
-		return this.priority;
-	}
-
 	public int getCode() {
 		return code;
 	}
 
 	public String getPriorityName() {
 		return priorityName;
+	}
+
+	public String getValue() {
+		return name();
 	}
 
 }
