@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.DynaActionForm;
+
+import tasklet.common.Priority;
+import tasklet.form.ShowTaskForm;
 
 /**
  * タスク追加画面を表示するアクションです。
@@ -28,10 +30,9 @@ public class EntryAction extends AbstractAction {
 	@Override
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		// TODO 自動生成されたメソッド・スタブ
-		DynaActionForm showTaskForm = (DynaActionForm) form;
-		String id = showTaskForm.get("activityId").toString();
-		System.out.println(id);
+
+		ShowTaskForm showTaskForm = (ShowTaskForm) form;
+		showTaskForm.setPriority(Priority.NOTHING);
 
 		saveToken(request);
 		return mapping.findForward("success");

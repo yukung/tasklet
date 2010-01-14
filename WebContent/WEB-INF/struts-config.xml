@@ -16,7 +16,7 @@
     <!-- タスク一覧選択用Form -->
     <form-bean name="checkTaskForm" type="tasklet.form.checkTaskForm"/>
     <!-- タスク追加用Form -->
-    <form-bean name="addTaskForm" type="tasklet.form.addTaskForm"/>
+    <form-bean name="addTaskForm" type="tasklet.form.AddTaskForm"/>
     <!-- タスク状況更新用Form -->
     <form-bean name="updateTaskForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
       <form-property name="actualTime" type="java.lang.Double"/>
@@ -43,10 +43,7 @@
       <form-property name="pageNo" type="java.lang.String"/>
     </form-bean>
     <!-- タスク一覧情報用Bean -->
-    <form-bean name="showTaskForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
-      <form-property name="activityId" type="java.lang.String"/>
-      <form-property name="title" type="java.lang.String"/>
-    </form-bean>
+    <form-bean name="showTaskForm" type="tasklet.form.ShowTaskForm"/>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -94,6 +91,10 @@
     <!-- タスク追加画面へ遷移する。 -->
     <action path="/entry" name="showTaskForm" type="tasklet.action.EntryAction" scope="request" validate="false">
       <forward name="success" path="addTask"/>
+    </action>
+    <!-- 入力されたタスク詳細情報からタスク詳細オブジェクトを生成し、データベースに追加する。 -->
+    <action path="/addTask" name="addTaskForm" type="tasklet.action.AddTaskAction" scope="request" validate="true" input="addTask">
+      <forward name="success" path="tasks"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

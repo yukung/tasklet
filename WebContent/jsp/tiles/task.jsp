@@ -33,7 +33,7 @@
 								<span class="attention"><nested:nest property="priority"><nested:write property="priorityName" /></nested:nest></span>
 							</nested:equal>
 							<nested:notEqual property="priority" value="HIGH">
-								<nested:nest property="priority"><nested:write property="priorityName" /></nested:nest>
+								<nested:notEqual property="priority" value="NOTHING"><nested:nest property="priority"><nested:write property="priorityName" /></nested:nest></nested:notEqual>
 							</nested:notEqual>
 							</td>
 							<td class="align-center">

@@ -23,4 +23,5 @@
 						<html:reset value="リセット" styleClass="button" />
 					</p>
 				</html:form>
+
 			</div>

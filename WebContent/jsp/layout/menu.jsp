@@ -3,6 +3,7 @@
 <html:xhtml/>
 		<!-- menu -->
 		<div id="menu">
+
 			<ul>
 				<logic:empty name="user" scope="session">
 				<li id="current"><html:link action="/index.do">ホーム</html:link></li>
@@ -15,6 +16,6 @@
 				<logic:notEmpty name="user" scope="session">
 				<li class="last"><html:link action="/logout">ログアウト</html:link></li>
 				</logic:notEmpty>
-
 			</ul>
+
 		</div>

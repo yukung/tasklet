@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.DynaActionForm;
-
 import tasklet.entity.Task;
 import tasklet.entity.User;
+import tasklet.form.ShowTaskForm;
 import tasklet.service.TaskService;
 import tasklet.service.TaskServiceImpl;
 
@@ -29,8 +28,13 @@ import tasklet.service.TaskServiceImpl;
  */
 public class ShowTasksAction extends AbstractAction {
 
-	/* (非 Javadoc)
-	 * @see tasklet.action.AbstractAction#doExecute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (非 Javadoc)
+	 *
+	 * @seetasklet.action.AbstractAction#doExecute(org.apache.struts.action.
+	 * ActionMapping, org.apache.struts.action.ActionForm,
+	 * javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
@@ -41,15 +45,15 @@ public class ShowTasksAction extends AbstractAction {
 			return mapping.findForward("login");
 		}
 
-		DynaActionForm showTasksForm = (DynaActionForm) form;
-		int activityId = Integer.parseInt(showTasksForm.get("activityId").toString());
+		ShowTaskForm showTasksForm = (ShowTaskForm) form;
+		int activityId = Integer.parseInt(showTasksForm.getActivityId().toString());
 
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.show(activityId);
 		request.setAttribute("tasks", tasks);
 		String title = taskService.getActivityTitle(activityId);
-		showTasksForm.set("activityId", Integer.toString(activityId));
-		showTasksForm.set("title", title);
+		showTasksForm.setActivityId(Integer.toString(activityId));
+		showTasksForm.setTitle(title);
 
 		saveToken(request);
 		return mapping.findForward("success");

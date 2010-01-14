@@ -17,14 +17,19 @@ public enum Priority {
 	HIGH(1,"高"),
 	NORMAL(2,"普通"),
 	LOW(3,"低"),
-	NOTHING(9,"");
+	NOTHING(9,"なし");
 
+	Priority priority;
 	int code;
 	String priorityName;
 
 	private Priority(int code, String priorityName) {
 		this.code = code;
 		this.priorityName = priorityName;
+	}
+
+	public Priority getPriority() {
+		return this.priority;
 	}
 
 	public int getCode() {
