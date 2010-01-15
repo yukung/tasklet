@@ -11,7 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -59,8 +59,10 @@ public class AddActivityAction extends AbstractAction {
 
 		Activity activity = new Activity();
 		try {
-			PropertyUtils.setSimpleProperty(activity, "title", addActivityForm.get("activityName"));
+			// 入力フォーム情報をユーザエンティティにマッピング
+			BeanUtils.setProperty(activity, "title", addActivityForm.get("activityName"));
 		} catch (Exception e) {
+			// 不整合の場合はシステム例外としてStrutsに投げる
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
