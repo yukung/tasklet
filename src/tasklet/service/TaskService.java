@@ -8,6 +8,7 @@ package tasklet.service;
 
 import java.util.List;
 
+import tasklet.TaskletException;
 import tasklet.entity.Task;
 
 /**
@@ -33,4 +34,12 @@ public interface TaskService {
 	 * @return アクティビティのタイトル
 	 */
 	public String getActivityTitle(int activityId);
+
+	/**
+	 * タスクを登録します。
+	 *
+	 * @param task
+	 * @throws TaskletException タスク登録時のエラー
+	 */
+	public void add(Task task) throws TaskletException;
 }

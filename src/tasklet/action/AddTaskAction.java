@@ -7,18 +7,25 @@
 
 package tasklet.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import tasklet.DataAccessException;
+import tasklet.TaskletException;
 import tasklet.entity.Task;
 import tasklet.entity.User;
 import tasklet.form.AddTaskForm;
+import tasklet.service.TaskService;
+import tasklet.service.TaskServiceImpl;
 
 /**
  * @author Y.Ikeda
@@ -33,13 +40,19 @@ public class AddTaskAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			return mapping.findForward("login");
+		}
+
 		if (!isTokenValid(request, true)) {
 			return mapping.findForward("double");
 		}
 
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
-			return mapping.findForward("login");
+		if (isCancelled(request)) {
+			// TODO タスク一覧に戻る処理を記述
+			// 登録ロジックをifで飛ばして再取得処理だけするように変更？
+			return mapping.getInputForward();
 		}
 
 		AddTaskForm addTaskForm = (AddTaskForm) form;
@@ -47,15 +60,31 @@ public class AddTaskAction extends AbstractAction {
 		Task task = new Task();
 		try {
 			// 入力フォーム情報をタスクエンティティにマッピング
-			PropertyUtils.copyProperties(task, addTaskForm);
+			BeanUtils.copyProperties(task, addTaskForm);
 		} catch (Exception e) {
 			// 不整合の場合はシステム例外としてStrutsに投げる
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
-		// TODO TaskServiceの登録メソッドを呼んで処理する
+		TaskService taskService = new TaskServiceImpl();
+		try {
+			taskService.add(task);
+		} catch (TaskletException e) {
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage(e.getMessage());
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+			return mapping.getInputForward();
+		}
 
-		return null;
+		// タスク一覧を再取得
+		List<Task> tasks = taskService.show(task.getActivityId());
+		request.setAttribute("tasks", tasks);
+		String title = taskService.getActivityTitle(task.getActivityId());
+		addTaskForm.setActivityTitle(title);
+
+		saveToken(request);
+		return mapping.findForward("success");
 	}
 
 }

@@ -171,7 +171,7 @@ input.button {
 	border: none;
 }
 
-/* search form */
+/* login form */
 .loginform {
 	background-color: transparent;
 	border: none;
@@ -311,11 +311,16 @@ input.button {
 	color: #88ac0b;
 	text-decoration: none;
 }
-
 #main ul li {
 	list-style-image: url(../images/bullet.gif);
 }
-
+#main #task-header {
+	width: 100%;
+}
+#main #task-header #add-link {
+	float: right;
+	margin: 35px 0px 0px 0px;
+}
 .pager {
 	background-color: #FAFAFA;
 	padding: 5px; margin: 20px 10px 10px 10px;
@@ -334,7 +339,6 @@ input.button {
 	background: url(../images/page.gif) no-repeat left center;
 	padding-left: 20px; margin: 0 10px 0 5px;
 }
-
 .pager .page {
 	padding-left: 5px; margin: 0 5px 0 5px;
 }

@@ -33,4 +33,11 @@ public interface TaskDao {
 	 * @return アクティビティのタイトル
 	 */
 	public String getActivityTitle(int activityId);
+
+	/**
+	 * タスク情報をタスクテーブルに登録します。
+	 *
+	 * @param task タスク情報オブジェクト
+	 */
+	public void addTasks(Task task);
 }

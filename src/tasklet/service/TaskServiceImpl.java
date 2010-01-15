@@ -9,6 +9,8 @@ package tasklet.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import tasklet.DataAccessException;
+import tasklet.TaskletException;
 import tasklet.dao.TaskDao;
 import tasklet.entity.Task;
 import tasklet.factory.DaoFactory;
@@ -43,6 +45,21 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	public String getActivityTitle(int activityId) {
 		return taskDao.getActivityTitle(activityId);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.TaskService#add(tasklet.entity.Task)
+	 */
+	public void add(Task task) throws TaskletException {
+
+		// タスク追加処理
+		try {
+			taskDao.addTasks(task);
+		} catch (DataAccessException e) {
+			// DB登録エラー
+			throw new TaskletException("errors.insert", e);
+		}
 	}
 
 }

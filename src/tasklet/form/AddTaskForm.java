@@ -6,9 +6,14 @@
  */
 package tasklet.form;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 
 import tasklet.common.Priority;
+import tasklet.util.EnumConverter;
 
 /**
  * @author Y.Ikeda
@@ -19,6 +24,9 @@ public class AddTaskForm extends ValidatorForm {
 
 	/** タスクに紐づくアクティビティId */
 	private String activityId;
+
+	/** タスクに紐づくアクティビティ名 */
+	private String activityTitle;
 
 	/** タスク名 */
 	private String title;
@@ -31,6 +39,14 @@ public class AddTaskForm extends ValidatorForm {
 
 	/** 見積時間 */
 	private String estimatedTime;
+
+	/**
+	 * 文字列型→列挙型へのコンバータを登録
+	 */
+	static {
+		EnumConverter converter = new EnumConverter();
+		ConvertUtils.register(converter, Priority.class);
+	}
 
 	/**
 	 * タスクに紐づくアクティビティIdを取得します。
@@ -46,6 +62,22 @@ public class AddTaskForm extends ValidatorForm {
 	 */
 	public void setActivityId(String activityId) {
 	    this.activityId = activityId;
+	}
+
+	/**
+	 * タスクに紐づくアクティビティ名を取得します。
+	 * @return タスクに紐づくアクティビティ名
+	 */
+	public String getActivityTitle() {
+	    return activityTitle;
+	}
+
+	/**
+	 * タスクに紐づくアクティビティ名を設定します。
+	 * @param activityTitle タスクに紐づくアクティビティ名
+	 */
+	public void setActivityTitle(String activityTitle) {
+	    this.activityTitle = activityTitle;
 	}
 
 	/**
@@ -70,6 +102,14 @@ public class AddTaskForm extends ValidatorForm {
 	 */
 	public Priority getPriority() {
 	    return priority;
+	}
+
+	/**
+	 * タスク追加画面の優先度プルダウンの要素を取得します。
+	 * @return タスク追加画面の優先度プルダウンの要素
+	 */
+	public Priority[] getPriorities() {
+		return Priority.values();
 	}
 
 	/**
@@ -112,5 +152,13 @@ public class AddTaskForm extends ValidatorForm {
 	    this.estimatedTime = estimatedTime;
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see org.apache.struts.validator.ValidatorForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		setPriority(Priority.NOTHING); // 優先度を「なし」に設定
+	}
 
 }

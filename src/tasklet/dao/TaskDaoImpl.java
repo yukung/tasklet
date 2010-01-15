@@ -9,6 +9,7 @@ package tasklet.dao;
 import static tasklet.common.Constants.PROPERTY_KEY_SQL;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,6 +125,40 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			close(conn);
 		}
 
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#addTasks(tasklet.entity.Task)
+	 */
+	public void addTasks(Task task) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addTaskToTasks").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, task.getActivityId());
+			statement.setString(2, task.getTitle());
+			statement.setInt(3, task.getPriority().getCode());
+			statement.setDate(4, (Date) task.getPeriod());
+			statement.setDouble(5, task.getEstimatedTime());
+
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			rollback(conn);
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(statement);
+			close(conn);
+		}
 	}
 
 }

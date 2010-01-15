@@ -16,7 +16,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import tasklet.entity.Task;
 import tasklet.entity.User;
-import tasklet.form.ShowTaskForm;
+import tasklet.form.AddTaskForm;
 import tasklet.service.TaskService;
 import tasklet.service.TaskServiceImpl;
 
@@ -45,15 +45,15 @@ public class ShowTasksAction extends AbstractAction {
 			return mapping.findForward("login");
 		}
 
-		ShowTaskForm showTasksForm = (ShowTaskForm) form;
-		int activityId = Integer.parseInt(showTasksForm.getActivityId().toString());
+		AddTaskForm addTasksForm = (AddTaskForm) form;
+		int activityId = Integer.parseInt(addTasksForm.getActivityId().toString());
 
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.show(activityId);
 		request.setAttribute("tasks", tasks);
 		String title = taskService.getActivityTitle(activityId);
-		showTasksForm.setActivityId(Integer.toString(activityId));
-		showTasksForm.setTitle(title);
+		addTasksForm.setActivityId(Integer.toString(activityId));
+		addTasksForm.setActivityTitle(title);
 
 		saveToken(request);
 		return mapping.findForward("success");

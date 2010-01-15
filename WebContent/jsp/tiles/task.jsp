@@ -2,15 +2,18 @@
 <html:xhtml/>
 			<div id="main">
 
-				<h2><bean:write name="showTaskForm" property="title" scope="request" /></h2>
+				<h2><bean:write name="addTaskForm" property="activityTitle" scope="request" /></h2>
 
 				<form>
 
-					<p>
-						<label>タスク操作</label>
-						<input type="submit" value="完了" class="button" />
-						<input type="submit" value="削除" class="button" />
-					</p>
+					<div id="task-header">
+						<p class="float-left">
+							<label>タスク操作</label>
+							<input type="submit" value="完了" class="button" />
+							<input type="submit" value="削除" class="button" />
+						</p>
+						<p id="add-link"><html:link action="/entry" paramId="activityId" paramName="addTaskForm" paramProperty="activityId">タスクの追加</html:link></p>
+					</div>
 
 					<table>
 						<tr>
@@ -63,7 +66,6 @@
 						</nested:root>
 						</logic:iterate>
 					</table>
-					<p><html:link action="/entry" paramId="activityId" paramName="showTaskForm" paramProperty="activityId">タスクの追加</html:link></p>
 
 				</form>
 

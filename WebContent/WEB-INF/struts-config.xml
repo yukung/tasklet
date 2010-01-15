@@ -42,8 +42,6 @@
     <form-bean name="activitiesPaginationForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
       <form-property name="pageNo" type="java.lang.String"/>
     </form-bean>
-    <!-- タスク一覧情報用Bean -->
-    <form-bean name="showTaskForm" type="tasklet.form.ShowTaskForm"/>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -85,15 +83,16 @@
       <forward name="success" path="activities"/>
     </action>
     <!-- データベースに保存されたタスク一覧情報から、タスク一覧オブジェクトを生成し、requestスコープに登録する。 -->
-    <action path="/showTasks" name="showTaskForm" type="tasklet.action.ShowTasksAction" scope="request" validate="false">
+    <action path="/showTasks" name="addTaskForm" type="tasklet.action.ShowTasksAction" scope="request" validate="false">
       <forward name="success" path="tasks"/>
     </action>
     <!-- タスク追加画面へ遷移する。 -->
-    <action path="/entry" name="showTaskForm" type="tasklet.action.EntryAction" scope="request" validate="false">
+    <action path="/entry" name="addTaskForm" type="tasklet.action.EntryAction" scope="request" validate="false">
       <forward name="success" path="addTask"/>
     </action>
     <!-- 入力されたタスク詳細情報からタスク詳細オブジェクトを生成し、データベースに追加する。 -->
     <action path="/addTask" name="addTaskForm" type="tasklet.action.AddTaskAction" scope="request" validate="true" input="addTask">
+      <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
     </action>
   </action-mappings>

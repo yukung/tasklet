@@ -8,13 +8,14 @@
 						<label>タスク名</label>
 						<html:text property="title" />
 						<label>優先度</label>
-						<html:select name="showTaskForm" property="priority">
-							<html:optionsCollection name="showTaskForm" property="priorities" value="value" label="priorityName"/>
+						<html:select name="addTaskForm" property="priority">
+							<html:optionsCollection name="addTaskForm" property="priorities" value="value" label="priorityName"/>
 						</html:select>
 						<label>期限</label>
 						<html:text property="period" />
 						<label>見積時間</label>
 						<html:text property="estimatedTime" />
+						<html:hidden property="activityId" />
 					</p>
 					<p>
 						<html:submit value="追加" styleClass="button" />
