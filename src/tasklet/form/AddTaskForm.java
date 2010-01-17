@@ -6,6 +6,8 @@
  */
 package tasklet.form;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.ConvertUtils;
@@ -13,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 
 import tasklet.common.Priority;
+import tasklet.util.DateConverter;
 import tasklet.util.EnumConverter;
 
 /**
@@ -41,11 +44,19 @@ public class AddTaskForm extends ValidatorForm {
 	private String estimatedTime;
 
 	/**
-	 * 文字列型→列挙型へのコンバータを登録
+	 * 文字列 → 列挙型へのコンバータを登録
 	 */
 	static {
-		EnumConverter converter = new EnumConverter();
-		ConvertUtils.register(converter, Priority.class);
+		EnumConverter enumConverter = new EnumConverter();
+		ConvertUtils.register(enumConverter, Priority.class);
+	}
+
+	/**
+	 * 文字列 → Date型へのコンバータを登録
+	 */
+	static {
+		DateConverter dateConverter = new DateConverter();
+		ConvertUtils.register(dateConverter, Date.class);
 	}
 
 	/**
@@ -133,7 +144,7 @@ public class AddTaskForm extends ValidatorForm {
 	 * @param period 期限
 	 */
 	public void setPeriod(String period) {
-	    this.period = period;
+		this.period = period;
 	}
 
 	/**

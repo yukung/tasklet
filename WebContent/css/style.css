@@ -127,6 +127,9 @@ td {
 td.first,th.first {
 	border-left: 0px;
 }
+th.task {
+	width: 250px;
+}
 tr.row-a {
 	background: #F8F8F8;
 }
@@ -410,3 +413,5 @@ input.button {
 /* display and additional classes */
 .clear { clear: both; }
 .attention { color: #F00; }
+.ui-datepicker-trigger { padding: 0px; border: none; }
+.ui-datepicker-calendar tr, th { height: 10px; }

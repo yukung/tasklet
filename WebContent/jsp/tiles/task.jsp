@@ -15,10 +15,10 @@
 						<p id="add-link"><html:link action="/entry" paramId="activityId" paramName="addTaskForm" paramProperty="activityId">タスクの追加</html:link></p>
 					</div>
 
-					<table>
+					<table class="clear">
 						<tr>
 							<th class="first"></th>
-							<th>タスク</th>
+							<th class="task">タスク</th>
 							<th>優先度</th>
 							<th>状態</th>
 							<th>期限/完了</th>

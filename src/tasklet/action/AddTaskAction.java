@@ -49,32 +49,33 @@ public class AddTaskAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
+		boolean isCancelled = false;
 		if (isCancelled(request)) {
-			// TODO タスク一覧に戻る処理を記述
-			// 登録ロジックをifで飛ばして再取得処理だけするように変更？
-			return mapping.getInputForward();
+			isCancelled = true;
 		}
 
 		AddTaskForm addTaskForm = (AddTaskForm) form;
-
 		Task task = new Task();
-		try {
-			// 入力フォーム情報をタスクエンティティにマッピング
-			BeanUtils.copyProperties(task, addTaskForm);
-		} catch (Exception e) {
-			// 不整合の場合はシステム例外としてStrutsに投げる
-			throw new DataAccessException(e.getMessage(), e);
-		}
-
 		TaskService taskService = new TaskServiceImpl();
-		try {
-			taskService.add(task);
-		} catch (TaskletException e) {
-			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage(e.getMessage());
-			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
-			saveErrors(request, errors);
-			return mapping.getInputForward();
+
+		if (!isCancelled) {
+			try {
+				// 入力フォーム情報をタスクエンティティにマッピング
+				BeanUtils.copyProperties(task, addTaskForm);
+			} catch (Exception e) {
+				// 不整合の場合はシステム例外としてStrutsに投げる
+				throw new DataAccessException(e.getMessage(), e);
+			}
+
+			try {
+				taskService.add(task);
+			} catch (TaskletException e) {
+				ActionMessages errors = new ActionMessages();
+				ActionMessage error = new ActionMessage(e.getMessage());
+				errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+				saveErrors(request, errors);
+				return mapping.getInputForward();
+			}
 		}
 
 		// タスク一覧を再取得
@@ -83,8 +84,12 @@ public class AddTaskAction extends AbstractAction {
 		String title = taskService.getActivityTitle(task.getActivityId());
 		addTaskForm.setActivityTitle(title);
 
-		saveToken(request);
-		return mapping.findForward("success");
+		if (isCancelled) {
+			return mapping.findForward("cancel");
+		} else {
+			saveToken(request);
+			return mapping.findForward("success");
+		}
 	}
 
 }
