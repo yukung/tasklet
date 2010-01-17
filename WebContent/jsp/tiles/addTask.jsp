@@ -8,7 +8,7 @@
 					<html:errors/>
 					<p>
 						<label>タスク名</label>
-						<html:text property="title" />
+						<html:text property="title" size="50" />
 						<label>優先度</label>
 						<html:select property="priority">
 							<html:optionsCollection property="priorities" value="value" label="priorityName"/>

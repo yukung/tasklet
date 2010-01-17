@@ -14,9 +14,9 @@
 						<label>メールアドレス</label>
 						<html:text property="email" />
 						<label>パスワード(*)</label>
-						<html:password property="password" />
+						<html:password property="password" redisplay="false" />
 						<label>パスワード確認(*)</label>
-						<html:password property="confirm" />
+						<html:password property="confirm" redisplay="false" />
 					</p>
 					<p>
 						<html:submit value="登録" styleClass="button" />

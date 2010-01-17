@@ -11,6 +11,7 @@ import tasklet.TaskletException;
 import tasklet.dao.UserDao;
 import tasklet.entity.User;
 import tasklet.factory.DaoFactory;
+import tasklet.util.PasswordUtil;
 
 /**
  * ユーザーアカウント関連のビジネスロジックを実行するServiceの実装クラスです。
@@ -29,7 +30,8 @@ public class AccountServiceImpl implements AccountService {
 	 * java.lang.String)
 	 */
 	public User login(String userName, String password) {
-		User user = userDao.findUserByUserNameAndPassword(userName, password);
+		String encryptedPassword = PasswordUtil.encrypt(password);
+		User user = userDao.findUserByUserNameAndPassword(userName, encryptedPassword);
 		if (user == null) {
 			user = null;
 		}
@@ -47,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
 			throw new TaskletException("errors.already");
 		}
 
-		// ユーザ登録処理
+		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
 		userDao.registerUser(user);
 		int userId = userDao.findUserByUserName(user.getUserName()).getId();
 		userDao.registerDefaultCategory(userId);
