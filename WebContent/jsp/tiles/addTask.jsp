@@ -14,9 +14,9 @@
 							<html:optionsCollection property="priorities" value="value" label="priorityName"/>
 						</html:select>
 						<label>期限</label>
-						<html:text property="period" styleId="period" readonly="true" />
+						<html:text property="period" size="10" styleId="period" readonly="true" />
 						<label>見積時間</label>
-						<html:text property="estimatedTime" />
+						<html:text property="estimatedTime" size="5" />
 						<html:hidden property="activityId" />
 					</p>
 					<p>
