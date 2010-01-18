@@ -93,7 +93,7 @@
     <!-- 入力されたタスク詳細情報からタスク詳細オブジェクトを生成し、データベースに追加する。 -->
     <action path="/addTask" name="addTaskForm" type="tasklet.action.AddTaskAction" scope="request" validate="true" input="addTask">
       <set-property property="cancellable" value="true"/>
-      <forward name="success" path="tasks"/>
+      <forward name="success" redirect="true" path="tasks"/>
       <forward name="cancel" path="/showTasks.do"/>
     </action>
   </action-mappings>

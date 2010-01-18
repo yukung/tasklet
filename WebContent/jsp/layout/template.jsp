@@ -7,7 +7,7 @@
 		<meta name="Keywords" content="task, ToDo, GTD, simple" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="./css/style.css" type="text/css" />
-		<%@ include file="/jsp/includes/jquery.jsp" %>
+		<jsp:include page="/jsp/includes/jquery.jsp" />
 
 		<title><tiles:getAsString name="title" /></title>
 	</head>

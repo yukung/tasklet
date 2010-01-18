@@ -413,5 +413,6 @@ input.button {
 /* display and additional classes */
 .clear { clear: both; }
 .attention { color: #F00; }
+
+/* jQuery UI Datepicker classes */
 .ui-datepicker-trigger { padding: 0px; border: none; }
-.ui-datepicker-calendar tr, th { height: 10px; }
