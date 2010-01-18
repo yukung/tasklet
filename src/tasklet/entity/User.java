@@ -6,13 +6,13 @@
  */
 package tasklet.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * ユーザ情報を表すBeanクラスです。
- * 
+ *
  * @author Y.Ikeda
- * 
+ *
  */
 public class User {
 
@@ -32,14 +32,14 @@ public class User {
 	private String displayName;
 
 	/** 登録タイムスタンプ */
-	private Date createdOn;
+	private Timestamp createdOn;
 
 	/** 更新タイムスタンプ */
-	private Date updatedOn;
+	private Timestamp updatedOn;
 
 	/**
 	 * IDを取得します。
-	 * 
+	 *
 	 * @return ID
 	 */
 	public int getId() {
@@ -48,7 +48,7 @@ public class User {
 
 	/**
 	 * IDを設定します。
-	 * 
+	 *
 	 * @param id
 	 *            ID
 	 */
@@ -58,7 +58,7 @@ public class User {
 
 	/**
 	 * ユーザ名を取得します。
-	 * 
+	 *
 	 * @return ユーザ名
 	 */
 	public String getUserName() {
@@ -67,7 +67,7 @@ public class User {
 
 	/**
 	 * ユーザ名を設定します。
-	 * 
+	 *
 	 * @param userName
 	 *            ユーザ名
 	 */
@@ -77,7 +77,7 @@ public class User {
 
 	/**
 	 * メールアドレスを取得します。
-	 * 
+	 *
 	 * @return メールアドレス
 	 */
 	public String getEmail() {
@@ -86,7 +86,7 @@ public class User {
 
 	/**
 	 * メールアドレスを設定します。
-	 * 
+	 *
 	 * @param email
 	 *            メールアドレス
 	 */
@@ -96,7 +96,7 @@ public class User {
 
 	/**
 	 * パスワードを取得します。
-	 * 
+	 *
 	 * @return パスワード
 	 */
 	public String getPassword() {
@@ -105,7 +105,7 @@ public class User {
 
 	/**
 	 * パスワードを設定します。
-	 * 
+	 *
 	 * @param password
 	 *            パスワード
 	 */
@@ -115,7 +115,7 @@ public class User {
 
 	/**
 	 * 表示名を取得します。
-	 * 
+	 *
 	 * @return 表示名
 	 */
 	public String getDisplayName() {
@@ -124,7 +124,7 @@ public class User {
 
 	/**
 	 * 表示名を設定します。
-	 * 
+	 *
 	 * @param displayName
 	 *            表示名
 	 */
@@ -134,39 +134,39 @@ public class User {
 
 	/**
 	 * 登録日を取得します。
-	 * 
+	 *
 	 * @return 登録日
 	 */
-	public Date getCreatedOn() {
+	public Timestamp getCreatedOn() {
 		return createdOn;
 	}
 
 	/**
 	 * 登録日を設定します。
-	 * 
+	 *
 	 * @param createdOn
 	 *            登録日
 	 */
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(Timestamp createdOn) {
 		this.createdOn = createdOn;
 	}
 
 	/**
 	 * 更新日を取得します。
-	 * 
+	 *
 	 * @return 更新日
 	 */
-	public Date getUpdatedOn() {
+	public Timestamp getUpdatedOn() {
 		return updatedOn;
 	}
 
 	/**
 	 * 更新日を設定します。
-	 * 
+	 *
 	 * @param updatedOn
 	 *            更新日
 	 */
-	public void setUpdatedOn(Date updatedOn) {
+	public void setUpdatedOn(Timestamp updatedOn) {
 		this.updatedOn = updatedOn;
 	}
 }

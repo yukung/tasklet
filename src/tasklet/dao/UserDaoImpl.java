@@ -66,8 +66,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			user.setEmail(rs.getString("email"));
 			user.setPassword(rs.getString("password"));
 			user.setDisplayName(rs.getString("display_name"));
-			user.setCreatedOn(rs.getDate("created_on"));
-			user.setUpdatedOn(rs.getDate("updated_on"));
+			user.setCreatedOn(rs.getTimestamp("created_on"));
+			user.setUpdatedOn(rs.getTimestamp("updated_on"));
 			return user;
 
 		} catch (SQLException e) {
@@ -112,8 +112,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			user.setEmail(rs.getString("email"));
 			user.setPassword(rs.getString("password"));
 			user.setDisplayName(rs.getString("display_name"));
-			user.setCreatedOn((rs.getDate("created_on")));
-			user.setUpdatedOn(rs.getDate("updated_on"));
+			user.setCreatedOn((rs.getTimestamp("created_on")));
+			user.setUpdatedOn(rs.getTimestamp("updated_on"));
 			return user;
 
 		} catch (SQLException e) {

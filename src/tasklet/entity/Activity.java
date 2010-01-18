@@ -6,6 +6,7 @@
  */
 package tasklet.entity;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,10 +45,10 @@ public class Activity {
 	private List<Task> tasks;
 
 	/** 作成タイムスタンプ */
-	private Date createdOn;
+	private Timestamp createdOn;
 
 	/** 更新タイムスタンプ */
-	private Date updatedOn;
+	private Timestamp updatedOn;
 
 	/**
 	 * IDを取得します。
@@ -337,7 +338,7 @@ public class Activity {
 	 *
 	 * @return 作成タイムスタンプ
 	 */
-	public Date getCreatedOn() {
+	public Timestamp getCreatedOn() {
 		return createdOn;
 	}
 
@@ -347,7 +348,7 @@ public class Activity {
 	 * @param createdOn
 	 *            作成タイムスタンプ
 	 */
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(Timestamp createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -356,7 +357,7 @@ public class Activity {
 	 *
 	 * @return 更新タイムスタンプ
 	 */
-	public Date getUpdatedOn() {
+	public Timestamp getUpdatedOn() {
 		return updatedOn;
 	}
 
@@ -366,7 +367,7 @@ public class Activity {
 	 * @param updatedOn
 	 *            更新タイムスタンプ
 	 */
-	public void setUpdatedOn(Date updatedOn) {
+	public void setUpdatedOn(Timestamp updatedOn) {
 		this.updatedOn = updatedOn;
 	}
 
