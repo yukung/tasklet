@@ -19,6 +19,8 @@ import tasklet.util.DateConverter;
 import tasklet.util.EnumConverter;
 
 /**
+ * タスク情報追加画面のActionFormです。
+ *
  * @author Y.Ikeda
  *
  */

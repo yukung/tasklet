@@ -32,7 +32,7 @@
 						<nested:root name="task">
 						<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 							<td class="first align-center"><input type="checkbox"></input></td>
-							<td><a href="#"><nested:write property="title" /></a></td>
+							<td><html:link action="/showDetail" paramId="taskId" paramName="task" paramProperty="id"><nested:write property="title" /></html:link></td>
 							<td class="align-center">
 							<nested:equal property="priority" value="HIGH">
 								<span class="attention"><nested:nest property="priority"><nested:write property="priorityName" /></nested:nest></span>

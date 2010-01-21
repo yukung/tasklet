@@ -6,10 +6,13 @@
  */
 package tasklet.entity;
 
+import static tasklet.common.Constants.SECONDS_OF_DAY;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.EnumSet;
+import java.util.List;
 
 import tasklet.common.Priority;
 import tasklet.common.Status;
@@ -49,14 +52,18 @@ public class Task {
 	/** 実績時間 */
 	private double actualTime;
 
+	/** タスクメモの数 */
+	private int memoCount;
+
+	/** メモ一覧 */
+	private List<Memo> memos;
+
 	/** 作成タイムスタンプ */
 	private Timestamp createdOn;
 
 	/** 更新タイムスタンプ */
 	private Timestamp updatedOn;
 
-	/** タスクメモの数 */
-	private int memoCount;
 
 	/**
 	 * IDを取得します。
@@ -220,12 +227,12 @@ public class Task {
 	 *         期限が今日を含めて後の場合は false
 	 */
 	public boolean isOverdue() {
-		if (period == null) {
+		if (getPeriod() == null) {
 			return false;
 		}
 		Calendar today = Calendar.getInstance();
 		Calendar period = Calendar.getInstance();
-		period.setTime(this.getPeriod());
+		period.setTime(getPeriod());
 
 		// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
 		// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
@@ -236,6 +243,26 @@ public class Task {
 		int result = today.compareTo(period);
 		// 戻り値が -1,0 は期限内
 		return result == 1 ? true : false;
+	}
+
+	/**
+	 * タスク期限までの残り日数を返します。
+	 *
+	 * @return 残り日数<br>
+	 * 期限が設定されていない場合は0を返す
+	 */
+	public long getDaysRemaining() {
+		if (getPeriod() == null) {
+			return 0;
+		}
+		Calendar today = Calendar.getInstance();
+		Calendar period = Calendar.getInstance();
+		period.setTime(getPeriod());
+		long days = (period.getTimeInMillis() - today.getTimeInMillis())
+				/ SECONDS_OF_DAY;
+
+		return days;
+
 	}
 
 	/**
@@ -296,6 +323,72 @@ public class Task {
 	}
 
 	/**
+	 * タスクメモの数を取得します。
+	 *
+	 * @return タスクメモの数
+	 */
+	public int getMemoCount() {
+		return memoCount;
+	}
+
+	/**
+	 * タスクメモの数を設定します。
+	 *
+	 * @param memoCount
+	 *            タスクメモの数
+	 */
+	public void setMemoCount(int memoCount) {
+		this.memoCount = memoCount;
+	}
+
+	/**
+	 * メモ一覧をListで取得します。
+	 *
+	 * @return メモ一覧（List）
+	 */
+	public List<Memo> getAllMemos() {
+	    return memos;
+	}
+
+	/**
+	 * メモ一覧を配列で取得します。
+	 *
+	 * @return メモ一覧（配列）
+	 */
+	public Memo[] getAllMemosArray() {
+		Memo[] allMemos = new Memo[memos.size()];
+		memos.toArray(allMemos);
+
+		return allMemos;
+	}
+
+	/**
+	 * メモIDを指定してメモを取得します。
+	 *
+	 * @param memoId
+	 * @return メモIDが一致したメモを返す。<br>
+	 *         メモIDが一致しない場合はnullを返す。
+	 */
+	public Memo getMemo(int memoId) {
+		Memo memo = null;
+		for (int i = 0; i < memos.size(); i++) {
+			memo = memos.get(i);
+			if (id == memo.getId()) {
+				return memo;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * メモ一覧を設定します。
+	 * @param memos メモ一覧
+	 */
+	public void setMemos(List<Memo> memos) {
+	    this.memos = memos;
+	}
+
+	/**
 	 * 作成タイムスタンプを取得します。
 	 *
 	 * @return 作成タイムスタンプ
@@ -331,24 +424,5 @@ public class Task {
 	 */
 	public void setUpdatedOn(Timestamp updatedOn) {
 		this.updatedOn = updatedOn;
-	}
-
-	/**
-	 * タスクメモの数を取得します。
-	 *
-	 * @return タスクメモの数
-	 */
-	public int getMemoCount() {
-		return memoCount;
-	}
-
-	/**
-	 * タスクメモの数を設定します。
-	 *
-	 * @param memoCount
-	 *            タスクメモの数
-	 */
-	public void setMemoCount(int memoCount) {
-		this.memoCount = memoCount;
 	}
 }

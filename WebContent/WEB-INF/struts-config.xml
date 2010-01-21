@@ -42,6 +42,8 @@
     <form-bean name="activitiesPaginationForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
       <form-property name="pageNo" type="java.lang.String"/>
     </form-bean>
+    <!-- タスク詳細&メモ追加用フォーム -->
+    <form-bean name="detailTaskForm" type="tasklet.form.DetailTaskForm"/>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -95,6 +97,10 @@
       <set-property property="cancellable" value="true"/>
       <forward name="success" redirect="true" path="tasks"/>
       <forward name="cancel" path="/showTasks.do"/>
+    </action>
+    <!-- データベースに保存されたタスク詳細情報から、タスク詳細オブジェクトを生成し、requestスコープに登録する。 -->
+    <action path="/showDetail" name="detailTaskForm" type="tasklet.action.ShowDetailAction" scope="request" validate="true">
+      <forward name="success" path="detail"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

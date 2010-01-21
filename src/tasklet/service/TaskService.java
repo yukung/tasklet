@@ -42,4 +42,13 @@ public interface TaskService {
 	 * @throws TaskletException タスク登録時のエラー
 	 */
 	public void add(Task task) throws TaskletException;
+
+	/**
+	 * タスクIDをキーにタスク情報オブジェクトを取得します。
+	 *
+	 * @param taskId
+	 * @return タスク情報オブジェクト
+	 */
+	public Task getTask(int taskId);
+
 }

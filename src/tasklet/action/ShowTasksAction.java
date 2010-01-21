@@ -49,7 +49,7 @@ public class ShowTasksAction extends AbstractAction {
 		}
 
 		AddTaskForm addTasksForm = (AddTaskForm) form;
-		int activityId = Integer.parseInt(addTasksForm.getActivityId().toString());
+		int activityId = Integer.parseInt(addTasksForm.getActivityId());
 
 		TaskService taskService = new TaskServiceImpl();
 		String title = taskService.getActivityTitle(activityId);

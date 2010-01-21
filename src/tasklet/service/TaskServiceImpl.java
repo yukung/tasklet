@@ -62,4 +62,14 @@ public class TaskServiceImpl implements TaskService {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.TaskService#getTask(int)
+	 */
+	public Task getTask(int taskId) {
+
+		return taskDao.getTaskDetailAndMemos(taskId);
+
+	}
+
 }

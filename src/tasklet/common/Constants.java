@@ -21,4 +21,7 @@ public class Constants {
 	// タスク一覧はページングしない
 //	public static final int TASKS_MAX_LIMIT = 10;
 
+	/** 1日の秒数 : 1000(ms) * 60(s) * 60(m) * 24(h) = 86400000 */
+	public static final long SECONDS_OF_DAY = 86400000;
+
 }

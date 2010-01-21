@@ -40,4 +40,12 @@ public interface TaskDao {
 	 * @param task タスク情報オブジェクト
 	 */
 	public void addTasks(Task task);
+
+	/**
+	 * タスクIDをキーにタスク情報エンティティを取得します。
+	 *
+	 * @param taskId
+	 * @return タスク情報エンティティ
+	 */
+	public Task getTaskDetailAndMemos(int taskId);
 }
