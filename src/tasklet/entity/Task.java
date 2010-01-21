@@ -260,6 +260,7 @@ public class Task {
 		period.setTime(getPeriod());
 		long days = (period.getTimeInMillis() - today.getTimeInMillis())
 				/ SECONDS_OF_DAY;
+		days += 1; // 締め切り当日も猶予日とするため、1日足す
 
 		return days;
 

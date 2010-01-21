@@ -24,7 +24,7 @@
 					<strong class="attention">（期日を過ぎています！！）</strong>
 					</logic:match>
 					<logic:match name="task" property="overdue" value="false">
-					<bean:write name="task" property="period" format="yyyy/MM/dd" scope="request" />
+					<bean:write name="task" property="period" format="yyyy/MM/dd" scope="request" />まで（あと<bean:write name="task" property="daysRemaining" />日）
 					</logic:match>
 					</logic:notEqual>
 					<logic:equal name="task" property="status" value="FINISH">
