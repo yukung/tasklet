@@ -62,7 +62,6 @@ public class ShowTasksAction extends AbstractAction {
 		} else {
 			request.setAttribute("tasks", tasks);
 		}
-//		addTasksForm.setActivityId(Integer.toString(activityId));
 		addTasksForm.setActivityTitle(title);
 
 		saveToken(request);
