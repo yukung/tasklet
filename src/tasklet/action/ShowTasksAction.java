@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+
 import tasklet.entity.Task;
 import tasklet.entity.User;
 import tasklet.form.AddTaskForm;
@@ -49,10 +52,17 @@ public class ShowTasksAction extends AbstractAction {
 		int activityId = Integer.parseInt(addTasksForm.getActivityId().toString());
 
 		TaskService taskService = new TaskServiceImpl();
-		List<Task> tasks = taskService.show(activityId);
-		request.setAttribute("tasks", tasks);
 		String title = taskService.getActivityTitle(activityId);
-		addTasksForm.setActivityId(Integer.toString(activityId));
+		List<Task> tasks = taskService.show(activityId);
+		if (tasks.size() == 0) {
+			ActionMessages messages = new ActionMessages();
+			ActionMessage message = new ActionMessage("messages.notask");
+			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
+			saveMessages(request, messages);
+		} else {
+			request.setAttribute("tasks", tasks);
+		}
+//		addTasksForm.setActivityId(Integer.toString(activityId));
 		addTasksForm.setActivityTitle(title);
 
 		saveToken(request);

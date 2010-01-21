@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import tasklet.common.Constants;
 import tasklet.entity.Activity;
@@ -51,10 +53,17 @@ public class ShowActivitiesAction extends AbstractAction {
 
 		ActivityService activityService = new ActivityServiceImpl();
 		long count = activityService.getCount(userId);
-		Pager pager = new Pager(count, pageNo, Constants.ACTIVITIES_MAX_LIMIT);
-		List<Activity> activities = activityService.show(userId, pager.getOffset(), pager.getLimit());
-		request.setAttribute("activities", activities);
-		request.setAttribute("pager", pager);
+		if (count == 0) {
+			ActionMessages messages = new ActionMessages();
+			ActionMessage message = new ActionMessage("messages.noactivity");
+			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
+			saveMessages(request, messages);
+		} else {
+			Pager pager = new Pager(count, pageNo, Constants.ACTIVITIES_MAX_LIMIT);
+			List<Activity> activities = activityService.show(userId, pager.getOffset(), pager.getLimit());
+			request.setAttribute("activities", activities);
+			request.setAttribute("pager", pager);
+		}
 
 		saveToken(request);
 		return mapping.findForward("success");

@@ -11,6 +11,10 @@
 				</logic:notEmpty>
 				</h2>
 
+				<html:messages id="msg" message="true">
+					<h3 class="message"><bean:write name="msg" /></h3>
+				</html:messages>
+				<logic:notEmpty name="activities" scope="request">
 				<table>
 					<tr>
 						<th class="first">アクティビティ</th>
@@ -42,8 +46,10 @@
 					</tr>
 					</logic:iterate>
 				</table>
+				</logic:notEmpty>
 
-				<logic:notEmpty name="pager" scope="request">
+				<logic:notEmpty name="pager">
+				<logic:greaterThan name="pager"  property="count" value="10">
 				<div class="pager align-right">
 					<logic:equal name="pager" property="prev" value="true" scope="request">
 						<html:link action="/activitiesPagination" paramId="pageNo" paramName="pager" paramProperty="prevPageNo" paramScope="request" styleClass="page">&lt;&lt;前</html:link>
@@ -52,6 +58,7 @@
 						<html:link action="/activitiesPagination" paramId="pageNo" paramName="pager" paramProperty="nextPageNo" paramScope="request" styleClass="page">次&gt;&gt;</html:link>
 					</logic:equal>
 				</div>
+				</logic:greaterThan>
 				</logic:notEmpty>
 
 				<h3>新規追加</h3>

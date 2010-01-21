@@ -55,14 +55,14 @@ h3 {
 /* images */
 img {
 	background: #FAFAFA;
-   border: 1px solid #E5E5E5;
+	border: 1px solid #E5E5E5;
 	padding: 5px;
 }
 img.float-right {
-  margin: 5px 0px 10px 10px;
+	margin: 5px 0px 10px 10px;
 }
 img.float-left {
-  margin: 5px 10px 10px 0px;
+	margin: 5px 10px 10px 0px;
 }
 
 h1, h2, h3, p {
@@ -75,25 +75,25 @@ ul, ol {
 }
 
 code {
-  margin: 5px 0;
-  padding: 10px;
-  text-align: left;
-  display: block;
-  overflow: auto;
-  font: 500 1em/1.5em 'Lucida Console', 'courier new', monospace ;
-  /* white-space: pre; */
-  background: #FAFAFA;
-  border: 1px solid #f2f2f2;
+	margin: 5px 0;
+	padding: 10px;
+	text-align: left;
+	display: block;
+	overflow: auto;
+	font: 500 1em/1.5em 'Lucida Console', 'courier new', monospace;
+	/* white-space: pre; */
+	background: #FAFAFA;
+	border: 1px solid #f2f2f2;
 }
 acronym {
-  cursor: help;
-  border-bottom: 1px dotted #777;
+	cursor: help;
+	border-bottom: 1px dotted #777;
 }
 blockquote {
 	margin: 10px;
- 	padding: 0 0 0 28px;
-   border: 1px solid #f2f2f2;
-  	background: #FAFAFA url(../images/quote.gif) no-repeat 5px 5px;
+	padding: 0 0 0 28px;
+	border: 1px solid #f2f2f2;
+	background: #FAFAFA url(../images/quote.gif) no-repeat 5px 5px;
 }
 
 /* start - table */
@@ -140,29 +140,30 @@ tr.row-b {
 
 /* form elements */
 form {
-	margin:10px; padding: 0 5px;
+	margin: 10px;
+	padding: 0 5px;
 	border: 1px solid #f2f2f2;
 	background-color: #FAFAFA;
 }
 label {
-	display:block;
-	font-weight:bold;
-	margin:5px 0;
+	display: block;
+	font-weight: bold;
+	margin: 5px 0;
 }
 input {
-	padding:2px;
-	border:1px solid #eee;
+	padding: 2px;
+	border: 1px solid #eee;
 	font: normal Verdana, sans-serif;
-	color:#777;
+	color: #777;
 }
 textarea {
-	width:400px;
-	padding:2px;
+	width: 400px;
+	padding: 2px;
 	font: normal Verdana, sans-serif;
-	border:1px solid #eee;
-	height:100px;
-	display:block;
-	color:#777;
+	border: 1px solid #eee;
+	height: 100px;
+	display: block;
+	color: #777;
 }
 input.button {
 	font: bold 12px Arial, Sans-serif;
@@ -178,10 +179,15 @@ input.button {
 .loginform {
 	background-color: transparent;
 	border: none;
-	margin: 0; padding: 5px 0 15px 0;
+	margin: 0;
+	padding: 5px 0 15px 0;
 	width: 190px;
 }
-.loginform p { margin: 0; padding: 0; }
+
+.loginform p {
+	margin: 0;
+	padding: 0;
+}
 .loginform input.textbox {
 	width: 120px;
 	color: #777;
@@ -222,7 +228,8 @@ input.button {
 }
 #header h1#logo-text a {
 	position: absolute;
-	margin: 0; padding: 0;
+	margin: 0;
+	padding: 0;
 	font: bolder 44px 'Trebuchet MS', Arial, Sans-serif;
 	letter-spacing: -2px;
 	color: #FFF;
@@ -231,23 +238,27 @@ input.button {
 	background: transparent;
 
 	/* change the values of top and left to adjust the position of the logo*/
-	top: 25px; left: 47px;
+	top: 25px;
+	left: 47px;
 }
 #header p#slogan {
 	position: absolute;
-	margin: 0; padding: 0;
+	margin: 0;
+	padding: 0;
 	font: normal 12px 'Trebuchet MS', Arial, Sans-serif;
 	text-transform: none;
 	color: #FFF;
 
 	/* change the values of top and left to adjust the position of the slogan*/
-	top: 70px; left: 55px;
+	top: 70px;
+	left: 55px;
 }
 
 /* header links */
 #header #header-links {
 	position: absolute;
-	top: 20px; right: 30px;
+	top: 20px;
+	right: 30px;
 	color: #C6DDEE;
 	font-size: 10px;
 }
@@ -262,7 +273,8 @@ input.button {
 /* Menu */
 #menu {
 	clear: both;
-	margin: 0 auto; padding: 0;
+	margin: 0 auto;
+	padding: 0;
 	background: url(../images/menu.jpg) repeat-x 0 0;
 	font: bold 12px/37px Verdana, Arial, Tahoma, Sans-serif;
 	height: 37px;
@@ -271,7 +283,8 @@ input.button {
 #menu ul {
 	float: right;
 	list-style: none;
-	margin:0; padding: 0;
+	margin: 0;
+	padding: 0;
 }
 #menu ul li {
 	display: inline;
@@ -297,7 +310,8 @@ input.button {
 #main {
 	float: left;
 	width: 76%;
-	padding: 0; margin: 5px 0 0 5px;
+	padding: 0;
+	margin: 5px 0 0 5px;
 	display: inline;
 }
 #main h2 {
@@ -320,37 +334,43 @@ input.button {
 #main #task-header {
 	width: 100%;
 }
-#main #task-header #add-link {
+#main #add-link {
 	float: right;
 	margin: 35px 0px 0px 0px;
 }
 .pager {
 	background-color: #FAFAFA;
-	padding: 5px; margin: 20px 10px 10px 10px;
+	padding: 5px;
+	margin: 20px 10px 10px 10px;
 	border: 1px solid #f2f2f2;
 	font-size: 95%;
 }
 .post-footer .date {
 	background: url(../images/clock.gif) no-repeat left center;
-	padding-left: 20px; margin: 0 10px 0 5px;
+	padding-left: 20px;
+	margin: 0 10px 0 5px;
 }
 .post-footer .comments {
 	background: url(../images/comment.gif) no-repeat left center;
-	padding-left: 20px; margin: 0 10px 0 5px;
+	padding-left: 20px;
+	margin: 0 10px 0 5px;
 }
 .post-footer .readmore {
 	background: url(../images/page.gif) no-repeat left center;
-	padding-left: 20px; margin: 0 10px 0 5px;
+	padding-left: 20px;
+	margin: 0 10px 0 5px;
 }
 .pager .page {
-	padding-left: 5px; margin: 0 5px 0 5px;
+	padding-left: 5px;
+	margin: 0 5px 0 5px;
 }
 
 /* Sidebar */
 #sidebar {
 	float: right;
 	width: 22%;
-	padding: 0; margin: 0;
+	padding: 0;
+	margin: 0;
 	color: #68774A;
 }
 #sidebar h3 {
@@ -362,7 +382,8 @@ input.button {
 #sidebar ul.sidemenu {
 	list-style: none;
 	text-align: left;
-	margin: 7px 4px 8px 0; padding: 0;
+	margin: 7px 4px 8px 0;
+	padding: 0;
 	text-decoration: none;
 	background: url(../images/dots.jpg) repeat-x left top;
 }
@@ -413,6 +434,10 @@ input.button {
 /* display and additional classes */
 .clear { clear: both; }
 .attention { color: #F00; }
+.message { color: #AAA; font-style: italic; }
 
 /* jQuery UI Datepicker classes */
-.ui-datepicker-trigger { padding: 0px; border: none; }
+.ui-datepicker-trigger {
+	padding: 0px;
+	border: none;
+}

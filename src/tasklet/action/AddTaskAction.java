@@ -57,16 +57,15 @@ public class AddTaskAction extends AbstractAction {
 		AddTaskForm addTaskForm = (AddTaskForm) form;
 		Task task = new Task();
 		TaskService taskService = new TaskServiceImpl();
+		try {
+			// 入力フォーム情報をタスクエンティティにマッピング
+			BeanUtils.copyProperties(task, addTaskForm);
+		} catch (Exception e) {
+			// 不整合の場合はシステム例外としてStrutsに投げる
+			throw new DataAccessException(e.getMessage(), e);
+		}
 
 		if (!isCancelled) {
-			try {
-				// 入力フォーム情報をタスクエンティティにマッピング
-				BeanUtils.copyProperties(task, addTaskForm);
-			} catch (Exception e) {
-				// 不整合の場合はシステム例外としてStrutsに投げる
-				throw new DataAccessException(e.getMessage(), e);
-			}
-
 			try {
 				taskService.add(task);
 			} catch (TaskletException e) {

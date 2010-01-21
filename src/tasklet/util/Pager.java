@@ -23,6 +23,9 @@ public class Pager {
 	/** 現在のページ位置,ページ内の件数 */
 	private final int offset, limit;
 
+	/** ページングするデータの全件数 */
+	private final long count;
+
 	/**
 	 * ページングするデータのPagerオブジェクトを生成します。
 	 *
@@ -51,6 +54,7 @@ public class Pager {
 			this.offset = offset;
 		}
 		this.limit = limit;
+		this.count = count;
 	}
 
 	/**
@@ -99,6 +103,14 @@ public class Pager {
 	 */
 	public int getLimit() {
 	    return limit;
+	}
+
+	/**
+	 * ページングするデータの全件数を取得します。
+	 * @return ページングするデータの全件数
+	 */
+	public long getCount() {
+	    return count;
 	}
 
 }
