@@ -81,7 +81,8 @@ public class AddTaskAction extends AbstractAction {
 		List<Task> tasks = taskService.show(task.getActivityId());
 		request.setAttribute("tasks", tasks);
 		String title = taskService.getActivityTitle(task.getActivityId());
-		addTaskForm.setActivityTitle(title);
+		request.setAttribute("title", title);
+		request.setAttribute("activityId", task.getActivityId());
 
 		if (isCancelled) {
 			return mapping.findForward("cancel");
