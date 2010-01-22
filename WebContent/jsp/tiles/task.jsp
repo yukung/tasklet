@@ -2,14 +2,14 @@
 <html:xhtml/>
 			<div id="main">
 
-				<h2><bean:write name="title" scope="request" /></h2>
+				<h2><bean:write name="activity" property="title" scope="request" /></h2>
 
 				<form>
 
 				<html:messages id="msg" message="true">
 					<h3 class="message"><bean:write name="msg" /></h3>
 				</html:messages>
-					<p id="add-link"><html:link action="/entry" paramId="activityId" paramName="activityId">タスクの追加</html:link></p>
+					<p id="add-link"><html:link action="/entry" paramId="activityId" paramName="activity" paramProperty="id">タスクの追加</html:link></p>
 					<logic:notEmpty name="tasks" scope="request">
 					<p>
 						<label>タスク操作</label>

@@ -21,6 +21,7 @@ import org.apache.struts.action.ActionMessages;
 
 import tasklet.DataAccessException;
 import tasklet.TaskletException;
+import tasklet.entity.Activity;
 import tasklet.entity.Task;
 import tasklet.entity.User;
 import tasklet.form.AddTaskForm;
@@ -81,8 +82,10 @@ public class AddTaskAction extends AbstractAction {
 		List<Task> tasks = taskService.show(task.getActivityId());
 		request.setAttribute("tasks", tasks);
 		String title = taskService.getActivityTitle(task.getActivityId());
-		request.setAttribute("title", title);
-		request.setAttribute("activityId", task.getActivityId());
+		Activity activity = new Activity();
+		activity.setId(task.getActivityId());
+		activity.setTitle(title);
+		request.setAttribute("activity", activity);
 
 		if (isCancelled) {
 			return mapping.findForward("cancel");

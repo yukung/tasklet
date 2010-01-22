@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
+import tasklet.entity.Activity;
 import tasklet.entity.Task;
 import tasklet.entity.User;
 import tasklet.form.AddTaskForm;
@@ -62,8 +63,11 @@ public class ShowTasksAction extends AbstractAction {
 		} else {
 			request.setAttribute("tasks", tasks);
 		}
-		request.setAttribute("activityId", activityId);
-		request.setAttribute("title", title);
+		// アクティビティ情報の再取得
+		Activity activity = new Activity();
+		activity.setId(activityId);
+		activity.setTitle(title);
+		request.setAttribute("activity", activity);
 
 		saveToken(request);
 		return mapping.findForward("success");
