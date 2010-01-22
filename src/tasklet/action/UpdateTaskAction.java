@@ -22,9 +22,10 @@ import org.apache.struts.action.ActionMessages;
 import tasklet.DataAccessException;
 import tasklet.TaskletException;
 import tasklet.entity.Activity;
+import tasklet.entity.Memo;
 import tasklet.entity.Task;
 import tasklet.entity.User;
-import tasklet.form.AddTaskForm;
+import tasklet.form.DetailTaskForm;
 import tasklet.service.TaskService;
 import tasklet.service.TaskServiceImpl;
 
@@ -32,7 +33,7 @@ import tasklet.service.TaskServiceImpl;
  * @author Y.Ikeda
  *
  */
-public class AddTaskAction extends AbstractAction {
+public class UpdateTaskAction extends AbstractAction {
 
 	/* (非 Javadoc)
 	 * @see tasklet.action.AbstractAction#doExecute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -55,11 +56,14 @@ public class AddTaskAction extends AbstractAction {
 			isCancelled = true;
 		}
 
-		AddTaskForm addTaskForm = (AddTaskForm) form;
+		DetailTaskForm detailTaskForm = (DetailTaskForm) form;
 		Task task = new Task();
+		Memo memo = new Memo();
 		try {
-			// 入力フォーム情報をタスクエンティティにマッピング
-			BeanUtils.copyProperties(task, addTaskForm);
+			// 入力フォーム情報をエンティティにマッピング
+			BeanUtils.copyProperty(task, "id", detailTaskForm.getTaskId());
+			BeanUtils.copyProperties(task, detailTaskForm);
+			BeanUtils.copyProperties(memo, detailTaskForm);
 		} catch (Exception e) {
 			// 不整合の場合はシステム例外としてStrutsに投げる
 			throw new DataAccessException(e.getMessage(), e);
@@ -68,7 +72,7 @@ public class AddTaskAction extends AbstractAction {
 		TaskService taskService = new TaskServiceImpl();
 		if (!isCancelled) {
 			try {
-				taskService.add(task);
+				taskService.update(task, memo);
 			} catch (TaskletException e) {
 				ActionMessages errors = new ActionMessages();
 				ActionMessage error = new ActionMessage(e.getMessage());

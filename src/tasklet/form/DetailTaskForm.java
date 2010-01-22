@@ -30,7 +30,7 @@ public class DetailTaskForm extends ValidatorForm {
 	private String actualTime;
 
 	/** 追加するメモの内容 */
-	private String memo;
+	private String contents;
 
 	/**
 	 * 文字列 → Date型へのコンバータを登録
@@ -76,16 +76,16 @@ public class DetailTaskForm extends ValidatorForm {
 	 * 追加するメモの内容を取得します。
 	 * @return 追加するメモの内容
 	 */
-	public String getMemo() {
-	    return memo;
+	public String getContents() {
+	    return contents;
 	}
 
 	/**
 	 * 追加するメモの内容を設定します。
-	 * @param memo 追加するメモの内容
+	 * @param contents 追加するメモの内容
 	 */
-	public void setMemo(String memo) {
-	    this.memo = memo;
+	public void setContents(String memo) {
+	    this.contents = memo;
 	}
 
 }

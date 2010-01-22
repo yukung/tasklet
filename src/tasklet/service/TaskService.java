@@ -9,6 +9,7 @@ package tasklet.service;
 import java.util.List;
 
 import tasklet.TaskletException;
+import tasklet.entity.Memo;
 import tasklet.entity.Task;
 
 /**
@@ -50,5 +51,14 @@ public interface TaskService {
 	 * @return タスク情報オブジェクト
 	 */
 	public Task getTask(int taskId);
+
+	/**
+	 * タスク情報オブジェクトとメモ情報オブジェクトを元に、タスクを更新します。
+	 *
+	 * @param task
+	 * @param memo
+	 * @throws TaskletException タスク更新時のエラー
+	 */
+	public void update(Task task, Memo memo) throws TaskletException;
 
 }

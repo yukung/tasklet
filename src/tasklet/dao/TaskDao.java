@@ -8,6 +8,7 @@ package tasklet.dao;
 
 import java.util.List;
 
+import tasklet.entity.Memo;
 import tasklet.entity.Task;
 
 /**
@@ -48,4 +49,33 @@ public interface TaskDao {
 	 * @return タスク情報エンティティ
 	 */
 	public Task getTaskDetailAndMemos(int taskId);
+
+	/**
+	 * タスク情報を元にタスクを更新します。
+	 *
+	 * @param task
+	 */
+	public void updateTask(Task task);
+
+	/**
+	 * タスクIDをキーにメモテーブルのソート順を最大値を取得します。
+	 * @param taskId
+	 * @return ソート順の最大値
+	 */
+	public Integer getMaxSequenceOfMemos(int taskId);
+
+	/**
+	 * メモ情報をメモテーブルに追加します。
+	 *
+	 * @param memo
+	 */
+	public void addMemos(Memo memo);
+
+	/**
+	 * タスクIDをキーにアクティビティIDを取得します。
+	 *
+	 * @param taskId
+	 * @return アクティビティID
+	 */
+	public int getActivityIdByTaskId(int taskId);
 }

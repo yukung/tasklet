@@ -46,17 +46,17 @@
 				</nested:notEmpty>
 				</nested:root>
 
-				<form action="#">
+				<html:form action="/updateTask">
 					<p>
 						<label>今回の実績時間（現在までの実績に加算されます）</label>
-						<input type="text" value="" />
+						<html:text property="actualTime" />
 						<label>メモの追加</label>
-						<textarea></textarea>
+						<html:textarea property="contents" />
 					</p>
 					<p>
-						<input type="submit" value="更新" class="button" />
-						<input type="submit" value="キャンセル" class="button" />
+						<html:submit value="更新" styleClass="button" />
+						<html:cancel value="キャンセル" styleClass="button" />
 					</p>
-				</form>
+				</html:form>
 
 			</div>

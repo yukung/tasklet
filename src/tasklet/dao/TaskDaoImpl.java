@@ -230,4 +230,141 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#updateTask(tasklet.entity.Task)
+	 */
+	public void updateTask(Task task) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("updateTaskByTaskId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setDouble(1, task.getActualTime());
+			statement.setInt(2, task.getId());
+
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			rollback(conn);
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#getMaxSequenceOfMemos(int)
+	 */
+	public Integer getMaxSequenceOfMemos(int taskId) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"getMaxSequenceOfMemos").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// SQLの実行
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, taskId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+
+			return Integer.valueOf(rs.getInt("max_seq"));
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#addMemos(tasklet.entity.Memo)
+	 */
+	public void addMemos(Memo memo) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addMemoToMemos").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, memo.getTaskId());
+			statement.setInt(2, memo.getSeq());
+			statement.setString(3, memo.getContents());
+
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			rollback(conn);
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#getActivityIdByTaskId(int)
+	 */
+	public int getActivityIdByTaskId(int taskId) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"getActivityIdByTaskId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// SQLの実行
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, taskId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				throw new DataAccessException("errors.exist");
+			}
+
+			return rs.getInt("activity_id");
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
 }
