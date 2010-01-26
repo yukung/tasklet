@@ -106,7 +106,6 @@
     <action path="/updateTask" name="detailTaskForm" type="tasklet.action.UpdateTaskAction" scope="request" validate="true" input="detail">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
-      <forward name="cancel" path="/showTasks.do"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

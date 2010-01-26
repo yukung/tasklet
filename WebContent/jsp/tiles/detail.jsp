@@ -52,6 +52,7 @@
 						<html:text property="actualTime" />
 						<label>メモの追加</label>
 						<html:textarea property="contents" />
+						<html:hidden property="taskId" />
 					</p>
 					<p>
 						<html:submit value="更新" styleClass="button" />

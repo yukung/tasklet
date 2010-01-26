@@ -93,14 +93,18 @@ public class TaskServiceImpl implements TaskService {
 			// メモ情報の追加
 			taskDao.addMemos(memo);
 
-			// タスク一覧再表示のためにアクティビティIDを再取得
-			int activityId = taskDao.getActivityIdByTaskId(task.getId());
-			task.setActivityId(activityId);
-
 		} catch (DataAccessException e) {
 			// DB更新エラー
 			throw new TaskletException("errors.insert", e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.TaskService#getActivityId(int)
+	 */
+	public int getActivityId(int taskId) {
+		return taskDao.getActivityIdByTaskId(taskId);
 	}
 
 }

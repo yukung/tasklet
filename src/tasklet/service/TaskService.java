@@ -61,4 +61,11 @@ public interface TaskService {
 	 */
 	public void update(Task task, Memo memo) throws TaskletException;
 
+	/**
+	 * タスクIDから紐づくアクティビティIDを取得します。
+	 * @param taskId
+	 * @return タスクIDに紐づくアクティビティID
+	 */
+	public int getActivityId(int taskId);
+
 }

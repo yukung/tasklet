@@ -83,20 +83,17 @@ public class UpdateTaskAction extends AbstractAction {
 		}
 
 		// タスク一覧を再取得
-		List<Task> tasks = taskService.show(task.getActivityId());
+		int activityId = taskService.getActivityId(task.getId());
+		List<Task> tasks = taskService.show(activityId);
 		request.setAttribute("tasks", tasks);
-		String title = taskService.getActivityTitle(task.getActivityId());
+		String title = taskService.getActivityTitle(activityId);
 		Activity activity = new Activity();
-		activity.setId(task.getActivityId());
+		activity.setId(activityId);
 		activity.setTitle(title);
 		request.setAttribute("activity", activity);
 
-		if (isCancelled) {
-			return mapping.findForward("cancel");
-		} else {
-			saveToken(request);
-			return mapping.findForward("success");
-		}
+		saveToken(request);
+		return mapping.findForward("success");
 	}
 
 }
