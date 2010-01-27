@@ -149,6 +149,15 @@
         			<var-value>24.0</var-value>
         		</var>
         	</field>
+
+        	<field property="contents" depends="maxlength">
+        		<arg0 key="メモ" resource="false" />
+        		<arg1 name="maxlength" key="${var:maxlength}" resource="false" />
+        		<var>
+        			<var-name>maxlength</var-name>
+        			<var-value>1000</var-value>
+        		</var>
+        	</field>
         </form>
 
     </formset>

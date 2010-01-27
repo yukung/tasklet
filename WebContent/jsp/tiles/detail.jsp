@@ -50,7 +50,7 @@
 					<html:errors />
 					<p>
 						<label>今回の実績時間（現在までの実績に加算されます）</label>
-						<html:text property="actualTime" />
+						<html:text property="actualTime" size="5" />
 						<label>メモの追加</label>
 						<html:textarea property="contents" />
 						<html:hidden property="taskId" />

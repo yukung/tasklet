@@ -84,19 +84,23 @@ public class TaskServiceImpl implements TaskService {
 			double accumulatedTime = taskDao.getActualTimeByTaskId(task.getId());
 			accumulatedTime += task.getActualTime();
 			task.setActualTime(accumulatedTime);
+
 			// タスク更新処理
 			taskDao.updateTask(task);
-			// ソート順の取得
-			Integer seq = taskDao.getMaxSequenceOfMemos(task.getId());
-			if (seq == null) {
-				seq = Integer.valueOf(0);
-			} else {
-				seq = seq.intValue() + 1;
-			}
-			memo.setSeq(seq);
-			// メモ情報の追加
-			taskDao.addMemos(memo);
 
+			// メモ欄の入力があった場合はmemosテーブルに登録処理
+			if (!memo.getContents().equals("")) {
+				// ソート順の取得
+				Integer seq = taskDao.getMaxSequenceOfMemos(task.getId());
+				if (seq == null) {
+					seq = Integer.valueOf(0);
+				} else {
+					seq = seq.intValue() + 1;
+				}
+				memo.setSeq(seq);
+
+				taskDao.addMemos(memo);
+			}
 		} catch (DataAccessException e) {
 			// DB更新エラー
 			throw new TaskletException("errors.insert", e);
