@@ -47,6 +47,7 @@
 				</nested:root>
 
 				<html:form action="/updateTask">
+					<html:errors />
 					<p>
 						<label>今回の実績時間（現在までの実績に加算されます）</label>
 						<html:text property="actualTime" />

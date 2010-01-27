@@ -99,11 +99,11 @@
       <forward name="cancel" path="/showTasks.do"/>
     </action>
     <!-- データベースに保存されたタスク詳細情報から、タスク詳細オブジェクトを生成し、requestスコープに登録する。 -->
-    <action path="/showDetail" name="detailTaskForm" type="tasklet.action.ShowDetailAction" scope="request" validate="true">
+    <action path="/showDetail" name="detailTaskForm" type="tasklet.action.ShowDetailAction" scope="request" validate="false">
       <forward name="success" path="detail"/>
     </action>
     <!-- 入力されたタスク更新情報からタスク更新オブジェクトを生成し、データベースを更新する。 -->
-    <action path="/updateTask" name="detailTaskForm" type="tasklet.action.UpdateTaskAction" scope="request" validate="true" input="detail">
+    <action path="/updateTask" name="detailTaskForm" type="tasklet.action.UpdateTaskAction" scope="request" validate="true" input="/showDetail.do">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
     </action>
