@@ -78,4 +78,12 @@ public interface TaskDao {
 	 * @return アクティビティID
 	 */
 	public int getActivityIdByTaskId(int taskId);
+
+	/**
+	 * タスクIDをキーに実績時間を取得します。
+	 *
+	 * @param taskId
+	 * @return 実績時間
+	 */
+	public double getActualTimeByTaskId(int taskId);
 }

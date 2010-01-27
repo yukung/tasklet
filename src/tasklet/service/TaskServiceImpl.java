@@ -80,6 +80,10 @@ public class TaskServiceImpl implements TaskService {
 	public void update(Task task, Memo memo) throws TaskletException {
 
 		try {
+			// タスク実績時間の加算
+			double accumulatedTime = taskDao.getActualTimeByTaskId(task.getId());
+			accumulatedTime += task.getActualTime();
+			task.setActualTime(accumulatedTime);
 			// タスク更新処理
 			taskDao.updateTask(task);
 			// ソート順の取得

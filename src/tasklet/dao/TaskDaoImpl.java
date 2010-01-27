@@ -367,4 +367,40 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			close(conn);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#getActualTimeByTaskId(int)
+	 */
+	public double getActualTimeByTaskId(int taskId) {
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
+					"getActualTimeByTaskId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// SQLの実行
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, taskId);
+			rs = statement.executeQuery();
+
+			if (!rs.next()) {
+				throw new DataAccessException("errors.exist");
+			}
+
+			return rs.getDouble("actual_time");
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
+			close(statement);
+			close(conn);
+		}
+	}
 }
