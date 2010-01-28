@@ -6,7 +6,7 @@
 				<p>各項目を入力してタスクの情報を更新してください。</p>
 				<h3>タスクの操作</h3>
 				<ul class="sidemenu">
-					<li><a href="#">属性情報の修正</a></li>
+					<li><html:link action="/modify" paramId="id" paramName="task" paramProperty="id">タスク情報の修正</html:link></li>
 				</ul>
 
 			</div>

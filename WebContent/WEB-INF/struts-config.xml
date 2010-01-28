@@ -23,7 +23,7 @@
       <form-property name="note" type="java.lang.String"/>
     </form-bean>
     <!-- タスク属性修正用Form -->
-    <form-bean name="modifyTaskForm" type="tasklet.form.modifyTaskForm"/>
+    <form-bean name="modifyTaskForm" type="tasklet.form.ModifyTaskForm"/>
     <!-- メモ追加用Form -->
     <form-bean name="addNoteForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
       <form-property name="note" type="java.lang.String"/>
@@ -38,12 +38,16 @@
     </form-bean>
     <!-- リクエストパラメータ無しのForm -->
     <form-bean name="noParameterForm" type="org.apache.struts.action.DynaActionForm" dynamic="true"/>
-    <!-- アクティビティ一覧ページ切替用Bean -->
+    <!-- アクティビティ一覧ページ切替用Form -->
     <form-bean name="activitiesPaginationForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
       <form-property name="pageNo" type="java.lang.String"/>
     </form-bean>
-    <!-- タスク詳細&メモ追加用フォーム -->
+    <!-- タスク詳細&メモ追加用Form -->
     <form-bean name="detailTaskForm" type="tasklet.form.DetailTaskForm"/>
+    <!-- タスク属性情報修正用Form -->
+    <form-bean name="modifyForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
+      <form-property name="taskId" type="int"/>
+    </form-bean>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -104,6 +108,15 @@
     </action>
     <!-- 入力されたタスク更新情報からタスク更新オブジェクトを生成し、データベースを更新する。 -->
     <action path="/updateTask" name="detailTaskForm" type="tasklet.action.UpdateTaskAction" scope="request" validate="true" input="/showDetail.do">
+      <set-property property="cancellable" value="true"/>
+      <forward name="success" path="tasks"/>
+    </action>
+    <!-- タスク情報修正画面へ遷移する。 -->
+    <action path="/modify" name="modifyTaskForm" type="tasklet.action.ModifyAction" scope="request" validate="false">
+      <forward name="success" path="modify"/>
+    </action>
+    <!-- 入力されたタスク修正情報からタスク修正オブジェクトを生成し、データベースを更新する。 -->
+    <action path="/modifyTask" name="modifyTaskForm" type="tasklet.action.ModifyTaskAction" scope="request" validate="true" input="modify">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
     </action>

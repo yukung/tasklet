@@ -403,4 +403,38 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			close(conn);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#modifyTask(tasklet.entity.Task)
+	 */
+	public void modifyTask(Task task) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {
+			// SQLの取得
+			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("modifyTaskByTaskId").toString();
+			PropertyUtil property = PropertyUtil.getInstance("sql");
+			String sql = property.getString(propertyKey);
+
+			// DB更新
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setString(1, task.getTitle());
+			statement.setInt(2, task.getPriority().getCode());
+			statement.setDate(3, task.getPeriod());
+			statement.setDouble(4, task.getEstimatedTime());
+			statement.setInt(5, task.getId());
+
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			rollback(conn);
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
 }

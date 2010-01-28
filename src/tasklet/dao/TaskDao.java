@@ -86,4 +86,11 @@ public interface TaskDao {
 	 * @return 実績時間
 	 */
 	public double getActualTimeByTaskId(int taskId);
+
+	/**
+	 * タスク情報を元にタスクを修正します。
+	 *
+	 * @param task
+	 */
+	public void modifyTask(Task task);
 }

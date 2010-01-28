@@ -53,7 +53,6 @@ public class TaskServiceImpl implements TaskService {
 	 * @see tasklet.service.TaskService#add(tasklet.entity.Task)
 	 */
 	public void add(Task task) throws TaskletException {
-
 		// タスク追加処理
 		try {
 			taskDao.addTasks(task);
@@ -113,6 +112,20 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	public int getActivityId(int taskId) {
 		return taskDao.getActivityIdByTaskId(taskId);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.TaskService#modify(tasklet.entity.Task)
+	 */
+	public void modify(Task task) throws TaskletException {
+		// タスク修正処理
+		try {
+			taskDao.modifyTask(task);
+		} catch (DataAccessException e) {
+			// DB登録エラー
+			throw new TaskletException("errors.update", e);
+		}
 	}
 
 }

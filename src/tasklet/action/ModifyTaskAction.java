@@ -22,20 +22,19 @@ import org.apache.struts.action.ActionMessages;
 import tasklet.DataAccessException;
 import tasklet.TaskletException;
 import tasklet.entity.Activity;
-import tasklet.entity.Memo;
 import tasklet.entity.Task;
 import tasklet.entity.User;
-import tasklet.form.DetailTaskForm;
+import tasklet.form.ModifyTaskForm;
 import tasklet.service.TaskService;
 import tasklet.service.TaskServiceImpl;
 
 /**
- * タスク情報を更新するアクションです。
+ * タスク情報を修正するアクションです。
  *
  * @author Y.Ikeda
  *
  */
-public class UpdateTaskAction extends AbstractAction {
+public class ModifyTaskAction extends AbstractAction {
 
 	/* (非 Javadoc)
 	 * @see tasklet.action.AbstractAction#doExecute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -53,28 +52,19 @@ public class UpdateTaskAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
-		boolean isCancelled = false;
-		if (isCancelled(request)) {
-			isCancelled = true;
-		}
-
-		DetailTaskForm detailTaskForm = (DetailTaskForm) form;
+		ModifyTaskForm modifyTaskForm = (ModifyTaskForm) form;
 		Task task = new Task();
-		Memo memo = new Memo();
 		try {
-			// 入力フォーム情報をエンティティにマッピング
-			BeanUtils.copyProperty(task, "id", detailTaskForm.getTaskId());
-			BeanUtils.copyProperties(task, detailTaskForm);
-			BeanUtils.copyProperties(memo, detailTaskForm);
+			BeanUtils.copyProperties(task, modifyTaskForm);
 		} catch (Exception e) {
 			// 不整合の場合はシステム例外としてStrutsに投げる
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
 		TaskService taskService = new TaskServiceImpl();
-		if (!isCancelled) {
+		if (!isCancelled(request)) {
 			try {
-				taskService.update(task, memo);
+				taskService.modify(task);
 			} catch (TaskletException e) {
 				ActionMessages errors = new ActionMessages();
 				ActionMessage error = new ActionMessage(e.getMessage());

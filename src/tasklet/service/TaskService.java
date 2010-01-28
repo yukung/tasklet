@@ -68,4 +68,12 @@ public interface TaskService {
 	 */
 	public int getActivityId(int taskId);
 
+	/**
+	 * タスクを修正します。
+	 *
+	 * @param task
+	 * @throws TaskletException タスク修正時のエラー
+	 */
+	public void modify(Task task) throws TaskletException;
+
 }
