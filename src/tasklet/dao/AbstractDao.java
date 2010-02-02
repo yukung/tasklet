@@ -6,6 +6,8 @@
  */
 package tasklet.dao;
 
+import static tasklet.common.Constants.PROPERTY_KEY_SQL;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +16,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import tasklet.DataAccessException;
+import tasklet.util.PropertyUtil;
 
 /**
  * Daoの基底クラスです。
@@ -22,7 +25,6 @@ import tasklet.DataAccessException;
  * @author Y.Ikeda
  *
  */
-
 public abstract class AbstractDao {
 
 	/** データソース */
@@ -105,6 +107,18 @@ public abstract class AbstractDao {
 				throw new DataAccessException(e.getMessage(), e);
 			}
 		}
+	}
+
+	/**
+	 * プロパティのSuffixをキーに、sql.propertiesからSQLを取得します。
+	 *
+	 * @param suffix
+	 * @return SQL文
+	 */
+	protected String getSQLFromProperty(String suffix) {
+		String key = new StringBuilder(PROPERTY_KEY_SQL).append(suffix).toString();
+		PropertyUtil property = PropertyUtil.getInstance("sql");
+		return property.getString(key);
 	}
 
 }

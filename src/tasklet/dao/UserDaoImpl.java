@@ -6,8 +6,6 @@
  */
 package tasklet.dao;
 
-import static tasklet.common.Constants.PROPERTY_KEY_SQL;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +15,6 @@ import javax.sql.DataSource;
 
 import tasklet.DataAccessException;
 import tasklet.entity.User;
-import tasklet.util.PropertyUtil;
 
 /**
  * ユーザ情報DAO実装クラスです。
@@ -46,10 +43,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findUserByUserName").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("findUserByUserName");
 
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
@@ -90,10 +84,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findUserByUserNameAndPassword").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("findUserByUserNameAndPassword");
 
 			// DBから取得
 			conn = source.getConnection();
@@ -136,9 +127,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKeyUser = new StringBuilder(PROPERTY_KEY_SQL).append("isRegistered").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKeyUser);
+			String sql = getSQLFromProperty("isRegistered");
 
 			// DBから取得
 			conn = source.getConnection();
@@ -175,12 +164,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL)
-					.append("registerUser").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("registerUser");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setString(1, user.getUserName());
@@ -209,12 +195,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"registerCategoryDefault").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("registerCategoryDefault");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, userId);

@@ -6,8 +6,6 @@
  */
 package tasklet.dao;
 
-import static tasklet.common.Constants.PROPERTY_KEY_SQL;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +18,6 @@ import javax.sql.DataSource;
 import tasklet.DataAccessException;
 import tasklet.TaskletException;
 import tasklet.entity.Activity;
-import tasklet.util.PropertyUtil;
 
 /**
  * アクティビティ情報DAO実装クラスです。
@@ -50,10 +47,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"findActivitiesByUserId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("findActivitiesByUserId");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -104,10 +98,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"getMaxSequenceOfActivities").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getMaxSequenceOfActivities");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -141,12 +132,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"addActivityToActivities").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("addActivityToActivities");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setString(1, activity.getTitle());
@@ -175,12 +163,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"addActivityToIndexes").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("addActivityToIndexes");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, userId);
@@ -209,12 +194,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"getLastActivityId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getLastActivityId");
 
-			// DB検索
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setString(1, activity.getTitle());
@@ -247,12 +229,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"getLastCategoryId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getLastCategoryId");
 
-			// DB検索
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, userId);
@@ -284,11 +263,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getActivityCountByUserId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getActivityCountByUserId");
 
-			// DB検索
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, userId);
