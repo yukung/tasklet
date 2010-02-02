@@ -48,6 +48,10 @@
     <form-bean name="modifyForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
       <form-property name="taskId" type="int"/>
     </form-bean>
+    <!-- メモ詳細画面用Form -->
+    <form-bean name="showMemosForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
+      <form-property name="taskId" type="java.lang.String"/>
+    </form-bean>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -119,6 +123,10 @@
     <action path="/modifyTask" name="modifyTaskForm" type="tasklet.action.ModifyTaskAction" scope="request" validate="true" input="modify">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
+    </action>
+    <!-- データベースに保存されたタスクメモ情報から、タスクメモオブジェクトを生成し、requestスコープに登録する。 -->
+    <action path="/showMemos" name="showMemosForm" type="tasklet.action.ShowMemosAction" scope="request" validate="false">
+      <forward name="success" path="memo"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -93,4 +93,12 @@ public interface TaskDao {
 	 * @param task
 	 */
 	public void modifyTask(Task task);
+
+	/**
+	 * タスクIDをキーにメモ一覧を取得します。
+	 *
+	 * @param taskId
+	 * @return メモ一覧
+	 */
+	public List<Memo> getMemosByTaskId(int taskId);
 }

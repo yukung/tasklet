@@ -6,8 +6,6 @@
  */
 package tasklet.dao;
 
-import static tasklet.common.Constants.PROPERTY_KEY_SQL;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +18,6 @@ import javax.sql.DataSource;
 import tasklet.DataAccessException;
 import tasklet.entity.Memo;
 import tasklet.entity.Task;
-import tasklet.util.PropertyUtil;
 
 /**
  * タスク情報DAO実装クラスです。
@@ -49,9 +46,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("findTasksByActivityId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("findTasksByActivityId");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -101,9 +96,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getActivityTitle").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getActivityTitle");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -137,11 +130,9 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addTaskToTasks").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("addTaskToTasks");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, task.getActivityId());
@@ -172,11 +163,9 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("getTaskDetailAndMemos").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getTaskDetailAndMemos");
 
-			// DB検索
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, taskId);
@@ -240,11 +229,9 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("updateTaskByTaskId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("updateTaskByTaskId");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setDouble(1, task.getActualTime());
@@ -272,10 +259,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"getMaxSequenceOfMemos").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getMaxSequenceOfMemos");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -309,11 +293,9 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("addMemoToMemos").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("addMemoToMemos");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setInt(1, memo.getTaskId());
@@ -342,10 +324,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"getActivityIdByTaskId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getActivityIdByTaskId");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -378,10 +357,7 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		ResultSet rs = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append(
-					"getActualTimeByTaskId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("getActualTimeByTaskId");
 
 			// SQLの実行
 			conn = source.getConnection();
@@ -414,11 +390,9 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		PreparedStatement statement = null;
 		try {
 			// SQLの取得
-			String propertyKey = new StringBuilder(PROPERTY_KEY_SQL).append("modifyTaskByTaskId").toString();
-			PropertyUtil property = PropertyUtil.getInstance("sql");
-			String sql = property.getString(propertyKey);
+			String sql = getSQLFromProperty("modifyTaskByTaskId");
 
-			// DB更新
+			// SQLの実行
 			conn = source.getConnection();
 			statement = conn.prepareStatement(sql);
 			statement.setString(1, task.getTitle());
@@ -433,6 +407,49 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			rollback(conn);
 			throw new DataAccessException(e.getMessage(), e);
 		} finally {
+			close(statement);
+			close(conn);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.dao.TaskDao#getMemosByTaskId(int)
+	 */
+	public List<Memo> getMemosByTaskId(int taskId) {
+
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			// SQLの取得
+			String sql = getSQLFromProperty("getMemosByTaskId");
+
+			// SQLの実行
+			conn = source.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, taskId);
+			rs = statement.executeQuery();
+
+			// 結果の取り出し
+			ArrayList<Memo> memos = new ArrayList<Memo>();
+			while (rs.next()) {
+				Memo memo = new Memo();
+				memo.setId(rs.getInt("id"));
+				memo.setTaskId(rs.getInt("task_id"));
+				memo.setSeq(rs.getInt("seq"));
+				memo.setContents(rs.getString("contents"));
+				memo.setCreatedOn(rs.getTimestamp("created_on"));
+				memo.setUpdatedOn(rs.getTimestamp("updated_on"));
+				memos.add(memo);
+			}
+
+			return memos;
+
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(rs);
 			close(statement);
 			close(conn);
 		}

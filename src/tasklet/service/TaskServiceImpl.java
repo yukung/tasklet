@@ -128,4 +128,13 @@ public class TaskServiceImpl implements TaskService {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.TaskService#getMemos(int)
+	 */
+	public List<Memo> getMemos(int taskId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return taskDao.getMemosByTaskId(taskId);
+	}
+
 }

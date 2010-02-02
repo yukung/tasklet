@@ -61,7 +61,7 @@
 							<td class="align-right"><nested:write property="actualTime" /></td>
 							<td class="align-center">
 							<nested:notEqual property="memoCount" value="0">
-								<a href="#"><nested:write property="memoCount" /></a>
+								<html:link action="/showMemos" paramId="taskId" paramName="task" paramProperty="id"><nested:write property="memoCount" /></html:link>
 							</nested:notEqual>
 							</td>
 						</tr>

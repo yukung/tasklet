@@ -76,4 +76,12 @@ public interface TaskService {
 	 */
 	public void modify(Task task) throws TaskletException;
 
+	/**
+	 * タスクIDから紐づくメモ一覧を取得します。
+	 *
+	 * @param taskId
+	 * @return タスクIDに紐づくメモ一覧
+	 */
+	public List<Memo> getMemos(int taskId);
+
 }
