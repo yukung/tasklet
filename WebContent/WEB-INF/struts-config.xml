@@ -46,7 +46,7 @@
     <form-bean name="detailTaskForm" type="tasklet.form.DetailTaskForm"/>
     <!-- タスク属性情報修正用Form -->
     <form-bean name="modifyForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
-      <form-property name="taskId" type="int"/>
+      <form-property name="taskId" type="java.lang.String"/>
     </form-bean>
     <!-- メモ詳細画面用Form -->
     <form-bean name="showMemosForm" type="org.apache.struts.action.DynaActionForm" dynamic="true">
