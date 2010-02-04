@@ -54,6 +54,7 @@ public class ShowMemosAction extends AbstractAction {
 		List<Memo> memos = taskService.getMemos(taskId);
 		String title = taskService.getTask(taskId).getTitle();
 		request.setAttribute("memos", memos);
+		request.setAttribute("taskId", String.valueOf(taskId));
 		request.setAttribute("title", title);
 
 		saveToken(request);

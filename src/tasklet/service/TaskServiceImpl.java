@@ -94,9 +94,9 @@ public class TaskServiceImpl implements TaskService {
 				if (seq == null) {
 					seq = Integer.valueOf(0);
 				} else {
-					seq = seq.intValue() + 1;
+					seq += 1;
 				}
-				memo.setSeq(seq);
+				memo.setSeq(seq.intValue());
 
 				taskDao.addMemos(memo);
 			}
@@ -133,8 +133,29 @@ public class TaskServiceImpl implements TaskService {
 	 * @see tasklet.service.TaskService#getMemos(int)
 	 */
 	public List<Memo> getMemos(int taskId) {
-		// TODO 自動生成されたメソッド・スタブ
 		return taskDao.getMemosByTaskId(taskId);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * @see tasklet.service.TaskService#add(tasklet.entity.Memo)
+	 */
+	public void add(Memo memo) throws TaskletException {
+		// ソート順の取得
+		Integer seq = taskDao.getMaxSequenceOfMemos(memo.getTaskId());
+		if (seq == null) {
+			seq = Integer.valueOf(0);
+		} else {
+			seq += 1;
+		}
+		memo.setSeq(seq.intValue());
+
+		try {
+			taskDao.addMemos(memo);
+		} catch (DataAccessException e) {
+			// DB登録エラー
+			throw new TaskletException("errors.insert", e);
+		}
 	}
 
 }

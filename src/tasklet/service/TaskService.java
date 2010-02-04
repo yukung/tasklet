@@ -84,4 +84,12 @@ public interface TaskService {
 	 */
 	public List<Memo> getMemos(int taskId);
 
+	/**
+	 * メモを登録します。
+	 *
+	 * @param memo
+	 * @throws TaskletException メモ追加時のエラー
+	 */
+	public void add(Memo memo) throws TaskletException;
+
 }

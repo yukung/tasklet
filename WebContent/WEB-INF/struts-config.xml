@@ -25,8 +25,9 @@
     <!-- タスク属性修正用Form -->
     <form-bean name="modifyTaskForm" type="tasklet.form.ModifyTaskForm"/>
     <!-- メモ追加用Form -->
-    <form-bean name="addNoteForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
-      <form-property name="note" type="java.lang.String"/>
+    <form-bean name="addMemoForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
+      <form-property name="taskId" type="java.lang.String"/>
+      <form-property name="contents" type="java.lang.String"/>
     </form-bean>
     <!-- ユーザー情報登録Form -->
     <form-bean name="registerUserForm" type="org.apache.struts.validator.DynaValidatorForm" dynamic="true">
@@ -127,6 +128,12 @@
     <!-- データベースに保存されたタスクメモ情報から、タスクメモオブジェクトを生成し、requestスコープに登録する。 -->
     <action path="/showMemos" name="showMemosForm" type="tasklet.action.ShowMemosAction" scope="request" validate="false">
       <forward name="success" path="memo"/>
+    </action>
+    <!-- 入力されたタスクメモ情報からタスクメモオブジェクトを生成し、データベースに追加する。 -->
+    <action path="/addMemo" name="addMemoForm" type="tasklet.action.AddMemoAction" scope="request" validate="true" input="memo">
+      <set-property property="cancellable" value="true"/>
+      <forward name="success" path="memo"/>
+      <forward name="cancel" path="tasks"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

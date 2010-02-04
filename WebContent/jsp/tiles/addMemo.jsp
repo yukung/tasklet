@@ -13,14 +13,15 @@
 				</logic:notEmpty>
 
 				<h3>メモの追加</h3>
-				<form action="#">
+				<html:form action="/addMemo">
 					<p>
-						<textarea></textarea>
+						<html:textarea property="contents"></html:textarea>
+						<html:hidden property="taskId" />
 					</p>
 					<p>
-						<input type="submit" value="追加" class="button" />
-						<input type="submit" value="キャンセル" class="button" />
+						<html:submit value="追加" styleClass="button" />
+						<html:cancel value="キャンセル" styleClass="button" />
 					</p>
-				</form>
+				</html:form>
 
 			</div>

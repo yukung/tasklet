@@ -18,21 +18,24 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.apache.struts.validator.DynaValidatorForm;
 
 import tasklet.DataAccessException;
 import tasklet.TaskletException;
 import tasklet.entity.Activity;
+import tasklet.entity.Memo;
 import tasklet.entity.Task;
 import tasklet.entity.User;
-import tasklet.form.AddTaskForm;
 import tasklet.service.TaskService;
 import tasklet.service.TaskServiceImpl;
 
 /**
+ * メモを追加するアクションです。
+ *
  * @author Y.Ikeda
  *
  */
-public class AddTaskAction extends AbstractAction {
+public class AddMemoAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
@@ -55,11 +58,10 @@ public class AddTaskAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
-		AddTaskForm addTaskForm = (AddTaskForm) form;
-		Task task = new Task();
+		DynaValidatorForm addMemoForm = (DynaValidatorForm) form;
+		Memo memo = new Memo();
 		try {
-			// 入力フォーム情報をタスクエンティティにマッピング
-			BeanUtils.copyProperties(task, addTaskForm);
+			BeanUtils.copyProperties(memo, addMemoForm);
 		} catch (Exception e) {
 			// 不整合の場合はシステム例外としてStrutsに投げる
 			throw new DataAccessException(e.getMessage(), e);
@@ -68,7 +70,7 @@ public class AddTaskAction extends AbstractAction {
 		TaskService taskService = new TaskServiceImpl();
 		if (!isCancelled(request)) {
 			try {
-				taskService.add(task);
+				taskService.add(memo);
 			} catch (TaskletException e) {
 				ActionMessages errors = new ActionMessages();
 				ActionMessage error = new ActionMessage(e.getMessage());
@@ -78,19 +80,20 @@ public class AddTaskAction extends AbstractAction {
 			}
 		}
 
-		// タスク一覧を再取得
-		List<Task> tasks = taskService.show(task.getActivityId());
+		// キャンセルボタン押下の場合はタスク一覧を再取得
+		int activityId = taskService.getActivityId(memo.getTaskId());
+		List<Task> tasks = taskService.show(activityId);
 		request.setAttribute("tasks", tasks);
-		String title = taskService.getActivityTitle(task.getActivityId());
+		String title = taskService.getActivityTitle(activityId);
 		Activity activity = new Activity();
-		activity.setId(task.getActivityId());
+		activity.setId(activityId);
 		activity.setTitle(title);
 		request.setAttribute("activity", activity);
 
+		saveToken(request);
 		if (isCancelled(request)) {
 			return mapping.findForward("cancel");
 		} else {
-			saveToken(request);
 			return mapping.findForward("success");
 		}
 	}

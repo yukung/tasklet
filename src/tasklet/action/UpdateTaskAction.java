@@ -58,11 +58,6 @@ public class UpdateTaskAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
-		boolean isCancelled = false;
-		if (isCancelled(request)) {
-			isCancelled = true;
-		}
-
 		DetailTaskForm detailTaskForm = (DetailTaskForm) form;
 		Task task = new Task();
 		Memo memo = new Memo();
@@ -77,7 +72,7 @@ public class UpdateTaskAction extends AbstractAction {
 		}
 
 		TaskService taskService = new TaskServiceImpl();
-		if (!isCancelled) {
+		if (!isCancelled(request)) {
 			try {
 				taskService.update(task, memo);
 			} catch (TaskletException e) {
