@@ -14,9 +14,10 @@
 
 				<h3>メモの追加</h3>
 				<html:form action="/addMemo">
+					<html:errors/>
 					<p>
-						<html:textarea property="contents"></html:textarea>
-						<html:hidden property="taskId" />
+						<html:textarea property="contents" />
+						<bean:parameter id="tid" name="taskId"/><html:hidden property="taskId" value="<%= tid %>"/>
 					</p>
 					<p>
 						<html:submit value="追加" styleClass="button" />

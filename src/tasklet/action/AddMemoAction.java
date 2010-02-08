@@ -18,7 +18,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.apache.struts.validator.DynaValidatorForm;
 
 import tasklet.DataAccessException;
 import tasklet.TaskletException;
@@ -26,6 +25,7 @@ import tasklet.entity.Activity;
 import tasklet.entity.Memo;
 import tasklet.entity.Task;
 import tasklet.entity.User;
+import tasklet.form.AddMemoForm;
 import tasklet.service.TaskService;
 import tasklet.service.TaskServiceImpl;
 
@@ -58,7 +58,7 @@ public class AddMemoAction extends AbstractAction {
 			return mapping.findForward("double");
 		}
 
-		DynaValidatorForm addMemoForm = (DynaValidatorForm) form;
+		AddMemoForm addMemoForm = (AddMemoForm) form;
 		Memo memo = new Memo();
 		try {
 			BeanUtils.copyProperties(memo, addMemoForm);
@@ -68,6 +68,8 @@ public class AddMemoAction extends AbstractAction {
 		}
 
 		TaskService taskService = new TaskServiceImpl();
+		saveToken(request);
+
 		if (!isCancelled(request)) {
 			try {
 				taskService.add(memo);
@@ -78,23 +80,26 @@ public class AddMemoAction extends AbstractAction {
 				saveErrors(request, errors);
 				return mapping.getInputForward();
 			}
-		}
+			List<Memo> memos = taskService.getMemos(memo.getTaskId());
+			String title = taskService.getTask(memo.getTaskId()).getTitle();
+			request.setAttribute("memos", memos);
+			request.setAttribute("taskId", String.valueOf(memo.getTaskId()));
+			request.setAttribute("title", title);
+			addMemoForm.setContents(""); // メモ入力欄を初期化
 
-		// キャンセルボタン押下の場合はタスク一覧を再取得
-		int activityId = taskService.getActivityId(memo.getTaskId());
-		List<Task> tasks = taskService.show(activityId);
-		request.setAttribute("tasks", tasks);
-		String title = taskService.getActivityTitle(activityId);
-		Activity activity = new Activity();
-		activity.setId(activityId);
-		activity.setTitle(title);
-		request.setAttribute("activity", activity);
-
-		saveToken(request);
-		if (isCancelled(request)) {
-			return mapping.findForward("cancel");
-		} else {
 			return mapping.findForward("success");
+		} else {
+			// キャンセルボタン押下の場合はタスク一覧を再取得
+			int activityId = taskService.getActivityId(memo.getTaskId());
+			List<Task> tasks = taskService.show(activityId);
+			request.setAttribute("tasks", tasks);
+			String title = taskService.getActivityTitle(activityId);
+			Activity activity = new Activity();
+			activity.setId(activityId);
+			activity.setTitle(title);
+			request.setAttribute("activity", activity);
+
+			return mapping.findForward("cancel");
 		}
 	}
 

@@ -193,6 +193,12 @@
         	</field>
         </form>
 
+        <form name="addMemoForm">
+        	<field property="contents" depends="required">
+        		<arg0 key="メモ" resource="false" />
+        	</field>
+        </form>
+
     </formset>
 
 </form-validation>
