@@ -4,7 +4,7 @@
 
 				<h2><bean:write name="activity" property="title" scope="request" /></h2>
 
-				<form>
+				<html:form action="/operate">
 
 				<html:messages id="msg" message="true">
 					<h3 class="message"><bean:write name="msg" /></h3>
@@ -13,8 +13,8 @@
 					<logic:notEmpty name="tasks" scope="request">
 					<p>
 						<label>タスク操作</label>
-						<input type="submit" value="完了" class="button" />
-						<input type="submit" value="削除" class="button" />
+						<html:submit property="done" value="完了" styleClass="button" />
+						<html:submit property="delete" value="削除" styleClass="button" />
 					</p>
 
 					<table>
@@ -31,7 +31,7 @@
 						<logic:iterate id="task" name="tasks" indexId="idx" scope="request">
 						<nested:root name="task">
 						<tr ${idx % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
-							<td class="first align-center"><input type="checkbox"></input></td>
+							<td class="first align-center"><html:multibox property="selected"><nested:write property="id" /></html:multibox></td>
 							<td><html:link action="/showDetail" paramId="taskId" paramName="task" paramProperty="id"><nested:write property="title" /></html:link></td>
 							<td class="align-center">
 							<nested:equal property="priority" value="HIGH">
@@ -70,6 +70,6 @@
 					</table>
 					</logic:notEmpty>
 
-				</form>
+				</html:form>
 
 			</div>

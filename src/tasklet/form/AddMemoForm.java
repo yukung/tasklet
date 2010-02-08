@@ -10,6 +10,8 @@ package tasklet.form;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
+ * メモ追加画面のActionFormです。
+ *
  * @author Y.Ikeda
  *
  */

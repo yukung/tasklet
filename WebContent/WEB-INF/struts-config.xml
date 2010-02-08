@@ -14,7 +14,7 @@
       <form-property name="activityName" type="java.lang.String"/>
     </form-bean>
     <!-- タスク一覧選択用Form -->
-    <form-bean name="checkTaskForm" type="tasklet.form.checkTaskForm"/>
+    <form-bean name="operateTaskForm" type="tasklet.form.OperateTaskForm"/>
     <!-- タスク追加用Form -->
     <form-bean name="addTaskForm" type="tasklet.form.AddTaskForm"/>
     <!-- タスク状況更新用Form -->
@@ -131,6 +131,10 @@
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="memo"/>
       <forward name="cancel" path="tasks"/>
+    </action>
+    <!-- 画面からチェックされたタスクに対して検索条件オブジェクトを生成し、データベースを更新する。 -->
+    <action path="/operate" name="operateTaskForm" type="tasklet.action.OperateTaskAction" scope="request" validate="true" input="/showTasks.do" parameter="done,delete,default=show">
+      <forward name="success" path="tasks"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
