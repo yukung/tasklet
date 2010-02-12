@@ -10,6 +10,8 @@
   <global-forwards>
   </global-forwards>
   <action-mappings>
+    <action path="/index">
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>
