@@ -4,18 +4,16 @@
 		<div id="header">
 
 			<h1 id="logo-text">
-			<logic:empty name="user" scope="session"><html:link action="/index">Tasklet</html:link></logic:empty>
-			<logic:notEmpty name="user" scope="session"><html:link action="/showActivities.do">Tasklet</html:link></logic:notEmpty>
+			<c:if test="${empty sessionScope.user}"><html:link action="/index">Tasklet</html:link></c:if>
+			<c:if test="${not empty sessionScope.user}"><html:link action="/index">Tasklet</html:link></c:if>
 			</h1>
 			<p id="slogan">your ToDo, more easy!</p>
 
 			<div id="header-links">
 			<p>
-				<logic:empty name="user" scope="session"><html:link action="/index">ホーム</html:link></logic:empty>
-				<logic:notEmpty name="user" scope="session"><html:link action="/showActivities.do">ホーム</html:link></logic:notEmpty>
-				 |
-				Contact |
-				Site Map
+				<c:if test="${empty sessionScope.user}"><html:link action="/index">ホーム</html:link></c:if>
+				<c:if test="${not empty sessionScope.user}"><html:link action="/index">ホーム</html:link></c:if>
+				 | Contact | Site Map
 			</p>
 			</div>
 
