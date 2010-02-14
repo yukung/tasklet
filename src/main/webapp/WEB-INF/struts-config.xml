@@ -4,6 +4,8 @@
   <data-sources>
   </data-sources>
   <form-beans>
+    <!-- ユーザ登録画面 -->
+    <form-bean name="registerForm" type="org.yukung.tasklet.form.RegisterForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -11,7 +13,15 @@
   </global-forwards>
   <action-mappings>
     <!-- tiles定義indexにforwardする。 -->
-    <action path="/index" type="org.apache.struts.actions.ForwardAction" forward="index">
+    <action path="/index" forward="index">
+    </action>
+    <!-- ユーザ登録画面に遷移する。 -->
+    <action path="/account" type="org.yukung.tasklet.action.AccountAction">
+      <forward name="success" path="register"/>
+    </action>
+    <!-- 画面入力されたユーザ情報を元に、ユーザ登録処理を行う。 -->
+    <action path="/register" name="registerForm" type="org.yukung.tasklet.action.RegisterAction" scope="request" validate="true" input="register">
+      <forward name="success" path="result"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -21,4 +21,15 @@
     	<put name="sidebar" value="/WEB-INF/jsp/tiles/login.jsp" />
     </definition>
 
+    <definition name="register" extends="base">
+    	<put name="title" value="ユーザー登録 - Tasklet" />
+    	<put name="main" value="/WEB-INF/jsp/tiles/register.jsp" />
+    	<put name="sidebar" value="/WEB-INF/jsp/tiles/registerInfo.jsp" />
+    </definition>
+
+	<definition name="result" extends="base">
+		<put name="title" value="ユーザー登録完了 - Tasklet" />
+		<put name="main" value="/WEB-INF/jsp/tiles/result.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/registerInfo.jsp" />
+	</definition>
 </tiles-definitions>
