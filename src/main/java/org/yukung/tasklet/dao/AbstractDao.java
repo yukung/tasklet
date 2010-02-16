@@ -15,9 +15,14 @@
  */
 package org.yukung.tasklet.dao;
 
+import java.io.IOException;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
+import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
+import org.yukung.tasklet.exception.DataAccessException;
 
 /**
  * <p>
@@ -30,19 +35,25 @@ import org.apache.commons.dbutils.QueryRunner;
  */
 public abstract class AbstractDao {
 
+	private static final String SQL_PROPERTY_PATH = "/WEB-INF/classes/sql.properties";
+
 	/** SQLプロパティファイルのsuffix文字列 */
 	private static final String PROPERTY_KEY_SQL = "sqltable.";
 
 	/** QueryRunnerのインスタンス */
 	protected QueryRunner run;
 
+	/** プロパティファイルのキーとSQL文が紐づいたMapオブジェクト */
+	protected static Map<String, String> prop;
+
 	/**
 	 * <p>
 	 * デフォルトコンストラクタ。<br>
-	 * クエリ発行メソッドを呼ぶ際，Connectionをその都度渡す場合はこちらを呼び出してください。
+	 * クエリ発行メソッドを呼ぶ際、Connectionをその都度渡す場合はこちらを呼び出してください。
 	 * </p>
 	 */
 	protected AbstractDao() {
+		initialize();
 		this.run = new QueryRunner();
 	}
 
@@ -55,13 +66,35 @@ public abstract class AbstractDao {
 	 *            接続を取り出すためのデータソース
 	 */
 	protected AbstractDao(DataSource ds) {
+		initialize();
 		this.run = new QueryRunner(ds);
 	}
 
+	/**
+	 * <p>
+	 * SQLプロパティファイルの内容を、Mapオブジェクトにマッピングします。
+	 * </p>
+	 * 
+	 */
+	private void initialize() {
+		try {
+			prop = QueryLoader.instance().load(SQL_PROPERTY_PATH);
+		} catch (IOException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * SQLプロパティのキーを元に、SQL文を取得します。
+	 * </p>
+	 * 
+	 * @param suffix
+	 * @return SQLプロパティのキーに紐づいたSQL文
+	 */
 	protected String getSQLFromPropertyFile(String suffix) {
 		String key = new StringBuffer(PROPERTY_KEY_SQL).append(suffix)
 				.toString();
-		// TODO PropertyFileUtilsが出来たら実装を書く
-
+		return prop.get(key);
 	}
 }
