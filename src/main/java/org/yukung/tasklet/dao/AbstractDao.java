@@ -41,10 +41,24 @@ public abstract class AbstractDao {
 	private static final String PROPERTY_KEY_SQL = "sqltable.";
 
 	/** QueryRunnerのインスタンス */
-	protected QueryRunner run;
+	protected QueryRunner runner;
 
 	/** プロパティファイルのキーとSQL文が紐づいたMapオブジェクト */
-	protected static Map<String, String> prop;
+	protected static Map<String, String> sqlMap;
+
+	/**
+	 * <p>
+	 * SQLプロパティファイルをMapオブジェクトにマッピングして初期化します。
+	 * </p>
+	 */
+	static {
+		try {
+			sqlMap = QueryLoader.instance().load(SQL_PROPERTY_PATH);
+		} catch (IOException e) {
+			//
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
 
 	/**
 	 * <p>
@@ -53,8 +67,7 @@ public abstract class AbstractDao {
 	 * </p>
 	 */
 	protected AbstractDao() {
-		initialize();
-		this.run = new QueryRunner();
+		this.runner = new QueryRunner();
 	}
 
 	/**
@@ -66,22 +79,7 @@ public abstract class AbstractDao {
 	 *            接続を取り出すためのデータソース
 	 */
 	protected AbstractDao(DataSource ds) {
-		initialize();
-		this.run = new QueryRunner(ds);
-	}
-
-	/**
-	 * <p>
-	 * SQLプロパティファイルの内容を、Mapオブジェクトにマッピングします。
-	 * </p>
-	 * 
-	 */
-	private void initialize() {
-		try {
-			prop = QueryLoader.instance().load(SQL_PROPERTY_PATH);
-		} catch (IOException e) {
-			throw new DataAccessException(e.getMessage(), e);
-		}
+		this.runner = new QueryRunner(ds);
 	}
 
 	/**
@@ -95,6 +93,6 @@ public abstract class AbstractDao {
 	protected String getSQLFromPropertyFile(String suffix) {
 		String key = new StringBuffer(PROPERTY_KEY_SQL).append(suffix)
 				.toString();
-		return prop.get(key);
+		return sqlMap.get(key);
 	}
 }

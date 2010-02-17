@@ -20,6 +20,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.yukung.tasklet.dao.UserDao;
+import org.yukung.tasklet.dao.impl.UserDaoImpl;
 import org.yukung.tasklet.exception.DataAccessException;
 
 /**
