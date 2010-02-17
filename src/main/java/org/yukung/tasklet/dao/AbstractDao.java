@@ -44,7 +44,7 @@ public abstract class AbstractDao {
 	protected QueryRunner runner;
 
 	/** プロパティファイルのキーとSQL文が紐づいたMapオブジェクト */
-	protected static Map<String, String> sqlMap;
+	private static Map<String, String> sqlMap;
 
 	/**
 	 * <p>

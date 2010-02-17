@@ -63,7 +63,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 */
 	@Override
 	public User findUserByUserName(String userName) {
-		String sql = sqlMap.get("findUserByUserName");
+		String sql = getSQLFromPropertyFile("findUserByUserName");
 		BeanHandler<User> rsh = new BeanHandler<User>(User.class);
 		try {
 			return runner.query(sql, rsh, userName);
