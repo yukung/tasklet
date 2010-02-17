@@ -81,8 +81,13 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 */
 	@Override
 	public User findUserByUserNameAndPassword(String userName, String password) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		String sql = getSQLFromPropertyFile("findUserByUserNameAndPassword");
+		BeanHandler<User> rsh = new BeanHandler<User>(User.class);
+		try {
+			return runner.query(sql, rsh, userName, password);
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
 	}
 
 	/*
