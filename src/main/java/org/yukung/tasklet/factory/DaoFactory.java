@@ -31,7 +31,7 @@ import org.yukung.tasklet.exception.DataAccessException;
  * @author yukung
  * 
  */
-public class DaoFactory {
+public final class DaoFactory {
 
 	/**
 	 * <p>
