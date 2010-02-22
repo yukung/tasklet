@@ -19,7 +19,9 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.entity.User;
@@ -93,12 +95,33 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	/*
 	 * (非 Javadoc)
 	 * 
-	 * @see org.yukung.tasklet.dao.UserDao#isRegisterd(java.lang.String)
+	 * @see org.yukung.tasklet.dao.UserDao#getUserCount(java.lang.String)
 	 */
 	@Override
-	public boolean isRegisterd(String userName) {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+	public Integer getUserCount(String userName) {
+		String sql = getSQLFromPropertyFile("getUserCount");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner.query(sql, rsh, userName);
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.UserDao#addUser(org.yukung.tasklet.entity.User)
+	 */
+	@Override
+	public void addUser(User user) {
+		String sql = getSQLFromPropertyFile("addUser");
+		try {
+			runner.update(sql, user);
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
 	}
 
 }

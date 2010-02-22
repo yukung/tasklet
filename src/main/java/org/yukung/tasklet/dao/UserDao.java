@@ -33,7 +33,7 @@ public interface UserDao {
 	 * </p>
 	 * 
 	 * @param userName
-	 * @return
+	 * @return ユーザ情報Entity
 	 */
 	public User findUserByUserName(String userName);
 
@@ -44,17 +44,22 @@ public interface UserDao {
 	 * 
 	 * @param userName
 	 * @param password
-	 * @return
+	 * @return ユーザ情報Entity
 	 */
 	public User findUserByUserNameAndPassword(String userName, String password);
 
 	/**
-	 * <p>
-	 * ユーザ名が既に登録されているかどうかを返します。
-	 * </p>
+	 * ユーザ名をキーに登録されている件数を取得します。
 	 * 
 	 * @param userName
-	 * @return 登録済みの場合はtrue,未登録の場合はfalse
+	 * @return 登録されている件数
 	 */
-	public boolean isRegisterd(String userName);
+	public Integer getUserCount(String userName);
+
+	/**
+	 * ユーザ情報をusersテーブルに追加します。
+	 * 
+	 * @param user
+	 */
+	public void addUser(User user);
 }

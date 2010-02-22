@@ -20,6 +20,7 @@ import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.service.AccountService;
+import org.yukung.tasklet.util.PasswordUtil;
 
 /**
  * <p>
@@ -43,9 +44,12 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Override
 	public void register(User user) throws TaskletException {
-		// TODO 自動生成されたメソッド・スタブ
+		// ユーザID重複チェック
 		checkForDuplicate(user.getUserName());
-
+		// パスワードの暗号化
+		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
+		// ユーザ登録
+		userDao.addUser(user);
 	}
 
 	/**
@@ -54,10 +58,14 @@ public class AccountServiceImpl implements AccountService {
 	 * </p>
 	 * 
 	 * @param userName
+	 * @throws TaskletException
+	 *             ユーザ名重複エラー
 	 */
-	private void checkForDuplicate(String userName) {
-		// TODO 自動生成されたメソッド・スタブ
-
+	private void checkForDuplicate(String userName) throws TaskletException {
+		Integer count = userDao.getUserCount(userName);
+		if (count.intValue() > 0) {
+			throw new TaskletException("errors.already");
+		}
 	}
 
 }
