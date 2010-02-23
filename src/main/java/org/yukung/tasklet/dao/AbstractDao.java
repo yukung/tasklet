@@ -74,6 +74,7 @@ public abstract class AbstractDao {
 	 * <p>
 	 * コンストラクタ。<br>
 	 * Connectionパラメータを使用しないメソッドでは、このDataSourceから接続を取り出します。
+	 * </p>
 	 * 
 	 * @param ds
 	 *            接続を取り出すためのデータソース
