@@ -123,5 +123,4 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
-
 }

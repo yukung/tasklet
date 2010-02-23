@@ -49,7 +49,9 @@ public interface UserDao {
 	public User findUserByUserNameAndPassword(String userName, String password);
 
 	/**
+	 * <p>
 	 * ユーザ名をキーに登録されている件数を取得します。
+	 * </p>
 	 * 
 	 * @param userName
 	 * @return 登録されている件数
@@ -57,7 +59,9 @@ public interface UserDao {
 	public Integer getUserCount(String userName);
 
 	/**
+	 * <p>
 	 * ユーザ情報をusersテーブルに追加します。
+	 * </p>
 	 * 
 	 * @param user
 	 */
