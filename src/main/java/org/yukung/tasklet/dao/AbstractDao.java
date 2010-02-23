@@ -63,7 +63,7 @@ public abstract class AbstractDao {
 	/**
 	 * <p>
 	 * デフォルトコンストラクタ。<br>
-	 * クエリ発行メソッドを呼ぶ際、Connectionをその都度渡す場合はこちらを呼び出してください。
+	 * クエリ発行メソッドを呼ぶ際、Connectionをその都度渡す場合はこちらをサブクラスで呼び出してください。
 	 * </p>
 	 */
 	protected AbstractDao() {
