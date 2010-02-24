@@ -22,8 +22,11 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.RegisterForm;
 import org.yukung.tasklet.service.AccountService;
 import org.yukung.tasklet.service.impl.AccountServiceImpl;
@@ -67,7 +70,15 @@ public class RegisterAction extends AbstractAction {
 		}
 
 		AccountService service = new AccountServiceImpl();
-		service.register(user);
-		return null;
+		try {
+			service.register(user);
+		} catch (TaskletException e) {
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage(e.getMessage());
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+			return mapping.getInputForward();
+		}
+		return mapping.findForward(SUCCESS);
 	}
 }

@@ -117,8 +117,25 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	@Override
 	public void addUser(User user) {
 		String sql = getSQLFromPropertyFile("addUser");
+		Object[] param = { user.getUserName(), user.getEmail(),
+				user.getPassword(), user.getDisplayName() };
 		try {
-			runner.update(sql, user);
+			runner.update(sql, param);
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.UserDao#addDefaultCategory(int)
+	 */
+	@Override
+	public void addDefaultCategory(int userId) {
+		String sql = getSQLFromPropertyFile("addDefaultCategory");
+		try {
+			runner.update(sql, Integer.valueOf(userId));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}

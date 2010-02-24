@@ -46,17 +46,13 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Override
 	public void register(User user) throws TaskletException {
-		// TODO 戻り値はint？（登録して割り振られたユーザIDの方がよい？）
 		// ユーザID重複チェック
 		checkForDuplicate(user.getUserName());
 		// パスワードの暗号化
 		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
 		// ユーザ登録
-		// UserDao#addUserと、UserDao#addDefaultCategoryを処理するロジッククラスを呼んで、
-		// そっちでトランザクション制御する
-		TransactionLogic<User> tx = new UserTransactionLogicImpl(userDao);
+		TransactionLogic<User> tx = new UserTransactionLogicImpl();
 		tx.store(user);
-		// userDao.addUser(user);
 	}
 
 	/**

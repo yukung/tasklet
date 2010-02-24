@@ -70,7 +70,7 @@ public final class DaoFactory {
 	 * 
 	 * @return データソース
 	 */
-	private DataSource getDataSource() {
+	public DataSource getDataSource() {
 		InitialContext context = null;
 		DataSource ds = null;
 		try {

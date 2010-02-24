@@ -15,6 +15,10 @@
  */
 package org.yukung.tasklet.logic.impl;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.DbUtils;
 import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
@@ -42,7 +46,7 @@ public class UserTransactionLogicImpl extends AbstractTransactionLogic
 	 * </p>
 	 */
 	public UserTransactionLogicImpl() {
-		this.userDao = DaoFactory.getInstance().createUserDao();
+		this(DaoFactory.getInstance().createUserDao());
 	}
 
 	/**
@@ -63,11 +67,25 @@ public class UserTransactionLogicImpl extends AbstractTransactionLogic
 	 * @see org.yukung.tasklet.logic.TransactionLogic#store(java.lang.Object)
 	 */
 	@Override
-	public void store(User entity) throws TaskletException {
-		// TODO 自動生成されたメソッド・スタブ
-		// トランザクション.スタート
-		// 更新処理
-		// トランザクション.エンド
+	public void store(User user) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = runner.getDataSource().getConnection();
+			conn.setAutoCommit(false);
+
+			// usersテーブルへデータを追加
+			userDao.addUser(user);
+			// 払い出されたユーザIDを取得
+			int userId = userDao.findUserByUserName(user.getUserName())
+					.getId();
+			// categoriesテーブルへデータを追加
+			userDao.addDefaultCategory(userId);
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 
 	/*

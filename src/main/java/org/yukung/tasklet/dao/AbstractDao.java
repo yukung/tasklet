@@ -35,7 +35,9 @@ import org.yukung.tasklet.exception.DataAccessException;
  */
 public abstract class AbstractDao {
 
-	private static final String SQL_PROPERTY_PATH = "/WEB-INF/classes/sql.properties";
+	// private static final String SQL_PROPERTY_PATH =
+	// "/WEB-INF/classes/sql.properties";
+	private static final String SQL_PROPERTY_PATH = "/sql.properties"; // 開発用
 
 	/** SQLプロパティファイルのsuffix文字列 */
 	private static final String PROPERTY_KEY_SQL = "sqltable.";
