@@ -8,8 +8,8 @@
 <%@ taglib prefix="bean" uri="/tags/struts-bean" %>
 --%>
 <%@ taglib prefix="html" uri="/tags/struts-html" %>
-<!--
+<%--
 <%@ taglib prefix="logic" uri="/tags/struts-logic" %>
 <%@ taglib prefix="nested" uri="/tags/struts-nested" %>
--->
+--%>
 <%@ taglib prefix="tiles" uri="/tags/struts-tiles" %>
