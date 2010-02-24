@@ -38,10 +38,12 @@ public abstract class AbstractAction extends Action {
 
 	private static final Log LOG = LogFactory.getLog(AbstractAction.class);
 
+	/** アクションが成功した場合に使われるforward先の論理名 */
+	public static final String SUCCESS = "success";
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
 		try {
 			return doExecute(mapping, form, request, response);
 		} catch (Exception e) {
