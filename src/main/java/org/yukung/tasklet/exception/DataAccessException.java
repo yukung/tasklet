@@ -26,6 +26,8 @@ package org.yukung.tasklet.exception;
  */
 public class DataAccessException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * <p>
 	 * デフォルトコンストラクタ。

@@ -26,6 +26,8 @@ package org.yukung.tasklet.exception;
  */
 public class TaskletException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * <p>
 	 * デフォルトコンストラクタ。

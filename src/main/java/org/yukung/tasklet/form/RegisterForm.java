@@ -27,6 +27,8 @@ import org.apache.struts.validator.ValidatorForm;
  */
 public class RegisterForm extends ValidatorForm {
 
+	private static final long serialVersionUID = 1L;
+
 	/** ユーザ名 */
 	private String userName;
 
