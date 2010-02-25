@@ -3,18 +3,16 @@
 			<div id="sidebar">
 
 				<h3>ログイン</h3>
-				<%--
-				<html:form action="/index">
+				<html:form action="/login" styleClass="loginform">
 					<ul class="sidemenu">
 						<li>ユーザーID</li>
-						<li><html:text property="userName" styleClass="textbox"/></li>
+						<li><html:text property="userName" styleClass="textbox" /></li>
 						<li>パスワード</li>
 						<li><html:password property="password" styleClass="textbox" redisplay="false" /></li>
 					</ul>
 					<html:submit value="ログイン" styleClass="button" />
-				</html:form>
-				--%>
 				<html:errors />
+				</html:form>
 
 				<h3>新規登録</h3>
 				<p>新規登録は<html:link action="/account">こちら</html:link>から</p>

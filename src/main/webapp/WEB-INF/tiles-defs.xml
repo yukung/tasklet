@@ -32,4 +32,11 @@
 		<put name="main" value="/WEB-INF/jsp/tiles/result.jsp" />
 		<put name="sidebar" value="/WEB-INF/jsp/tiles/registerInfo.jsp" />
 	</definition>
+
+	<definition name="activities" extends="base">
+		<put name="title" value="アクティビティ一覧 - Tasklet" />
+		<put name="main" value="/WEB-INF/jsp/tiles/user/activity.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/actOperation.jsp" />
+	</definition>
+
 </tiles-definitions>

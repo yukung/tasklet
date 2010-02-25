@@ -6,6 +6,8 @@
   <form-beans>
     <!-- ユーザ登録画面 -->
     <form-bean name="registerForm" type="org.yukung.tasklet.form.RegisterForm"/>
+    <!-- ログイン画面 -->
+    <form-bean name="loginForm" type="org.yukung.tasklet.form.LoginForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -22,6 +24,10 @@
     <!-- 画面入力されたユーザ情報を元に、ユーザ登録処理を行う。 -->
     <action path="/register" name="registerForm" type="org.yukung.tasklet.action.RegisterAction" scope="request" validate="true" input="register">
       <forward name="success" path="result"/>
+    </action>
+    <!-- 画面入力されたユーザ名とパスワードからログイン処理を行い、アクティビティ一覧画面に遷移する。 -->
+    <action path="/login" name="loginForm" type="org.yukung.tasklet.action.LoginAction" scope="request" validate="true" input="index">
+      <forward name="success" module="/user" path="activities"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
