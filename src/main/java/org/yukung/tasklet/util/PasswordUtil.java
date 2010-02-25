@@ -34,17 +34,22 @@ public final class PasswordUtil {
 	 * </p>
 	 * 
 	 * @param password
-	 * @return MD5でダイジェストされたパスワード
+	 * @return MD5でダイジェストされたパスワード<br>
+	 *         引数がnullもしくは空文字の場合は空文字を返します。
 	 */
 	public static String encrypt(String password) {
-		MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			throw new DataAccessException(e.getMessage(), e);
+		if (password == null || (password.length() == 0)) {
+			return "";
+		} else {
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				throw new DataAccessException(e.getMessage(), e);
+			}
+			byte[] digest = md.digest(password.getBytes());
+			return toHexString(digest);
 		}
-		byte[] digest = md.digest(password.getBytes());
-		return toHexString(digest);
 	}
 
 	/**
@@ -70,7 +75,7 @@ public final class PasswordUtil {
 
 	/**
 	 * <p>
-	 * コンストラクタ。状態を持つ必要がないユーティリティクラスであるため、インスタンス化不可です。
+	 * コンストラクタ。状態を持つ必要がないユーティリティクラスであるため、インスタンス化できません。
 	 * </p>
 	 */
 	private PasswordUtil() {
