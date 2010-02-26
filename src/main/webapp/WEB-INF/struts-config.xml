@@ -27,7 +27,7 @@
     </action>
     <!-- 画面入力されたユーザ名とパスワードからログイン処理を行い、アクティビティ一覧画面に遷移する。 -->
     <action path="/login" name="loginForm" type="org.yukung.tasklet.action.LoginAction" scope="request" validate="true" input="index">
-      <forward name="success" module="/user" path="activities"/>
+      <forward name="success" module="/user" path="/activities.do"/>
     </action>
     <!-- ログアウト処理を行い、indexページへ遷移する。 -->
     <action path="/logout" type="org.yukung.tasklet.action.LogoutAction">

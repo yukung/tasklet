@@ -10,6 +10,10 @@
   <global-forwards>
   </global-forwards>
   <action-mappings>
+    <!-- セッションのユーザ情報から、アクティビティ一覧を取得して表示する。 -->
+    <action path="/activities" type="org.yukung.tasklet.action.ActivitiesAction">
+      <forward name="success" path="activities"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>

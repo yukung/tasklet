@@ -19,7 +19,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.UserDao;
+import org.yukung.tasklet.dao.impl.ActivityDaoImpl;
 import org.yukung.tasklet.dao.impl.UserDaoImpl;
 import org.yukung.tasklet.exception.DataAccessException;
 
@@ -100,5 +102,16 @@ public final class DaoFactory {
 	 */
 	public UserDao createUserDao() {
 		return new UserDaoImpl(getDataSource());
+	}
+
+	/**
+	 * <p>
+	 * ActivityDaoの実装クラスを生成します。
+	 * </p>
+	 * 
+	 * @return アクティビティ情報DAO実装クラスのインスタンス
+	 */
+	public ActivityDao createActivityDao() {
+		return new ActivityDaoImpl(getDataSource());
 	}
 }

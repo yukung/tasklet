@@ -29,7 +29,7 @@ import org.yukung.tasklet.exception.DataAccessException;
 
 /**
  * <p>
- * ユーザ情報DAOの実装クラスです。
+ * ユーザ情報DAOインタフェースの実装クラスです。
  * </p>
  * 
  * @author yukung
