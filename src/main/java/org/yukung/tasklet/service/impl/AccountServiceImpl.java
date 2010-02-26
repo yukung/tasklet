@@ -71,4 +71,21 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.AccountService#login(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public User login(String userName, String password) {
+		String encryptPass = PasswordUtil.encrypt(password);
+		User user = userDao
+				.findUserByUserNameAndPassword(userName, encryptPass);
+		if (user == null) {
+			user = null;
+		}
+		return user;
+	}
+
 }

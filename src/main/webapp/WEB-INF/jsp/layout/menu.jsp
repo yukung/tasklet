@@ -12,7 +12,7 @@
 				<li><html:link href="#">設定</html:link></li>
 				<li><html:link href="#">ヘルプ</html:link></li>
 				<c:if test="${not empty sessionScope.user}">
-				<li class="last"><html:link action="/index">ログアウト</html:link></li>
+				<li class="last"><html:link action="/logout">ログアウト</html:link></li>
 				</c:if>
 			</ul>
 		</div>

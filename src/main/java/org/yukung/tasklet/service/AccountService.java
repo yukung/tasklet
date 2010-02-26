@@ -38,4 +38,15 @@ public interface AccountService {
 	 *             アプリ例外
 	 */
 	public void register(User user) throws TaskletException;
+
+	/**
+	 * <p>
+	 * ユーザIDとパスワードをキーにログインします。
+	 * </p>
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return ログインユーザーのUserオブジェクト
+	 */
+	public User login(String userName, String password);
 }
