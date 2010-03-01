@@ -21,7 +21,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.ActivityDao;
@@ -86,7 +86,14 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	public List<Activity> findActivitiesByUserId(int userId, int offset,
 			int limit) {
 		String sql = getSQLFromPropertyFile("findActivitiesByUserId");
-		ResultSetHandler<List<Object[]>> rsh = new ArrayListHandler();
-		return runner.query(sql, rsh, params, param);
+		ResultSetHandler<List<Activity>> rsh = new BeanListHandler<Activity>(
+				Activity.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId), Integer
+					.valueOf(userId), Integer.valueOf(offset), Integer
+					.valueOf(limit));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
 	}
 }

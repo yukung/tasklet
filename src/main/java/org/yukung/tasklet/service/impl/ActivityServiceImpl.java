@@ -63,6 +63,7 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activities == null) {
 			activities = new ArrayList<Activity>();
 		}
+		// TODO ここでアクションクラスに渡す表示用オブジェクトをごにょごにょして作る
 		return activities;
 	}
 
