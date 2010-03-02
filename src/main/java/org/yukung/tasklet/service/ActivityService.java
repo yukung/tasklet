@@ -17,7 +17,7 @@ package org.yukung.tasklet.service;
 
 import java.util.List;
 
-import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.dto.ActivityDto;
 
 /**
  * <p>
@@ -45,11 +45,11 @@ public interface ActivityService {
 	 * </p>
 	 * 
 	 * @param userId
-	 * @param offset
-	 *            取得開始ページ
 	 * @param limit
+	 *            取得開始ページ
+	 * @param offset
 	 *            最大取得件数
-	 * @return アクティビティ一覧を格納したList
+	 * @return アクティビティ画面表示DTOを格納したList
 	 */
-	public List<Activity> show(int userId, int offset, int limit);
+	public List<ActivityDto> show(int userId, int limit, int offset);
 }

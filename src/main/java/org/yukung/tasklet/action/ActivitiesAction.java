@@ -27,7 +27,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.service.ActivityService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
@@ -69,9 +69,8 @@ public class ActivitiesAction extends AbstractAction {
 			saveMessages(request, messages);
 		} else {
 			Pager pager = new Pager(count, pageNo, ACTIVITIES_MAX_LIMIT);
-			List<Activity> activities = activityService.show(userId, pager
-					.getOffset(), pager.getLimit());
-
+			List<ActivityDto> activities = activityService.show(userId, pager
+					.getLimit(), pager.getOffset());
 		}
 
 		saveToken(request);

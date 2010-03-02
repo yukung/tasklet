@@ -22,28 +22,27 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
-import org.yukung.tasklet.dao.ActivityDao;
-import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.dao.TaskDao;
+import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
 
 /**
  * <p>
- * アクティビティ情報DAOインタフェースの実装クラスです。
+ * タスク情報DAOインタフェースの実装クラスです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
+public class TaskDaoImpl extends AbstractDao implements TaskDao {
 
 	/**
 	 * <p>
 	 * デフォルトコンストラクタ。
 	 * </p>
 	 */
-	public ActivityDaoImpl() {
+	public TaskDaoImpl() {
 		super();
 	}
 
@@ -55,44 +54,24 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	 * @param ds
 	 *            データソース
 	 */
-	public ActivityDaoImpl(DataSource ds) {
+	public TaskDaoImpl(DataSource ds) {
 		super(ds);
 	}
 
 	/*
 	 * (非 Javadoc)
 	 * 
-	 * @see org.yukung.tasklet.dao.ActivityDao#getCountByUserId(int)
+	 * @see org.yukung.tasklet.dao.TaskDao#findTasksByActivityId(int)
 	 */
 	@Override
-	public long getCountByUserId(int userId) {
-		String sql = getSQLFromPropertyFile("getCountByUserId");
-		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+	public List<Task> findTasksByActivityId(int activityId) {
+		String sql = getSQLFromPropertyFile("findTasksByActivityId");
+		ResultSetHandler<List<Task>> rsh = new BeanListHandler<Task>(Task.class);
 		try {
-			return ((Long) runner.query(sql, rsh, Integer.valueOf(userId)))
-					.longValue();
+			return runner.query(sql, rsh, Integer.valueOf(activityId));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see org.yukung.tasklet.dao.ActivityDao#findActivitiesByUserId(int, int,
-	 * int)
-	 */
-	@Override
-	public List<Activity> findActivitiesByUserId(int userId, int limit,
-			int offset) {
-		String sql = getSQLFromPropertyFile("findActivitiesByUserId");
-		ResultSetHandler<List<Activity>> rsh = new BeanListHandler<Activity>(
-				Activity.class);
-		try {
-			return runner.query(sql, rsh, Integer.valueOf(userId), Integer
-					.valueOf(limit), Integer.valueOf(offset));
-		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
-		}
-	}
 }

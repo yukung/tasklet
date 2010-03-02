@@ -15,11 +15,13 @@
  */
 package org.yukung.tasklet.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.dao.TaskDao;
+import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.factory.ActivityFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.service.ActivityService;
 
@@ -34,8 +36,7 @@ import org.yukung.tasklet.service.ActivityService;
 public class ActivityServiceImpl implements ActivityService {
 
 	/** アクティビティ情報DAO */
-	private ActivityDao activityDao = DaoFactory.getInstance()
-			.createActivityDao();
+	private ActivityDao activityDao = DaoFactory.getInstance().createActivityDao();
 
 	/** タスク情報DAO */
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
@@ -56,13 +57,10 @@ public class ActivityServiceImpl implements ActivityService {
 	 * @see org.yukung.tasklet.service.ActivityService#show(int, int, int)
 	 */
 	@Override
-	public List<Activity> show(int userId, int offset, int limit) {
-		List<Activity> activities = activityDao.findActivitiesByUserId(userId,
-				offset, limit);
-		// アクティビティが1件も登録されていない場合、空のListを返す
-		if (activities == null) {
-			activities = new ArrayList<Activity>();
-		}
+	public List<ActivityDto> show(int userId, int limit, int offset) {
+		ActivityFactory activityFactory = new ActivityFactory();
+		List<Activity> activities = activityFactory.getActivitiesByUserId(userId, limit, offset);
+
 		// TODO ここでアクションクラスに渡す表示用オブジェクトをごにょごにょして作る
 		return activities;
 	}

@@ -80,12 +80,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public User login(String userName, String password) {
 		String encryptPass = PasswordUtil.encrypt(password);
-		User user = userDao
-				.findUserByUserNameAndPassword(userName, encryptPass);
-		if (user == null) {
-			user = null;
-		}
-		return user;
+		return userDao.findUserByUserNameAndPassword(userName, encryptPass);
 	}
 
 }

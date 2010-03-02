@@ -17,40 +17,25 @@ package org.yukung.tasklet.dao;
 
 import java.util.List;
 
-import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Task;
 
 /**
  * <p>
- * アクティビティ情報DAOインタフェースです。
+ * タスク情報DAOインタフェースです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public interface ActivityDao {
+public interface TaskDao {
 
 	/**
 	 * <p>
-	 * 引数のユーザIDに紐づくアクティビティの件数を取得します。
+	 * アクティビティIDをキーにタスクの一覧を取得します。
 	 * </p>
 	 * 
-	 * @param userId
-	 * @return アクティビティの件数
+	 * @param activityId
+	 * @return タスク一覧を格納したList
 	 */
-	public long getCountByUserId(int userId);
-
-	/**
-	 * <p>
-	 * ユーザIDをキーにアクティビティの一覧を取得します。
-	 * </p>
-	 * 
-	 * @param userId
-	 * @param limit
-	 *            取得開始ページ
-	 * @param offset
-	 *            最大取得件数
-	 * @return アクティビティ一覧を格納したList
-	 */
-	public List<Activity> findActivitiesByUserId(int userId, int limit,
-			int offset);
+	public List<Task> findTasksByActivityId(int activityId);
 }

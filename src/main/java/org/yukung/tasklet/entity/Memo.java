@@ -16,35 +16,28 @@
 package org.yukung.tasklet.entity;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * <p>
- * アクティビティ情報を表すBeanクラスです。
+ * メモ情報を表すBeanクラスです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class Activity {
+public class Memo {
 
 	/** ID */
 	private int id;
 
-	/** アクティビティ名 */
-	private String title;
+	/** タスクID */
+	private int taskId;
 
 	/** ソート順 */
 	private int seq;
 
-	/** 未完了フラグ */
-	private boolean isIncomplete;
-
-	/** カテゴリ */
-	private Category category;
-
-	/** タスク一覧 */
-	private List<Task> tasks;
+	/** 内容 */
+	private String contents;
 
 	/** 作成タイムスタンプ */
 	private Timestamp createdOn;
@@ -72,22 +65,22 @@ public class Activity {
 	}
 
 	/**
-	 * アクティビティ名を取得します。
+	 * タスクIDを取得します。
 	 * 
-	 * @return アクティビティ名
+	 * @return タスクID
 	 */
-	public String getTitle() {
-		return title;
+	public int getTaskId() {
+		return taskId;
 	}
 
 	/**
-	 * アクティビティ名を設定します。
+	 * タスクIDを設定します。
 	 * 
-	 * @param title
-	 *            アクティビティ名
+	 * @param taskId
+	 *            タスクID
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
 
 	/**
@@ -110,60 +103,22 @@ public class Activity {
 	}
 
 	/**
-	 * 未完了フラグを取得します。
+	 * 内容を取得します。
 	 * 
-	 * @return 未完了フラグ
+	 * @return 内容
 	 */
-	public boolean isIncomplete() {
-		return isIncomplete;
+	public String getContents() {
+		return contents;
 	}
 
 	/**
-	 * 未完了フラグを設定します。
+	 * 内容を設定します。
 	 * 
-	 * @param isIncomplete
-	 *            未完了フラグ
+	 * @param contents
+	 *            内容
 	 */
-	public void setIncomplete(boolean isIncomplete) {
-		this.isIncomplete = isIncomplete;
-	}
-
-	/**
-	 * カテゴリを取得します。
-	 * 
-	 * @return カテゴリ
-	 */
-	public Category getCategory() {
-		return category;
-	}
-
-	/**
-	 * カテゴリを設定します。
-	 * 
-	 * @param category
-	 *            カテゴリ
-	 */
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	/**
-	 * タスク一覧を取得します。
-	 * 
-	 * @return タスク一覧
-	 */
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	/**
-	 * タスク一覧を設定します。
-	 * 
-	 * @param tasks
-	 *            タスク一覧
-	 */
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	/**
