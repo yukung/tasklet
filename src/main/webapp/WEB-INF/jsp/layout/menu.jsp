@@ -4,10 +4,10 @@
 		<div id="menu">
 			<ul>
 				<c:if test="${empty sessionScope.user}">
-				<li id="current"><html:link action="/index">ホーム</html:link></li>
+				<li id="current"><html:link module="/" action="/index">ホーム</html:link></li>
 				</c:if>
 				<c:if test="${not empty sessionScope.user}">
-				<li id="current"><html:link action="/index">ホーム</html:link></li>
+				<li id="current"><html:link action="/activities">ホーム</html:link></li>
 				</c:if>
 				<li><html:link href="#">設定</html:link></li>
 				<li><html:link href="#">ヘルプ</html:link></li>
