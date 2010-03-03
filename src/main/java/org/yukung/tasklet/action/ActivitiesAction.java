@@ -71,6 +71,8 @@ public class ActivitiesAction extends AbstractAction {
 			Pager pager = new Pager(count, pageNo, ACTIVITIES_MAX_LIMIT);
 			List<ActivityDto> activities = activityService.show(userId, pager
 					.getLimit(), pager.getOffset());
+			request.setAttribute("activities", activities);
+			request.setAttribute("pager", pager);
 		}
 
 		saveToken(request);

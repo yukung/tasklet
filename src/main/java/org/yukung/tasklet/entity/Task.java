@@ -36,7 +36,7 @@ public class Task {
 	private int id;
 
 	/** アクティビティID */
-	private int activity_id;
+	private int activityId;
 
 	/** タスク名 */
 	private String title;
@@ -92,18 +92,18 @@ public class Task {
 	 * 
 	 * @return アクティビティID
 	 */
-	public int getActivity_id() {
-		return activity_id;
+	public int getActivityId() {
+		return activityId;
 	}
 
 	/**
 	 * アクティビティIDを設定します。
 	 * 
-	 * @param activity_id
+	 * @param activityId
 	 *            アクティビティID
 	 */
-	public void setActivity_id(int activity_id) {
-		this.activity_id = activity_id;
+	public void setActivityId(int activityId) {
+		this.activityId = activityId;
 	}
 
 	/**

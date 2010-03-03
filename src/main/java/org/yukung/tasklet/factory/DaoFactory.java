@@ -20,9 +20,11 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.dao.impl.ActivityDaoImpl;
+import org.yukung.tasklet.dao.impl.CategoryDaoImpl;
 import org.yukung.tasklet.dao.impl.TaskDaoImpl;
 import org.yukung.tasklet.dao.impl.UserDaoImpl;
 import org.yukung.tasklet.exception.DataAccessException;
@@ -126,5 +128,16 @@ public final class DaoFactory {
 	 */
 	public TaskDao createTaskDao() {
 		return new TaskDaoImpl(getDataSource());
+	}
+
+	/**
+	 * <p>
+	 * CategoryDaoの実装クラスを生成します。
+	 * </p>
+	 * 
+	 * @return カテゴリ情報DAO実装クラスのインスタンス
+	 */
+	public CategoryDao createCategoryDao() {
+		return new CategoryDaoImpl(getDataSource());
 	}
 }

@@ -25,9 +25,223 @@ package org.yukung.tasklet.dto;
  */
 public class ActivityDto {
 
+	/** アクティビティID */
 	private String id;
 
+	/** アクティビティ名 */
 	private String title;
 
-	private String category;
+	/** カテゴリ名 */
+	private String categoryName;
+
+	/** 未完了フラグ */
+	private boolean isIncomplete;
+
+	/** 達成率 */
+	private String achievementRatio;
+
+	/** タスク残数 */
+	private String remainingAmount;
+
+	/** 期限超過タスク数 */
+	private String overdue;
+
+	/** 予実比 */
+	private String ratioOfEstimateAndActual;
+
+	/** 見積時間合計 */
+	private String estimatedTimeTotal;
+
+	/** 実績時間合計 */
+	private String actualTimeTotal;
+
+	/**
+	 * アクティビティIDを取得します。
+	 * 
+	 * @return アクティビティID
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * アクティビティIDを設定します。
+	 * 
+	 * @param id
+	 *            アクティビティID
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * アクティビティ名を取得します。
+	 * 
+	 * @return アクティビティ名
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * アクティビティ名を設定します。
+	 * 
+	 * @param title
+	 *            アクティビティ名
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	/**
+	 * カテゴリ名を取得します。
+	 * 
+	 * @return カテゴリ名
+	 */
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	/**
+	 * カテゴリ名を設定します。
+	 * 
+	 * @param categoryName
+	 *            カテゴリ名
+	 */
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	/**
+	 * 未完了フラグを取得します。
+	 * 
+	 * @return 未完了フラグ
+	 */
+	public boolean isIncomplete() {
+		return isIncomplete;
+	}
+
+	/**
+	 * 未完了フラグを設定します。
+	 * 
+	 * @param isIncomplete
+	 *            未完了フラグ
+	 */
+	public void setIncomplete(boolean isIncomplete) {
+		this.isIncomplete = isIncomplete;
+	}
+
+	/**
+	 * 達成率を取得します。
+	 * 
+	 * @return 達成率
+	 */
+	public String getAchievementRatio() {
+		return achievementRatio;
+	}
+
+	/**
+	 * 達成率を設定します。
+	 * 
+	 * @param achievementRatio
+	 *            達成率
+	 */
+	public void setAchievementRatio(String achievementRatio) {
+		this.achievementRatio = achievementRatio;
+	}
+
+	/**
+	 * タスク残数を取得します。
+	 * 
+	 * @return タスク残数
+	 */
+	public String getRemainingAmount() {
+		return remainingAmount;
+	}
+
+	/**
+	 * タスク残数を設定します。
+	 * 
+	 * @param remainingAmount
+	 *            タスク残数
+	 */
+	public void setRemainingAmount(String remainingAmount) {
+		this.remainingAmount = remainingAmount;
+	}
+
+	/**
+	 * 期限超過タスク数を取得します。
+	 * 
+	 * @return 期限超過タスク数
+	 */
+	public String getOverdue() {
+		return overdue;
+	}
+
+	/**
+	 * 期限超過タスク数を設定します。
+	 * 
+	 * @param overdue
+	 *            期限超過タスク数
+	 */
+	public void setOverdue(String overdue) {
+		this.overdue = overdue;
+	}
+
+	/**
+	 * 予実比を取得します。
+	 * 
+	 * @return 予実比
+	 */
+	public String getRatioOfEstimateAndActual() {
+		return ratioOfEstimateAndActual;
+	}
+
+	/**
+	 * 予実比を設定します。
+	 * 
+	 * @param ratioOfEstimateAndActual
+	 *            予実比
+	 */
+	public void setRatioOfEstimateAndActual(String ratioOfEstimateAndActual) {
+		this.ratioOfEstimateAndActual = ratioOfEstimateAndActual;
+	}
+
+	/**
+	 * 見積時間合計を取得します。
+	 * 
+	 * @return 見積時間合計
+	 */
+	public String getEstimatedTimeTotal() {
+		return estimatedTimeTotal;
+	}
+
+	/**
+	 * 見積時間合計を設定します。
+	 * 
+	 * @param estimatedTimeTotal
+	 *            見積時間合計
+	 */
+	public void setEstimatedTimeTotal(String estimatedTimeTotal) {
+		this.estimatedTimeTotal = estimatedTimeTotal;
+	}
+
+	/**
+	 * 実績時間合計を取得します。
+	 * 
+	 * @return 実績時間合計
+	 */
+	public String getActualTimeTotal() {
+		return actualTimeTotal;
+	}
+
+	/**
+	 * 実績時間合計を設定します。
+	 * 
+	 * @param actualTimeTotal
+	 *            実績時間合計
+	 */
+	public void setActualTimeTotal(String actualTimeTotal) {
+		this.actualTimeTotal = actualTimeTotal;
+	}
 }

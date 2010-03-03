@@ -69,8 +69,8 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		String sql = getSQLFromPropertyFile("getCountByUserId");
 		ResultSetHandler<Object> rsh = new ScalarHandler(1);
 		try {
-			return ((Long) runner.query(sql, rsh, Integer.valueOf(userId)))
-					.longValue();
+			Object result = runner.query(sql, rsh, Integer.valueOf(userId));
+			return Long.parseLong(String.valueOf(result));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}

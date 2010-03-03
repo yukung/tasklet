@@ -18,8 +18,10 @@ package org.yukung.tasklet.factory;
 import java.util.List;
 
 import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.entity.Task;
 
 /**
@@ -36,6 +38,9 @@ public class ActivityFactory {
 			.createActivityDao();
 
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
+
+	private CategoryDao categoryDao = DaoFactory.getInstance()
+			.createCategoryDao();
 
 	/**
 	 * <p>
@@ -55,6 +60,12 @@ public class ActivityFactory {
 		// アクティビティが存在しない場合はnullを返す
 		if (activities == null) {
 			return null;
+		}
+
+		for (Activity activity : activities) {
+			Category category = categoryDao.findCategoryByActivityId(activity
+					.getId());
+			activity.setCategory(category);
 		}
 
 		for (Activity activity : activities) {

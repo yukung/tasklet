@@ -30,6 +30,14 @@ public final class PasswordUtil {
 
 	/**
 	 * <p>
+	 * コンストラクタ。状態を持つ必要がないユーティリティクラスであるため、インスタンス化できません。
+	 * </p>
+	 */
+	private PasswordUtil() {
+	}
+
+	/**
+	 * <p>
 	 * パスワードを暗号化します。
 	 * </p>
 	 * 
@@ -71,13 +79,5 @@ public final class PasswordUtil {
 			sb.append(Integer.toHexString(n).toUpperCase());
 		}
 		return sb.toString();
-	}
-
-	/**
-	 * <p>
-	 * コンストラクタ。状態を持つ必要がないユーティリティクラスであるため、インスタンス化できません。
-	 * </p>
-	 */
-	private PasswordUtil() {
 	}
 }
