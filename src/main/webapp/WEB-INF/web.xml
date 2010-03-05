@@ -16,11 +16,28 @@
     </init-param>
   </filter>
 
+  <filter>
+    <description>セッション中にログインユーザのUserオブジェクトが存在するかどうかをチェックする。</description>
+    <display-name>AuthFilter</display-name>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>org.yukung.tasklet.filter.AuthFilter</filter-class>
+  </filter>
+
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/user/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <session-config>
+    <session-timeout>1</session-timeout>
+  </session-config>
 
   <servlet>
     <servlet-name>action</servlet-name>
