@@ -37,7 +37,7 @@ public interface ActivityDao {
 	 * @param userId
 	 * @return アクティビティの件数
 	 */
-	public long getCountByUserId(int userId);
+	public Long getCountByUserId(int userId);
 
 	/**
 	 * <p>
@@ -53,4 +53,23 @@ public interface ActivityDao {
 	 */
 	public List<Activity> findActivitiesByUserId(int userId, int limit,
 			int offset);
+
+	/**
+	 * <p>
+	 * 新規アクティビティを追加します。
+	 * </p>
+	 * 
+	 * @param activity
+	 */
+	public void addActivities(Activity activity);
+
+	/**
+	 * <p>
+	 * ユーザIDをキーにアクティビティのソート順の最大値を取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 * @return アクティビティのソート順最大値
+	 */
+	public Integer getMaxSeqOfActivities(int userId);
 }

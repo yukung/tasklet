@@ -4,6 +4,8 @@
   <data-sources>
   </data-sources>
   <form-beans>
+    <!-- アクティビティ追加用 -->
+    <form-bean name="addActivityForm" type="org.yukung.tasklet.form.AddActivityForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -17,6 +19,10 @@
     <!-- ログアウト処理を行い、indexページへ遷移する。 -->
     <action path="/logout" type="org.yukung.tasklet.action.LogoutAction">
       <forward name="success" module="/" path="/index.do"/>
+    </action>
+    <!-- 画面入力されたアクティビティ名を元に、アクティビティ登録処理を行う。 -->
+    <action path="/addActivity" name="addActivityForm" type="org.yukung.tasklet.action.AddActivityAction" scope="request" validate="true" input="activities">
+      <forward name="success" path="activities"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

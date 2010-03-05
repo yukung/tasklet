@@ -65,12 +65,11 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	 * @see org.yukung.tasklet.dao.ActivityDao#getCountByUserId(int)
 	 */
 	@Override
-	public long getCountByUserId(int userId) {
+	public Long getCountByUserId(int userId) {
 		String sql = getSQLFromPropertyFile("getCountByUserId");
 		ResultSetHandler<Object> rsh = new ScalarHandler(1);
 		try {
-			Object result = runner.query(sql, rsh, Integer.valueOf(userId));
-			return Long.parseLong(String.valueOf(result));
+			return (Long) runner.query(sql, rsh, Integer.valueOf(userId));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -91,6 +90,39 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		try {
 			return runner.query(sql, rsh, Integer.valueOf(userId), Integer
 					.valueOf(limit), Integer.valueOf(offset));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#addActivities(org.yukung.tasklet.entity
+	 * .Activity)
+	 */
+	@Override
+	public void addActivities(Activity activity) {
+		String sql = getSQLFromPropertyFile("addActivities");
+		try {
+			runner.update(sql, activity.getTitle());
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getMaxSeqOfActivities(int)
+	 */
+	@Override
+	public Integer getMaxSeqOfActivities(int userId) {
+		String sql = getSQLFromPropertyFile("getMaxSeqOfActivities");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner.query(sql, rsh, Integer.valueOf(userId));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}

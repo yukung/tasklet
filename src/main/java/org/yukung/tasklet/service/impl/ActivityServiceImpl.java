@@ -51,7 +51,7 @@ public class ActivityServiceImpl implements ActivityService {
 	 */
 	@Override
 	public long getCount(int userId) {
-		return activityDao.getCountByUserId(userId);
+		return activityDao.getCountByUserId(userId).longValue();
 	}
 
 	/*
@@ -71,4 +71,33 @@ public class ActivityServiceImpl implements ActivityService {
 		return DtoConverter.convert(activities);
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.ActivityService#add(org.yukung.tasklet.entity
+	 * .Activity, int)
+	 */
+	@Override
+	public void add(Activity activity, int userId) {
+		// アクティビティのソート順を取得
+		int count = getSeq(userId);
+		activity.setSeq(count);
+	}
+
+	/**
+	 * <p>
+	 * ユーザIDに紐づくアクティビティの最新順を取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 * @return アクティビティのソート順最大値
+	 */
+	private int getSeq(int userId) {
+		int count = activityDao.getMaxSeqOfActivities(userId);
+		if (count > 0) {
+			count++;
+		}
+		return count;
+	}
 }

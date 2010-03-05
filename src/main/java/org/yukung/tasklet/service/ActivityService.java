@@ -18,6 +18,7 @@ package org.yukung.tasklet.service;
 import java.util.List;
 
 import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.entity.Activity;
 
 /**
  * <p>
@@ -52,4 +53,16 @@ public interface ActivityService {
 	 * @return アクティビティ画面表示DTOを格納したList
 	 */
 	public List<ActivityDto> show(int userId, int limit, int offset);
+
+	/**
+	 * <p>
+	 * 新規アクティビティを追加します。
+	 * </p>
+	 * 
+	 * @param activity
+	 *            追加するアクティビティ情報のEntity
+	 * @param userId
+	 *            ユーザID
+	 */
+	public void add(Activity activity, int userId);
 }

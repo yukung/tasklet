@@ -4,9 +4,9 @@
   <data-sources>
   </data-sources>
   <form-beans>
-    <!-- ユーザ登録画面 -->
+    <!-- ユーザ登録用 -->
     <form-bean name="registerForm" type="org.yukung.tasklet.form.RegisterForm"/>
-    <!-- ログイン画面 -->
+    <!-- ログイン用 -->
     <form-bean name="loginForm" type="org.yukung.tasklet.form.LoginForm"/>
   </form-beans>
   <global-exceptions>
