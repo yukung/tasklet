@@ -77,7 +77,6 @@ public final class CalculateUtil {
 	 * @return タスク残数
 	 */
 	public static String calcRemainingAmount(List<Task> tasks) {
-		// TODO 自動生成されたメソッド・スタブ
 		int complete = 0;
 		int amount = tasks.size();
 		for (Task task : tasks) {
@@ -98,7 +97,6 @@ public final class CalculateUtil {
 	 * @return 期限超過タスク数
 	 */
 	public static String calcOverdue(List<Task> tasks) {
-		// TODO 自動生成されたメソッド・スタブ
 		int amount = 0;
 		Calendar today = Calendar.getInstance();
 		for (Task task : tasks) {
