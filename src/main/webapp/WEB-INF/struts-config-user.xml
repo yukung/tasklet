@@ -14,6 +14,10 @@
     <action path="/activities" type="org.yukung.tasklet.action.ActivitiesAction">
       <forward name="success" path="activities"/>
     </action>
+    <!-- ログアウト処理を行い、indexページへ遷移する。 -->
+    <action path="/logout" type="org.yukung.tasklet.action.LogoutAction">
+      <forward name="success" module="/" path="/index.do"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>

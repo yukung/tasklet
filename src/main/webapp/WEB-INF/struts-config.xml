@@ -29,10 +29,6 @@
     <action path="/login" name="loginForm" type="org.yukung.tasklet.action.LoginAction" scope="request" validate="true" input="index">
       <forward name="success" module="/user" path="/activities.do"/>
     </action>
-    <!-- ログアウト処理を行い、indexページへ遷移する。 -->
-    <action path="/logout" type="org.yukung.tasklet.action.LogoutAction">
-      <forward name="success" path="/index.do"/>
-    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>

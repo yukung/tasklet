@@ -6,7 +6,7 @@
 		<meta name="Description" content="あなたのタスク管理をもっと簡単にします。シンプルなToDo管理ツールです。" />
 		<meta name="Keywords" content="task, ToDo, GTD, simple" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/tasklet/css/style.css" type="text/css" />
 		<title><tiles:getAsString name="title" /></title>
 	</head>
 
