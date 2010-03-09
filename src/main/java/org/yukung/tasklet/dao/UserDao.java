@@ -66,14 +66,4 @@ public interface UserDao {
 	 * @param user
 	 */
 	public void addUser(User user);
-
-	/**
-	 * <p>
-	 * カテゴリ「未分類」をcategoriesテーブルに登録します。
-	 * </p>
-	 * 
-	 * @param userId
-	 *            DBから払い出されたユーザID
-	 */
-	public void addDefaultCategory(int userId);
 }

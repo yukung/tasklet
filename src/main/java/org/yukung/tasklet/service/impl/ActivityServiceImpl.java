@@ -94,7 +94,7 @@ public class ActivityServiceImpl implements ActivityService {
 	 * @return アクティビティのソート順最大値
 	 */
 	private int getSeq(int userId) {
-		int count = activityDao.getMaxSeqOfActivities(userId);
+		int count = activityDao.getMaxSeqOfActivities(userId).intValue();
 		if (count > 0) {
 			count++;
 		}

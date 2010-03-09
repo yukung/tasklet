@@ -29,6 +29,16 @@ public interface CategoryDao {
 
 	/**
 	 * <p>
+	 * カテゴリ「未分類」をcategoriesテーブルに登録します。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            DBから払い出されたユーザID
+	 */
+	public void addDefaultCategory(int userId);
+
+	/**
+	 * <p>
 	 * 引数のアクティビティIDに紐づくカテゴリを取得します。
 	 * </p>
 	 * 
