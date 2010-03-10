@@ -19,12 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Category;
+import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.ActivityFactory;
 import org.yukung.tasklet.factory.DaoFactory;
+import org.yukung.tasklet.logic.ActivityTxLogic;
 import org.yukung.tasklet.service.ActivityService;
 
 /**
@@ -40,6 +44,10 @@ public class ActivityServiceImpl implements ActivityService {
 	/** アクティビティ情報DAO */
 	private ActivityDao activityDao = DaoFactory.getInstance()
 			.createActivityDao();
+
+	/** カテゴリ情報DAO */
+	private CategoryDao categoryDao = DaoFactory.getInstance()
+			.createCategoryDao();
 
 	/** タスク情報DAO */
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
@@ -79,10 +87,16 @@ public class ActivityServiceImpl implements ActivityService {
 	 * .Activity, int)
 	 */
 	@Override
-	public void add(Activity activity, int userId) {
+	public void add(Activity activity, int userId) throws TaskletException {
 		// アクティビティのソート順を取得
 		int count = getSeq(userId);
 		activity.setSeq(count);
+		// デフォルトカテゴリの取得
+		Category category = categoryDao.getDefaultCategory(userId);
+		activity.setCategory(category);
+		// アクティビティ追加
+		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
+		tx.add(activity, userId);
 	}
 
 	/**
@@ -94,10 +108,10 @@ public class ActivityServiceImpl implements ActivityService {
 	 * @return アクティビティのソート順最大値
 	 */
 	private int getSeq(int userId) {
-		int count = activityDao.getMaxSeqOfActivities(userId).intValue();
-		if (count > 0) {
-			count++;
+		Integer count = activityDao.getMaxSeqOfActivities(userId);
+		if (count == null) {
+			return 0;
 		}
-		return count;
+		return count.intValue();
 	}
 }

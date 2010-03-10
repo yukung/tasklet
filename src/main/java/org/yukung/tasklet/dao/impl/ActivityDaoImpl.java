@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.dao.impl;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -69,7 +70,9 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		String sql = getSQLFromPropertyFile("getCountByUserId");
 		ResultSetHandler<Object> rsh = new ScalarHandler(1);
 		try {
-			return (Long) runner.query(sql, rsh, Integer.valueOf(userId));
+			Integer count = (Integer) runner.query(sql, rsh, Integer
+					.valueOf(userId));
+			return Long.valueOf(count.longValue());
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -98,18 +101,16 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	/*
 	 * (非 Javadoc)
 	 * 
-	 * @see
-	 * org.yukung.tasklet.dao.ActivityDao#addActivities(org.yukung.tasklet.entity
-	 * .Activity)
+	 * @seeorg.yukung.tasklet.dao.ActivityDao#addActivityToActivities(java.sql.
+	 * Connection, org.yukung.tasklet.entity.Activity)
 	 */
 	@Override
-	public void addActivities(Activity activity) {
-		String sql = getSQLFromPropertyFile("addActivities");
-		try {
-			runner.update(sql, activity.getTitle());
-		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
-		}
+	public void addActivityToActivities(Connection conn, Activity activity)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("addActivityToActivities");
+		Object[] params = { activity.getTitle(),
+				Integer.valueOf(activity.getSeq()) };
+		runner.update(conn, sql, params);
 	}
 
 	/*
@@ -126,5 +127,38 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getLastInsertId(java.lang.String)
+	 */
+	@Override
+	public Integer getLastInsertId(String title) {
+		String sql = getSQLFromPropertyFile("getLastInsertId");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner.query(sql, rsh, title);
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#addActivityToIndexes(java.sql.Connection
+	 * , org.yukung.tasklet.entity.Activity, int)
+	 */
+	@Override
+	public void addActivityToIndexes(Connection conn, Activity activity,
+			int userId) throws SQLException {
+		String sql = getSQLFromPropertyFile("addActivityToIndexes");
+		Object[] params = { Integer.valueOf(userId),
+				Integer.valueOf(activity.getCategory().getId()),
+				Integer.valueOf(activity.getId()) };
+		runner.update(conn, sql, params);
 	}
 }

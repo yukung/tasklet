@@ -19,28 +19,24 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.DbUtils;
-import org.yukung.tasklet.dao.CategoryDao;
-import org.yukung.tasklet.dao.UserDao;
-import org.yukung.tasklet.entity.User;
+import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
 
 /**
  * <p>
- * ユーザーアカウント関連のトランザクション単位を規定するクラスです。<br>
+ * アクティビティ関連のトランザクション単位を規定するクラスです。<br>
  * 1メソッドが1トランザクションを表現します。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class AccountTxLogic {
+public class ActivityTxLogic {
 
-	/** ユーザ情報DAO */
-	private UserDao userDao;
-
-	/** カテゴリ情報DAO */
-	private CategoryDao categoryDao;
+	/** アクティビティ情報DAO */
+	private ActivityDao activityDao;
 
 	/**
 	 * <p>
@@ -51,9 +47,8 @@ public class AccountTxLogic {
 	 * 極力Service自身が持つDAOを渡す形で利用してください。
 	 * </p>
 	 */
-	public AccountTxLogic() {
-		this(DaoFactory.getInstance().createUserDao(), DaoFactory.getInstance()
-				.createCategoryDao());
+	public ActivityTxLogic() {
+		this(DaoFactory.getInstance().createActivityDao());
 	}
 
 	/**
@@ -61,41 +56,42 @@ public class AccountTxLogic {
 	 * コンストラクタ。
 	 * </p>
 	 * 
-	 * @param userDao
-	 * @param categoryDao
+	 * @param activityDao
 	 */
-	public AccountTxLogic(UserDao userDao, CategoryDao categoryDao) {
-		this.userDao = userDao;
-		this.categoryDao = categoryDao;
+	public ActivityTxLogic(ActivityDao activityDao) {
+		this.activityDao = activityDao;
 	}
 
 	/**
 	 * <p>
-	 * ユーザ登録処理を行います。
+	 * 新規アクティビティを追加します。
 	 * </p>
 	 * 
-	 * @param user
-	 *            ユーザ情報Entity
+	 * @param activity
+	 *            アクティビティ情報のEntity
+	 * @param userId
 	 * @throws TaskletException
 	 *             DB更新時のエラー
 	 */
-	public void register(User user) throws TaskletException {
+	public void add(Activity activity, int userId) throws TaskletException {
 		Connection conn = null;
 		try {
 			conn = DaoFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
 
-			// usersテーブルへユーザを追加
-			userDao.addUser(conn, user);
-			// 払い出されたユーザIDを取得
-			int userId = userDao.findUserByUserName(user.getUserName()).getId();
-			// categoriesテーブルへデフォルトのカテゴリを追加
-			categoryDao.addDefaultCategory(conn, userId);
+			// activitiesテーブルへアクティビティを追加
+			activityDao.addActivityToActivities(conn, activity);
+			// 払い出されたアクティビティIDを取得
+			activity.setId(activityDao.getLastInsertId(activity.getTitle())
+					.intValue());
+			// indexesテーブルへ関連を追加
+			activityDao.addActivityToIndexes(conn, activity, userId);
 
 			DbUtils.commitAndCloseQuietly(conn);
 		} catch (SQLException e) {
 			DbUtils.rollbackAndCloseQuietly(conn);
 			throw new TaskletException(e.getMessage(), e);
 		}
+
 	}
 }

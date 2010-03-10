@@ -54,4 +54,14 @@ public interface CategoryDao {
 	 * @return カテゴリ情報
 	 */
 	public Category findCategoryByActivityId(int activityId);
+
+	/**
+	 * <p>
+	 * デフォルトのカテゴリ情報を取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 * @return カテゴリ情報
+	 */
+	public Category getDefaultCategory(int userId);
 }

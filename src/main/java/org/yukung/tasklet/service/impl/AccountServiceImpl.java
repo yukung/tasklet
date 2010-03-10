@@ -70,9 +70,10 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	private void checkForDuplicate(String userName) throws TaskletException {
 		int count = userDao.getUserCount(userName).intValue();
-		if (count > 0) {
+		if (count == 0) {
 			throw new TaskletException("errors.already");
 		}
+
 	}
 
 	/*

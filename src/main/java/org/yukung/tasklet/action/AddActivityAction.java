@@ -22,9 +22,12 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.AddActivityForm;
 import org.yukung.tasklet.service.ActivityService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
@@ -66,8 +69,16 @@ public class AddActivityAction extends AbstractAction {
 		User user = (User) request.getSession().getAttribute("user");
 		int userId = user.getId();
 		ActivityService activityService = new ActivityServiceImpl();
-		activityService.add(activity, userId);
-		return null;
+		try {
+			activityService.add(activity, userId);
+		} catch (TaskletException e) {
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage(e.getMessage());
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+			return mapping.getInputForward();
+		}
+		return mapping.findForward(SUCCESS);
 	}
 
 }

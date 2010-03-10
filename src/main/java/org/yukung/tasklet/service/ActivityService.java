@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -60,9 +61,11 @@ public interface ActivityService {
 	 * </p>
 	 * 
 	 * @param activity
-	 *            追加するアクティビティ情報のEntity
+	 *            アクティビティ情報Entity
 	 * @param userId
 	 *            ユーザID
+	 * @throws TaskletException
+	 *             DB更新時のエラー
 	 */
-	public void add(Activity activity, int userId);
+	public void add(Activity activity, int userId) throws TaskletException;
 }

@@ -15,6 +15,8 @@
  */
 package org.yukung.tasklet.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.yukung.tasklet.entity.Activity;
@@ -36,6 +38,10 @@ public interface ActivityDao {
 	 * 
 	 * @param userId
 	 * @return アクティビティの件数
+	 *         <p>
+	 *         見つからない場合は0を返します。<br>
+	 *         COUNT文のため、nullを考慮する必要はありません。
+	 *         </p>
 	 */
 	public Long getCountByUserId(int userId);
 
@@ -59,9 +65,15 @@ public interface ActivityDao {
 	 * 新規アクティビティを追加します。
 	 * </p>
 	 * 
+	 * @param conn
+	 *            DB接続
 	 * @param activity
+	 *            アクティビティ情報Entity
+	 * @throws SQLException
+	 *             DB更新時のエラー
 	 */
-	public void addActivities(Activity activity);
+	public void addActivityToActivities(Connection conn, Activity activity)
+			throws SQLException;
 
 	/**
 	 * <p>
@@ -69,7 +81,31 @@ public interface ActivityDao {
 	 * </p>
 	 * 
 	 * @param userId
-	 * @return アクティビティのソート順最大値
+	 * @return アクティビティのソート順最大値<br>
+	 *         アクティビティが存在しない場合はnullを返します。
 	 */
 	public Integer getMaxSeqOfActivities(int userId);
+
+	/**
+	 * <p>
+	 * 払い出されたアクティビティIDを取得します。
+	 * </p>
+	 * 
+	 * @param title
+	 * @return DBから払い出されたアクティビティID<br>
+	 *         アクティビティが存在しない場合はnullを返します。
+	 */
+	public Integer getLastInsertId(String title);
+
+	/**
+	 * @param conn
+	 *            DB接続
+	 * @param activity
+	 *            アクティビティ情報Entity
+	 * @param userId
+	 * @throws SQLException
+	 *             DB更新時のエラー
+	 */
+	public void addActivityToIndexes(Connection conn, Activity activity,
+			int userId) throws SQLException;
 }

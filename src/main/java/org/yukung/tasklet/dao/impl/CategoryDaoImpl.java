@@ -89,4 +89,22 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.CategoryDao#getDefaultCategory(int)
+	 */
+	@Override
+	public Category getDefaultCategory(int userId) {
+		String sql = getSQLFromPropertyFile("getDefaultCategory");
+		ResultSetHandler<Category> rsh = new BeanHandler<Category>(
+				Category.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+
+	}
+
 }

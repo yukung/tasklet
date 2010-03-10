@@ -58,6 +58,10 @@ public interface UserDao {
 	 * 
 	 * @param userName
 	 * @return 登録されている件数
+	 *         <p>
+	 *         見つからない場合は0を返します。<br>
+	 *         COUNT文のため、nullを考慮する必要はありません。
+	 *         </p>
 	 */
 	public Integer getUserCount(String userName);
 
