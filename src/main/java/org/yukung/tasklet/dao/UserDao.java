@@ -15,6 +15,9 @@
  */
 package org.yukung.tasklet.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import org.yukung.tasklet.entity.User;
 
 /**
@@ -63,7 +66,12 @@ public interface UserDao {
 	 * ユーザ情報をusersテーブルに追加します。
 	 * </p>
 	 * 
+	 * @param conn
+	 *            DB接続
 	 * @param user
+	 *            ユーザ情報
+	 * @throws SQLException
+	 *             DB更新エラー
 	 */
-	public void addUser(User user);
+	public void addUser(Connection conn, User user) throws SQLException;
 }

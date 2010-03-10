@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.dao.impl;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -111,18 +112,14 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	/*
 	 * (非 Javadoc)
 	 * 
-	 * @see
-	 * org.yukung.tasklet.dao.UserDao#addUser(org.yukung.tasklet.entity.User)
+	 * @see org.yukung.tasklet.dao.UserDao#addUser(java.sql.Connection,
+	 * org.yukung.tasklet.entity.User)
 	 */
 	@Override
-	public void addUser(User user) {
+	public void addUser(Connection conn, User user) throws SQLException {
 		String sql = getSQLFromPropertyFile("addUser");
 		Object[] param = { user.getUserName(), user.getEmail(),
 				user.getPassword(), user.getDisplayName() };
-		try {
-			runner.update(sql, param);
-		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
-		}
+		runner.update(conn, sql, param);
 	}
 }

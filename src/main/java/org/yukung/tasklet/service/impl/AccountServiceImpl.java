@@ -15,12 +15,12 @@
  */
 package org.yukung.tasklet.service.impl;
 
+import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
-import org.yukung.tasklet.logic.TransactionLogic;
-import org.yukung.tasklet.logic.impl.UserTransactionLogicImpl;
+import org.yukung.tasklet.logic.UserTxLogic;
 import org.yukung.tasklet.service.AccountService;
 import org.yukung.tasklet.util.PasswordUtil;
 
@@ -37,6 +37,10 @@ public class AccountServiceImpl implements AccountService {
 	/** ユーザ情報DAO */
 	private UserDao userDao = DaoFactory.getInstance().createUserDao();
 
+	/** カテゴリ情報DAO */
+	private CategoryDao categoryDao = DaoFactory.getInstance()
+			.createCategoryDao();
+
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -51,8 +55,8 @@ public class AccountServiceImpl implements AccountService {
 		// パスワードの暗号化
 		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
 		// ユーザ登録
-		TransactionLogic<User> tx = new UserTransactionLogicImpl();
-		tx.store(user);
+		UserTxLogic tx = new UserTxLogic(userDao, categoryDao);
+		tx.register(user);
 	}
 
 	/**
@@ -65,8 +69,8 @@ public class AccountServiceImpl implements AccountService {
 	 *             ユーザ名重複エラー
 	 */
 	private void checkForDuplicate(String userName) throws TaskletException {
-		Integer count = userDao.getUserCount(userName);
-		if (count.intValue() > 0) {
+		int count = userDao.getUserCount(userName).intValue();
+		if (count > 0) {
 			throw new TaskletException("errors.already");
 		}
 	}

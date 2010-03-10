@@ -15,6 +15,9 @@
  */
 package org.yukung.tasklet.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import org.yukung.tasklet.entity.Category;
 
 /**
@@ -32,10 +35,15 @@ public interface CategoryDao {
 	 * カテゴリ「未分類」をcategoriesテーブルに登録します。
 	 * </p>
 	 * 
+	 * @param conn
+	 *            DB接続
 	 * @param userId
 	 *            DBから払い出されたユーザID
+	 * @throws SQLException
+	 *             DB更新エラー
 	 */
-	public void addDefaultCategory(int userId);
+	public void addDefaultCategory(Connection conn, int userId)
+			throws SQLException;
 
 	/**
 	 * <p>

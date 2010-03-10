@@ -15,6 +15,9 @@
  */
 package org.yukung.tasklet.factory;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -95,6 +98,19 @@ public final class DaoFactory {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 		return ds;
+	}
+
+	/**
+	 * <p>
+	 * データソースからDB接続を取得します。
+	 * </p>
+	 * 
+	 * @return DB接続
+	 * @throws SQLException
+	 *             DB接続エラー
+	 */
+	public Connection getConnection() throws SQLException {
+		return getDataSource().getConnection();
 	}
 
 	/**

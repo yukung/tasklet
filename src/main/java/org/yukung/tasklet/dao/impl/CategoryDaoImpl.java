@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.dao.impl;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -60,16 +61,15 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 	/*
 	 * (非 Javadoc)
 	 * 
-	 * @see org.yukung.tasklet.dao.CategoryDao#addDefaultCategory(int)
+	 * @see
+	 * org.yukung.tasklet.dao.CategoryDao#addDefaultCategory(java.sql.Connection
+	 * , int)
 	 */
 	@Override
-	public void addDefaultCategory(int userId) {
+	public void addDefaultCategory(Connection conn, int userId)
+			throws SQLException {
 		String sql = getSQLFromPropertyFile("addDefaultCategory");
-		try {
-			runner.update(sql, Integer.valueOf(userId));
-		} catch (SQLException e) {
-			throw new DataAccessException(e.getMessage(), e);
-		}
+		runner.update(conn, sql, Integer.valueOf(userId));
 	}
 
 	/*
@@ -79,7 +79,6 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 	 */
 	@Override
 	public Category findCategoryByActivityId(int activityId) {
-		// TODO 自動生成されたメソッド・スタブ
 		String sql = getSQLFromPropertyFile("findCategoryByActivityId");
 		ResultSetHandler<Category> rsh = new BeanHandler<Category>(
 				Category.class);
