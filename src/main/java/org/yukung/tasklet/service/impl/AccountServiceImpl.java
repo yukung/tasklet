@@ -20,7 +20,7 @@ import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
-import org.yukung.tasklet.logic.UserTxLogic;
+import org.yukung.tasklet.logic.AccountTxLogic;
 import org.yukung.tasklet.service.AccountService;
 import org.yukung.tasklet.util.PasswordUtil;
 
@@ -55,7 +55,7 @@ public class AccountServiceImpl implements AccountService {
 		// パスワードの暗号化
 		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
 		// ユーザ登録
-		UserTxLogic tx = new UserTxLogic(userDao, categoryDao);
+		AccountTxLogic tx = new AccountTxLogic(userDao, categoryDao);
 		tx.register(user);
 	}
 

@@ -34,7 +34,7 @@ import org.yukung.tasklet.factory.DaoFactory;
  * @author yukung
  * 
  */
-public class UserTxLogic {
+public class AccountTxLogic {
 
 	/** ユーザ情報DAO */
 	private UserDao userDao;
@@ -50,7 +50,7 @@ public class UserTxLogic {
 	 * リソース有効利用の観点から、各Serviceクラスから利用する場合は極力Service自身が持つDAOを渡す形で利用してください。
 	 * </p>
 	 */
-	public UserTxLogic() {
+	public AccountTxLogic() {
 		this(DaoFactory.getInstance().createUserDao(), DaoFactory.getInstance()
 				.createCategoryDao());
 	}
@@ -63,7 +63,7 @@ public class UserTxLogic {
 	 * @param userDao
 	 * @param categoryDao
 	 */
-	public UserTxLogic(UserDao userDao, CategoryDao categoryDao) {
+	public AccountTxLogic(UserDao userDao, CategoryDao categoryDao) {
 		this.userDao = userDao;
 		this.categoryDao = categoryDao;
 	}
