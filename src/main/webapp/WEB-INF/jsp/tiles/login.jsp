@@ -6,9 +6,9 @@
 				<html:form action="/login" styleClass="loginform">
 					<ul class="sidemenu">
 						<li>ユーザーID</li>
-						<li><html:text property="userName" styleClass="textbox" /></li>
+						<li><html:text property="userName" maxlength="30" styleClass="textbox" /></li>
 						<li>パスワード</li>
-						<li><html:password property="password" styleClass="textbox" redisplay="false" /></li>
+						<li><html:password property="password" maxlength="30" styleClass="textbox" redisplay="false" /></li>
 					</ul>
 					<html:submit value="ログイン" styleClass="button" />
 				<html:errors />

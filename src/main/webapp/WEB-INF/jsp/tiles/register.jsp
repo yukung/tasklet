@@ -8,15 +8,15 @@
 					<html:errors />
 					<p>
 						<label>ユーザー名（*）</label>
-						<html:text property="userName" />
+						<html:text property="userName" maxlength="30" />
 						<label>ニックネーム</label>
-						<html:text property="displayName" />
+						<html:text property="displayName" maxlength="20" />
 						<label>メールアドレス（*）</label>
-						<html:text property="email" />
+						<html:text property="email" maxlength="255" />
 						<label>パスワード（*）</label>
-						<html:password property="password" redisplay="false" />
+						<html:password property="password" redisplay="false" maxlength="30" />
 						<label>パスワード確認（*）</label>
-						<html:password property="confirm" redisplay="false" />
+						<html:password property="confirm" redisplay="false" maxlength="30" />
 					</p>
 					<p>
 						<html:submit value="登録" styleClass="button" />
