@@ -15,6 +15,10 @@
  */
 package org.yukung.tasklet.action;
 
+import static org.yukung.tasklet.common.Constants.ACTIVITIES_MAX_LIMIT;
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +28,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.DataAccessException;
@@ -31,6 +36,7 @@ import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.AddActivityForm;
 import org.yukung.tasklet.service.ActivityService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
+import org.yukung.tasklet.util.Pager;
 
 /**
  * <p>
@@ -65,7 +71,7 @@ public class AddActivityAction extends AbstractAction {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
-		// セッションからユーザIDを取得
+		// アクティビティ追加処理
 		User user = (User) request.getSession().getAttribute("user");
 		int userId = user.getId();
 		ActivityService activityService = new ActivityServiceImpl();
@@ -78,7 +84,22 @@ public class AddActivityAction extends AbstractAction {
 			saveErrors(request, errors);
 			return mapping.getInputForward();
 		}
+
+		// アクティビティ一覧再表示
+		long count = activityService.getCount(userId);
+		if (count == 0) {
+			ActionMessages messages = new ActionMessages();
+			ActionMessage message = new ActionMessage("messages.noactivity");
+			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
+			saveMessages(request, messages);
+		} else {
+			int pageNo = 1; // 先頭に新規アクティビティが追加されるため、1ページ目を再表示
+			Pager pager = new Pager(count, pageNo, ACTIVITIES_MAX_LIMIT);
+			List<ActivityDto> activities = activityService.show(userId, pager
+					.getLimit(), pager.getOffset());
+			request.setAttribute("activities", activities);
+			request.setAttribute("pager", pager);
+		}
 		return mapping.findForward(SUCCESS);
 	}
-
 }
