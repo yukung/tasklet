@@ -39,4 +39,10 @@
 		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/actOperation.jsp" />
 	</definition>
 
+	<definition name="tasks" extends="base">
+		<put name="title" value="タスク一覧 - Tasklet" />
+		<put name="main" value="/WEB-INF/jsp/tiles/user/task.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/taskOperation.jsp" />
+	</definition>
+
 </tiles-definitions>

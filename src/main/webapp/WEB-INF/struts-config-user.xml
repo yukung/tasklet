@@ -6,6 +6,8 @@
   <form-beans>
     <!-- アクティビティ追加用 -->
     <form-bean name="addActivityForm" type="org.yukung.tasklet.form.AddActivityForm"/>
+    <!-- タスク一覧表示用 -->
+    <form-bean name="tasksForm" type="org.yukung.tasklet.form.TasksForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -21,8 +23,11 @@
       <forward name="success" module="/" path="/index.do"/>
     </action>
     <!-- 画面入力されたアクティビティ名を元に、アクティビティ登録処理を行う。 -->
-    <action path="/addActivity" name="addActivityForm" type="org.yukung.tasklet.action.AddActivityAction" scope="request" validate="true" input="activities">
+    <action path="/addActivity" name="addActivityForm" type="org.yukung.tasklet.action.AddActivityAction" scope="request" validate="true" input="/activities.do">
       <forward name="success" path="activities"/>
+    </action>
+    <action path="/tasks" name="tasksForm" type="org.yukung.tasklet.action.TasksAction" scope="request">
+      <forward name="success" path="tasks"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
