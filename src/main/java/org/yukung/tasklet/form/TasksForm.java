@@ -32,6 +32,9 @@ public class TasksForm extends ActionForm {
 	/** アクティビティID */
 	private String activityId;
 
+	/** アクティビティ名 */
+	private String title;
+
 	/**
 	 * アクティビティIDを取得します。
 	 * 
@@ -49,5 +52,24 @@ public class TasksForm extends ActionForm {
 	 */
 	public void setActivityId(String activityId) {
 		this.activityId = activityId;
+	}
+
+	/**
+	 * アクティビティ名を取得します。
+	 * 
+	 * @return アクティビティ名
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * アクティビティ名を設定します。
+	 * 
+	 * @param title
+	 *            アクティビティ名
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

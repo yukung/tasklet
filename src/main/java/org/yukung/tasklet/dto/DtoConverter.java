@@ -16,6 +16,7 @@
 package org.yukung.tasklet.dto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -72,20 +73,32 @@ public class DtoConverter {
 		dto.setEstimatedTimeTotal(CalculateUtil.calcEstimatedTimeTotal(tasks));
 		dto.setActualTimeTotal(CalculateUtil.calcActualTimeTotal(tasks));
 
+		// タスク一覧画面へ受け渡すパラメータの編集
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("activityId", Integer.toString(activity.getId()));
+		params.put("title", activity.getTitle());
+		dto.setParams(params);
+
 		return dto;
 	}
 
 	/**
 	 * <p>
-	 * アクティビティEntityのListから，アクティビティ一覧画面DTOのListへの変換を行います。
+	 * Entityのリスト → DTOのListへの変換を行います。
+	 * </p>
 	 * 
-	 * @param activities
-	 * @return アクティビティ一覧画面DTOのList
+	 * @param <S>
+	 *            変換元のEntityの型 (src)
+	 * @param <D>
+	 *            変換先のDTOの型 (dest)
+	 * @param src
+	 *            変換元のEntityのList
+	 * @return 変換先のDTOのList
 	 */
-	public static List<ActivityDto> convert(List<Activity> activities) {
-		List<ActivityDto> list = new ArrayList<ActivityDto>();
-		for (Activity activity : activities) {
-			list.add(convert(activity));
+	public static <S, D> List<D> convert(List<S> src) {
+		List<D> list = new ArrayList<D>();
+		for (S s : src) {
+			list.add(convert(s));
 		}
 		return list;
 	}

@@ -24,10 +24,12 @@ import javax.sql.DataSource;
 
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.CategoryDao;
+import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.dao.impl.ActivityDaoImpl;
 import org.yukung.tasklet.dao.impl.CategoryDaoImpl;
+import org.yukung.tasklet.dao.impl.MemoDaoImpl;
 import org.yukung.tasklet.dao.impl.TaskDaoImpl;
 import org.yukung.tasklet.dao.impl.UserDaoImpl;
 import org.yukung.tasklet.exception.DataAccessException;
@@ -155,5 +157,16 @@ public final class DaoFactory {
 	 */
 	public CategoryDao createCategoryDao() {
 		return new CategoryDaoImpl(getDataSource());
+	}
+
+	/**
+	 * <p>
+	 * MemoDaoの実装クラスを生成します。
+	 * </p>
+	 * 
+	 * @return メモ情報DAO実装クラスのインスタンス
+	 */
+	public MemoDao createMemoDao() {
+		return new MemoDaoImpl(getDataSource());
 	}
 }

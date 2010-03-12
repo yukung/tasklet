@@ -72,6 +72,7 @@ public class ActivityServiceImpl implements ActivityService {
 		ActivityFactory activityFactory = new ActivityFactory();
 		List<Activity> activities = activityFactory.getActivitiesByUserId(
 				userId, limit, offset);
+
 		// アクティビティが1件も登録されていない場合、空のListを返す
 		if (activities == null) {
 			return new ArrayList<ActivityDto>();
