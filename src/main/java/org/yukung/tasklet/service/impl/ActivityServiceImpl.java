@@ -22,11 +22,12 @@ import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dto.ActivityDto;
-import org.yukung.tasklet.dto.DtoConverter;
+import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.ActivityFactory;
+import org.yukung.tasklet.factory.ConverterFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.logic.ActivityTxLogic;
 import org.yukung.tasklet.service.ActivityService;
@@ -51,6 +52,9 @@ public class ActivityServiceImpl implements ActivityService {
 
 	/** タスク情報DAO */
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
+
+	/** DTO変換コンバータ */
+	private DtoConverter<Activity, ActivityDto> converter;
 
 	/*
 	 * (非 Javadoc)
@@ -77,7 +81,8 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activities == null) {
 			return new ArrayList<ActivityDto>();
 		}
-		return DtoConverter.convert(activities);
+		converter = ConverterFactory.createDtoConverter(activities.get(0));
+		return converter.convert(activities);
 	}
 
 	/*

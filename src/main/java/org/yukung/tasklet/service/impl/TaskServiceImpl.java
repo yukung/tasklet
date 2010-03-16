@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.yukung.tasklet.dao.TaskDao;
-import org.yukung.tasklet.dto.DtoConverter;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.factory.TaskFactory;
