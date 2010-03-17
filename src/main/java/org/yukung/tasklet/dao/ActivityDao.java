@@ -98,6 +98,10 @@ public interface ActivityDao {
 	public Integer getLastInsertId(String title);
 
 	/**
+	 * <p>
+	 * indexesテーブルにアクティビティ情報を追加します。
+	 * </p>
+	 * 
 	 * @param conn
 	 *            DB接続
 	 * @param activity
@@ -108,4 +112,15 @@ public interface ActivityDao {
 	 */
 	public void addActivityToIndexes(Connection conn, Activity activity,
 			int userId) throws SQLException;
+
+	/**
+	 * <p>
+	 * アクティビティ名を取得します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 * @return アクティビティ情報
+	 */
+	public Activity getActivityInfo(int activityId);
+
 }

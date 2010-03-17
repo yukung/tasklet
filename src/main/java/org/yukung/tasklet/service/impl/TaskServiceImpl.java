@@ -18,10 +18,14 @@ package org.yukung.tasklet.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.TaskDao;
+import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
+import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.Task;
+import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.factory.ConverterFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.factory.TaskFactory;
@@ -37,11 +41,12 @@ import org.yukung.tasklet.service.TaskService;
  */
 public class TaskServiceImpl implements TaskService {
 
+	/** アクティビティ情報DAO */
+	private ActivityDao activityDao = DaoFactory.getInstance()
+			.createActivityDao();
+
 	/** タスク情報DAO */
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
-
-	/** DTO変換コンバータ */
-	private DtoConverter<Task, TaskDto> converter;
 
 	/*
 	 * (非 Javadoc)
@@ -57,7 +62,26 @@ public class TaskServiceImpl implements TaskService {
 		if (tasks == null) {
 			return new ArrayList<TaskDto>();
 		}
-		converter = ConverterFactory.createDtoConverter(tasks.get(0));
+		DtoConverter<Task, TaskDto> converter = ConverterFactory
+				.createDtoConverter(Task.class);
 		return converter.convert(tasks);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.TaskService#getActivityInfo(int)
+	 */
+	@Override
+	public ActivityDto getActivityInfo(int activityId)
+			throws DataAccessException {
+		Activity activity = activityDao.getActivityInfo(activityId);
+
+		if (activity == null) {
+			throw new DataAccessException("errors.general");
+		}
+		DtoConverter<Activity, ActivityDto> converter = ConverterFactory
+				.createDtoConverter(Activity.class);
+		return converter.convert(activity);
 	}
 }

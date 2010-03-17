@@ -15,7 +15,6 @@
  */
 package org.yukung.tasklet.action;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +25,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.form.TasksForm;
 import org.yukung.tasklet.service.TaskService;
@@ -57,7 +57,12 @@ public class TasksAction extends AbstractAction {
 		TasksForm tasksForm = (TasksForm) form;
 		int activityId = Integer.parseInt(tasksForm.getActivityId());
 
+		// アクティビティIDとアクティビティ名の取得
 		TaskService taskService = new TaskServiceImpl();
+		ActivityDto activity = taskService.getActivityInfo(activityId);
+		request.setAttribute("activity", activity);
+
+		// タスク情報の取得
 		List<TaskDto> tasks = taskService.show(activityId);
 		if (tasks.size() == 0) {
 			ActionMessages messages = new ActionMessages();
@@ -68,24 +73,7 @@ public class TasksAction extends AbstractAction {
 			request.setAttribute("tasks", tasks);
 		}
 
-		HashMap<String, String> params = createParams(tasksForm);
-		request.setAttribute("params", params);
 		return mapping.findForward(SUCCESS);
-	}
-
-	/**
-	 * <p>
-	 * アクティビティ一覧画面から引き継いだ情報をリクエストパラメータとしてまとめます。
-	 * 
-	 * @param tasksForm
-	 * @param activityId
-	 * @return リクエストパラメータ
-	 */
-	private HashMap<String, String> createParams(TasksForm tasksForm) {
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("activityId", String.valueOf(tasksForm.getActivityId()));
-		params.put("title", tasksForm.getTitle());
-		return params;
 	}
 
 }

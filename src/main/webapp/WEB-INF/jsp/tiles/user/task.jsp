@@ -2,12 +2,12 @@
 <html:xhtml/>
 			<div id="main">
 
-				<h2><c:out value="${params.title}"></c:out></h2>
+				<h2><c:out value="${activity.title}"></c:out></h2>
 				<form>
 				<html:messages id="msg" message="true">
 					<h3 class="message"><c:out value="${msg}" /></h3>
 				</html:messages>
-					<p id="add-link"><html:link action="/entry" paramId="activityId" paramName="params" paramProperty="activityId">タスクの追加</html:link></p>
+					<p id="add-link"><html:link action="/entry" paramId="activityId" paramName="activity" paramProperty="id">タスクの追加</html:link></p>
 					<c:if test="${not empty tasks}">
 					<p>
 						<label>タスク操作</label>

@@ -81,7 +81,7 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activities == null) {
 			return new ArrayList<ActivityDto>();
 		}
-		converter = ConverterFactory.createDtoConverter(activities.get(0));
+		converter = ConverterFactory.createDtoConverter(Activity.class);
 		return converter.convert(activities);
 	}
 

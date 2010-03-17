@@ -17,7 +17,9 @@ package org.yukung.tasklet.service;
 
 import java.util.List;
 
+import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.exception.DataAccessException;
 
 /**
  * <p>
@@ -38,5 +40,17 @@ public interface TaskService {
 	 * @return タスク一覧画面表示DTOを格納したList
 	 */
 	List<TaskDto> show(int activityId);
+
+	/**
+	 * <p>
+	 * アクティビティID及びアクティビティ名を取得します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 * @return アクティビティ情報
+	 * @throws DataAccessException
+	 *             アクティビティが見つからない場合
+	 */
+	ActivityDto getActivityInfo(int activityId) throws DataAccessException;
 
 }

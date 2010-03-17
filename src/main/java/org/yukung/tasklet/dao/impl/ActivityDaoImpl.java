@@ -22,6 +22,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
@@ -160,5 +161,22 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 				Integer.valueOf(activity.getCategory().getId()),
 				Integer.valueOf(activity.getId()) };
 		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getActivityTitle(int)
+	 */
+	@Override
+	public Activity getActivityInfo(int activityId) {
+		String sql = getSQLFromPropertyFile("getActivityInfo");
+		ResultSetHandler<Activity> rsh = new BeanHandler<Activity>(
+				Activity.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(activityId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
 	}
 }

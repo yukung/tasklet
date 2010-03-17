@@ -17,7 +17,9 @@ package org.yukung.tasklet.factory;
 
 import org.yukung.tasklet.dto.converter.ActivityConverter;
 import org.yukung.tasklet.dto.converter.DtoConverter;
+import org.yukung.tasklet.dto.converter.TaskConverter;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Task;
 
 /**
  * <p>
@@ -30,13 +32,13 @@ import org.yukung.tasklet.entity.Activity;
  */
 public class ConverterFactory {
 
-	public static <E, D> DtoConverter<E, D> createDtoConverter(E entity) {
+	public static <E, D> DtoConverter<E, D> createDtoConverter(Class<E> entity) {
 		DtoConverter<E, D> converter = null;
 
-		if (entity.getClass() == Activity.class) {
+		if (entity == Activity.class) {
 			converter = (DtoConverter<E, D>) new ActivityConverter();
-		} else {
-			// TODO タスクのとき
+		} else if (entity == Task.class) {
+			converter = (DtoConverter<E, D>) new TaskConverter();
 		}
 		return converter;
 	}
