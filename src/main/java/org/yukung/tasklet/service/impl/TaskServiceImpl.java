@@ -22,6 +22,7 @@ import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Task;
+import org.yukung.tasklet.factory.ConverterFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.factory.TaskFactory;
 import org.yukung.tasklet.service.TaskService;
@@ -39,6 +40,9 @@ public class TaskServiceImpl implements TaskService {
 	/** タスク情報DAO */
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
 
+	/** DTO変換コンバータ */
+	private DtoConverter<Task, TaskDto> converter;
+
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -53,6 +57,7 @@ public class TaskServiceImpl implements TaskService {
 		if (tasks == null) {
 			return new ArrayList<TaskDto>();
 		}
-		return DtoConverter.convert(tasks);
+		converter = ConverterFactory.createDtoConverter(tasks.get(0));
+		return converter.convert(tasks);
 	}
 }

@@ -48,7 +48,7 @@ public class TaskFactory {
 		List<Task> tasks = taskDao.findTasksByActivityId(activityId);
 
 		// タスクが存在しない場合はnullを返す
-		if (tasks == null) {
+		if (tasks.size() == 0) {
 			return null;
 		}
 
