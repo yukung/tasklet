@@ -16,7 +16,6 @@
 package org.yukung.tasklet.dto.converter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -74,12 +73,6 @@ public class ActivityConverter implements DtoConverter<Activity, ActivityDto> {
 				.calcRatioOfEstimateAndActual(tasks));
 		dto.setEstimatedTimeTotal(CalculateUtil.calcEstimatedTimeTotal(tasks));
 		dto.setActualTimeTotal(CalculateUtil.calcActualTimeTotal(tasks));
-
-		// タスク一覧画面へ受け渡すパラメータの編集
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("activityId", Integer.toString(entity.getId()));
-		params.put("title", entity.getTitle());
-		dto.setParams(params);
 
 		return dto;
 	}

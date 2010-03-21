@@ -57,9 +57,6 @@ public class ActivityDto {
 	/** 実績時間合計 */
 	private String actualTimeTotal;
 
-	/** 受渡しパラメータ */
-	private Map<String, String> params;
-
 	/**
 	 * アクティビティIDを取得します。
 	 * 
@@ -248,24 +245,5 @@ public class ActivityDto {
 	 */
 	public void setActualTimeTotal(String actualTimeTotal) {
 		this.actualTimeTotal = actualTimeTotal;
-	}
-
-	/**
-	 * 受渡しパラメータを取得します。
-	 * 
-	 * @return 受渡しパラメータ
-	 */
-	public Map<String, String> getParams() {
-		return params;
-	}
-
-	/**
-	 * 受渡しパラメータを設定します。
-	 * 
-	 * @param params
-	 *            受渡しパラメータ
-	 */
-	public void setParams(Map<String, String> params) {
-		this.params = params;
 	}
 }

@@ -29,7 +29,7 @@
 					<c:forEach var="activity" items="${activities}" varStatus="status">
 					<tr ${status.index % 2 == 0 ? "class\"row-a\"" : "class=\"row-b\""}>
 						<td class="first">
-							<html:link action="/tasks" name="activity" property="params"><c:out value="${activity.title}"></c:out></html:link>
+							<html:link action="/tasks" paramId="activityId" paramName="activity" paramProperty="id"><c:out value="${activity.title}"></c:out></html:link>
 						</td>
 						<td class="align-center"><c:out value="${activity.categoryName}" /></td>
 						<td class="align-right"><c:out value="${activity.achievementRatio}" /></td>
