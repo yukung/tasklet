@@ -18,28 +18,19 @@ package org.yukung.tasklet.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-import org.yukung.tasklet.entity.User;
-import org.yukung.tasklet.exception.DataAccessException;
-import org.yukung.tasklet.exception.TaskletException;
-import org.yukung.tasklet.form.RegisterForm;
-import org.yukung.tasklet.service.AccountService;
-import org.yukung.tasklet.service.impl.AccountServiceImpl;
 
 /**
  * <p>
- * 新規ユーザ登録アクションです。
+ * タスク追加画面を表示するアクションです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class RegisterAction extends AbstractAction {
+public class EntryAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
@@ -54,31 +45,8 @@ public class RegisterAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		// ダブルポストのチェック
-		if (!isTokenValid(request, true)) {
-			return mapping.findForward("double");
-		}
-
-		// ActionFormをEntityにマッピング
-		RegisterForm registerForm = (RegisterForm) form;
-		User user = new User();
-		try {
-			BeanUtils.copyProperties(user, registerForm);
-		} catch (Exception e) {
-			// 不整合の場合はStrutsに例外を投げる
-			throw new DataAccessException(e.getMessage(), e);
-		}
-
-		AccountService accountService = new AccountServiceImpl();
-		try {
-			accountService.register(user);
-		} catch (TaskletException e) {
-			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage(e.getMessage());
-			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
-			saveErrors(request, errors);
-			return mapping.getInputForward();
-		}
+		saveToken(request);
 		return mapping.findForward(SUCCESS);
 	}
+
 }

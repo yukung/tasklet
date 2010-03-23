@@ -26,6 +26,7 @@ import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.ConverterFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.factory.TaskFactory;
@@ -83,5 +84,19 @@ public class TaskServiceImpl implements TaskService {
 		DtoConverter<Activity, ActivityDto> converter = ConverterFactory
 				.createDtoConverter(Activity.class);
 		return converter.convert(activity);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.TaskService#add(org.yukung.tasklet.entity.
+	 * Task)
+	 */
+	@Override
+	public void add(Task task) throws TaskletException {
+		// TODO 自動生成されたメソッド・スタブ
+		taskDao.addTask(task);
+
 	}
 }

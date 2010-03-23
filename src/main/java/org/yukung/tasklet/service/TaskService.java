@@ -19,7 +19,9 @@ import java.util.List;
 
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -39,7 +41,7 @@ public interface TaskService {
 	 * @param activityId
 	 * @return タスク一覧画面表示DTOを格納したList
 	 */
-	List<TaskDto> show(int activityId);
+	public List<TaskDto> show(int activityId);
 
 	/**
 	 * <p>
@@ -51,6 +53,19 @@ public interface TaskService {
 	 * @throws DataAccessException
 	 *             アクティビティが見つからない場合
 	 */
-	ActivityDto getActivityInfo(int activityId) throws DataAccessException;
+	public ActivityDto getActivityInfo(int activityId)
+			throws DataAccessException;
+
+	/**
+	 * <p>
+	 * 新規タスクを追加します。
+	 * </p>
+	 * 
+	 * @param task
+	 *            タスク情報Entity
+	 * @exception TaskletException
+	 *                データベース登録エラー
+	 */
+	public void add(Task task) throws TaskletException;
 
 }

@@ -22,24 +22,21 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-import org.yukung.tasklet.entity.User;
+import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
-import org.yukung.tasklet.exception.TaskletException;
-import org.yukung.tasklet.form.RegisterForm;
-import org.yukung.tasklet.service.AccountService;
-import org.yukung.tasklet.service.impl.AccountServiceImpl;
+import org.yukung.tasklet.form.AddTaskForm;
+import org.yukung.tasklet.service.TaskService;
+import org.yukung.tasklet.service.impl.TaskServiceImpl;
 
 /**
  * <p>
- * 新規ユーザ登録アクションです。
+ * 新規タスク登録アクションです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class RegisterAction extends AbstractAction {
+public class AddTaskAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
@@ -60,25 +57,17 @@ public class RegisterAction extends AbstractAction {
 		}
 
 		// ActionFormをEntityにマッピング
-		RegisterForm registerForm = (RegisterForm) form;
-		User user = new User();
+		AddTaskForm addTaskForm = (AddTaskForm) form;
+		Task task = new Task();
 		try {
-			BeanUtils.copyProperties(user, registerForm);
+			BeanUtils.copyProperties(task, addTaskForm);
 		} catch (Exception e) {
-			// 不整合の場合はStrutsに例外を投げる
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
-		AccountService accountService = new AccountServiceImpl();
-		try {
-			accountService.register(user);
-		} catch (TaskletException e) {
-			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage(e.getMessage());
-			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
-			saveErrors(request, errors);
-			return mapping.getInputForward();
-		}
-		return mapping.findForward(SUCCESS);
+		TaskService taskService = new TaskServiceImpl();
+		taskService.add(task);
+		return null;
 	}
+
 }
