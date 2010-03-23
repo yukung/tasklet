@@ -169,6 +169,7 @@ public class Task {
 				return;
 			}
 		}
+		throw new IllegalArgumentException("No such priority code.");
 	}
 
 	/**
