@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.dto;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.yukung.tasklet.common.Priority;
@@ -150,6 +151,25 @@ public class TaskDto {
 	 */
 	public void setPeriod(Date period) {
 		this.period = period;
+	}
+
+	public boolean isOverdue() {
+		if (getPeriod() == null) {
+			return false;
+		}
+		Calendar today = Calendar.getInstance();
+		Calendar period = Calendar.getInstance();
+		period.setTime(getPeriod());
+
+		// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
+		// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
+		// （期日はその日の午前0時で表されるため）
+		// これを防ぐため、期限を1日ずらすことで今日が期限のタスクを期限オーバーに含めないようにする。
+		period.add(Calendar.DAY_OF_MONTH, 1);
+
+		int result = today.compareTo(period);
+		// 戻り値が -1,0 は期限内
+		return result == 1 ? true : false;
 	}
 
 	/**

@@ -3,7 +3,7 @@
 			<div id="main">
 
 				<h2><c:out value="${activity.title}"></c:out></h2>
-				<form>
+				<html:form action="/addTask">
 				<html:messages id="msg" message="true">
 					<h3 class="message"><c:out value="${msg}" /></h3>
 				</html:messages>
@@ -28,7 +28,7 @@
 						</tr>
 						<c:forEach var="task" items="${tasks}" varStatus="status">
 						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
-							<td class="first align-center"><html:multibox property="selected"><c:out value="${task.id}" /></html:multibox></td>
+							<td class="first align-center"><%-- <html:multibox property="selected"><c:out value="${task.id}" /></html:multibox> --%></td>
 							<td><html:link action="/detail" paramId="taskId" paramName="task" paramProperty="id"><c:out value="${task.title}"></c:out></html:link></td>
 							<td class="align-center">
 							<c:choose>
@@ -41,7 +41,7 @@
 								</c:otherwise>
 							</c:choose>
 							</td>
-							<td class="align-center"><c:out value="${status.statusName}" /></td>
+							<td class="align-center"><c:out value="${task.status.statusName}" /></td>
 							<td class="align-right">
 							<c:choose>
 								<c:when test="${task.status == 'FINISH'}">
@@ -68,6 +68,6 @@
 						</c:forEach>
 					</table>
 					</c:if>
-				</form>
+				</html:form>
 
 			</div>

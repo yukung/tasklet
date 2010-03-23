@@ -125,6 +125,20 @@ public class Task {
 		this.title = title;
 	}
 
+	public int getPriorityCode() {
+		return priority.getCode();
+	}
+
+	public void setPriorityCode(int code) {
+		for (Priority element : Priority.values()) {
+			if (element.getCode() == code) {
+				priority = element;
+				return;
+			}
+		}
+		throw new IllegalArgumentException("No such priority code.");
+	}
+
 	/**
 	 * 優先度を取得します。
 	 * 
@@ -142,6 +156,19 @@ public class Task {
 	 */
 	public void setPriority(Priority priority) {
 		this.priority = priority;
+	}
+
+	public int getStatusCode() {
+		return status.getCode();
+	}
+
+	public void setStatusCode(int code) {
+		for (Status element : Status.values()) {
+			if (element.getCode() == code) {
+				status = element;
+				return;
+			}
+		}
 	}
 
 	/**
