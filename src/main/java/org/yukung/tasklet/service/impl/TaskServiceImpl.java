@@ -95,8 +95,6 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	public void add(Task task) throws TaskletException {
-		// TODO 自動生成されたメソッド・スタブ
 		taskDao.addTask(task);
-
 	}
 }

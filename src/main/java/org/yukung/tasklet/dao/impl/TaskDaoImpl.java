@@ -26,6 +26,7 @@ import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -71,6 +72,25 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			return runner.query(sql, rsh, Integer.valueOf(activityId));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.TaskDao#addTask(org.yukung.tasklet.entity.Task)
+	 */
+	@Override
+	public void addTask(Task task) throws TaskletException {
+		String sql = getSQLFromPropertyFile("addTask");
+		Object[] param = { Integer.valueOf(task.getActivityId()),
+				task.getTitle(), Integer.valueOf(task.getPriority().getCode()),
+				task.getPeriod(), Double.valueOf(task.getEstimatedTime()) };
+		try {
+			runner.update(sql, param);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
 		}
 	}
 

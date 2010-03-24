@@ -70,7 +70,7 @@ public interface ActivityDao {
 	 * @param activity
 	 *            アクティビティ情報Entity
 	 * @throws SQLException
-	 *             DB更新時のエラー
+	 *             DB更新エラー
 	 */
 	public void addActivityToActivities(Connection conn, Activity activity)
 			throws SQLException;
@@ -108,7 +108,7 @@ public interface ActivityDao {
 	 *            アクティビティ情報Entity
 	 * @param userId
 	 * @throws SQLException
-	 *             DB更新時のエラー
+	 *             DB更新エラー
 	 */
 	public void addActivityToIndexes(Connection conn, Activity activity,
 			int userId) throws SQLException;

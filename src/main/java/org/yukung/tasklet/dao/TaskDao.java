@@ -18,6 +18,7 @@ package org.yukung.tasklet.dao;
 import java.util.List;
 
 import org.yukung.tasklet.entity.Task;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -38,4 +39,16 @@ public interface TaskDao {
 	 * @return タスク一覧を格納したList
 	 */
 	public List<Task> findTasksByActivityId(int activityId);
+
+	/**
+	 * <p>
+	 * 新規タスクを追加します。
+	 * </p>
+	 * 
+	 * @param task
+	 *            タスク情報Entity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void addTask(Task task) throws TaskletException;
 }
