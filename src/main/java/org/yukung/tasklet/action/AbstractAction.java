@@ -41,6 +41,9 @@ public abstract class AbstractAction extends Action {
 	/** アクションが成功した場合に使われるforward先の論理名 */
 	public static final String SUCCESS = "success";
 
+	/** アクションがキャンセルされた場合に使われるforward先の論理名 */
+	public static final String CANCEL = "cancel";
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

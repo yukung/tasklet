@@ -15,11 +15,16 @@
  */
 package org.yukung.tasklet.form;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 import org.yukung.tasklet.common.Priority;
+import org.yukung.tasklet.util.DateConverter;
+import org.yukung.tasklet.util.EnumConverter;
 
 /**
  * <p>
@@ -47,6 +52,22 @@ public class AddTaskForm extends ValidatorForm {
 
 	/** 見積時間 */
 	private String estimatedTime;
+
+	/**
+	 * 文字列 → 列挙型へのコンバータを登録
+	 */
+	static {
+		EnumConverter enumConverter = new EnumConverter();
+		ConvertUtils.register(enumConverter, Priority.class);
+	}
+
+	/**
+	 * 文字列 → Date型へのコンバータを登録
+	 */
+	static {
+		DateConverter dateConverter = new DateConverter();
+		ConvertUtils.register(dateConverter, Date.class);
+	}
 
 	/**
 	 * アクティビティIDを取得します。

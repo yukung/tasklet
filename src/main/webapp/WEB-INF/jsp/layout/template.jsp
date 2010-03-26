@@ -7,6 +7,7 @@
 		<meta name="Keywords" content="task, ToDo, GTD, simple" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="/tasklet/css/style.css" type="text/css" />
+		<c:import url="/WEB-INF/jsp/includes/jquery.jsp" />
 		<title><tiles:getAsString name="title" /></title>
 	</head>
 
