@@ -102,10 +102,10 @@ public class AddTaskAction extends AbstractAction {
 		request.setAttribute("activity", activity);
 
 		if (!isCancelled(request)) {
-			return mapping.findForward(CANCEL);
-		} else {
 			saveToken(request);
 			return mapping.findForward(SUCCESS);
+		} else {
+			return mapping.findForward(CANCEL);
 		}
 	}
 
