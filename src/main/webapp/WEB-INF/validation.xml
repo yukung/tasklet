@@ -112,6 +112,40 @@
         	</field>
         </form>
 
+		<!-- タスク追加フォーム -->
+        <form name="addTaskForm">
+        	<field property="title" depends="required,maxlength">
+        		<arg position="0" key="タスク名" resource="false" />
+        		<arg position="1" key="${var:maxlength}" resource="false" />
+        		<var>
+        			<var-name>maxlength</var-name>
+        			<var-value>255</var-value>
+        		</var>
+        	</field>
+
+        	<field property="period" depends="required,date">
+        		<arg position="0" key="期限" resource="false" />
+        		<var>
+        			<var-name>datePattern</var-name>
+        			<var-value>yyyy/MM/dd</var-value>
+        		</var>
+        	</field>
+
+        	<field property="estimatedTime" depends="required,double,doubleRange">
+        		<arg position="0" key="見積時間" resource="false" />
+        		<arg position="1" key="${var:min}" resource="false" />
+        		<arg position="2" key="${var:max}" resource="false" />
+        		<var>
+        			<var-name>min</var-name>
+        			<var-value>0.1</var-value>
+        		</var>
+        		<var>
+        			<var-name>max</var-name>
+        			<var-value>24.0</var-value>
+        		</var>
+        	</field>
+        </form>
+
     </formset>
 
 </form-validation>

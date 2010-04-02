@@ -30,6 +30,7 @@
     </action>
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->
     <action path="/tasks" name="tasksForm" type="org.yukung.tasklet.action.TasksAction" scope="request">
+      <set-property property="cancellable" value="true"/> <!-- 新規タスク追加時のキャンセル押下時、InvalidCancelException防止のため -->
       <forward name="success" path="tasks"/>
     </action>
     <!-- タスク追加画面に遷移する。 -->
