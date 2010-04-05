@@ -15,11 +15,13 @@
  */
 package org.yukung.tasklet.factory;
 
+import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.dto.DetailDto;
+import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.dto.converter.ActivityConverter;
+import org.yukung.tasklet.dto.converter.DetailConverter;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.dto.converter.TaskConverter;
-import org.yukung.tasklet.entity.Activity;
-import org.yukung.tasklet.entity.Task;
 
 /**
  * <p>
@@ -32,13 +34,15 @@ import org.yukung.tasklet.entity.Task;
  */
 public class ConverterFactory {
 
-	public static <E, D> DtoConverter<E, D> createDtoConverter(Class<E> entity) {
+	public static <E, D> DtoConverter<E, D> createDtoConverter(Class<D> entity) {
 		DtoConverter<E, D> converter = null;
 
-		if (entity == Activity.class) {
+		if (entity == ActivityDto.class) {
 			converter = (DtoConverter<E, D>) new ActivityConverter();
-		} else if (entity == Task.class) {
+		} else if (entity == TaskDto.class) {
 			converter = (DtoConverter<E, D>) new TaskConverter();
+		} else if (entity == DetailDto.class) {
+			converter = (DtoConverter<E, D>) new DetailConverter();
 		}
 		return converter;
 	}

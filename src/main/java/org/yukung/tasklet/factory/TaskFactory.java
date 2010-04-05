@@ -59,4 +59,24 @@ public class TaskFactory {
 		return tasks;
 	}
 
+	/**
+	 * <p>
+	 * メモ情報を格納したタスク詳細情報を取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return メモ情報を持ったタスクのEntity
+	 */
+	public Task getTaskByTaskId(int taskId) {
+		Task task = taskDao.getTask(taskId);
+
+		// タスクが存在しない場合はnullを返す
+		if (task == null) {
+			return null;
+		}
+		task.setMemos(memoDao.getMemosByTaskId(taskId));
+
+		return task;
+	}
+
 }

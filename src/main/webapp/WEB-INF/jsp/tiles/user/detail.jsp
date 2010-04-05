@@ -38,9 +38,11 @@
 				<h3>現在までの実績</h3>
 				<p><c:out value="${task.actualTime}" />時間</p>
 				<h3>メモ</h3>
-				<c:if test="${task.memoCount != '0'}">
+				<c:if test="${not empty task.memos}">
 				<ul>
-					<li>a</li>
+					<c:forEach var="memo" items="${task.memos}" varStatus="status">
+					<li><c:out value="${memo.contents}" /></li>
+					</c:forEach>
 				</ul>
 				</c:if>
 

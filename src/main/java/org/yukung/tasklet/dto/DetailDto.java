@@ -16,22 +16,24 @@
 package org.yukung.tasklet.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.yukung.tasklet.common.Priority;
 import org.yukung.tasklet.common.Status;
+import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.util.CalculateUtil;
 
 /**
  * <p>
- * タスク一覧画面の表示用Beanクラスです。
+ * タスク詳細画面の表示用Beanクラスです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class TaskDto {
+public class DetailDto {
 
-	/** ID */
+	/** タスクID */
 	private String id;
 
 	/** タスク名 */
@@ -40,7 +42,7 @@ public class TaskDto {
 	/** 優先度 */
 	private Priority priority;
 
-	/** タスクの状態 */
+	/** 状態 */
 	private Status status;
 
 	/** 期限 */
@@ -55,23 +57,23 @@ public class TaskDto {
 	/** 実績時間 */
 	private String actualTime;
 
-	/** メモ件数 */
-	private String memoCount;
+	/** メモ一覧 */
+	private List<Memo> memos;
 
 	/**
-	 * IDを取得します。
+	 * タスクIDを取得します。
 	 * 
-	 * @return ID
+	 * @return タスクID
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * IDを設定します。
+	 * タスクIDを設定します。
 	 * 
 	 * @param id
-	 *            ID
+	 *            タスクID
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -116,22 +118,32 @@ public class TaskDto {
 	}
 
 	/**
-	 * タスクの状態を取得します。
+	 * 状態を取得します。
 	 * 
-	 * @return タスクの状態
+	 * @return 状態
 	 */
 	public Status getStatus() {
 		return status;
 	}
 
 	/**
-	 * タスクの状態を設定します。
+	 * 状態を設定します。
 	 * 
 	 * @param status
-	 *            タスクの状態
+	 *            状態
 	 */
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	/**
+	 * 期限切れかどうかを返します。
+	 * 
+	 * @return 期限切れの場合 true<br>
+	 *         そうでない場合 false
+	 */
+	public boolean isOverdue() {
+		return CalculateUtil.isOverdue((java.sql.Date) getPeriod());
 	}
 
 	/**
@@ -153,14 +165,8 @@ public class TaskDto {
 		this.period = period;
 	}
 
-	/**
-	 * 期限切れかどうかを返します。
-	 * 
-	 * @return 期限切れの場合 true<br>
-	 *         そうでない場合 false
-	 */
-	public boolean isOverdue() {
-		return CalculateUtil.isOverdue((java.sql.Date) getPeriod());
+	public long getDaysRemaining() {
+		return CalculateUtil.calcDaysRemaining((java.sql.Date) getPeriod());
 	}
 
 	/**
@@ -221,21 +227,21 @@ public class TaskDto {
 	}
 
 	/**
-	 * メモ件数を取得します。
+	 * メモ一覧を取得します。
 	 * 
-	 * @return メモ件数
+	 * @return メモ一覧
 	 */
-	public String getMemoCount() {
-		return memoCount;
+	public List<Memo> getMemos() {
+		return memos;
 	}
 
 	/**
-	 * メモ件数を設定します。
+	 * メモ一覧を設定します。
 	 * 
-	 * @param memoCount
-	 *            メモ件数
+	 * @param memos
+	 *            メモ一覧
 	 */
-	public void setMemoCount(String memoCount) {
-		this.memoCount = memoCount;
+	public void setMemos(List<Memo> memos) {
+		this.memos = memos;
 	}
 }

@@ -18,6 +18,7 @@ package org.yukung.tasklet.service;
 import java.util.List;
 
 import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
@@ -67,5 +68,15 @@ public interface TaskService {
 	 *                データベース登録エラー
 	 */
 	public void add(Task task) throws TaskletException;
+
+	/**
+	 * <p>
+	 * タスク詳細情報を取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return タスク詳細情報
+	 */
+	public DetailDto getTask(int taskId);
 
 }

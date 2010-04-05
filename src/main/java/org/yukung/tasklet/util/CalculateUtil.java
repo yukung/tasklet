@@ -15,6 +15,8 @@
  */
 package org.yukung.tasklet.util;
 
+import static org.yukung.tasklet.common.Constants.SECONDS_OF_DAY;
+
 import java.sql.Date;
 import java.text.NumberFormat;
 import java.util.Calendar;
@@ -130,6 +132,35 @@ public final class CalculateUtil {
 
 	/**
 	 * <p>
+	 * 期限切れかどうかを調べます。
+	 * </p>
+	 * 
+	 * @param period
+	 *            期限
+	 * @return 期限切れの場合 true<br>
+	 *         そうでない場合 false
+	 */
+	public static boolean isOverdue(Date paramDate) {
+		if (paramDate == null) {
+			return false;
+		}
+		Calendar today = Calendar.getInstance();
+		Calendar period = Calendar.getInstance();
+		period.setTime(paramDate);
+
+		// Calendar#compareTo(anotherCalendar)メソッドは、ミリ秒単位の比較を行うため、
+		// 期日と今日の日付が同じ日の場合は期日オーバーと判定されてしまう。
+		// （期日はその日の午前0時で表されるため）
+		// これを防ぐため、期限を1日ずらすことで今日が期限のタスクを期限オーバーに含めないようにする。
+		period.add(Calendar.DAY_OF_MONTH, 1);
+
+		int result = today.compareTo(period);
+		// 戻り値が -1,0 は期限内
+		return result == 1 ? true : false;
+	}
+
+	/**
+	 * <p>
 	 * 予実比を取得します。
 	 * </p>
 	 * 
@@ -187,4 +218,27 @@ public final class CalculateUtil {
 		return Double.toString(actualTimeTotal);
 	}
 
+	/**
+	 * <p>
+	 * タスク期限までの残り日数を返します。
+	 * </p>
+	 * 
+	 * @param paramDate
+	 *            期限
+	 * @return 残り日数<br>
+	 *         期限が設定されていない場合は0を返す
+	 */
+	public static long calcDaysRemaining(Date paramDate) {
+		if (paramDate == null) {
+			return 0;
+		}
+		Calendar today = Calendar.getInstance();
+		Calendar period = Calendar.getInstance();
+		period.setTime(paramDate);
+		long days = (period.getTimeInMillis() - today.getTimeInMillis())
+				/ SECONDS_OF_DAY;
+		days += 1; // 締め切り当日も猶予日とするため、1日インクリメント
+
+		return days;
+	}
 }

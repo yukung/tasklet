@@ -28,4 +28,6 @@ public class Constants {
 	/** アクティビティ一覧の1ページの表示件数 */
 	public static final int ACTIVITIES_MAX_LIMIT = 10;
 
+	/** 1日の秒数 ： 1000(ms) * 60(s) * 60(m) * 24(h) = 86400000 */
+	public static final long SECONDS_OF_DAY = 86400000;
 }

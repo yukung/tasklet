@@ -73,9 +73,9 @@ public class ActivitiesAction extends AbstractAction {
 					.getLimit(), pager.getOffset());
 			request.setAttribute("activities", activities);
 			request.setAttribute("pager", pager);
+			saveToken(request);
 		}
 
-		saveToken(request);
 		return mapping.findForward(SUCCESS);
 	}
 }

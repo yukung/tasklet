@@ -21,6 +21,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.TaskDao;
@@ -94,4 +95,19 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#getTaskDetail(int)
+	 */
+	@Override
+	public Task getTask(int taskId) {
+		String sql = getSQLFromPropertyFile("getTask");
+		ResultSetHandler<Task> rsh = new BeanHandler<Task>(Task.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(taskId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
 }

@@ -21,6 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+import org.yukung.tasklet.dto.DetailDto;
+import org.yukung.tasklet.form.DetailForm;
+import org.yukung.tasklet.service.TaskService;
+import org.yukung.tasklet.service.impl.TaskServiceImpl;
 
 /**
  * <p>
@@ -44,6 +50,21 @@ public class DetailAction extends AbstractAction {
 	@Override
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
+
+		DetailForm detailForm = (DetailForm) form;
+		int taskId = Integer.parseInt(detailForm.getTaskId());
+
+		TaskService taskService = new TaskServiceImpl();
+		DetailDto task = taskService.getTask(taskId);
+		if (task == null) {
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage("errors.general");
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+		} else {
+			request.setAttribute("task", task);
+			saveToken(request);
+		}
 		return mapping.findForward(SUCCESS);
 	}
 

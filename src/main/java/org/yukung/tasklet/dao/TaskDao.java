@@ -51,4 +51,10 @@ public interface TaskDao {
 	 *             DB更新エラー
 	 */
 	public void addTask(Task task) throws TaskletException;
+
+	/**
+	 * @param taskId
+	 * @return タスク詳細情報を格納したEntity
+	 */
+	public Task getTask(int taskId);
 }
