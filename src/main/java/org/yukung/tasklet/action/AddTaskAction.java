@@ -86,6 +86,11 @@ public class AddTaskAction extends AbstractAction {
 			}
 		}
 
+		// アクティビティIDとアクティビティ名の取得
+		ActivityDto activity = taskService
+				.getActivityInfo(task.getActivityId());
+		request.setAttribute("activity", activity);
+
 		// タスク一覧を再取得
 		List<TaskDto> tasks = taskService.show(task.getActivityId());
 		if (tasks.size() == 0) {
@@ -97,16 +102,8 @@ public class AddTaskAction extends AbstractAction {
 			request.setAttribute("tasks", tasks);
 		}
 
-		ActivityDto activity = taskService
-				.getActivityInfo(task.getActivityId());
-		request.setAttribute("activity", activity);
-
-		if (!isCancelled(request)) {
-			saveToken(request);
-			return mapping.findForward(SUCCESS);
-		} else {
-			return mapping.findForward(CANCEL);
-		}
+		saveToken(request);
+		return mapping.findForward(SUCCESS);
 	}
 
 }

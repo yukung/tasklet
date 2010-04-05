@@ -107,7 +107,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public DetailDto getTask(int taskId) {
 		TaskFactory taskFactory = new TaskFactory();
-		Task task = taskFactory.getTaskByTaskId(taskId);
+		Task task = taskFactory.getTask(taskId);
 
 		if (task == null) {
 			throw new DataAccessException("errors.general");
@@ -115,5 +115,15 @@ public class TaskServiceImpl implements TaskService {
 		DtoConverter<Task, DetailDto> converter = ConverterFactory
 				.createDtoConverter(DetailDto.class);
 		return converter.convert(task);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.TaskService#getActivityId(int)
+	 */
+	@Override
+	public int getActivityId(int taskId) {
+		return (taskDao.getActivityIdByTaskId(taskId)).intValue();
 	}
 }

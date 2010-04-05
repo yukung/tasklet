@@ -67,7 +67,7 @@ public class TaskFactory {
 	 * @param taskId
 	 * @return メモ情報を持ったタスクのEntity
 	 */
-	public Task getTaskByTaskId(int taskId) {
+	public Task getTask(int taskId) {
 		Task task = taskDao.getTask(taskId);
 
 		// タスクが存在しない場合はnullを返す

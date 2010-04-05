@@ -12,6 +12,8 @@
     <form-bean name="addTaskForm" type="org.yukung.tasklet.form.AddTaskForm"/>
     <!-- タスク詳細用 -->
     <form-bean name="detailForm" type="org.yukung.tasklet.form.DetailForm"/>
+    <!-- タスク更新用 -->
+    <form-bean name="updateTaskForm" type="org.yukung.tasklet.form.UpdateTaskForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -32,8 +34,6 @@
     </action>
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->
     <action path="/tasks" name="tasksForm" type="org.yukung.tasklet.action.TasksAction" scope="request">
-      <set-property property="cancellable" value="true"/>
-      <!-- 新規タスク追加時のキャンセル押下時、InvalidCancelException防止のため -->
       <forward name="success" path="tasks"/>
     </action>
     <!-- タスク追加画面に遷移する。 -->
@@ -44,11 +44,15 @@
     <action path="/addTask" name="addTaskForm" type="org.yukung.tasklet.action.AddTaskAction" scope="request" validate="true" input="entry">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
-      <forward name="cancel" path="/tasks.do"/>
     </action>
     <!-- タスク詳細画面に遷移する。 -->
     <action path="/detail" name="detailForm" type="org.yukung.tasklet.action.DetailAction" scope="request">
       <forward name="success" path="detail"/>
+    </action>
+    <!-- タスク情報を更新する。 -->
+    <action path="/update" name="updateTaskForm" type="org.yukung.tasklet.action.UpdateTaskAction" scope="request" validate="true" input="detail">
+      <set-property property="cancellable" value="true"/>
+      <forward name="success" path="tasks"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

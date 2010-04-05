@@ -79,4 +79,14 @@ public interface TaskService {
 	 */
 	public DetailDto getTask(int taskId);
 
+	/**
+	 * <p>
+	 * アクティビティIDを取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return アクティビティID
+	 */
+	public int getActivityId(int taskId);
+
 }

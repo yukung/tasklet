@@ -23,6 +23,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.entity.Task;
@@ -109,5 +110,22 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#getActivityIdByTaskId(int)
+	 */
+	@Override
+	public Integer getActivityIdByTaskId(int taskId) {
+		String sql = getSQLFromPropertyFile("getActivityIdByTaskId");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner.query(sql, rsh, Integer.valueOf(taskId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+
 	}
 }

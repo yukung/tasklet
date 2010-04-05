@@ -57,4 +57,14 @@ public interface TaskDao {
 	 * @return タスク詳細情報を格納したEntity
 	 */
 	public Task getTask(int taskId);
+
+	/**
+	 * <p>
+	 * タスクIDをキーにアクティビティIDを取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return アクティビティID
+	 */
+	public Integer getActivityIdByTaskId(int taskId);
 }
