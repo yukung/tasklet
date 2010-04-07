@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.dao.impl;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -128,4 +129,35 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		}
 
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#getActualTimeByTaskId(int)
+	 */
+	@Override
+	public Double getActualTimeByTaskId(int taskId) {
+		String sql = getSQLFromPropertyFile("getActualTimeByTaskId");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Double) runner.query(sql, rsh, Integer.valueOf(taskId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#updateTask(java.sql.Connection,
+	 * org.yukung.tasklet.entity.Task)
+	 */
+	@Override
+	public void updateTask(Connection conn, Task task) throws SQLException {
+		String sql = getSQLFromPropertyFile("updateTask");
+		Object[] params = { Double.valueOf(task.getActualTime()),
+				Integer.valueOf(task.getId()) };
+		runner.update(conn, sql, params);
+	}
+
 }

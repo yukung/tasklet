@@ -31,6 +31,7 @@ import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.UpdateTaskForm;
 import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.TaskServiceImpl;
@@ -78,7 +79,15 @@ public class UpdateTaskAction extends AbstractAction {
 
 		TaskService taskService = new TaskServiceImpl();
 		if (!isCancelled(request)) {
-			taskService.update(task, memo);
+			try {
+				taskService.update(task, memo);
+			} catch (TaskletException e) {
+				ActionMessages errors = new ActionMessages();
+				ActionMessage error = new ActionMessage(e.getMessage(), e);
+				errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+				saveErrors(request, errors);
+				mapping.getInputForward();
+			}
 		}
 
 		// アクティビティIDとアクティビティ名の取得

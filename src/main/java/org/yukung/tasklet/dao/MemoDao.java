@@ -15,6 +15,8 @@
  */
 package org.yukung.tasklet.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.yukung.tasklet.entity.Memo;
@@ -37,6 +39,30 @@ public interface MemoDao {
 	 * @param taskId
 	 * @return メモ一覧を格納したList
 	 */
-	List<Memo> getMemosByTaskId(int taskId);
+	public List<Memo> getMemosByTaskId(int taskId);
+
+	/**
+	 * <p>
+	 * タスクIDをキーにメモテーブルのソート順の最大値を取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return ソート順の最大値
+	 */
+	public Integer getMaxSequenceOfMemos(int taskId);
+
+	/**
+	 * <p>
+	 * メモを追加します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param memo
+	 *            メモ情報Entity
+	 * @exception SQLException
+	 *                DB更新エラー
+	 */
+	public void addMemoToMemos(Connection conn, Memo memo) throws SQLException;
 
 }

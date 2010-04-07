@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.dao.impl;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.entity.Memo;
@@ -71,5 +73,35 @@ public class MemoDaoImpl extends AbstractDao implements MemoDao {
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.MemoDao#getMaxSequenceOfMemos(int)
+	 */
+	@Override
+	public Integer getMaxSequenceOfMemos(int taskId) {
+		String sql = getSQLFromPropertyFile("getMaxSequenceOfMemos");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner.query(sql, rsh, Integer.valueOf(taskId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.MemoDao#addMemos(java.sql.Connection,
+	 * org.yukung.tasklet.entity.Memo)
+	 */
+	@Override
+	public void addMemoToMemos(Connection conn, Memo memo) throws SQLException {
+		String sql = getSQLFromPropertyFile("addMemoToMemos");
+		Object[] params = { Integer.valueOf(memo.getTaskId()),
+				Integer.valueOf(memo.getSeq()), memo.getContents() };
+		runner.update(conn, sql, params);
 	}
 }

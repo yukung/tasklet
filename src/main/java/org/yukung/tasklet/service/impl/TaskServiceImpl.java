@@ -19,18 +19,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.ConverterFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.factory.TaskFactory;
+import org.yukung.tasklet.logic.TaskTxLogic;
 import org.yukung.tasklet.service.TaskService;
 
 /**
@@ -49,6 +52,9 @@ public class TaskServiceImpl implements TaskService {
 
 	/** タスク情報DAO */
 	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
+
+	/** メモ情報DAO */
+	private MemoDao memoDao = DaoFactory.getInstance().createMemoDao();
 
 	/*
 	 * (非 Javadoc)
@@ -125,5 +131,35 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public int getActivityId(int taskId) {
 		return (taskDao.getActivityIdByTaskId(taskId)).intValue();
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.TaskService#update(org.yukung.tasklet.entity
+	 * .Task, org.yukung.tasklet.entity.Memo)
+	 */
+	@Override
+	public void update(Task task, Memo memo) throws TaskletException {
+		double accumulatedTime = calculateActualTime(task);
+		task.setActualTime(accumulatedTime);
+
+		// タスク更新処理
+		TaskTxLogic tx = new TaskTxLogic(taskDao, memoDao);
+		tx.update(task, memo);
+
+	}
+
+	/**
+	 * @param task
+	 * @return
+	 */
+	private double calculateActualTime(Task task) {
+		// タスク実績時間の加算
+		double accumulatedTime = taskDao.getActualTimeByTaskId(task.getId())
+				.doubleValue();
+		accumulatedTime += task.getActualTime();
+		return accumulatedTime;
 	}
 }

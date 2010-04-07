@@ -68,7 +68,7 @@ public class ActivityTxLogic {
 	 * </p>
 	 * 
 	 * @param activity
-	 *            アクティビティ情報のEntity
+	 *            アクティビティ情報Entity
 	 * @param userId
 	 * @throws TaskletException
 	 *             DB更新時のエラー

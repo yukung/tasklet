@@ -20,6 +20,7 @@ import java.util.List;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
@@ -88,5 +89,19 @@ public interface TaskService {
 	 * @return アクティビティID
 	 */
 	public int getActivityId(int taskId);
+
+	/**
+	 * <p>
+	 * タスク情報を更新します。
+	 * </p>
+	 * 
+	 * @param task
+	 *            タスク情報Entity
+	 * @param memo
+	 *            メモ情報Entity
+	 * @throws TaskletException
+	 *             データベース更新エラー
+	 */
+	public void update(Task task, Memo memo) throws TaskletException;
 
 }

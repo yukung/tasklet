@@ -15,6 +15,8 @@
  */
 package org.yukung.tasklet.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.yukung.tasklet.entity.Task;
@@ -67,4 +69,29 @@ public interface TaskDao {
 	 * @return アクティビティID
 	 */
 	public Integer getActivityIdByTaskId(int taskId);
+
+	/**
+	 * <p>
+	 * タスクIDをキーに実績時間を取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return 実績時間
+	 */
+	public Double getActualTimeByTaskId(int taskId);
+
+	/**
+	 * <p>
+	 * タスク情報を元にタスクを更新します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param task
+	 *            タスク情報Entity
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void updateTask(Connection conn, Task task) throws SQLException;
+
 }
