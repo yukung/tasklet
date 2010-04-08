@@ -27,6 +27,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.entity.Task;
@@ -69,8 +70,8 @@ public class UpdateTaskAction extends AbstractAction {
 		Task task = new Task();
 		Memo memo = new Memo();
 		try {
-			BeanUtils.copyProperty(task, "id", updateTaskForm.getTaskId());
 			BeanUtils.copyProperties(task, updateTaskForm);
+			BeanUtils.copyProperty(memo, "taskId", updateTaskForm.getId());
 			BeanUtils.copyProperties(memo, updateTaskForm);
 		} catch (Exception e) {
 			// 不整合の場合はシステム例外としてStrutsに投げる
@@ -83,10 +84,13 @@ public class UpdateTaskAction extends AbstractAction {
 				taskService.update(task, memo);
 			} catch (TaskletException e) {
 				ActionMessages errors = new ActionMessages();
-				ActionMessage error = new ActionMessage(e.getMessage(), e);
+				ActionMessage error = new ActionMessage("errors.update");
 				errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 				saveErrors(request, errors);
-				mapping.getInputForward();
+				DetailDto detail = taskService.getTask(task.getId());
+				request.setAttribute("task", detail);
+				saveToken(request);
+				return mapping.getInputForward();
 			}
 		}
 

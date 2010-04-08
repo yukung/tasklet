@@ -34,7 +34,7 @@ public class UpdateTaskForm extends ValidatorForm {
 	private static final long serialVersionUID = 1L;
 
 	/** タスクID */
-	private String taskId;
+	private String id;
 
 	/** 実績時間 */
 	private String actualTime;
@@ -55,18 +55,18 @@ public class UpdateTaskForm extends ValidatorForm {
 	 * 
 	 * @return タスクID
 	 */
-	public String getTaskId() {
-		return taskId;
+	public String getId() {
+		return id;
 	}
 
 	/**
 	 * タスクIDを設定します。
 	 * 
-	 * @param taskId
+	 * @param id
 	 *            タスクID
 	 */
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**

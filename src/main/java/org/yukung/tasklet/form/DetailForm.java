@@ -30,24 +30,24 @@ public class DetailForm extends ActionForm {
 	private static final long serialVersionUID = 1L;
 
 	/** タスクID */
-	private String taskId;
+	private String id;
 
 	/**
 	 * タスクIDを取得します。
 	 * 
 	 * @return タスクID
 	 */
-	public String getTaskId() {
-		return taskId;
+	public String getId() {
+		return id;
 	}
 
 	/**
 	 * タスクIDを設定します。
 	 * 
-	 * @param taskId
+	 * @param id
 	 *            タスクID
 	 */
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
+	public void setId(String id) {
+		this.id = id;
 	}
 }

@@ -52,10 +52,10 @@ public class DetailAction extends AbstractAction {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		DetailForm detailForm = (DetailForm) form;
-		int taskId = Integer.parseInt(detailForm.getTaskId());
+		int id = Integer.parseInt(detailForm.getId());
 
 		TaskService taskService = new TaskServiceImpl();
-		DetailDto task = taskService.getTask(taskId);
+		DetailDto task = taskService.getTask(id);
 		if (task == null) {
 			ActionMessages errors = new ActionMessages();
 			ActionMessage error = new ActionMessage("errors.general");

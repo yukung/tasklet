@@ -50,7 +50,7 @@
       <forward name="success" path="detail"/>
     </action>
     <!-- タスク情報を更新する。 -->
-    <action path="/update" name="updateTaskForm" type="org.yukung.tasklet.action.UpdateTaskAction" scope="request" validate="true" input="detail">
+    <action path="/update" name="updateTaskForm" type="org.yukung.tasklet.action.UpdateTaskAction" scope="request" validate="true" input="/detail.do">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
     </action>

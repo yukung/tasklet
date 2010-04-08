@@ -29,7 +29,7 @@
 						<c:forEach var="task" items="${tasks}" varStatus="status">
 						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 							<td class="first align-center"><%-- <html:multibox property="selected"><c:out value="${task.id}" /></html:multibox> --%></td>
-							<td><html:link action="/detail" paramId="taskId" paramName="task" paramProperty="id"><c:out value="${task.title}"></c:out></html:link></td>
+							<td><html:link action="/detail" paramId="id" paramName="task" paramProperty="id"><c:out value="${task.title}"></c:out></html:link></td>
 							<td class="align-center">
 							<c:choose>
 								<c:when test="${task.priority == 'HIGH'}">
