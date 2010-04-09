@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.CategoryDao;
-import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
@@ -49,9 +48,6 @@ public class ActivityServiceImpl implements ActivityService {
 	/** カテゴリ情報DAO */
 	private CategoryDao categoryDao = DaoFactory.getInstance()
 			.createCategoryDao();
-
-	/** タスク情報DAO */
-	private TaskDao taskDao = DaoFactory.getInstance().createTaskDao();
 
 	/** DTO変換コンバータ */
 	private DtoConverter<Activity, ActivityDto> converter;

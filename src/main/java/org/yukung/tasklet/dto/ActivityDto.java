@@ -15,8 +15,6 @@
  */
 package org.yukung.tasklet.dto;
 
-import java.util.Map;
-
 /**
  * <p>
  * アクティビティ一覧画面の表示用Beanクラスです。
