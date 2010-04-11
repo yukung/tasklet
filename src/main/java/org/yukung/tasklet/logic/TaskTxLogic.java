@@ -120,12 +120,11 @@ public class TaskTxLogic {
 	 */
 	private int getSeqOfMemo(Task task) {
 		// ソート順の取得
-		Integer seq = memoDao.getMaxSequenceOfMemos(task.getId());
+		Integer seq = memoDao.getMaxSeqOfMemos(task.getId());
 		if (seq == null) {
 			return 0;
-		} else {
-			return seq.intValue() + 1;
 		}
+		return seq.intValue() + 1;
 	}
 
 }

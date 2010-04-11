@@ -28,6 +28,7 @@ import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -81,7 +82,7 @@ public class MemoDaoImpl extends AbstractDao implements MemoDao {
 	 * @see org.yukung.tasklet.dao.MemoDao#getMaxSequenceOfMemos(int)
 	 */
 	@Override
-	public Integer getMaxSequenceOfMemos(int taskId) {
+	public Integer getMaxSeqOfMemos(int taskId) {
 		String sql = getSQLFromPropertyFile("getMaxSequenceOfMemos");
 		ResultSetHandler<Object> rsh = new ScalarHandler(1);
 		try {
@@ -103,5 +104,24 @@ public class MemoDaoImpl extends AbstractDao implements MemoDao {
 		Object[] params = { Integer.valueOf(memo.getTaskId()),
 				Integer.valueOf(memo.getSeq()), memo.getContents() };
 		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.MemoDao#addMemoToMemos(org.yukung.tasklet.entity
+	 * .Memo)
+	 */
+	@Override
+	public void addMemoToMemos(Memo memo) throws TaskletException {
+		String sql = getSQLFromPropertyFile("addMemoToMemos");
+		Object[] params = { Integer.valueOf(memo.getTaskId()),
+				Integer.valueOf(memo.getSeq()), memo.getContents() };
+		try {
+			runner.update(sql, params);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 }

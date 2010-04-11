@@ -91,8 +91,8 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public void add(Activity activity, int userId) throws TaskletException {
 		// アクティビティのソート順を取得
-		int count = getSeq(userId);
-		activity.setSeq(count);
+		int seq = getSeq(userId);
+		activity.setSeq(seq);
 		// デフォルトカテゴリの取得
 		Category category = categoryDao.getDefaultCategory(userId);
 		activity.setCategory(category);
@@ -114,6 +114,6 @@ public class ActivityServiceImpl implements ActivityService {
 		if (count == null) {
 			return 0;
 		}
-		return count.intValue();
+		return count.intValue() + 1;
 	}
 }

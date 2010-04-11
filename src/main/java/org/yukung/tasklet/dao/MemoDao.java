@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.yukung.tasklet.entity.Memo;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -49,7 +50,7 @@ public interface MemoDao {
 	 * @param taskId
 	 * @return ソート順の最大値
 	 */
-	public Integer getMaxSequenceOfMemos(int taskId);
+	public Integer getMaxSeqOfMemos(int taskId);
 
 	/**
 	 * <p>
@@ -64,5 +65,17 @@ public interface MemoDao {
 	 *                DB更新エラー
 	 */
 	public void addMemoToMemos(Connection conn, Memo memo) throws SQLException;
+
+	/**
+	 * <p>
+	 * メモを追加します。
+	 * </p>
+	 * 
+	 * @param memo
+	 *            メモ情報Entity
+	 * @exception TaskletException
+	 *                DB更新エラー
+	 */
+	public void addMemoToMemos(Memo memo) throws TaskletException;
 
 }

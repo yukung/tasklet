@@ -115,4 +115,16 @@ public interface TaskService {
 	 */
 	public List<MemoDto> getMemos(int taskId);
 
+	/**
+	 * <p>
+	 * 新規メモを追加します。
+	 * </p>
+	 * 
+	 * @param memo
+	 *            メモ情報Entity
+	 * @exception TaskletException
+	 *                データベース登録エラー
+	 */
+	public void add(Memo memo) throws TaskletException;
+
 }

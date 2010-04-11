@@ -182,4 +182,36 @@ public class TaskServiceImpl implements TaskService {
 				.createDtoConverter(MemoDto.class);
 		return converter.convert(memos);
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.TaskService#add(org.yukung.tasklet.entity.
+	 * Memo)
+	 */
+	@Override
+	public void add(Memo memo) throws TaskletException {
+		// メモのソート順の取得
+		int seq = getSeq(memo.getTaskId());
+		memo.setSeq(seq);
+
+		memoDao.addMemoToMemos(memo);
+	}
+
+	/**
+	 * <p>
+	 * タスクIDに紐づくメモの再浸潤を取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return メモのソート順最大値
+	 */
+	private int getSeq(int taskId) {
+		Integer count = memoDao.getMaxSeqOfMemos(taskId);
+		if (count == null) {
+			return 0;
+		}
+		return count.intValue() + 1;
+	}
 }
