@@ -14,6 +14,8 @@
     <form-bean name="detailForm" type="org.yukung.tasklet.form.DetailForm"/>
     <!-- タスク更新用 -->
     <form-bean name="updateTaskForm" type="org.yukung.tasklet.form.UpdateTaskForm"/>
+    <!-- メモ一覧表示用 -->
+    <form-bean name="memosForm" type="org.yukung.tasklet.form.MemosForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -53,6 +55,10 @@
     <action path="/update" name="updateTaskForm" type="org.yukung.tasklet.action.UpdateTaskAction" scope="request" validate="true" input="/detail.do">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="tasks"/>
+    </action>
+    <!-- 選択したタスクのメモ一覧を取得して表示する。 -->
+    <action path="/memos" name="memosForm" type="org.yukung.tasklet.action.MemosAction" scope="request">
+      <forward name="success" path="memos"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DetailDto;
+import org.yukung.tasklet.dto.MemoDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.entity.Task;
@@ -103,5 +104,15 @@ public interface TaskService {
 	 *             データベース更新エラー
 	 */
 	public void update(Task task, Memo memo) throws TaskletException;
+
+	/**
+	 * <p>
+	 * タスクIDに紐づいたメモ一覧を取得します。
+	 * </p>
+	 * 
+	 * @param taskId
+	 * @return メモ一覧画面表示用DTOを格納したList
+	 */
+	public List<MemoDto> getMemos(int taskId);
 
 }

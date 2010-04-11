@@ -17,10 +17,12 @@ package org.yukung.tasklet.factory;
 
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DetailDto;
+import org.yukung.tasklet.dto.MemoDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.dto.converter.ActivityConverter;
 import org.yukung.tasklet.dto.converter.DetailConverter;
 import org.yukung.tasklet.dto.converter.DtoConverter;
+import org.yukung.tasklet.dto.converter.MemoConverter;
 import org.yukung.tasklet.dto.converter.TaskConverter;
 
 /**
@@ -43,6 +45,8 @@ public class ConverterFactory {
 			converter = (DtoConverter<E, D>) new TaskConverter();
 		} else if (entity == DetailDto.class) {
 			converter = (DtoConverter<E, D>) new DetailConverter();
+		} else if (entity == MemoDto.class) {
+			converter = (DtoConverter<E, D>) new MemoConverter();
 		}
 		return converter;
 	}

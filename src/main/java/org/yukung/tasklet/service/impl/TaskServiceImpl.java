@@ -23,6 +23,7 @@ import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DetailDto;
+import org.yukung.tasklet.dto.MemoDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
@@ -161,5 +162,24 @@ public class TaskServiceImpl implements TaskService {
 				.doubleValue();
 		accumulatedTime += task.getActualTime();
 		return accumulatedTime;
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.TaskService#getMemos(int)
+	 */
+	@Override
+	public List<MemoDto> getMemos(int taskId) {
+		List<Memo> memos = memoDao.getMemosByTaskId(taskId);
+
+		// メモが1件も登録されていない場合、空のListを返す
+		if (memos == null) {
+			return new ArrayList<MemoDto>();
+		}
+
+		DtoConverter<Memo, MemoDto> converter = ConverterFactory
+				.createDtoConverter(MemoDto.class);
+		return converter.convert(memos);
 	}
 }

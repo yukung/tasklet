@@ -57,4 +57,10 @@
 		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/detailInfo.jsp" />
 	</definition>
 
+	<definition name="memos" extends="base">
+		<put name="title" value="メモの一覧と追加" />
+		<put name="main" value="/WEB-INF/jsp/tiles/user/memo.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/memoInfo.jsp" />
+	</definition>
+
 </tiles-definitions>

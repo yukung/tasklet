@@ -61,7 +61,7 @@
 							<td class="align-right"><c:out value="${task.actualTime}" /></td>
 							<td class="align-center">
 								<c:if test="${task.memoCount != 0}">
-									<html:link action="/memos"><c:out value="${task.memoCount}" /></html:link>
+									<html:link action="/memos" paramId="taskId" paramName="task" paramProperty="id"><c:out value="${task.memoCount}" /></html:link>
 								</c:if>
 							</td>
 						</tr>
