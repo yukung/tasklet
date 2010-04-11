@@ -93,7 +93,7 @@ public class TaskTxLogic {
 			// メモ欄の入力があった場合はメモテーブルにデータを追加
 			if (!memo.getContents().equals("")) {
 				// メモテーブルの最新ソート順を追加
-				int seq = getSeqOfMemo(task);
+				int seq = getSeq(task);
 				memo.setSeq(seq);
 
 				// タスク情報のIDとメモ情報のIDを紐付け
@@ -118,7 +118,7 @@ public class TaskTxLogic {
 	 * @param task
 	 * @return ソート順の最大値
 	 */
-	private int getSeqOfMemo(Task task) {
+	private int getSeq(Task task) {
 		// ソート順の取得
 		Integer seq = memoDao.getMaxSeqOfMemos(task.getId());
 		if (seq == null) {

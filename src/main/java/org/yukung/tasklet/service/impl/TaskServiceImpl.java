@@ -208,10 +208,10 @@ public class TaskServiceImpl implements TaskService {
 	 * @return メモのソート順最大値
 	 */
 	private int getSeq(int taskId) {
-		Integer count = memoDao.getMaxSeqOfMemos(taskId);
-		if (count == null) {
+		Integer seq = memoDao.getMaxSeqOfMemos(taskId);
+		if (seq == null) {
 			return 0;
 		}
-		return count.intValue() + 1;
+		return seq.intValue() + 1;
 	}
 }
