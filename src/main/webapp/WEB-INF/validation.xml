@@ -172,6 +172,18 @@
         	</field>
         </form>
 
+        <!-- メモ追加フォーム -->
+        <form name="addMemoForm">
+        	<field property="contents" depends="maxlength">
+        		<arg position="0" key="メモ" resource="false" />
+        		<arg position="1" key="${var:maxlength}" resource="false" />
+        		<var>
+        			<var-name>maxlength</var-name>
+        			<var-value>1000</var-value>
+        		</var>
+        	</field>
+        </form>
+
     </formset>
 
 </form-validation>
