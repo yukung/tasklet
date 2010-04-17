@@ -160,4 +160,24 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		runner.update(conn, sql, params);
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.TaskDao#modifyTask(org.yukung.tasklet.entity.Task)
+	 */
+	@Override
+	public void modifyTask(Task task) throws TaskletException {
+		String sql = getSQLFromPropertyFile("modifyTask");
+		Object[] params = { task.getTitle(),
+				Integer.valueOf(task.getPriorityCode()), task.getPeriod(),
+				Double.valueOf(task.getEstimatedTime()),
+				Integer.valueOf(task.getId()) };
+		try {
+			runner.update(sql, params);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
 }

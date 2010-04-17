@@ -214,4 +214,16 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return seq.intValue() + 1;
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.TaskService#modify(org.yukung.tasklet.entity
+	 * .Task)
+	 */
+	@Override
+	public void modify(Task task) throws TaskletException {
+		taskDao.modifyTask(task);
+	}
 }

@@ -127,4 +127,15 @@ public interface TaskService {
 	 */
 	public void add(Memo memo) throws TaskletException;
 
+	/**
+	 * <p>
+	 * タスク情報を修正します。
+	 * </p>
+	 * 
+	 * @param task
+	 * @throws TaskletException
+	 *             データベース更新エラー
+	 */
+	public void modify(Task task) throws TaskletException;
+
 }

@@ -94,4 +94,15 @@ public interface TaskDao {
 	 */
 	public void updateTask(Connection conn, Task task) throws SQLException;
 
+	/**
+	 * <p>
+	 * タスク情報を元にタスクを修正します。
+	 * </p>
+	 * 
+	 * @param task
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void modifyTask(Task task) throws TaskletException;
+
 }
