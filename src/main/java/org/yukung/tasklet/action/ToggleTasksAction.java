@@ -59,7 +59,7 @@ public class ToggleTasksAction extends AbstractAction {
 		ToggleTasksForm toggleTasksForm = (ToggleTasksForm) form;
 		int activityId = Integer.parseInt(toggleTasksForm.getActivityId());
 
-		boolean showsCompleted = toggleshowsCompleted(request);
+		boolean onlyIncompleted = toggleOnlyIncompleted(request);
 
 		// アクティビティIDとアクティビティ名の取得
 		TaskService taskService = new TaskServiceImpl();
@@ -69,7 +69,8 @@ public class ToggleTasksAction extends AbstractAction {
 		// タスク情報の取得
 		List<TaskDto> tasks = taskService.show(activityId);
 		int completed = CalculateUtil.countCompleted(tasks);
-		if (tasks.size() == 0 || (showsCompleted && tasks.size() == completed)) {
+		if (tasks.size() == 0
+				|| (onlyIncompleted && tasks.size() == completed)) {
 			ActionMessages messages = new ActionMessages();
 			ActionMessage message = new ActionMessage("messages.notask");
 			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
@@ -87,17 +88,17 @@ public class ToggleTasksAction extends AbstractAction {
 	 * </p>
 	 * 
 	 * @param request
-	 * @return 表示モード。Trueの場合完了タスクを表示します。<br>
-	 *         Falseの場合完了タスクを表示しません。
+	 * @return 表示モード。Trueの場合完了タスクを非表示にします。<br>
+	 *         Falseの場合完了タスクを表示します。
 	 */
-	private boolean toggleshowsCompleted(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Object showsCompleted = session.getAttribute("showsCompleted");
-		if (showsCompleted != null && showsCompleted.equals(Boolean.TRUE)) {
-			session.setAttribute("showsCompleted", Boolean.FALSE);
+	private boolean toggleOnlyIncompleted(HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+		Object onlyIncompleted = session.getAttribute("onlyIncompleted");
+		if (onlyIncompleted != null && onlyIncompleted.equals(Boolean.TRUE)) {
+			session.setAttribute("onlyIncompleted", Boolean.FALSE);
 			return false;
 		} else {
-			session.setAttribute("showsCompleted", Boolean.TRUE);
+			session.setAttribute("onlyIncompleted", Boolean.TRUE);
 			return true;
 		}
 	}

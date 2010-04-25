@@ -61,6 +61,7 @@ public class LoginAction extends AbstractAction {
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
+			session.setAttribute("onlyIncompleted", Boolean.TRUE); // 完了タスクを非表示
 			return mapping.findForward(SUCCESS);
 		} else {
 			ActionMessages errors = new ActionMessages();

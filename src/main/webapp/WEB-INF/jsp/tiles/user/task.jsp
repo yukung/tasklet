@@ -29,7 +29,7 @@
 						</tr>
 						<c:forEach var="task" items="${tasks}" varStatus="status">
 						<c:choose>
-						<c:when test="${showsCompleted}">
+						<c:when test="${onlyIncompleted}">
 						<c:if test="${task.status != 'FINISH'}">
 						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 							<td class="first align-center">

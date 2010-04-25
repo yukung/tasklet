@@ -95,10 +95,10 @@ public class AddTaskAction extends AbstractAction {
 		// タスク一覧を再取得
 		List<TaskDto> tasks = taskService.show(task.getActivityId());
 		int completed = CalculateUtil.countCompleted(tasks);
-		Boolean showsCompleted = (Boolean) request.getSession(true)
-				.getAttribute("showsCompleted");
+		Boolean onlyIncompleted = (Boolean) request.getSession(true)
+				.getAttribute("onlyIncompleted");
 		if (tasks.size() == 0
-				|| (showsCompleted.booleanValue() && tasks.size() == completed)) {
+				|| (onlyIncompleted.booleanValue() && tasks.size() == completed)) {
 			ActionMessages messages = new ActionMessages();
 			ActionMessage message = new ActionMessage("messages.notask");
 			messages.add(ActionMessages.GLOBAL_MESSAGE, message);

@@ -46,7 +46,7 @@ public class LogoutAction extends AbstractAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession().getAttribute("user") != null) {
 			request.getSession().removeAttribute("user");
-			request.getSession().removeAttribute("showsCompleted");
+			request.getSession().removeAttribute("onlyIncompleted");
 		}
 		return mapping.findForward(SUCCESS);
 	}
