@@ -20,6 +20,8 @@
     <form-bean name="addMemoForm" type="org.yukung.tasklet.form.AddMemoForm"/>
     <!-- タスク修正用 -->
     <form-bean name="modifyTaskForm" type="org.yukung.tasklet.form.ModifyTaskForm"/>
+    <!-- タスク操作用 -->
+    <form-bean name="operateTaskForm" type="org.yukung.tasklet.form.OperateTaskForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -77,6 +79,10 @@
     <!-- タスク情報を修正する。 -->
     <action path="/modifyTask" name="modifyTaskForm" type="org.yukung.tasklet.action.ModifyTaskAction" scope="request" validate="true" input="modify">
       <set-property property="cancellable" value="true"/>
+      <forward name="success" path="tasks"/>
+    </action>
+    <!-- タスクを操作する。 -->
+    <action path="/operate" name="operateTaskForm" type="org.yukung.tasklet.action.OperateTaskAction" scope="request" parameter="complete,delete,default=error">
       <forward name="success" path="tasks"/>
     </action>
   </action-mappings>

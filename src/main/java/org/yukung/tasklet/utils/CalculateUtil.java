@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.yukung.tasklet.util;
+package org.yukung.tasklet.utils;
 
 import static org.yukung.tasklet.common.Constants.SECONDS_OF_DAY;
 

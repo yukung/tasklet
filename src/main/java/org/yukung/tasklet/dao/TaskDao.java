@@ -100,9 +100,35 @@ public interface TaskDao {
 	 * </p>
 	 * 
 	 * @param task
+	 *            タスク情報Entity
 	 * @throws TaskletException
 	 *             DB更新エラー
 	 */
 	public void modifyTask(Task task) throws TaskletException;
+
+	/**
+	 * <p>
+	 * 選択されたタスクを完了します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param checked
+	 *            選択されたタスクIDの配列
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void completeTasks(Connection conn, String[] checked)
+			throws SQLException;
+
+	/**
+	 * <p>
+	 * 未完了のタスク件数を取得します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 * @return 未完了のタスク件数
+	 */
+	public Integer getIncompleteCount(int activityId);
 
 }

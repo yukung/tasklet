@@ -24,7 +24,7 @@ import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
-import org.yukung.tasklet.util.CalculateUtil;
+import org.yukung.tasklet.utils.CalculateUtil;
 
 /**
  * <p>

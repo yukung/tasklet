@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.DbUtils;
+import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.entity.Memo;
@@ -36,6 +37,9 @@ import org.yukung.tasklet.factory.DaoFactory;
  * 
  */
 public class TaskTxLogic {
+
+	/** アクティビティ情報DAO */
+	private ActivityDao activityDao;
 
 	/** タスク情報DAO */
 	private TaskDao taskDao;
@@ -66,8 +70,23 @@ public class TaskTxLogic {
 	 * @param memoDao
 	 */
 	public TaskTxLogic(TaskDao taskDao, MemoDao memoDao) {
+		this.activityDao = null;
 		this.taskDao = taskDao;
 		this.memoDao = memoDao;
+	}
+
+	/**
+	 * <p>
+	 * コンストラクタ。
+	 * </p>
+	 * 
+	 * @param activityDao
+	 * @param taskDao
+	 */
+	public TaskTxLogic(ActivityDao activityDao, TaskDao taskDao) {
+		this.activityDao = activityDao;
+		this.taskDao = taskDao;
+		this.memoDao = null;
 	}
 
 	/**
@@ -125,6 +144,37 @@ public class TaskTxLogic {
 			return 0;
 		}
 		return seq.intValue() + 1;
+	}
+
+	/**
+	 * <p>
+	 * タスクを完了します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 * @param checked
+	 *            完了対象のタスクIDの配列
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void complete(int activityId, String[] checked)
+			throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			taskDao.completeTasks(conn, checked);
+			int count = taskDao.getIncompleteCount(activityId).intValue();
+			if (count == 0) {
+				activityDao.completeActivity(conn, activityId);
+			}
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 
 }

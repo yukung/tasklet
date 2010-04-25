@@ -226,4 +226,19 @@ public class TaskServiceImpl implements TaskService {
 	public void modify(Task task) throws TaskletException {
 		taskDao.modifyTask(task);
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.TaskService#complete(int,
+	 * java.lang.String[])
+	 */
+	@Override
+	public void complete(int activityId, String[] checked)
+			throws TaskletException {
+
+		TaskTxLogic tx = new TaskTxLogic(activityDao, taskDao);
+		tx.complete(activityId, checked);
+
+	}
 }

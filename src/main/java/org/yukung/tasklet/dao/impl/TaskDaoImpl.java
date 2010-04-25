@@ -30,6 +30,7 @@ import org.yukung.tasklet.dao.TaskDao;
 import org.yukung.tasklet.entity.Task;
 import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
+import org.yukung.tasklet.utils.StringUtil;
 
 /**
  * <p>
@@ -180,4 +181,35 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#completeTasks(java.sql.Connection,
+	 * java.lang.String[])
+	 */
+	@Override
+	public void completeTasks(Connection conn, String[] checked)
+			throws SQLException {
+		String sql = StringUtil.createBindVariables(checked,
+				getSQLFromPropertyFile("completeTasks"));
+		Object[] params = checked;
+		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#getIncompleteCount(int)
+	 */
+	@Override
+	public Integer getIncompleteCount(int activityId) {
+		String sql = getSQLFromPropertyFile("getIncompleteCount");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner
+					.query(sql, rsh, Integer.valueOf(activityId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
 }

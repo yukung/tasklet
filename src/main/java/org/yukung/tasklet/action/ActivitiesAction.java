@@ -31,7 +31,7 @@ import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.service.ActivityService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
-import org.yukung.tasklet.util.Pager;
+import org.yukung.tasklet.utils.Pager;
 
 /**
  * <p>

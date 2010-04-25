@@ -123,4 +123,19 @@ public interface ActivityDao {
 	 */
 	public Activity getActivityInfo(int activityId);
 
+	/**
+	 * <p>
+	 * アクティビティを完了にします。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * 
+	 * @param activityId
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void completeActivity(Connection conn, int activityId)
+			throws SQLException;
+
 }

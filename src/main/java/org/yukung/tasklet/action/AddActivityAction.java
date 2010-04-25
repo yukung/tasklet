@@ -36,7 +36,7 @@ import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.AddActivityForm;
 import org.yukung.tasklet.service.ActivityService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
-import org.yukung.tasklet.util.Pager;
+import org.yukung.tasklet.utils.Pager;
 
 /**
  * <p>

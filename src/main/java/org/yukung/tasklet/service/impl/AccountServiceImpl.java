@@ -22,7 +22,7 @@ import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.logic.AccountTxLogic;
 import org.yukung.tasklet.service.AccountService;
-import org.yukung.tasklet.util.PasswordUtil;
+import org.yukung.tasklet.utils.PasswordUtil;
 
 /**
  * <p>

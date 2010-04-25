@@ -3,7 +3,7 @@
 			<div id="main">
 
 				<h2><c:out value="${activity.title}"></c:out></h2>
-				<html:form action="/addTask">
+				<html:form action="/operate">
 				<html:messages id="msg" message="true">
 					<h3 class="message"><c:out value="${msg}" /></h3>
 				</html:messages>
@@ -11,13 +11,14 @@
 					<c:if test="${not empty tasks}">
 					<p>
 						<label>タスク操作</label>
-						<html:submit property="done" value="完了" styleClass="button" />
+						<html:hidden property="activityId" value="${activity.id}" />
+						<html:submit property="complete" value="完了" styleClass="button" />
 						<html:submit property="delete" value="削除" styleClass="button" />
 					</p>
 
 					<table>
 						<tr>
-							<th class="first"></th>
+							<th class="first align-center"><input type="checkbox" onclick="selectAll(this.checked);" /></th>
 							<th class="task">タスク</th>
 							<th>優先度</th>
 							<th>状態</th>
@@ -28,7 +29,9 @@
 						</tr>
 						<c:forEach var="task" items="${tasks}" varStatus="status">
 						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
-							<td class="first align-center"><%-- <html:multibox property="selected"><c:out value="${task.id}" /></html:multibox> --%></td>
+							<td class="first align-center">
+								<c:if test="${task.status != 'FINISH'}"><html:multibox property="checked" value="${task.id}"/></c:if>
+							</td>
 							<td><html:link action="/detail" paramId="id" paramName="task" paramProperty="id"><c:out value="${task.title}"></c:out></html:link></td>
 							<td class="align-center">
 							<c:choose>

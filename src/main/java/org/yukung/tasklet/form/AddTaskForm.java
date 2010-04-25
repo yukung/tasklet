@@ -23,8 +23,8 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 import org.yukung.tasklet.common.Priority;
-import org.yukung.tasklet.util.DateConverter;
-import org.yukung.tasklet.util.EnumConverter;
+import org.yukung.tasklet.utils.DateConverter;
+import org.yukung.tasklet.utils.EnumConverter;
 
 /**
  * <p>

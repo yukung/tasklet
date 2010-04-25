@@ -19,7 +19,7 @@ import java.sql.Date;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.struts.validator.ValidatorForm;
-import org.yukung.tasklet.util.DateConverter;
+import org.yukung.tasklet.utils.DateConverter;
 
 /**
  * <p>

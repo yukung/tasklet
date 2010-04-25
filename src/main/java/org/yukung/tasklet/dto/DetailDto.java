@@ -21,7 +21,7 @@ import java.util.List;
 import org.yukung.tasklet.common.Priority;
 import org.yukung.tasklet.common.Status;
 import org.yukung.tasklet.entity.Memo;
-import org.yukung.tasklet.util.CalculateUtil;
+import org.yukung.tasklet.utils.CalculateUtil;
 
 /**
  * <p>

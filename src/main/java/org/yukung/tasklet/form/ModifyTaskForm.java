@@ -20,8 +20,8 @@ import java.sql.Date;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.struts.validator.ValidatorActionForm;
 import org.yukung.tasklet.common.Priority;
-import org.yukung.tasklet.util.DateConverter;
-import org.yukung.tasklet.util.EnumConverter;
+import org.yukung.tasklet.utils.DateConverter;
+import org.yukung.tasklet.utils.EnumConverter;
 
 /**
  * <p>

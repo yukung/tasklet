@@ -15,6 +15,8 @@
  */
 package org.yukung.tasklet.util;
 
+import org.yukung.tasklet.utils.PasswordUtil;
+
 import junit.framework.TestCase;
 
 /**
@@ -24,7 +26,7 @@ import junit.framework.TestCase;
 public class PasswordUtilTest extends TestCase {
 
 	/**
-	 * {@link org.yukung.tasklet.util.PasswordUtil#encrypt(java.lang.String)}
+	 * {@link org.yukung.tasklet.utils.PasswordUtil#encrypt(java.lang.String)}
 	 * のためのテスト・メソッド。
 	 * 
 	 */

@@ -179,4 +179,18 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#completeActivity(java.sql.Connection,
+	 * int)
+	 */
+	@Override
+	public void completeActivity(Connection conn, int activityId)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("completeActivity");
+		runner.update(conn, sql, Integer.valueOf(activityId));
+	}
 }

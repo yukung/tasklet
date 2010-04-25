@@ -19,7 +19,7 @@ import java.util.Date;
 
 import org.yukung.tasklet.common.Priority;
 import org.yukung.tasklet.common.Status;
-import org.yukung.tasklet.util.CalculateUtil;
+import org.yukung.tasklet.utils.CalculateUtil;
 
 /**
  * <p>

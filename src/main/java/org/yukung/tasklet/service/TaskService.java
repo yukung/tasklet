@@ -67,7 +67,7 @@ public interface TaskService {
 	 * @param task
 	 *            タスク情報Entity
 	 * @exception TaskletException
-	 *                データベース登録エラー
+	 *                DB登録エラー
 	 */
 	public void add(Task task) throws TaskletException;
 
@@ -101,7 +101,7 @@ public interface TaskService {
 	 * @param memo
 	 *            メモ情報Entity
 	 * @throws TaskletException
-	 *             データベース更新エラー
+	 *             DB更新エラー
 	 */
 	public void update(Task task, Memo memo) throws TaskletException;
 
@@ -123,7 +123,7 @@ public interface TaskService {
 	 * @param memo
 	 *            メモ情報Entity
 	 * @exception TaskletException
-	 *                データベース登録エラー
+	 *                DB登録エラー
 	 */
 	public void add(Memo memo) throws TaskletException;
 
@@ -134,8 +134,17 @@ public interface TaskService {
 	 * 
 	 * @param task
 	 * @throws TaskletException
-	 *             データベース更新エラー
+	 *             DB更新エラー
 	 */
 	public void modify(Task task) throws TaskletException;
+
+	/**
+	 * @param activityId
+	 * @param checked
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void complete(int activityId, String[] checked)
+			throws TaskletException;
 
 }
