@@ -31,6 +31,7 @@ import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.form.ToggleTasksForm;
 import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.TaskServiceImpl;
+import org.yukung.tasklet.utils.CalculateUtil;
 
 /**
  * <p>
@@ -55,10 +56,10 @@ public class ToggleTasksAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		toggleshowsCompleted(request);
+		ToggleTasksForm toggleTasksForm = (ToggleTasksForm) form;
+		int activityId = Integer.parseInt(toggleTasksForm.getActivityId());
 
-		ToggleTasksForm toggleTaskForm = (ToggleTasksForm) form;
-		int activityId = Integer.parseInt(toggleTaskForm.getActivityId());
+		boolean showsCompleted = toggleshowsCompleted(request);
 
 		// アクティビティIDとアクティビティ名の取得
 		TaskService taskService = new TaskServiceImpl();
@@ -67,7 +68,8 @@ public class ToggleTasksAction extends AbstractAction {
 
 		// タスク情報の取得
 		List<TaskDto> tasks = taskService.show(activityId);
-		if (tasks.size() == 0) {
+		int completed = CalculateUtil.countCompleted(tasks);
+		if (tasks.size() == 0 || (showsCompleted && tasks.size() == completed)) {
 			ActionMessages messages = new ActionMessages();
 			ActionMessage message = new ActionMessage("messages.notask");
 			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
@@ -85,14 +87,18 @@ public class ToggleTasksAction extends AbstractAction {
 	 * </p>
 	 * 
 	 * @param request
+	 * @return 表示モード。Trueの場合完了タスクを表示します。<br>
+	 *         Falseの場合完了タスクを表示しません。
 	 */
-	private void toggleshowsCompleted(HttpServletRequest request) {
+	private boolean toggleshowsCompleted(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Object showsCompleted = session.getAttribute("showsCompleted");
 		if (showsCompleted != null && showsCompleted.equals(Boolean.TRUE)) {
 			session.setAttribute("showsCompleted", Boolean.FALSE);
+			return false;
 		} else {
 			session.setAttribute("showsCompleted", Boolean.TRUE);
+			return true;
 		}
 	}
 }

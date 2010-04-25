@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.yukung.tasklet.common.Status;
+import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Task;
 
 /**
@@ -241,4 +242,23 @@ public final class CalculateUtil {
 
 		return days;
 	}
+
+	/**
+	 * <p>
+	 * 完了タスクの数をカウントします。
+	 * </p>
+	 * 
+	 * @param tasks
+	 * @return 完了タスク数
+	 */
+	public static int countCompleted(List<TaskDto> tasks) {
+		int completed = 0;
+		for (TaskDto taskDto : tasks) {
+			if (taskDto.getStatus() == Status.FINISH) {
+				completed++;
+			}
+		}
+		return completed;
+	}
+
 }

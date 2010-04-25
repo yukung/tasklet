@@ -36,6 +36,7 @@ import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.AddMemoForm;
 import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.TaskServiceImpl;
+import org.yukung.tasklet.utils.CalculateUtil;
 
 /**
  * <p>
@@ -93,12 +94,25 @@ public class AddMemoAction extends AbstractAction {
 			addMemoForm.setContents(""); // メモ入力欄を初期化
 			return mapping.findForward(SUCCESS);
 		} else {
-			// キャンセルの場合はタスク一覧を再取得
+			// アクティビティIDとアクティビティ名の取得
 			int activityId = taskService.getActivityId(memo.getTaskId());
 			ActivityDto activity = taskService.getActivityInfo(activityId);
 			request.setAttribute("activity", activity);
+
+			// タスク一覧を再取得
 			List<TaskDto> tasks = taskService.show(activityId);
-			request.setAttribute("tasks", tasks);
+			int completed = CalculateUtil.countCompleted(tasks);
+			Boolean showsCompleted = (Boolean) request.getSession(true)
+					.getAttribute("showsCompleted");
+			if (tasks.size() == 0
+					|| (showsCompleted.booleanValue() && tasks.size() == completed)) {
+				ActionMessages messages = new ActionMessages();
+				ActionMessage message = new ActionMessage("messages.notask");
+				messages.add(ActionMessages.GLOBAL_MESSAGE, message);
+				saveMessages(request, messages);
+			} else {
+				request.setAttribute("tasks", tasks);
+			}
 			return mapping.findForward(CANCEL);
 		}
 	}

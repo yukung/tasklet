@@ -30,6 +30,7 @@ import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.form.TasksForm;
 import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.TaskServiceImpl;
+import org.yukung.tasklet.utils.CalculateUtil;
 
 /**
  * <p>
@@ -64,7 +65,11 @@ public class TasksAction extends AbstractAction {
 
 		// タスク情報の取得
 		List<TaskDto> tasks = taskService.show(activityId);
-		if (tasks.size() == 0) {
+		int completed = CalculateUtil.countCompleted(tasks);
+		Boolean showsCompleted = (Boolean) request.getSession(true)
+				.getAttribute("showsCompleted");
+		if (tasks.size() == 0
+				|| (showsCompleted.booleanValue() && tasks.size() == completed)) {
 			ActionMessages messages = new ActionMessages();
 			ActionMessage message = new ActionMessage("messages.notask");
 			messages.add(ActionMessages.GLOBAL_MESSAGE, message);

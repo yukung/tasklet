@@ -28,7 +28,9 @@
 							<th>メモ</th>
 						</tr>
 						<c:forEach var="task" items="${tasks}" varStatus="status">
-						<c:if test="${showsCompleted || task.status != 'FINISH'}">
+						<c:choose>
+						<c:when test="${showsCompleted}">
+						<c:if test="${task.status != 'FINISH'}">
 						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 							<td class="first align-center">
 								<c:if test="${task.status != 'FINISH'}"><html:multibox property="checked" value="${task.id}"/></c:if>
@@ -70,6 +72,50 @@
 							</td>
 						</tr>
 						</c:if>
+						</c:when>
+						<c:otherwise>
+						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
+							<td class="first align-center">
+								<c:if test="${task.status != 'FINISH'}"><html:multibox property="checked" value="${task.id}"/></c:if>
+							</td>
+							<td><html:link action="/detail" paramId="id" paramName="task" paramProperty="id"><c:out value="${task.title}"></c:out></html:link></td>
+							<td class="align-center">
+							<c:choose>
+								<c:when test="${task.priority == 'HIGH'}">
+									<span class="attention"><c:out value="${task.priority.priorityName}" /></span>
+								</c:when>
+								<c:when test="${task.priority == 'NOTHING'}"><%-- 何も出力しない --%></c:when>
+								<c:otherwise>
+									<c:out value="${task.priority.priorityName}" />
+								</c:otherwise>
+							</c:choose>
+							</td>
+							<td class="align-center"><c:out value="${task.status.statusName}" /></td>
+							<td class="align-right">
+							<c:choose>
+								<c:when test="${task.status == 'FINISH'}">
+									<fmt:formatDate value="${task.finishedOn}" />
+								</c:when>
+								<c:otherwise>
+									<c:if test="${task.overdue}">
+										<span class="attention"><fmt:formatDate value="${task.period}" /></span>
+									</c:if>
+									<c:if test="${!task.overdue}">
+										<fmt:formatDate value="${task.period}" />
+									</c:if>
+								</c:otherwise>
+							</c:choose>
+							</td>
+							<td class="align-right"><c:out value="${task.estimatedTime}" /></td>
+							<td class="align-right"><c:out value="${task.actualTime}" /></td>
+							<td class="align-center">
+								<c:if test="${task.memoCount != 0}">
+									<html:link action="/memos" paramId="taskId" paramName="task" paramProperty="id"><c:out value="${task.memoCount}" /></html:link>
+								</c:if>
+							</td>
+						</tr>
+						</c:otherwise>
+						</c:choose>
 						</c:forEach>
 					</table>
 					</c:if>
