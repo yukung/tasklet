@@ -22,6 +22,8 @@
     <form-bean name="modifyTaskForm" type="org.yukung.tasklet.form.ModifyTaskForm"/>
     <!-- タスク操作用 -->
     <form-bean name="operateTaskForm" type="org.yukung.tasklet.form.OperateTaskForm"/>
+    <!-- タスク表示切替用 -->
+    <form-bean name="toggleTasksForm" type="org.yukung.tasklet.form.ToggleTasksForm"/>
   </form-beans>
   <global-exceptions>
   </global-exceptions>
@@ -83,6 +85,10 @@
     </action>
     <!-- タスクを操作する。 -->
     <action path="/operate" name="operateTaskForm" type="org.yukung.tasklet.action.OperateTaskAction" scope="request" parameter="complete,delete,default=error">
+      <forward name="success" path="tasks"/>
+    </action>
+    <!-- 完了タスクを表示する。 -->
+    <action path="/toggle" name="toggleTasksForm" type="org.yukung.tasklet.action.ToggleTasksAction" scope="request">
       <forward name="success" path="tasks"/>
     </action>
   </action-mappings>

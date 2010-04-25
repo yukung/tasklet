@@ -28,7 +28,7 @@
 							<th>メモ</th>
 						</tr>
 						<c:forEach var="task" items="${tasks}" varStatus="status">
-						<c:if test="${task.status != 'FINISH'}">
+						<c:if test="${showsCompleted || task.status != 'FINISH'}">
 						<tr ${status.index % 2 == 0 ? "class=\"row-a\"" : "class=\"row-b\""}>
 							<td class="first align-center">
 								<c:if test="${task.status != 'FINISH'}"><html:multibox property="checked" value="${task.id}"/></c:if>
