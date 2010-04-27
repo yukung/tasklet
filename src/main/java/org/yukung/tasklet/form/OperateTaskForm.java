@@ -17,8 +17,8 @@ package org.yukung.tasklet.form;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
  * <p>
@@ -28,7 +28,7 @@ import org.apache.struts.action.ActionMapping;
  * @author yukung
  * 
  */
-public class OperateTaskForm extends ActionForm {
+public class OperateTaskForm extends ValidatorForm {
 
 	private static final long serialVersionUID = 1L;
 

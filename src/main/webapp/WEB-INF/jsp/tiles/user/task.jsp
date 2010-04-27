@@ -14,6 +14,7 @@
 						<html:hidden property="activityId" value="${activity.id}" />
 						<html:submit property="complete" value="完了" styleClass="button" />
 						<html:submit property="delete" value="削除" styleClass="button" />
+						<html:errors/>
 					</p>
 
 					<table>

@@ -218,6 +218,12 @@
         	</field>
         </form>
 
+        <form name="operateTaskForm">
+        	<field property="checked" depends="required">
+        		<msg name="required" key="errors.select" />
+        	</field>
+        </form>
+
     </formset>
 
 </form-validation>

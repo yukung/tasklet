@@ -84,7 +84,7 @@
       <forward name="success" path="tasks"/>
     </action>
     <!-- タスクを操作する。 -->
-    <action path="/operate" name="operateTaskForm" type="org.yukung.tasklet.action.OperateTaskAction" scope="request" parameter="complete,delete,default=error">
+    <action path="/operate" name="operateTaskForm" type="org.yukung.tasklet.action.OperateTaskAction" scope="request" parameter="complete,delete,default=error" validate="true" input="/tasks.do">
       <forward name="success" path="tasks"/>
     </action>
     <!-- 完了タスクの表示をトグルする。 -->

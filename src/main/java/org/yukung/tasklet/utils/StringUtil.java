@@ -38,7 +38,7 @@ public final class StringUtil {
 	 * SQLのIN句に用いるバインド変数文字列を動的に生成します。
 	 * </p>
 	 * <p>
-	 * 編集対象のIN句はSQLの最後である必要があります。
+	 * 編集対象のIN句はSQLの最後に記述されている必要があります。
 	 * </p>
 	 * 
 	 * @param params
