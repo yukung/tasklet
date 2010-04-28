@@ -31,6 +31,7 @@ import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.MemoDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Memo;
+import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.AddMemoForm;
@@ -94,9 +95,13 @@ public class AddMemoAction extends AbstractAction {
 			addMemoForm.setContents(""); // メモ入力欄を初期化
 			return mapping.findForward(SUCCESS);
 		} else {
+			User user = (User) request.getSession().getAttribute("user");
+			int userId = user.getId();
+
 			// アクティビティIDとアクティビティ名の取得
 			int activityId = taskService.getActivityId(memo.getTaskId());
-			ActivityDto activity = taskService.getActivityInfo(activityId);
+			ActivityDto activity = taskService.getActivityInfo(activityId,
+					userId);
 			request.setAttribute("activity", activity);
 
 			// タスク一覧を再取得

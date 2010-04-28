@@ -18,6 +18,7 @@ package org.yukung.tasklet.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.yukung.tasklet.entity.Activity;
 
@@ -138,4 +139,12 @@ public interface ActivityDao {
 	public void completeActivity(Connection conn, int activityId)
 			throws SQLException;
 
+	/**
+	 * <p>
+	 * ユーザが持つアクティビティのIDと名称を持つMapのリストを取得します。
+	 * 
+	 * @param userId
+	 * @return Object型の配列としてアクティビティIDを持つList
+	 */
+	public List<Map<String, Object>> getMoreActivities(int userId);
 }

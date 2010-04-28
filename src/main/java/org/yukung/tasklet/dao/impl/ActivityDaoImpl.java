@@ -18,12 +18,14 @@ package org.yukung.tasklet.dao.impl;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.ActivityDao;
@@ -192,5 +194,21 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			throws SQLException {
 		String sql = getSQLFromPropertyFile("completeActivity");
 		runner.update(conn, sql, Integer.valueOf(activityId));
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getMoreActivities(int)
+	 */
+	@Override
+	public List<Map<String, Object>> getMoreActivities(int userId) {
+		String sql = getSQLFromPropertyFile("getMoreActivities");
+		ResultSetHandler<List<Map<String, Object>>> rsh = new MapListHandler();
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
 	}
 }

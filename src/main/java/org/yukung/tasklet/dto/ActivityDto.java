@@ -15,6 +15,9 @@
  */
 package org.yukung.tasklet.dto;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * アクティビティ一覧画面の表示用Beanクラスです。
@@ -54,6 +57,9 @@ public class ActivityDto {
 
 	/** 実績時間合計 */
 	private String actualTimeTotal;
+
+	/** 他のアクティビティID */
+	private List<Map<String, Object>> moreActivities;
 
 	/**
 	 * アクティビティIDを取得します。
@@ -244,4 +250,24 @@ public class ActivityDto {
 	public void setActualTimeTotal(String actualTimeTotal) {
 		this.actualTimeTotal = actualTimeTotal;
 	}
+
+	/**
+	 * 他のアクティビティIDを取得します。
+	 * 
+	 * @return 他のアクティビティID
+	 */
+	public List<Map<String, Object>> getMoreActivities() {
+		return moreActivities;
+	}
+
+	/**
+	 * 他のアクティビティIDを設定します。
+	 * 
+	 * @param moreActivities
+	 *            他のアクティビティID
+	 */
+	public void setMoreActivities(List<Map<String, Object>> moreActivities) {
+		this.moreActivities = moreActivities;
+	}
+
 }

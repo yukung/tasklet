@@ -28,6 +28,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.form.ToggleTasksForm;
 import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.TaskServiceImpl;
@@ -61,16 +62,18 @@ public class ToggleTasksAction extends AbstractAction {
 
 		boolean onlyIncompleted = toggleOnlyIncompleted(request);
 
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
+
 		// アクティビティIDとアクティビティ名の取得
 		TaskService taskService = new TaskServiceImpl();
-		ActivityDto activity = taskService.getActivityInfo(activityId);
+		ActivityDto activity = taskService.getActivityInfo(activityId, userId);
 		request.setAttribute("activity", activity);
 
 		// タスク情報の取得
 		List<TaskDto> tasks = taskService.show(activityId);
 		int completed = CalculateUtil.countCompleted(tasks);
-		if (tasks.size() == 0
-				|| (onlyIncompleted && tasks.size() == completed)) {
+		if (tasks.size() == 0 || (onlyIncompleted && tasks.size() == completed)) {
 			ActionMessages messages = new ActionMessages();
 			ActionMessage message = new ActionMessage("messages.notask");
 			messages.add(ActionMessages.GLOBAL_MESSAGE, message);

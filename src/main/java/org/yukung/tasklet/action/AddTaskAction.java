@@ -29,6 +29,7 @@ import org.apache.struts.action.ActionMessages;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
 import org.yukung.tasklet.entity.Task;
+import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.AddTaskForm;
@@ -87,9 +88,12 @@ public class AddTaskAction extends AbstractAction {
 			}
 		}
 
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
+
 		// アクティビティIDとアクティビティ名の取得
-		ActivityDto activity = taskService
-				.getActivityInfo(task.getActivityId());
+		ActivityDto activity = taskService.getActivityInfo(
+				task.getActivityId(), userId);
 		request.setAttribute("activity", activity);
 
 		// タスク一覧を再取得

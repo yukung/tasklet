@@ -52,11 +52,12 @@ public interface TaskService {
 	 * </p>
 	 * 
 	 * @param activityId
+	 * @param userId TODO
 	 * @return アクティビティ情報
 	 * @throws DataAccessException
 	 *             アクティビティが見つからない場合
 	 */
-	public ActivityDto getActivityInfo(int activityId)
+	public ActivityDto getActivityInfo(int activityId, int userId)
 			throws DataAccessException;
 
 	/**

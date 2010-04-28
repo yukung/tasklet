@@ -17,6 +17,7 @@ package org.yukung.tasklet.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.MemoDao;
@@ -82,7 +83,7 @@ public class TaskServiceImpl implements TaskService {
 	 * @see org.yukung.tasklet.service.TaskService#getActivityInfo(int)
 	 */
 	@Override
-	public ActivityDto getActivityInfo(int activityId)
+	public ActivityDto getActivityInfo(int activityId, int userId)
 			throws DataAccessException {
 		Activity activity = activityDao.getActivityInfo(activityId);
 
@@ -91,7 +92,15 @@ public class TaskServiceImpl implements TaskService {
 		}
 		DtoConverter<Activity, ActivityDto> converter = ConverterFactory
 				.createDtoConverter(ActivityDto.class);
-		return converter.convert(activity);
+		ActivityDto activityDto = converter.convert(activity);
+		List<Map<String, Object>> moreActivities = activityDao
+				.getMoreActivities(userId);
+		// 現在表示しているアクティビティは除く
+		for (Map<String, Object> map : moreActivities) {
+			map.remove("activity_id");
+		}
+		activityDto.setMoreActivities(moreActivities);
+		return activityDto;
 	}
 
 	/*

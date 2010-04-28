@@ -28,6 +28,7 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.actions.EventDispatchAction;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.form.OperateTaskForm;
 import org.yukung.tasklet.service.TaskService;
@@ -78,8 +79,11 @@ public class OperateTaskAction extends EventDispatchAction {
 			saveErrors(request, errors);
 		}
 
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
+
 		// アクティビティIDとアクティビティ名の取得
-		ActivityDto activity = taskService.getActivityInfo(activityId);
+		ActivityDto activity = taskService.getActivityInfo(activityId, userId);
 		request.setAttribute("activity", activity);
 
 		// タスク一覧を再取得
@@ -140,10 +144,13 @@ public class OperateTaskAction extends EventDispatchAction {
 
 		OperateTaskForm operateTaskForm = (OperateTaskForm) form;
 		int activityId = Integer.parseInt(operateTaskForm.getActivityId());
-		TaskService taskService = new TaskServiceImpl();
 
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
+
+		TaskService taskService = new TaskServiceImpl();
 		// アクティビティIDとアクティビティ名の取得
-		ActivityDto activity = taskService.getActivityInfo(activityId);
+		ActivityDto activity = taskService.getActivityInfo(activityId, userId);
 		request.setAttribute("activity", activity);
 
 		// タスク一覧を再取得

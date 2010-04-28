@@ -27,6 +27,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.form.TasksForm;
 import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.TaskServiceImpl;
@@ -58,9 +59,12 @@ public class TasksAction extends AbstractAction {
 		TasksForm tasksForm = (TasksForm) form;
 		int activityId = Integer.parseInt(tasksForm.getActivityId());
 
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
+
 		// アクティビティIDとアクティビティ名の取得
 		TaskService taskService = new TaskServiceImpl();
-		ActivityDto activity = taskService.getActivityInfo(activityId);
+		ActivityDto activity = taskService.getActivityInfo(activityId, userId);
 		request.setAttribute("activity", activity);
 
 		// タスク情報の取得
