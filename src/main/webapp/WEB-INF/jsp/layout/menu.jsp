@@ -9,7 +9,9 @@
 				<c:if test="${not empty sessionScope.user}">
 				<li id="current"><html:link action="/activities">ホーム</html:link></li>
 				</c:if>
+				<c:if test="${not empty sessionScope.user}">
 				<li><html:link href="#">設定</html:link></li>
+				</c:if>
 				<li><html:link href="#">ヘルプ</html:link></li>
 				<c:if test="${not empty sessionScope.user}">
 				<li class="last"><html:link action="/logout">ログアウト</html:link></li>
