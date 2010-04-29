@@ -6,6 +6,8 @@
   <form-beans>
     <!-- アクティビティ追加用 -->
     <form-bean name="addActivityForm" type="org.yukung.tasklet.form.AddActivityForm"/>
+    <!-- ページ遷移用 -->
+    <form-bean name="paginationForm" type="org.yukung.tasklet.form.PaginationForm"/>
     <!-- タスク一覧表示用 -->
     <form-bean name="tasksForm" type="org.yukung.tasklet.form.TasksForm"/>
     <!-- タスク追加用 -->
@@ -37,6 +39,10 @@
     <!-- ログアウト処理を行い、indexページへ遷移する。 -->
     <action path="/logout" type="org.yukung.tasklet.action.LogoutAction">
       <forward name="success" module="/" path="/index.do"/>
+    </action>
+    <!-- アクティビティ一覧画面のページ遷移を行い、アクティビティ一覧を再表示する。 -->
+    <action path="/pagination" name="paginationForm" type="org.yukung.tasklet.action.PaginationAction" scope="request">
+      <forward name="success" path="activities"/>
     </action>
     <!-- 画面入力されたアクティビティ名を元に、アクティビティ登録処理を行う。 -->
     <action path="/addActivity" name="addActivityForm" type="org.yukung.tasklet.action.AddActivityAction" scope="request" validate="true" input="/activities.do">
@@ -84,7 +90,7 @@
       <forward name="success" path="tasks"/>
     </action>
     <!-- タスクを操作する。 -->
-    <action path="/operate" name="operateTaskForm" type="org.yukung.tasklet.action.OperateTaskAction" scope="request" parameter="complete,delete,default=error" validate="true" input="/tasks.do">
+    <action path="/operate" name="operateTaskForm" type="org.yukung.tasklet.action.OperateTaskAction" scope="request" validate="true" input="/tasks.do" parameter="complete,delete,default=error">
       <forward name="success" path="tasks"/>
     </action>
     <!-- 完了タスクの表示をトグルする。 -->
