@@ -50,7 +50,7 @@
 				</table>
 				</c:if>
 
-				<c:if test="not empty pager">
+				<c:if test="${not empty pager}">
 					<c:if test="${pager.count > 10}">
 					<div class="pager align-right">
 						<c:if test="${pager.prev}">
