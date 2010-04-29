@@ -52,7 +52,8 @@ public interface TaskService {
 	 * </p>
 	 * 
 	 * @param activityId
-	 * @param userId TODO
+	 * @param userId
+	 *            TODO
 	 * @return アクティビティ情報
 	 * @throws DataAccessException
 	 *             アクティビティが見つからない場合
@@ -140,12 +141,29 @@ public interface TaskService {
 	public void modify(Task task) throws TaskletException;
 
 	/**
+	 * <p>
+	 * タスクを完了します。
+	 * </p>
+	 * 
 	 * @param activityId
 	 * @param checked
+	 *            選択されたタスクID
 	 * @throws TaskletException
 	 *             DB更新エラー
 	 */
 	public void complete(int activityId, String[] checked)
 			throws TaskletException;
+
+	/**
+	 * <p>
+	 * タスクを削除します。
+	 * </p>
+	 * 
+	 * @param checked
+	 *            選択されたタスクID
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void remove(String[] checked) throws TaskletException;
 
 }

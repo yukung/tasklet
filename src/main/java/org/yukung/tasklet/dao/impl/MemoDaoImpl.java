@@ -29,6 +29,7 @@ import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.entity.Memo;
 import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
+import org.yukung.tasklet.utils.StringUtil;
 
 /**
  * <p>
@@ -123,5 +124,20 @@ public class MemoDaoImpl extends AbstractDao implements MemoDao {
 		} catch (SQLException e) {
 			throw new TaskletException(e.getMessage(), e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.MemoDao#removeMemos(java.sql.Connection,
+	 * java.lang.String[])
+	 */
+	@Override
+	public void removeMemos(Connection conn, String[] checked)
+			throws SQLException {
+		String sql = StringUtil.createBindVariables(checked,
+				getSQLFromPropertyFile("removeMemos"));
+		Object[] params = checked;
+		runner.update(conn, sql, params);
 	}
 }

@@ -177,4 +177,30 @@ public class TaskTxLogic {
 		}
 	}
 
+	/**
+	 * <p>
+	 * タスクを削除します。
+	 * </p>
+	 * 
+	 * @param checked
+	 *            削除対象のタスクIDの配列
+	 * @exception TaskletException
+	 *                DB更新時のエラー
+	 */
+	public void remove(String[] checked) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			memoDao.removeMemos(conn, checked);
+			taskDao.removeTasks(conn, checked);
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
 }

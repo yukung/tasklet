@@ -78,4 +78,14 @@ public interface MemoDao {
 	 */
 	public void addMemoToMemos(Memo memo) throws TaskletException;
 
+	/**
+	 * @param conn
+	 *            DB接続
+	 * @param checked
+	 *            選択されたタスクIDの配列
+	 * @exception DB更新エラー
+	 */
+	public void removeMemos(Connection conn, String[] checked)
+			throws SQLException;
+
 }

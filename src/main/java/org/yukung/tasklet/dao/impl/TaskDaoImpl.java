@@ -212,4 +212,19 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#removeTasks(java.sql.Connection,
+	 * java.lang.String[])
+	 */
+	@Override
+	public void removeTasks(Connection conn, String[] checked)
+			throws SQLException {
+		String sql = StringUtil.createBindVariables(checked,
+				getSQLFromPropertyFile("removeTasks"));
+		Object[] params = checked;
+		runner.update(conn, sql, params);
+	}
 }

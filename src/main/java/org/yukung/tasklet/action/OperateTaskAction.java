@@ -123,7 +123,48 @@ public class OperateTaskAction extends EventDispatchAction {
 	public ActionForward delete(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return null;
+		OperateTaskForm operateTaskForm = (OperateTaskForm) form;
+		int activityId = Integer.parseInt(operateTaskForm.getActivityId());
+		String[] checked = operateTaskForm.getChecked();
+
+		TaskService taskService = new TaskServiceImpl();
+
+		try {
+			taskService.remove(checked);
+		} catch (TaskletException e) {
+			ActionMessages errors = new ActionMessages();
+			ActionMessage error = new ActionMessage("errors.update");
+			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
+			saveErrors(request, errors);
+		}
+
+		User user = (User) request.getSession().getAttribute("user");
+		int userId = user.getId();
+
+		// アクティビティIDとアクティビティ名の取得
+		ActivityDto activity = taskService.getActivityInfo(activityId, userId);
+		request.setAttribute("activity", activity);
+
+		// タスク一覧を再取得
+		List<TaskDto> tasks = taskService.show(activityId);
+		int completed = CalculateUtil.countCompleted(tasks);
+		Boolean onlyIncompleted = (Boolean) request.getSession(true)
+				.getAttribute("onlyIncompleted");
+		if (tasks.size() == 0
+				|| (onlyIncompleted.booleanValue() && tasks.size() == completed)) {
+			ActionMessages messages = new ActionMessages();
+			ActionMessage message = new ActionMessage("messages.notask");
+			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
+			saveMessages(request, messages);
+		} else {
+			request.setAttribute("tasks", tasks);
+		}
+
+		// チェックボックスの初期化
+		operateTaskForm.setChecked(null);
+
+		saveToken(request);
+		return mapping.findForward(SUCCESS);
 	}
 
 	/**

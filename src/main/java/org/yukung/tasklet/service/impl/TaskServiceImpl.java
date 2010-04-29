@@ -248,9 +248,19 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public void complete(int activityId, String[] checked)
 			throws TaskletException {
-
 		TaskTxLogic tx = new TaskTxLogic(activityDao, taskDao);
 		tx.complete(activityId, checked);
+	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.TaskService#remove(int,
+	 * java.lang.String[])
+	 */
+	@Override
+	public void remove(String[] checked) throws TaskletException {
+		TaskTxLogic tx = new TaskTxLogic(taskDao, memoDao);
+		tx.remove(checked);
 	}
 }

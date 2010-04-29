@@ -131,4 +131,17 @@ public interface TaskDao {
 	 */
 	public Integer getIncompleteCount(int activityId);
 
+	/**
+	 * <p>
+	 * 選択されたタスクを削除します。
+	 * </p>
+	 * 
+	 * @param conn
+	 * @param checked
+	 * @exception SQLException
+	 *                DB更新エラー
+	 */
+	public void removeTasks(Connection conn, String[] checked)
+			throws SQLException;
+
 }
