@@ -93,13 +93,16 @@ public class TaskServiceImpl implements TaskService {
 		DtoConverter<Activity, ActivityDto> converter = ConverterFactory
 				.createDtoConverter(ActivityDto.class);
 		ActivityDto activityDto = converter.convert(activity);
-		List<Map<String, Object>> moreActivities = activityDao
+		List<Map<String, Object>> origin = activityDao
 				.getMoreActivities(userId);
 		// 現在表示しているアクティビティは除く
-		for (Map<String, Object> map : moreActivities) {
-			map.remove("activity_id");
+		List<Map<String, Object>> dest = new ArrayList<Map<String, Object>>();
+		for (Map<String, Object> map : origin) {
+			if (!map.containsValue(Integer.valueOf(activityId))) {
+				dest.add(map);
+			}
 		}
-		activityDto.setMoreActivities(moreActivities);
+		activityDto.setMoreActivities(dest);
 		return activityDto;
 	}
 
