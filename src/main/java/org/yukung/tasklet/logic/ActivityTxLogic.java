@@ -17,6 +17,7 @@ package org.yukung.tasklet.logic;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.yukung.tasklet.dao.ActivityDao;
@@ -93,5 +94,68 @@ public class ActivityTxLogic {
 			throw new TaskletException(e.getMessage(), e);
 		}
 
+	}
+
+	/**
+	 * <p>
+	 * アクティビティを昇順にソートします。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void ascend(int userId) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			List<Activity> origin = activityDao.getSeqByAscending(userId);
+			// ソート順の書き換え
+			int index = 0;
+			for (Activity activity : origin) {
+				activity.setSeq(index);
+				activityDao.updateSeq(conn, activity);
+				index++;
+			}
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * アクティビティを降順にソートします。
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void descend(int userId) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			List<Activity> origin = activityDao.getSeqByDescending(userId);
+			// ソート順の書き換え
+			int index = 0;
+			for (Activity activity : origin) {
+				activity.setSeq(index);
+				activityDao.updateSeq(conn, activity);
+				index++;
+			}
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 }

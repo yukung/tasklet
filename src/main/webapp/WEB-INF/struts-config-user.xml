@@ -48,6 +48,14 @@
     <action path="/addActivity" name="addActivityForm" type="org.yukung.tasklet.action.AddActivityAction" scope="request" validate="true" input="/activities.do">
       <forward name="success" path="activities"/>
     </action>
+    <!-- アクティビティ一覧を昇順に並び替える。 -->
+    <action path="/ascend" type="org.yukung.tasklet.action.AscendAction">
+      <forward name="success" path="activities"/>
+    </action>
+    <!-- アクティビティ一覧を降順に並び替える。 -->
+    <action path="/descend" type="org.yukung.tasklet.action.DescendAction">
+      <forward name="success" path="activities"/>
+    </action>
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->
     <action path="/tasks" name="tasksForm" type="org.yukung.tasklet.action.TasksAction" scope="request">
       <forward name="success" path="tasks"/>

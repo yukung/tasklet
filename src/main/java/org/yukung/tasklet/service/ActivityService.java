@@ -68,4 +68,24 @@ public interface ActivityService {
 	 *             DB更新時のエラー
 	 */
 	public void add(Activity activity, int userId) throws TaskletException;
+
+	/**
+	 * <p>
+	 * アクティビティを昇順に並び替えます。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @exception TaskletException
+	 *                DB更新時のエラー
+	 */
+	public void ascend(int userId) throws TaskletException;
+
+	/**
+	 * @param userId
+	 *            ユーザID
+	 * @exception TaskletException
+	 *                DB更新時のエラー
+	 */
+	public void descend(int userId) throws TaskletException;
 }

@@ -147,4 +147,36 @@ public interface ActivityDao {
 	 * @return Object型の配列としてアクティビティIDを持つList
 	 */
 	public List<Map<String, Object>> getMoreActivities(int userId);
+
+	/**
+	 * <p>
+	 * アクティビティのソート順を昇順で取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 * @return アクティビティのソート順のリスト
+	 */
+	public List<Activity> getSeqByAscending(int userId);
+
+	/**
+	 * <p>
+	 * アクティビティのソート順を更新します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param activity
+	 *            アクティビティ情報Entity
+	 */
+	public void updateSeq(Connection conn, Activity activity)
+			throws SQLException;
+
+	/**
+	 * <p>
+	 * アクティビティのソート順を降順で取得します。
+	 * 
+	 * @param userId
+	 * @return アクティビティのソート順のリスト
+	 */
+	public List<Activity> getSeqByDescending(int userId);
 }

@@ -211,4 +211,53 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getSeqByAscending(int)
+	 */
+	@Override
+	public List<Activity> getSeqByAscending(int userId) {
+		String sql = getSQLFromPropertyFile("getSeqByAscending");
+		ResultSetHandler<List<Activity>> rsh = new BeanListHandler<Activity>(
+				Activity.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#updateSeq(java.sql.Connection,
+	 * org.yukung.tasklet.entity.Activity)
+	 */
+	@Override
+	public void updateSeq(Connection conn, Activity activity)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("updateSeq");
+		Object[] params = { Integer.valueOf(activity.getSeq()),
+				Integer.valueOf(activity.getId()) };
+		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getSeqByDescending(int)
+	 */
+	@Override
+	public List<Activity> getSeqByDescending(int userId) {
+		String sql = getSQLFromPropertyFile("getSeqByDescending");
+		ResultSetHandler<List<Activity>> rsh = new BeanListHandler<Activity>(
+				Activity.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
 }

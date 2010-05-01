@@ -116,4 +116,26 @@ public class ActivityServiceImpl implements ActivityService {
 		}
 		return count.intValue() + 1;
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.ActivityService#ascend(int)
+	 */
+	@Override
+	public void ascend(int userId) throws TaskletException {
+		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
+		tx.ascend(userId);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.ActivityService#descend(int)
+	 */
+	@Override
+	public void descend(int userId) throws TaskletException {
+		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
+		tx.descend(userId);
+	}
 }
