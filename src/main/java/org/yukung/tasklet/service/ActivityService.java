@@ -82,10 +82,15 @@ public interface ActivityService {
 	public void ascend(int userId) throws TaskletException;
 
 	/**
+	 * <p>
+	 * アクティビティを降順に並び替えます。
+	 * </p>
+	 * 
 	 * @param userId
 	 *            ユーザID
 	 * @exception TaskletException
 	 *                DB更新時のエラー
 	 */
 	public void descend(int userId) throws TaskletException;
+
 }

@@ -263,4 +263,15 @@ public class TaskServiceImpl implements TaskService {
 		TaskTxLogic tx = new TaskTxLogic(taskDao, memoDao);
 		tx.remove(checked);
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.TaskService#deleteAll(int)
+	 */
+	@Override
+	public void deleteAll(int activityId) throws TaskletException {
+		TaskTxLogic tx = new TaskTxLogic(activityDao, taskDao, memoDao);
+		tx.delete(activityId);
+	}
 }

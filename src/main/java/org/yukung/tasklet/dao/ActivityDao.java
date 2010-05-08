@@ -176,7 +176,30 @@ public interface ActivityDao {
 	 * アクティビティのソート順を降順で取得します。
 	 * 
 	 * @param userId
+	 *            ユーザID
 	 * @return アクティビティのソート順のリスト
 	 */
 	public List<Activity> getSeqByDescending(int userId);
+
+	/**
+	 * @param conn
+	 *            DB接続
+	 * @param activityId
+	 *            アクティビティID
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void deleteIndexes(Connection conn, int activityId)
+			throws SQLException;
+
+	/**
+	 * @param conn
+	 *            DB接続
+	 * @param activityId
+	 *            アクティビティID
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void deleteActivities(Connection conn, int activityId)
+			throws SQLException;
 }

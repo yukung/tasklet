@@ -22,6 +22,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
@@ -138,6 +139,38 @@ public class MemoDaoImpl extends AbstractDao implements MemoDao {
 		String sql = StringUtil.createBindVariables(checked,
 				getSQLFromPropertyFile("removeMemos"));
 		Object[] params = checked;
+		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.MemoDao#findMemoIdByActivityId(int)
+	 */
+	@Override
+	public List<Object[]> findMemoIdByActivityId(int activityId) {
+		String sql = getSQLFromPropertyFile("findMemoIdByActivityId");
+		ResultSetHandler<List<Object[]>> rsh = new ArrayListHandler();
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(activityId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.MemoDao#deleteMemosFromActivity(java.sql.Connection
+	 * , java.util.List)
+	 */
+	@Override
+	public void deleteMemosFromActivity(Connection conn, String[] memoIds)
+			throws SQLException {
+		String sql = StringUtil.createBindVariables(memoIds,
+				getSQLFromPropertyFile("deleteMemosFromActivity"));
+		Object[] params = memoIds;
 		runner.update(conn, sql, params);
 	}
 }

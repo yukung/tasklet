@@ -17,6 +17,7 @@ package org.yukung.tasklet.logic;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.yukung.tasklet.dao.ActivityDao;
@@ -87,6 +88,17 @@ public class TaskTxLogic {
 		this.activityDao = activityDao;
 		this.taskDao = taskDao;
 		this.memoDao = null;
+	}
+
+	/**
+	 * @param activityDao
+	 * @param taskDao
+	 * @param memoDao
+	 */
+	public TaskTxLogic(ActivityDao activityDao, TaskDao taskDao, MemoDao memoDao) {
+		this.activityDao = activityDao;
+		this.taskDao = taskDao;
+		this.memoDao = memoDao;
 	}
 
 	/**
@@ -203,4 +215,89 @@ public class TaskTxLogic {
 		}
 	}
 
+	/**
+	 * <p>
+	 * アクティビティとそれに紐づくタスク、メモを全て削除します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void delete(int activityId) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			deleteMemos(conn, activityId);
+			deleteTasks(conn, activityId);
+			activityDao.deleteIndexes(conn, activityId);
+			activityDao.deleteActivities(conn, activityId);
+
+			DbUtils.commitAndCloseQuietly(conn);
+
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * アクティビティIDに紐づくタスク全てを削除します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param activityId
+	 *            アクティビティID
+	 * 
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	private void deleteTasks(Connection conn, int activityId)
+			throws SQLException {
+		List<Object[]> tasks = taskDao.findTaskIdByActivityId(activityId);
+		if (tasks.size() != 0) {
+			String[] taskIds = new String[tasks.size()];
+			int idx = 0;
+			for (Object[] array : tasks) {
+				for (Object param : array) {
+					taskIds[idx] = String.valueOf(param);
+				}
+				idx++;
+			}
+			taskDao.deleteTasksFromActivity(conn, taskIds);
+		}
+	}
+
+	/**
+	 * <p>
+	 * アクティビティIDに紐づくメモ全てを削除します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param activityId
+	 *            アクティビティID
+	 * 
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	private void deleteMemos(Connection conn, int activityId)
+			throws SQLException {
+		List<Object[]> memos = memoDao.findMemoIdByActivityId(activityId);
+		if (memos.size() != 0) {
+			String[] memoIds = new String[memos.size()];
+			int idx = 0;
+			for (Object[] array : memos) {
+				for (Object param : array) {
+					memoIds[idx] = String.valueOf(param);
+				}
+				idx++;
+			}
+			memoDao.deleteMemosFromActivity(conn, memoIds);
+		}
+	}
 }

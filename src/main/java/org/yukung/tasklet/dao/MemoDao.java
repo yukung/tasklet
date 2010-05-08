@@ -61,8 +61,8 @@ public interface MemoDao {
 	 *            DB接続
 	 * @param memo
 	 *            メモ情報Entity
-	 * @exception SQLException
-	 *                DB更新エラー
+	 * @throws SQLException
+	 *             DB更新エラー
 	 */
 	public void addMemoToMemos(Connection conn, Memo memo) throws SQLException;
 
@@ -73,19 +73,50 @@ public interface MemoDao {
 	 * 
 	 * @param memo
 	 *            メモ情報Entity
-	 * @exception TaskletException
-	 *                DB更新エラー
+	 * @throws TaskletException
+	 *             DB更新エラー
 	 */
 	public void addMemoToMemos(Memo memo) throws TaskletException;
 
 	/**
+	 * <p>
+	 * 選択されたタスクに紐づくメモを削除します。
+	 * </p>
+	 * 
 	 * @param conn
 	 *            DB接続
 	 * @param checked
 	 *            選択されたタスクIDの配列
-	 * @exception DB更新エラー
+	 * @throws DB更新エラー
 	 */
 	public void removeMemos(Connection conn, String[] checked)
+			throws SQLException;
+
+	/**
+	 * <p>
+	 * アクティビティIDから紐づいたメモIDを取得します。
+	 * </p>
+	 * <p>
+	 * 
+	 * @param activityId
+	 *            アクティビティID
+	 * @return メモIDの配列を要素としたList
+	 */
+	public List<Object[]> findMemoIdByActivityId(int activityId);
+
+	/**
+	 * <p>
+	 * アクティビティに紐づいたメモを削除します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param memoIds
+	 *            削除対象のメモID
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void deleteMemosFromActivity(Connection conn, String[] memoIds)
 			throws SQLException;
 
 }

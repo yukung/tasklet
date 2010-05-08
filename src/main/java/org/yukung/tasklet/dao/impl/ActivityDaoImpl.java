@@ -260,4 +260,32 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#deleteIndexes(java.sql.Connection,
+	 * int)
+	 */
+	@Override
+	public void deleteIndexes(Connection conn, int activityId)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("deleteIndexes");
+		runner.update(conn, sql, Integer.valueOf(activityId));
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#deleteActivities(java.sql.Connection,
+	 * int)
+	 */
+	@Override
+	public void deleteActivities(Connection conn, int activityId)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("deleteActivities");
+		runner.update(conn, sql, Integer.valueOf(activityId));
+	}
 }

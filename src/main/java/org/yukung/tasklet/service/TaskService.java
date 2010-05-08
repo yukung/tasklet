@@ -166,4 +166,16 @@ public interface TaskService {
 	 */
 	public void remove(String[] checked) throws TaskletException;
 
+	/**
+	 * <p>
+	 * アクティビティとそれに紐づくタスク、メモを全て削除します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 *            アクティビティID
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void deleteAll(int activityId) throws TaskletException;
+
 }

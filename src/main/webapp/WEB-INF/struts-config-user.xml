@@ -14,6 +14,8 @@
     <form-bean name="addTaskForm" type="org.yukung.tasklet.form.AddTaskForm"/>
     <!-- タスク詳細用 -->
     <form-bean name="detailForm" type="org.yukung.tasklet.form.DetailForm"/>
+    <!-- アクティビティ削除用 -->
+    <form-bean name="deleteActivityForm" type="org.yukung.tasklet.form.DeleteActivityForm"/>
     <!-- タスク更新用 -->
     <form-bean name="updateTaskForm" type="org.yukung.tasklet.form.UpdateTaskForm"/>
     <!-- メモ一覧表示用 -->
@@ -59,6 +61,10 @@
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->
     <action path="/tasks" name="tasksForm" type="org.yukung.tasklet.action.TasksAction" scope="request">
       <forward name="success" path="tasks"/>
+    </action>
+    <!-- アクティビティを削除する。 -->
+    <action path="/deleteActivity" name="deleteActivityForm" type="org.yukung.tasklet.action.DeleteActivityAction" scope="request" validate="false">
+      <forward name="success" path="activities"/>
     </action>
     <!-- タスク追加画面に遷移する。 -->
     <action path="/entry" name="addTaskForm" type="org.yukung.tasklet.action.EntryAction" scope="request" validate="false">

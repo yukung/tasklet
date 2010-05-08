@@ -22,6 +22,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -225,6 +226,38 @@ public class TaskDaoImpl extends AbstractDao implements TaskDao {
 		String sql = StringUtil.createBindVariables(checked,
 				getSQLFromPropertyFile("removeTasks"));
 		Object[] params = checked;
+		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.TaskDao#findTaskIdByActivityId(int)
+	 */
+	@Override
+	public List<Object[]> findTaskIdByActivityId(int activityId) {
+		String sql = getSQLFromPropertyFile("findTaskIdByActivityId");
+		ResultSetHandler<List<Object[]>> rsh = new ArrayListHandler();
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(activityId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.TaskDao#deleteTasksFromActivity(java.sql.Connection
+	 * , java.lang.Object[])
+	 */
+	@Override
+	public void deleteTasksFromActivity(Connection conn, String[] taskIds)
+			throws SQLException {
+		String sql = StringUtil.createBindVariables((String[]) taskIds,
+				getSQLFromPropertyFile("deleteTasksFromActivity"));
+		Object[] params = taskIds;
 		runner.update(conn, sql, params);
 	}
 }

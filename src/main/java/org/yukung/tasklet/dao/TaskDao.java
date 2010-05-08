@@ -144,4 +144,26 @@ public interface TaskDao {
 	public void removeTasks(Connection conn, String[] checked)
 			throws SQLException;
 
+	/**
+	 * <p>
+	 * アクティビティIDから紐づいたタスクIDを取得します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 *            アクティビティID
+	 * @return タスクIDの配列を要素としたList
+	 */
+	public List<Object[]> findTaskIdByActivityId(int activityId);
+
+	/**
+	 * @param conn
+	 *            DB接続
+	 * @param taskIds
+	 *            削除対象のタスクID
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void deleteTasksFromActivity(Connection conn, String[] taskIds)
+			throws SQLException;
+
 }

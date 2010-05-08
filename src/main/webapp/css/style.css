@@ -47,6 +47,9 @@ h2 {
 	text-transform: uppercase;
 	color: #88ac0b;
 }
+h2 span {
+	font-size: 70%;
+}
 h3 {
 	font-size: 120%;
 	color: #666666;

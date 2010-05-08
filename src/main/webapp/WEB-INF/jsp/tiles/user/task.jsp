@@ -2,7 +2,13 @@
 <html:xhtml/>
 			<div id="main">
 
-				<h2><c:out value="${activity.title}"></c:out></h2>
+				<h2>
+					<c:out value="${activity.title}"></c:out>
+					<span>
+						[編集]
+						<html:link action="/deleteActivity" paramId="activityId" paramName="activity" paramProperty="id" onclick="return confirm('このアクティビティを本当に削除しますか？この操作は取り消せません。');">[x]</html:link>
+					</span>
+				</h2>
 				<html:form action="/operate">
 				<html:messages id="msg" message="true">
 					<h3 class="message"><c:out value="${msg}" /></h3>
