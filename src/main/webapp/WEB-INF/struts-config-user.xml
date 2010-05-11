@@ -65,7 +65,7 @@
       <forward name="success" path="sort"/>
     </action>
     <!-- アクティビティを指定した順序でソートする。 -->
-    <action path="/sort" type="org.yukung.tasklet.action.SortActivityAction">
+    <action path="/sort" name="sortActivityForm" type="org.yukung.tasklet.action.SortActivityAction" scope="request" validate="true" input="/reorder.do">
       <forward name="success" path="activities"/>
     </action>
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->

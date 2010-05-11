@@ -104,4 +104,15 @@ public interface ActivityService {
 	 */
 	public List<SortableDto> getSortableInfo(int userId);
 
+	/**
+	 * @param sortedActivities
+	 *            ソート後のアクティビティEntityを格納したList
+	 * @param userId
+	 *            ユーザID
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void sort(List<Activity> sortedActivities, int userId)
+			throws TaskletException;
+
 }

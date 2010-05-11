@@ -154,4 +154,22 @@ public class ActivityServiceImpl implements ActivityService {
 				.createDtoConverter(SortableDto.class);
 		return converter.convert(activities);
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.ActivityService#sort(java.util.List, int)
+	 */
+	@Override
+	public void sort(List<Activity> sortedActivities, int userId)
+			throws TaskletException {
+		long count = activityDao.getCountByUserId(userId).longValue();
+		// 渡されてきたアクティビティEntity（アクティビティID）の数と、
+		// 実際にDBに格納されているアクティビティの数が一致しなかった場合はアプリ例外
+		if (count != sortedActivities.size()) {
+			throw new TaskletException("errors.mismatch");
+		}
+		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
+		tx.sort(sortedActivities);
+	}
 }

@@ -158,4 +158,29 @@ public class ActivityTxLogic {
 			throw new TaskletException(e.getMessage(), e);
 		}
 	}
+
+	/**
+	 * <p>
+	 * 渡されたアクティビティのソート順で更新します。
+	 * </p>
+	 * 
+	 * @param sortedActivities
+	 *            ソートされたアクティビティEntity
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void sort(List<Activity> sortedActivities) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			for (Activity activity : sortedActivities) {
+				activityDao.updateSeq(conn, activity);
+			}
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
 }

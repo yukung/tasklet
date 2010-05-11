@@ -7,6 +7,7 @@
 				<html:messages id="msg" message="true">
 				<h3 class="message"><c:out value="${msg}" /></h3>
 				</html:messages>
+				<html:errors/>
 				<c:if test="${not empty activities}">
 					<html:form action="/sort">
 					<ul id="sortList">
@@ -16,7 +17,7 @@
 					</ul>
 					<p>
 						<html:hidden property="sortId" value="" styleId="sortId"/>
-						<html:submit value="並び順を確定" styleClass="button" />
+						<html:submit value="並び順を確定する" styleId="submit" styleClass="button" disabled="true"/>
 					</p>
 					</html:form>
 				</c:if>

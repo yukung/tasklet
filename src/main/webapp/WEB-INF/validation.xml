@@ -146,6 +146,17 @@
         	</field>
         </form>
 
+        <!-- アクティビティソートフォーム -->
+        <form name="sortActivityForm">
+        	<field property="sortId" depends="required,mask">
+                <arg position="0" key="ソート対象のアクティビティID" resource="false" />
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[\d,]*\d$</var-value>
+                </var>
+        	</field>
+        </form>
+
         <!-- タスク更新フォーム -->
         <form name="updateTaskForm">
         	<field property="actualTime" depends="required,double,doubleRange">
@@ -218,6 +229,7 @@
         	</field>
         </form>
 
+		<!-- タスク操作フォーム -->
         <form name="operateTaskForm">
         	<field property="checked" depends="required">
         		<msg name="required" key="errors.select" />

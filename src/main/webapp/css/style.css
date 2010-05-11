@@ -177,6 +177,15 @@ input.button {
 	background: #8EB50C url(../images/button-bg.jpg) repeat-x 0 0;
 	border: none;
 }
+input.button[disabled="disabled"] {
+	font: 12px Arial, Sans-serif;
+	height: 24px;
+	margin: 0;
+	padding: 2px 3px;
+	color: #FFF;
+	background: #8EB50C url(../images/button-bg-disabled.jpg) repeat-x 0 0;
+	border: none;
+}
 
 /* login form */
 .loginform {

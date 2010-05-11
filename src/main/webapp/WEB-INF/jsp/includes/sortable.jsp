@@ -20,6 +20,7 @@ $(function() {
 				data.push(v.id);
 			});
 			$("#sortId").val(data.toString());
+			$("#submit").removeAttr("disabled");
 		}
 	};
 	// sortable実行

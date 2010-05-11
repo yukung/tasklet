@@ -53,7 +53,7 @@ public interface TaskService {
 	 * 
 	 * @param activityId
 	 * @param userId
-	 *            TODO
+	 *            ユーザID
 	 * @return アクティビティ情報
 	 * @throws DataAccessException
 	 *             アクティビティが見つからない場合
