@@ -8,8 +8,9 @@
 			Valid <html:link href="http://validator.w3.org/check?uri=referer">XHTML</html:link> |
 			<html:link href="http://jigsaw.w3.org/css-validator/check/referer">CSS</html:link>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<html:link action="/index">ホーム</html:link>&nbsp;|&nbsp;
-			Sitemap&nbsp;|&nbsp;
-			RSS Feed
+			<c:if test="${empty sessionScope.user}"><html:link module="/" action="/index">ホーム</html:link>&nbsp;|&nbsp;</c:if>
+			<c:if test="${not empty sessionScope.user}"><html:link action="/activities">ホーム</html:link>&nbsp;|&nbsp;</c:if>
+			<html:link href="http://d.hatena.ne.jp/yukung/" target="_blank">開発者ブログ</html:link>&nbsp;|&nbsp;
+			<html:link href="http://twitter.com/yukung/" target="_blank">Twitter</html:link>
 			</p>
 		</div>
