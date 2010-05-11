@@ -213,7 +213,7 @@ public class TaskServiceImpl implements TaskService {
 
 	/**
 	 * <p>
-	 * タスクIDに紐づくメモの再浸潤を取得します。
+	 * タスクIDに紐づくメモの最新順を取得します。
 	 * </p>
 	 * 
 	 * @param taskId
