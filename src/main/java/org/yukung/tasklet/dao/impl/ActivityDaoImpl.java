@@ -288,4 +288,21 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		String sql = getSQLFromPropertyFile("deleteActivities");
 		runner.update(conn, sql, Integer.valueOf(activityId));
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.ActivityDao#getSortableInfo(int)
+	 */
+	@Override
+	public List<Activity> getSortableInfo(int userId) {
+		String sql = getSQLFromPropertyFile("getSortableInfo");
+		ResultSetHandler<List<Activity>> rsh = new BeanListHandler<Activity>(
+				Activity.class);
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
 }

@@ -16,6 +16,8 @@
     <form-bean name="detailForm" type="org.yukung.tasklet.form.DetailForm"/>
     <!-- アクティビティ削除用 -->
     <form-bean name="deleteActivityForm" type="org.yukung.tasklet.form.DeleteActivityForm"/>
+    <!-- アクティビティソート用 -->
+    <form-bean name="sortActivityForm" type="org.yukung.tasklet.form.SortActivityForm"/>
     <!-- タスク更新用 -->
     <form-bean name="updateTaskForm" type="org.yukung.tasklet.form.UpdateTaskForm"/>
     <!-- メモ一覧表示用 -->
@@ -56,6 +58,14 @@
     </action>
     <!-- アクティビティ一覧を降順に並び替える。 -->
     <action path="/descend" type="org.yukung.tasklet.action.DescendAction">
+      <forward name="success" path="activities"/>
+    </action>
+    <!-- アクティビティ並び替え画面へ遷移する。 -->
+    <action path="/reorder" type="org.yukung.tasklet.action.ReorderAction">
+      <forward name="success" path="sort"/>
+    </action>
+    <!-- アクティビティを指定した順序でソートする。 -->
+    <action path="/sort" type="org.yukung.tasklet.action.SortActivityAction">
       <forward name="success" path="activities"/>
     </action>
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->

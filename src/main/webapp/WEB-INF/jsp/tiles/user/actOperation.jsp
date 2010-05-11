@@ -8,7 +8,7 @@
 						<ul>
 							<li><html:link action="/ascend">昇順にソート</html:link></li>
 							<li><html:link action="/descend">降順にソート</html:link></li>
-							<li>個別にソート</li>
+							<li><html:link action="/reorder">個別にソート</html:link></li>
 						</ul>
 					</li>
 				</ul>

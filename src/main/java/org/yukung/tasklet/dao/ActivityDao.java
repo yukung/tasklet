@@ -182,6 +182,10 @@ public interface ActivityDao {
 	public List<Activity> getSeqByDescending(int userId);
 
 	/**
+	 * <p>
+	 * インデックステーブルからアクティビティを削除します。
+	 * </p>
+	 * 
 	 * @param conn
 	 *            DB接続
 	 * @param activityId
@@ -193,6 +197,10 @@ public interface ActivityDao {
 			throws SQLException;
 
 	/**
+	 * <p>
+	 * アクティビティテーブルからアクティビティを削除します。
+	 * </p>
+	 * 
 	 * @param conn
 	 *            DB接続
 	 * @param activityId
@@ -202,4 +210,13 @@ public interface ActivityDao {
 	 */
 	public void deleteActivities(Connection conn, int activityId)
 			throws SQLException;
+
+	/**
+	 * <p>
+	 * ソート順変更のための情報を取得します。
+	 * 
+	 * @param userId
+	 * @return アクティビティEntityのリスト
+	 */
+	public List<Activity> getSortableInfo(int userId);
 }

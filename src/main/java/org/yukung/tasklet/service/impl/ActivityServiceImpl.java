@@ -21,6 +21,7 @@ import java.util.List;
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.dto.SortableDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.Category;
@@ -49,9 +50,6 @@ public class ActivityServiceImpl implements ActivityService {
 	private CategoryDao categoryDao = DaoFactory.getInstance()
 			.createCategoryDao();
 
-	/** DTO変換コンバータ */
-	private DtoConverter<Activity, ActivityDto> converter;
-
 	/*
 	 * (非 Javadoc)
 	 * 
@@ -77,7 +75,8 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activities == null) {
 			return new ArrayList<ActivityDto>();
 		}
-		converter = ConverterFactory.createDtoConverter(ActivityDto.class);
+		DtoConverter<Activity, ActivityDto> converter = ConverterFactory
+				.createDtoConverter(ActivityDto.class);
 		return converter.convert(activities);
 	}
 
@@ -137,5 +136,22 @@ public class ActivityServiceImpl implements ActivityService {
 	public void descend(int userId) throws TaskletException {
 		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
 		tx.descend(userId);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.ActivityService#getSortableInfo(int)
+	 */
+	@Override
+	public List<SortableDto> getSortableInfo(int userId) {
+		List<Activity> activities = activityDao.getSortableInfo(userId);
+
+		if (activities == null) {
+			return new ArrayList<SortableDto>();
+		}
+		DtoConverter<Activity, SortableDto> converter = ConverterFactory
+				.createDtoConverter(SortableDto.class);
+		return converter.convert(activities);
 	}
 }

@@ -18,6 +18,7 @@ package org.yukung.tasklet.service;
 import java.util.List;
 
 import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.dto.SortableDto;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.exception.TaskletException;
 
@@ -92,5 +93,15 @@ public interface ActivityService {
 	 *                DB更新時のエラー
 	 */
 	public void descend(int userId) throws TaskletException;
+
+	/**
+	 * <p>
+	 * アクティビティを並び替えるための情報を取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<SortableDto> getSortableInfo(int userId);
 
 }
