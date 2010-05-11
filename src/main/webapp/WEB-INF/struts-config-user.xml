@@ -30,10 +30,15 @@
     <form-bean name="operateTaskForm" type="org.yukung.tasklet.form.OperateTaskForm"/>
     <!-- タスク表示切替用 -->
     <form-bean name="toggleTasksForm" type="org.yukung.tasklet.form.ToggleTasksForm"/>
+    <!-- 設定変更用 -->
+    <form-bean name="configForm" type="org.yukung.tasklet.form.ConfigForm"/>
   </form-beans>
   <global-exceptions>
+    <exception key="errors.general" type="java.lang.Exception" path="error"/>
   </global-exceptions>
   <global-forwards>
+    <forward name="error" path="error"/>
+    <forward name="double" path="double"></forward>
   </global-forwards>
   <action-mappings>
     <!-- セッションのユーザ情報から、アクティビティ一覧を取得して表示する。 -->
@@ -120,6 +125,11 @@
     <!-- 完了タスクの表示をトグルする。 -->
     <action path="/toggle" name="toggleTasksForm" type="org.yukung.tasklet.action.ToggleTasksAction" scope="request">
       <forward name="success" path="tasks"/>
+    </action>
+    <!-- 設定変更画面に遷移する。 -->
+    <action path="/config" name="configForm" type="org.yukung.tasklet.action.ConfigAction" scope="request">
+      <forward name="success" path="config"/>
+      <forward name="error" path="error"></forward>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

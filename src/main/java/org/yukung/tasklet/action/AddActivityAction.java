@@ -61,6 +61,11 @@ public class AddActivityAction extends AbstractAction {
 	public ActionForward doExecute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 
+		// ダブルポストのチェック
+		if (!isTokenValid(request, true)) {
+			return mapping.findForward("double");
+		}
+
 		// ActionFormをEntityにマッピング
 		AddActivityForm addActivityForm = (AddActivityForm) form;
 		Activity activity = new Activity();

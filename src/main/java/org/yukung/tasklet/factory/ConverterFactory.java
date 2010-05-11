@@ -20,12 +20,14 @@ import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.MemoDto;
 import org.yukung.tasklet.dto.SortableDto;
 import org.yukung.tasklet.dto.TaskDto;
+import org.yukung.tasklet.dto.UserDto;
 import org.yukung.tasklet.dto.converter.ActivityConverter;
 import org.yukung.tasklet.dto.converter.DetailConverter;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.dto.converter.MemoConverter;
 import org.yukung.tasklet.dto.converter.SortableConverter;
 import org.yukung.tasklet.dto.converter.TaskConverter;
+import org.yukung.tasklet.dto.converter.UserConverter;
 import org.yukung.tasklet.exception.DataAccessException;
 
 /**
@@ -53,6 +55,8 @@ public class ConverterFactory {
 			converter = (DtoConverter<E, D>) new MemoConverter();
 		} else if (entity == SortableDto.class) {
 			converter = (DtoConverter<E, D>) new SortableConverter();
+		} else if (entity == UserDto.class) {
+			converter = (DtoConverter<E, D>) new UserConverter();
 		} else {
 			throw new DataAccessException("errors.general");
 		}

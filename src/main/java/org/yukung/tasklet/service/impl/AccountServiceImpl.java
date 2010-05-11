@@ -17,8 +17,11 @@ package org.yukung.tasklet.service.impl;
 
 import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.dao.UserDao;
+import org.yukung.tasklet.dto.UserDto;
+import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
+import org.yukung.tasklet.factory.ConverterFactory;
 import org.yukung.tasklet.factory.DaoFactory;
 import org.yukung.tasklet.logic.AccountTxLogic;
 import org.yukung.tasklet.service.AccountService;
@@ -86,6 +89,23 @@ public class AccountServiceImpl implements AccountService {
 	public User login(String userName, String password) {
 		String encryptPass = PasswordUtil.encrypt(password);
 		return userDao.findUserByUserNameAndPassword(userName, encryptPass);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.AccountService#find(java.lang.String)
+	 */
+	@Override
+	public UserDto find(String userName) {
+		User user = userDao.findUserByUserName(userName);
+
+		if (user == null) {
+			return null;
+		}
+		DtoConverter<User, UserDto> converter = ConverterFactory
+				.createDtoConverter(UserDto.class);
+		return converter.convert(user);
 	}
 
 }

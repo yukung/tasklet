@@ -15,6 +15,7 @@
  */
 package org.yukung.tasklet.service;
 
+import org.yukung.tasklet.dto.UserDto;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.TaskletException;
 
@@ -49,4 +50,14 @@ public interface AccountService {
 	 * @return ログインユーザーのUserオブジェクト
 	 */
 	public User login(String userName, String password);
+
+	/**
+	 * <p>
+	 * ユーザIDから設定変更情報を取得します。
+	 * </p>
+	 * 
+	 * @param userName
+	 * @return 設定画面DTO
+	 */
+	public UserDto find(String userName);
 }
