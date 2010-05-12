@@ -12,7 +12,7 @@ $(function() {
 		// 動かせる方向
 		axis: 'y',
 		// カーソル指定
-		cursor: 'move',
+		cursor: 'pointer',
 		// 並び替え終了後に位置が入れ替わっていたら実行される関数
 		update: function() {
 			var data =[];
