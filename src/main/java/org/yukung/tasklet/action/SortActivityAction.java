@@ -109,11 +109,13 @@ public class SortActivityAction extends AbstractAction {
 		String[] sortIdArray = sortId.split(",");
 		List<Activity> sortedActivities = new ArrayList<Activity>(
 				sortIdArray.length);
+		int index = sortIdArray.length; // 逆順からソートする
 		for (int i = 0; i < sortIdArray.length; i++) {
 			Activity activity = new Activity();
-			activity.setId(Integer.valueOf(sortIdArray[i]));
-			activity.setSeq(i);
+			activity.setId(Integer.parseInt(sortIdArray[i]));
+			activity.setSeq(index); // 配列 → ArrayList への詰め直しは前後を入れ替える
 			sortedActivities.add(activity);
+			index--;
 		}
 		return sortedActivities;
 	}

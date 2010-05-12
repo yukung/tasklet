@@ -114,11 +114,11 @@ public class ActivityTxLogic {
 
 			List<Activity> origin = activityDao.getSeqByAscending(userId);
 			// ソート順の書き換え
-			int index = 0;
+			int index = origin.size();
 			for (Activity activity : origin) {
 				activity.setSeq(index);
 				activityDao.updateSeq(conn, activity);
-				index++;
+				index--;
 			}
 
 			DbUtils.commitAndCloseQuietly(conn);
@@ -145,11 +145,11 @@ public class ActivityTxLogic {
 
 			List<Activity> origin = activityDao.getSeqByDescending(userId);
 			// ソート順の書き換え
-			int index = 0;
+			int index = origin.size();
 			for (Activity activity : origin) {
 				activity.setSeq(index);
 				activityDao.updateSeq(conn, activity);
-				index++;
+				index--;
 			}
 
 			DbUtils.commitAndCloseQuietly(conn);
