@@ -13,9 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.yukung.tasklet.util;
-
-import org.yukung.tasklet.utils.PasswordUtil;
+package org.yukung.tasklet.utils;
 
 import junit.framework.TestCase;
 

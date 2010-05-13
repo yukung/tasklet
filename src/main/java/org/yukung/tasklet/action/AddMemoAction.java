@@ -64,7 +64,7 @@ public class AddMemoAction extends AbstractAction {
 
 		// ダブルポストのチェック
 		if (!isTokenValid(request, true)) {
-			return mapping.findForward("double");
+			return mapping.findForward(DOUBLE);
 		}
 
 		// ActionFormをEntityにマッピング

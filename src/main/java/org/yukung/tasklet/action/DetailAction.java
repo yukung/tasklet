@@ -61,6 +61,7 @@ public class DetailAction extends AbstractAction {
 			ActionMessage error = new ActionMessage("errors.general");
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
+			return mapping.findForward(ERROR);
 		} else {
 			request.setAttribute("task", task);
 			saveToken(request);

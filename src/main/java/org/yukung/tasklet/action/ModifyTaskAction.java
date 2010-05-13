@@ -62,7 +62,7 @@ public class ModifyTaskAction extends AbstractAction {
 
 		// ダブルポストのチェック
 		if (!isTokenValid(request, true)) {
-			return mapping.findForward("double");
+			return mapping.findForward(DOUBLE);
 		}
 
 		ModifyTaskForm modifyTaskForm = (ModifyTaskForm) form;

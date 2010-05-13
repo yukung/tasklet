@@ -64,7 +64,7 @@ public class UpdateTaskAction extends AbstractAction {
 
 		// ダブルポストのチェック
 		if (!isTokenValid(request, true)) {
-			return mapping.findForward("double");
+			return mapping.findForward(DOUBLE);
 		}
 
 		// ActionFormをEntityにマッピング

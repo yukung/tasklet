@@ -71,6 +71,7 @@ public class DeleteActivityAction extends AbstractAction {
 			ActionMessage error = new ActionMessage("errors.update");
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
+			return mapping.findForward(ERROR);
 		}
 
 		// アクティビティ一覧再表示

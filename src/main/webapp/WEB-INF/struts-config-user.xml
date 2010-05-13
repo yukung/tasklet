@@ -32,6 +32,8 @@
     <form-bean name="toggleTasksForm" type="org.yukung.tasklet.form.ToggleTasksForm"/>
     <!-- 設定変更用 -->
     <form-bean name="configForm" type="org.yukung.tasklet.form.ConfigForm"/>
+    <!-- カテゴリ追加用 -->
+    <form-bean name="addCategoryForm" type="org.yukung.tasklet.form.AddCategoryForm"/>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -80,6 +82,7 @@
     <!-- アクティビティを削除する。 -->
     <action path="/deleteActivity" name="deleteActivityForm" type="org.yukung.tasklet.action.DeleteActivityAction" scope="request" validate="false">
       <forward name="success" path="activities"/>
+      <forward name="error" path="error"/>
     </action>
     <!-- タスク追加画面に遷移する。 -->
     <action path="/entry" name="addTaskForm" type="org.yukung.tasklet.action.EntryAction" scope="request" validate="false">
@@ -93,6 +96,7 @@
     <!-- タスク詳細画面に遷移する。 -->
     <action path="/detail" name="detailForm" type="org.yukung.tasklet.action.DetailAction" scope="request">
       <forward name="success" path="detail"/>
+      <forward name="error" path="error"/>
     </action>
     <!-- タスク情報を更新する。 -->
     <action path="/update" name="updateTaskForm" type="org.yukung.tasklet.action.UpdateTaskAction" scope="request" validate="true" input="/detail.do">
@@ -127,12 +131,16 @@
       <forward name="success" path="tasks"/>
     </action>
     <!-- 設定変更画面に遷移する。 -->
-    <action path="/config" name="configForm" type="org.yukung.tasklet.action.ConfigAction" scope="request">
+    <action path="/config" name="configForm" type="org.yukung.tasklet.action.ConfigAction" scope="request" validate="false">
       <forward name="success" path="config"/>
       <forward name="error" path="error"/>
     </action>
     <!-- ユーザー設定を変更する。 -->
     <action path="/updateAccount" name="configForm" type="org.yukung.tasklet.action.UpdateAccountAction" scope="request" validate="true" input="config">
+      <forward name="success" path="config"/>
+    </action>
+    <!-- カテゴリを追加する。 -->
+    <action path="/addCategory" name="addCategoryForm" type="org.yukung.tasklet.action.AddCategoryAction" scope="request" validate="true" input="config">
       <forward name="success" path="config"/>
     </action>
   </action-mappings>

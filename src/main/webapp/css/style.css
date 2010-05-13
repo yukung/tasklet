@@ -215,10 +215,10 @@ input.button[disabled="disabled"] {
 	vertical-align: top;
 }
 
-/* configForm */
-#configform input.disabled {
-	color: #CCC;
-	background-color: #333;
+/* config form */
+.configform input.disabled {
+	background-color:#EEEEEE;
+	color:#999;
 }
 /********************************************
    LAYOUT

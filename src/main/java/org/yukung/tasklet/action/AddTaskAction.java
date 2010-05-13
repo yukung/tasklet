@@ -62,7 +62,7 @@ public class AddTaskAction extends AbstractAction {
 
 		// ダブルポストのチェック
 		if (!isTokenValid(request, true)) {
-			return mapping.findForward("double");
+			return mapping.findForward(DOUBLE);
 		}
 
 		// ActionFormをEntityにマッピング
@@ -83,7 +83,6 @@ public class AddTaskAction extends AbstractAction {
 				ActionMessage error = new ActionMessage("errors.insert");
 				errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 				saveErrors(request, errors);
-				e.printStackTrace();
 				return mapping.getInputForward();
 			}
 		}

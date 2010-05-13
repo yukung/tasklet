@@ -47,6 +47,9 @@ public abstract class AbstractAction extends Action {
 	/** アクション内でエラーが発生した場合に使われるforward先の論理名 */
 	public static final String ERROR = "error";
 
+	/** 2度押しでリクエストされた場合に使われるforward先の論理名 */
+	public static final String DOUBLE = "double";
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

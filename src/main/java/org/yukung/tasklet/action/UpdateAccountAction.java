@@ -57,7 +57,7 @@ public class UpdateAccountAction extends AbstractAction {
 
 		// ダブルポストのチェック
 		if (!isTokenValid(request, true)) {
-			return mapping.findForward("double");
+			return mapping.findForward(DOUBLE);
 		}
 
 		User session = (User) request.getSession().getAttribute("user");
