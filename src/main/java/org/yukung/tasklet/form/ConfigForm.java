@@ -41,10 +41,13 @@ public class ConfigForm extends ValidatorForm {
 	/** メールアドレス */
 	private String email;
 
-	/** パスワード */
+	/** 古いパスワード */
+	private String origin;
+
+	/** 新パスワード */
 	private String password;
 
-	/** パスワード確認入力 */
+	/** 新パスワード確認入力 */
 	private String confirm;
 
 	/**
@@ -124,7 +127,26 @@ public class ConfigForm extends ValidatorForm {
 	}
 
 	/**
-	 * パスワードを取得します。
+	 * 古いパスワードを取得します。
+	 * 
+	 * @return 古いパスワード
+	 */
+	public String getOrigin() {
+		return origin;
+	}
+
+	/**
+	 * 古いパスワードを設定します。
+	 * 
+	 * @param origin
+	 *            古いパスワード
+	 */
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	/**
+	 * 新パスワードを取得します。
 	 * 
 	 * @return パスワード
 	 */
@@ -133,7 +155,7 @@ public class ConfigForm extends ValidatorForm {
 	}
 
 	/**
-	 * パスワードを設定します。
+	 * 新パスワードを設定します。
 	 * 
 	 * @param password
 	 *            パスワード
@@ -143,7 +165,7 @@ public class ConfigForm extends ValidatorForm {
 	}
 
 	/**
-	 * パスワード確認入力を取得します。
+	 * 新パスワード確認入力を取得します。
 	 * 
 	 * @return パスワード確認入力
 	 */
@@ -152,7 +174,7 @@ public class ConfigForm extends ValidatorForm {
 	}
 
 	/**
-	 * パスワード確認入力を設定します。
+	 * 新パスワード確認入力を設定します。
 	 * 
 	 * @param confirm
 	 *            パスワード確認入力

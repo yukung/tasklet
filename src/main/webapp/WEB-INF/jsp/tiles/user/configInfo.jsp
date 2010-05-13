@@ -17,13 +17,17 @@
 						</ul>
 					</li>
 					<li>メールアドレス</li>
-					<li>パスワード<strong>（必須）</strong>
+					<li>古いパスワード
+						<ul>
+							<li>現在のパスワードを入力してください。</li>
+						</ul>
+					<li>新パスワード<strong>（必須）</strong>
 						<ul>
 							<li>半角英数字</li>
 							<li>6文字以上30文字以内</li>
 						</ul>
 					</li>
-					<li>パスワードの確認<strong>（必須）</strong>
+					<li>新パスワードの確認<strong>（必須）</strong>
 						<ul>
 							<li>入力したパスワードをもう一度入力</li>
 						</ul>

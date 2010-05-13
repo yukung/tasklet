@@ -34,11 +34,11 @@
     <form-bean name="configForm" type="org.yukung.tasklet.form.ConfigForm"/>
   </form-beans>
   <global-exceptions>
-    <exception key="errors.general" type="java.lang.Exception" path="error"/>
+    <exception type="java.lang.Exception" path="error" key="errors.general"/>
   </global-exceptions>
   <global-forwards>
     <forward name="error" path="error"/>
-    <forward name="double" path="double"></forward>
+    <forward name="double" path="double"/>
   </global-forwards>
   <action-mappings>
     <!-- セッションのユーザ情報から、アクティビティ一覧を取得して表示する。 -->
@@ -129,7 +129,11 @@
     <!-- 設定変更画面に遷移する。 -->
     <action path="/config" name="configForm" type="org.yukung.tasklet.action.ConfigAction" scope="request">
       <forward name="success" path="config"/>
-      <forward name="error" path="error"></forward>
+      <forward name="error" path="error"/>
+    </action>
+    <!-- ユーザー設定を変更する。 -->
+    <action path="/updateAccount" name="configForm" type="org.yukung.tasklet.action.UpdateAccountAction" scope="request" validate="true" input="config">
+      <forward name="success" path="config"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -74,7 +74,7 @@ public class RegisterAction extends AbstractAction {
 			accountService.register(user);
 		} catch (TaskletException e) {
 			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage(e.getMessage());
+			ActionMessage error = new ActionMessage("errors.general");
 			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
 			saveErrors(request, errors);
 			return mapping.getInputForward();

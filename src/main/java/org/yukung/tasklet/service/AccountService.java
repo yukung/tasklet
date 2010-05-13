@@ -36,7 +36,7 @@ public interface AccountService {
 	 * 
 	 * @param user
 	 * @throws TaskletException
-	 *             アプリ例外
+	 *             DB登録エラー
 	 */
 	public void register(User user) throws TaskletException;
 
@@ -60,4 +60,29 @@ public interface AccountService {
 	 * @return 設定画面DTO
 	 */
 	public UserDto find(String userName);
+
+	/**
+	 * <p>
+	 * 入力されたパスワードが妥当かどうかをチェックします。
+	 * </p>
+	 * 
+	 * @param userName
+	 *            ユーザ名
+	 * @param encrypt
+	 *            暗号化されたパスワード
+	 * @return チェック結果
+	 */
+	public boolean isPasswordValid(String userName, String encrypt);
+
+	/**
+	 * <p>
+	 * ユーザ情報を更新します。
+	 * </p>
+	 * 
+	 * @param user
+	 *            ユーザEntity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void update(User user) throws TaskletException;
 }

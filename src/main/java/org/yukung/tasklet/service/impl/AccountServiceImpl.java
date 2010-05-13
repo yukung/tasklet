@@ -108,4 +108,39 @@ public class AccountServiceImpl implements AccountService {
 		return converter.convert(user);
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.AccountService#isPasswordValid(java.lang.String
+	 * , java.lang.String)
+	 */
+	@Override
+	public boolean isPasswordValid(String userName, String entry) {
+		if ((userName == null) || (entry == null)) {
+			return false;
+		}
+		String origin = userDao.getPassword(userName);
+		if (origin.equals(entry)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.AccountService#update(org.yukung.tasklet.entity
+	 * .User)
+	 */
+	@Override
+	public void update(User user) throws TaskletException {
+		// パスワードの暗号化
+		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
+		// ユーザ登録
+		userDao.updateUser(user);
+	}
+
 }

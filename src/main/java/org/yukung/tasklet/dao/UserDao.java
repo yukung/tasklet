@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.yukung.tasklet.entity.User;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -78,4 +79,23 @@ public interface UserDao {
 	 *             DB更新エラー
 	 */
 	public void addUser(Connection conn, User user) throws SQLException;
+
+	/**
+	 * @param userName
+	 *            ユーザ名
+	 * @return Userテーブルに格納されているパスワード
+	 */
+	public String getPassword(String userName);
+
+	/**
+	 * <p>
+	 * ユーザ情報を更新します。
+	 * </p>
+	 * 
+	 * @param user
+	 *            ユーザEntity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void updateUser(User user) throws TaskletException;
 }

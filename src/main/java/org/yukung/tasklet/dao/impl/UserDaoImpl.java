@@ -27,6 +27,7 @@ import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.UserDao;
 import org.yukung.tasklet.entity.User;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -121,5 +122,39 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		Object[] param = { user.getUserName(), user.getEmail(),
 				user.getPassword(), user.getDisplayName() };
 		runner.update(conn, sql, param);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.UserDao#getPassword(java.lang.String)
+	 */
+	@Override
+	public String getPassword(String userName) {
+		String sql = getSQLFromPropertyFile("getPassword");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (String) runner.query(sql, rsh, userName);
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.UserDao#updateUser(org.yukung.tasklet.entity.User)
+	 */
+	@Override
+	public void updateUser(User user) throws TaskletException {
+		String sql = getSQLFromPropertyFile("updateUser");
+		Object[] params = { user.getEmail(), user.getPassword(),
+				user.getDisplayName(), user.getUserName() };
+		try {
+			runner.update(sql, params);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 }
