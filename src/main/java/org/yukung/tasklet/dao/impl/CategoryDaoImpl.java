@@ -26,6 +26,7 @@ import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.exception.DataAccessException;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -105,6 +106,24 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 			throw new DataAccessException(e.getMessage(), e);
 		}
 
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.CategoryDao#add(java.sql.Connection,
+	 * org.yukung.tasklet.entity.Category)
+	 */
+	@Override
+	public void add(Category category) throws TaskletException {
+		String sql = getSQLFromPropertyFile("addCategory");
+		Object[] params = { Integer.valueOf(category.getUserId()),
+				category.getName() };
+		try {
+			runner.update(sql, params);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 
 }

@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.yukung.tasklet.entity.Category;
+import org.yukung.tasklet.exception.TaskletException;
 
 /**
  * <p>
@@ -64,4 +65,16 @@ public interface CategoryDao {
 	 * @return カテゴリ情報
 	 */
 	public Category getDefaultCategory(int userId);
+
+	/**
+	 * <p>
+	 * カテゴリ情報をcategoriesテーブルに追加します。
+	 * </p>
+	 * 
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void add(Category category) throws TaskletException;
 }

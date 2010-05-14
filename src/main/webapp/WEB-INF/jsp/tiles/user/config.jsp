@@ -2,13 +2,13 @@
 <html:xhtml/>
 			<div id="main">
 
+				<html:messages id="msg" message="true">
+					<h3 class="message"><c:out value="${msg}" /></h3>
+				</html:messages>
 				<html:errors />
 				<h2>設定変更</h2>
 
 				<html:form action="/updateAccount" styleClass="configform">
-				<html:messages id="msg" message="true">
-					<h3 class="message"><c:out value="${msg}" /></h3>
-				</html:messages>
 				<p>
 					<label>ユーザー名（*）</label>
 					<html:text property="userName" maxlength="30" readonly="true" styleClass="disabled" />

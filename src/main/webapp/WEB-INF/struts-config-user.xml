@@ -141,7 +141,7 @@
     </action>
     <!-- カテゴリを追加する。 -->
     <action path="/addCategory" name="addCategoryForm" type="org.yukung.tasklet.action.AddCategoryAction" scope="request" validate="true" input="config">
-      <forward name="success" path="config"/>
+      <forward name="success" path="/config.do"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

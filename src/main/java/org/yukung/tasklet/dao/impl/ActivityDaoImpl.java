@@ -139,7 +139,7 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 	 */
 	@Override
 	public Integer getLastInsertId(String title) {
-		String sql = getSQLFromPropertyFile("getLastInsertId");
+		String sql = getSQLFromPropertyFile("getLastInsertIdOfActivities");
 		ResultSetHandler<Object> rsh = new ScalarHandler(1);
 		try {
 			return (Integer) runner.query(sql, rsh, title);

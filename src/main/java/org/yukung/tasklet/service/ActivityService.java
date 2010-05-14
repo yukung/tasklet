@@ -20,6 +20,7 @@ import java.util.List;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.SortableDto;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.exception.TaskletException;
 
 /**
@@ -105,6 +106,10 @@ public interface ActivityService {
 	public List<SortableDto> getSortableInfo(int userId);
 
 	/**
+	 * <p>
+	 * 指定された順番でアクティビティをソートします。
+	 * </p>
+	 * 
 	 * @param sortedActivities
 	 *            ソート後のアクティビティEntityを格納したList
 	 * @param userId
@@ -114,5 +119,17 @@ public interface ActivityService {
 	 */
 	public void sort(List<Activity> sortedActivities, int userId)
 			throws TaskletException;
+
+	/**
+	 * <p>
+	 * カテゴリを追加します。
+	 * </p>
+	 * 
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void addCategory(Category category) throws TaskletException;
 
 }

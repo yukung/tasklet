@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.yukung.tasklet.dao.ActivityDao;
+import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
@@ -39,6 +40,9 @@ public class ActivityTxLogic {
 	/** アクティビティ情報DAO */
 	private ActivityDao activityDao;
 
+	/** カテゴリ情報DAO */
+	private CategoryDao categoryDao;
+
 	/**
 	 * <p>
 	 * デフォルトコンストラクタ。
@@ -49,7 +53,8 @@ public class ActivityTxLogic {
 	 * </p>
 	 */
 	public ActivityTxLogic() {
-		this(DaoFactory.getInstance().createActivityDao());
+		this(DaoFactory.getInstance().createActivityDao(), DaoFactory
+				.getInstance().createCategoryDao());
 	}
 
 	/**
@@ -61,6 +66,32 @@ public class ActivityTxLogic {
 	 */
 	public ActivityTxLogic(ActivityDao activityDao) {
 		this.activityDao = activityDao;
+		this.categoryDao = null;
+	}
+
+	/**
+	 * <p>
+	 * コンストラクタ。
+	 * </p>
+	 * 
+	 * @param categoryDao
+	 */
+	public ActivityTxLogic(CategoryDao categoryDao) {
+		this.activityDao = null;
+		this.categoryDao = categoryDao;
+	}
+
+	/**
+	 * <p>
+	 * コンストラクタ。
+	 * </p>
+	 * 
+	 * @param activityDao
+	 * @param categoryDao
+	 */
+	public ActivityTxLogic(ActivityDao activityDao, CategoryDao categoryDao) {
+		this.activityDao = activityDao;
+		this.categoryDao = categoryDao;
 	}
 
 	/**

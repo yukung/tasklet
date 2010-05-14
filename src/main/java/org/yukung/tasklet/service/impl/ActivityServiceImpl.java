@@ -172,4 +172,16 @@ public class ActivityServiceImpl implements ActivityService {
 		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
 		tx.sort(sortedActivities);
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.ActivityService#addCategory(org.yukung.tasklet
+	 * .entity.Category)
+	 */
+	@Override
+	public void addCategory(Category category) throws TaskletException {
+		categoryDao.add(category);
+	}
 }
