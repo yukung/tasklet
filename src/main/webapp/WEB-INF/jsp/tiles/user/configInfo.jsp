@@ -34,4 +34,13 @@
 					</li>
 				</ul>
 
+				<h3>カテゴリ管理</h3>
+				<ul class="sidemenu">
+					<li>新規カテゴリ名
+						<ul>
+							<li>255文字以内</li>
+						</ul>
+					</li>
+				</ul>
+
 			</div>
