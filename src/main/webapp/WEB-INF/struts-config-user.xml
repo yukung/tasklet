@@ -34,6 +34,8 @@
     <form-bean name="configForm" type="org.yukung.tasklet.form.ConfigForm"/>
     <!-- カテゴリ追加用 -->
     <form-bean name="addCategoryForm" type="org.yukung.tasklet.form.AddCategoryForm"/>
+    <!-- カテゴリ編集用 -->
+    <form-bean name="modifyCategoryForm" type="org.yukung.tasklet.form.ModifyCategoryForm"/>
   </form-beans>
   <global-exceptions>
     <exception type="java.lang.Exception" path="error" key="errors.general"/>
@@ -142,6 +144,10 @@
     <!-- カテゴリを追加する。 -->
     <action path="/addCategory" name="addCategoryForm" type="org.yukung.tasklet.action.AddCategoryAction" scope="request" validate="true" input="config">
       <forward name="success" path="/config.do"/>
+    </action>
+    <!-- 既存カテゴリ編集画面に遷移する。 -->
+    <action path="/modifyCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.ModifyCategoryAction" scope="request" validate="false">
+      <forward name="success" path="categories"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

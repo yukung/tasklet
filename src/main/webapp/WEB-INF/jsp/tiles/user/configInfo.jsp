@@ -38,7 +38,7 @@
 				<ul class="sidemenu">
 					<li>新規カテゴリ名
 						<ul>
-							<li>255文字以内</li>
+							<li>30文字以内</li>
 						</ul>
 					</li>
 				</ul>

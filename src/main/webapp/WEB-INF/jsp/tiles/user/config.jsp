@@ -36,7 +36,7 @@
 					<html:text property="name" maxlength="255" />
 					<html:submit value="カテゴリ追加" styleClass="button" />
 					</p>
-					<p><html:link href="#">既存カテゴリの編集</html:link></p>
+					<p><html:link action="/modifyCategory">既存カテゴリの編集</html:link></p>
 				</html:form>
 
 			</div>

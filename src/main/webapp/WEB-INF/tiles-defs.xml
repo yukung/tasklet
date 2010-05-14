@@ -95,7 +95,13 @@
 	<definition name="config" extends="base">
 		<put name="title" value="設定変更 - Tasklet" />
 		<put name="main" value="/WEB-INF/jsp/tiles/user/config.jsp" />
-		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/configInfo.jsp"/>
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/configInfo.jsp" />
+	</definition>
+
+	<definition name="categories" extends="base">
+		<put name="title" value="カテゴリの編集 - Tasklet" />
+		<put name="main" value="/WEB-INF/jsp/tiles/user/category.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/categoryInfo.jsp" />
 	</definition>
 
 </tiles-definitions>
