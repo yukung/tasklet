@@ -17,6 +17,8 @@ package org.yukung.tasklet.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.exception.TaskletException;
@@ -71,10 +73,35 @@ public interface CategoryDao {
 	 * カテゴリ情報をcategoriesテーブルに追加します。
 	 * </p>
 	 * 
+	 * @param conn
+	 *            DB接続
 	 * @param category
 	 *            カテゴリ情報Entity
 	 * @throws TaskletException
 	 *             DB更新エラー
 	 */
-	public void add(Category category) throws TaskletException;
+	public void add(Connection conn, Category category) throws TaskletException;
+
+	/**
+	 * <p>
+	 * 引数のユーザIDに紐づくカテゴリを取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @return ユーザIDに紐づいたカテゴリ一覧をMapに持つList<br>
+	 *         <p>
+	 *         key:カテゴリID<br>
+	 *         value:カテゴリ名
+	 *         </p>
+	 */
+	public List<Map<String, Object>> findCategoriesByUserId(int userId);
+
+	/**
+	 * <p>
+	 * ユーザIDをキーにカテゴリのソート順の最大値を取得します。
+	 * @param userId
+	 *            ユーザID
+	 */
+	public Integer getMaxSeqOfCategories(int userId);
 }

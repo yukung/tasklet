@@ -16,7 +16,10 @@
 package org.yukung.tasklet.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.CategoryDao;
@@ -25,6 +28,7 @@ import org.yukung.tasklet.dto.SortableDto;
 import org.yukung.tasklet.dto.converter.DtoConverter;
 import org.yukung.tasklet.entity.Activity;
 import org.yukung.tasklet.entity.Category;
+import org.yukung.tasklet.exception.DataAccessException;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.ActivityFactory;
 import org.yukung.tasklet.factory.ConverterFactory;
@@ -182,6 +186,35 @@ public class ActivityServiceImpl implements ActivityService {
 	 */
 	@Override
 	public void addCategory(Category category) throws TaskletException {
-		categoryDao.add(category);
+		// TODO 最新そーと順を取得して、setSeq(ソート順)を読んでセットする。
+		ActivityTxLogic tx = new ActivityTxLogic(categoryDao);
+		tx.addCategory(category);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.ActivityService#getCategories(int)
+	 */
+	@Override
+	public Map<String, String> getCategories(int userId) {
+		List<Map<String, Object>> categories = categoryDao
+				.findCategoriesByUserId(userId);
+		HashMap<String, String> ret = new LinkedHashMap<String, String>(); // 戻り値のMap
+		for (Map<String, Object> map : categories) {
+			String key = "", value = "";
+			// 以下、戻り値のMapへ詰め直し。SQLのSELECT句を変更した場合は修正が必須
+			for (Map.Entry<String, Object> e : map.entrySet()) {
+				if (e.getKey().equalsIgnoreCase("id")) {
+					key = e.getValue().toString();
+				} else if (e.getKey().equalsIgnoreCase("name")) {
+					value = e.getValue().toString();
+				} else {
+					throw new DataAccessException("errors.general");
+				}
+			}
+			ret.put(key, value);
+		}
+		return ret;
 	}
 }

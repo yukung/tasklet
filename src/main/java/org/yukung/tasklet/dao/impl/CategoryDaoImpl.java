@@ -17,11 +17,15 @@ package org.yukung.tasklet.dao.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.entity.Category;
@@ -34,6 +38,7 @@ import org.yukung.tasklet.exception.TaskletException;
  * <p>
  * 
  * @author yukung
+ * 
  * 
  */
 public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
@@ -115,14 +120,48 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 	 * org.yukung.tasklet.entity.Category)
 	 */
 	@Override
-	public void add(Category category) throws TaskletException {
+	public void add(Connection conn, Category category) throws TaskletException {
 		String sql = getSQLFromPropertyFile("addCategory");
 		Object[] params = { Integer.valueOf(category.getUserId()),
-				category.getName() };
+				Integer.valueOf(category.getSeq()), category.getName() };
 		try {
-			runner.update(sql, params);
+			runner.update(conn, sql, params);
 		} catch (SQLException e) {
 			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.dao.CategoryDao#findCategoriesByUserId(int)
+	 */
+	@Override
+	public List<Map<String, Object>> findCategoriesByUserId(int userId) {
+		String sql = getSQLFromPropertyFile("findCategoriesByUserId");
+		ResultSetHandler<List<Map<String, Object>>> rsh = new MapListHandler();
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.CategoryDao#getMaxSeqOfCategories(java.sql.Connection
+	 * , int)
+	 */
+	@Override
+	public Integer getMaxSeqOfCategories(int userId) {
+		String sql = getSQLFromPropertyFile("getMaxSeqOfCategories");
+		ResultSetHandler<Object> rsh = new ScalarHandler(1);
+		try {
+			return (Integer) runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
 

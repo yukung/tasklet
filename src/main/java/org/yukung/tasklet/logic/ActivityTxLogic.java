@@ -23,6 +23,7 @@ import org.apache.commons.dbutils.DbUtils;
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.CategoryDao;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.exception.TaskletException;
 import org.yukung.tasklet.factory.DaoFactory;
 
@@ -213,5 +214,50 @@ public class ActivityTxLogic {
 			DbUtils.rollbackAndCloseQuietly(conn);
 			throw new TaskletException(e.getMessage(), e);
 		}
+	}
+
+	/**
+	 * <p>
+	 * 最新のソート順を取得して、カテゴリを追加します。
+	 * </p>
+	 * 
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void addCategory(Category category) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			// カテゴリの最新ソート順を取得
+			Integer count = categoryDao.getMaxSeqOfCategories(category
+					.getUserId());
+			category.setSeq(getSeq(count));
+			// categoriesテーブルへカテゴリを追加
+			categoryDao.add(conn, category);
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * ユーザIDに紐づくカテゴリの最新順を取得します。
+	 * </p>
+	 * 
+	 * @param count
+	 * @return カテゴリのソート順最大値
+	 */
+	private int getSeq(Integer count) {
+		if (count == null) {
+			count = 0;
+		}
+		return count.intValue() + 1;
 	}
 }

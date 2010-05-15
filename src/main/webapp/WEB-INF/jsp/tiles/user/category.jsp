@@ -8,17 +8,15 @@
 				<html:errors />
 				<h2>カテゴリの編集</h2>
 
-				<form>
+				<html:form action="/modifyCategory">
 				<p>
-					<select>
-						<option>aaaa</option>
-						<option>bbbb</option>
-					</select>
-					<input type="hidden">
-					<input type="text">
-					<input type="submit" value="名前変更">
-					<input type="submit" value="削除">
+					<html:select property="id">
+						<html:optionsCollection property="categories" value="key" label="value" />
+					</html:select>
+					を<html:text property="name" />
+					<html:submit value="名前変更" styleClass="button" />
+					<html:submit value="削除" styleClass="button" />
 				</p>
-				</form>
+				</html:form>
 
 			</div>

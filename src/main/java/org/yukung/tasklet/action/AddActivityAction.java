@@ -105,6 +105,8 @@ public class AddActivityAction extends AbstractAction {
 			request.setAttribute("activities", activities);
 			request.setAttribute("pager", pager);
 		}
+
+		saveToken(request);
 		return mapping.findForward(SUCCESS);
 	}
 }

@@ -33,6 +33,9 @@ public class Category {
 	/** ユーザID */
 	private int userId;
 
+	/** ソート順 */
+	private int seq;
+
 	/** カテゴリ名 */
 	private String name;
 
@@ -44,81 +47,115 @@ public class Category {
 
 	/**
 	 * IDを取得します。
+	 * 
 	 * @return ID
 	 */
 	public int getId() {
-	    return id;
+		return id;
 	}
 
 	/**
 	 * IDを設定します。
-	 * @param id ID
+	 * 
+	 * @param id
+	 *            ID
 	 */
 	public void setId(int id) {
-	    this.id = id;
+		this.id = id;
 	}
 
 	/**
 	 * ユーザIDを取得します。
+	 * 
 	 * @return ユーザID
 	 */
 	public int getUserId() {
-	    return userId;
+		return userId;
 	}
 
 	/**
 	 * ユーザIDを設定します。
-	 * @param userId ユーザID
+	 * 
+	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(int userId) {
-	    this.userId = userId;
+		this.userId = userId;
+	}
+
+	/**
+	 * ソート順を取得します。
+	 * 
+	 * @return ソート順
+	 */
+	public int getSeq() {
+		return seq;
+	}
+
+	/**
+	 * ソート順を設定します。
+	 * 
+	 * @param seq
+	 *            ソート順
+	 */
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 
 	/**
 	 * カテゴリ名を取得します。
+	 * 
 	 * @return カテゴリ名
 	 */
 	public String getName() {
-	    return name;
+		return name;
 	}
 
 	/**
 	 * カテゴリ名を設定します。
-	 * @param name カテゴリ名
+	 * 
+	 * @param name
+	 *            カテゴリ名
 	 */
 	public void setName(String name) {
-	    this.name = name;
+		this.name = name;
 	}
 
 	/**
 	 * 作成タイムスタンプを取得します。
+	 * 
 	 * @return 作成タイムスタンプ
 	 */
 	public Timestamp getCreated_on() {
-	    return created_on;
+		return created_on;
 	}
 
 	/**
 	 * 作成タイムスタンプを設定します。
-	 * @param created_on 作成タイムスタンプ
+	 * 
+	 * @param created_on
+	 *            作成タイムスタンプ
 	 */
 	public void setCreated_on(Timestamp created_on) {
-	    this.created_on = created_on;
+		this.created_on = created_on;
 	}
 
 	/**
 	 * 更新タイムスタンプを取得します。
+	 * 
 	 * @return 更新タイムスタンプ
 	 */
 	public Timestamp getUpdated_on() {
-	    return updated_on;
+		return updated_on;
 	}
 
 	/**
 	 * 更新タイムスタンプを設定します。
-	 * @param updated_on 更新タイムスタンプ
+	 * 
+	 * @param updated_on
+	 *            更新タイムスタンプ
 	 */
 	public void setUpdated_on(Timestamp updated_on) {
-	    this.updated_on = updated_on;
+		this.updated_on = updated_on;
 	}
 }

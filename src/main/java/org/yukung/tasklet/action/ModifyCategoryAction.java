@@ -24,6 +24,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.yukung.tasklet.entity.User;
+import org.yukung.tasklet.form.ModifyCategoryForm;
 import org.yukung.tasklet.service.ActivityService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
 
@@ -58,7 +59,12 @@ public class ModifyCategoryAction extends AbstractAction {
 		Map<String, String> categories = activityService.getCategories(user
 				.getId());
 
+		// プルダウンのセット
+		ModifyCategoryForm modifyCategoryForm = (ModifyCategoryForm) form;
+		modifyCategoryForm.setCategories(categories);
+
 		// ActionFormへの設定
+		saveToken(request);
 		return mapping.findForward(SUCCESS);
 	}
 

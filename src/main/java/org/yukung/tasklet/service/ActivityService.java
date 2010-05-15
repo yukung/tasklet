@@ -16,6 +16,7 @@
 package org.yukung.tasklet.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.SortableDto;
@@ -131,5 +132,16 @@ public interface ActivityService {
 	 *             DB更新時のエラー
 	 */
 	public void addCategory(Category category) throws TaskletException;
+
+	/**
+	 * <p>
+	 * カテゴリ一覧を取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @return カテゴリ一覧情報を持ったMap
+	 */
+	public Map<String, String> getCategories(int userId);
 
 }

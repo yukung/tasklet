@@ -76,6 +76,7 @@ public class ActivitiesAction extends AbstractAction {
 			saveToken(request);
 		}
 
+		saveToken(request);
 		return mapping.findForward(SUCCESS);
 	}
 }
