@@ -140,8 +140,9 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 	public List<Map<String, Object>> findCategoriesByUserId(int userId) {
 		String sql = getSQLFromPropertyFile("findCategoriesByUserId");
 		ResultSetHandler<List<Map<String, Object>>> rsh = new MapListHandler();
+		Integer param = Integer.valueOf(userId);
 		try {
-			return runner.query(sql, rsh, Integer.valueOf(userId));
+			return runner.query(sql, rsh, Integer.valueOf(userId), param);
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}

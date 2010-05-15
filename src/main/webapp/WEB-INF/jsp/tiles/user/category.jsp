@@ -11,6 +11,7 @@
 				<html:form action="/modifyCategory">
 				<p>
 					<html:select property="id">
+						<option selected>以下より選択してください</option>
 						<html:optionsCollection property="categories" value="key" label="value" />
 					</html:select>
 					を<html:text property="name" />

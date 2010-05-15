@@ -9,7 +9,7 @@
 						<ul>
 							<li>
 					<select onChange="jumpMenu('parent',this,0)">
-						<option selected>下記より選択してください</option>
+						<option selected>以下より選択してください</option>
 						<c:forEach var="activityId" items="${activity.moreActivities}" varStatus="status">
 						<option value="/tasklet/user/tasks.do?activityId=${activityId['activity_id']}">${activityId['title']}</option>
 						</c:forEach>
