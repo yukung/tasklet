@@ -104,4 +104,10 @@
 		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/categoryInfo.jsp" />
 	</definition>
 
+	<definition name="activity" extends="base">
+		<put name="title" value="アクティビティの修正 - Tasklet" />
+		<put name="main" value="/WEB-INF/jsp/tiles/user/actModification.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/actModificationInfo.jsp" />
+	</definition>
+
 </tiles-definitions>

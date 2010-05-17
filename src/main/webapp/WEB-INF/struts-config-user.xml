@@ -14,6 +14,8 @@
     <form-bean name="addTaskForm" type="org.yukung.tasklet.form.AddTaskForm"/>
     <!-- タスク詳細用 -->
     <form-bean name="detailForm" type="org.yukung.tasklet.form.DetailForm"/>
+    <!-- アクティビティ修正用 -->
+    <form-bean name="modifyActivityForm" type="org.yukung.tasklet.form.ModifyActivityForm"/>
     <!-- アクティビティ削除用 -->
     <form-bean name="deleteActivityForm" type="org.yukung.tasklet.form.DeleteActivityForm"/>
     <!-- アクティビティソート用 -->
@@ -80,6 +82,10 @@
     <!-- 選択したアクティビティのタスク一覧を取得して表示する。 -->
     <action path="/tasks" name="tasksForm" type="org.yukung.tasklet.action.TasksAction" scope="request">
       <forward name="success" path="tasks"/>
+    </action>
+    <!-- アクティビティ修正画面に遷移する。 -->
+    <action path="/modifyActivity" name="modifyActivityForm" type="org.yukung.tasklet.action.ModifyActivityAction" scope="request" validate="false">
+      <forward name="success" path="activity"/>
     </action>
     <!-- アクティビティを削除する。 -->
     <action path="/deleteActivity" name="deleteActivityForm" type="org.yukung.tasklet.action.DeleteActivityAction" scope="request" validate="false">

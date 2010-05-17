@@ -100,8 +100,26 @@ public interface CategoryDao {
 	/**
 	 * <p>
 	 * ユーザIDをキーにカテゴリのソート順の最大値を取得します。
+	 * 
 	 * @param userId
 	 *            ユーザID
 	 */
 	public Integer getMaxSeqOfCategories(int userId);
+
+	/**
+	 * <p>
+	 * 引数のユーザIDに紐づくカテゴリを取得します（カテゴリ「未分類」を含め）。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @return ユーザIDに紐づいたカテゴリ一覧をMapに持つList<br>
+	 *         <p>
+	 *         key:カテゴリID<br>
+	 *         value:カテゴリ名
+	 *         </p>
+	 * 
+	 */
+	public List<Map<String, Object>> findCategoriesWithUncategorized(
+			int userId);
 }

@@ -217,4 +217,43 @@ public class ActivityServiceImpl implements ActivityService {
 		}
 		return ret;
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see org.yukung.tasklet.service.ActivityService#getCategory(int)
+	 */
+	@Override
+	public Category getCategory(int activityId) {
+		return categoryDao.findCategoryByActivityId(activityId);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.ActivityService#getCategoriesWithUncategorized
+	 * (int)
+	 */
+	@Override
+	public Map<String, String> getCategoriesWithUncategorized(int userId) {
+		List<Map<String, Object>> categories = categoryDao
+				.findCategoriesWithUncategorized(userId);
+		Map<String, String> ret = new LinkedHashMap<String, String>(); // 戻り値のMap
+		for (Map<String, Object> map : categories) {
+			String key = "", value = "";
+			// 以下、戻り値のMapへ詰め直し。SQLのSELECT句を変更した場合は修正が必須
+			for (Map.Entry<String, Object> e : map.entrySet()) {
+				if (e.getKey().equalsIgnoreCase("id")) {
+					key = e.getValue().toString();
+				} else if (e.getKey().equalsIgnoreCase("name")) {
+					value = e.getValue().toString();
+				} else {
+					throw new DataAccessException("errors.general");
+				}
+			}
+			ret.put(key, value);
+		}
+		return ret;
+	}
 }

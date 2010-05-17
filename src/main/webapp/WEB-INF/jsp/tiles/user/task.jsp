@@ -5,7 +5,7 @@
 				<h2>
 					<c:out value="${activity.title}"></c:out>
 					<span>
-						[編集]
+						<html:link action="/modifyActivity" paramId="activityId" paramName="activity" paramProperty="id">[編集]</html:link>
 						<html:link action="/deleteActivity" paramId="activityId" paramName="activity" paramProperty="id" onclick="return confirm('このアクティビティを本当に削除しますか？この操作は取り消せません。');">[x]</html:link>
 					</span>
 				</h2>

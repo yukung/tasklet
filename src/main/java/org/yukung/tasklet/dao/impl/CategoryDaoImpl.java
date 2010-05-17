@@ -140,9 +140,9 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 	public List<Map<String, Object>> findCategoriesByUserId(int userId) {
 		String sql = getSQLFromPropertyFile("findCategoriesByUserId");
 		ResultSetHandler<List<Map<String, Object>>> rsh = new MapListHandler();
-		Integer param = Integer.valueOf(userId);
+		Integer params = Integer.valueOf(userId);
 		try {
-			return runner.query(sql, rsh, Integer.valueOf(userId), param);
+			return runner.query(sql, rsh, params, params);
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -161,6 +161,24 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 		ResultSetHandler<Object> rsh = new ScalarHandler(1);
 		try {
 			return (Integer) runner.query(sql, rsh, Integer.valueOf(userId));
+		} catch (SQLException e) {
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.CategoryDao#findCategoriesByUserIdWithUncategorized
+	 * (int)
+	 */
+	@Override
+	public List<Map<String, Object>> findCategoriesWithUncategorized(int userId) {
+		String sql = getSQLFromPropertyFile("findCategoriesWithUncategoriezed");
+		ResultSetHandler<List<Map<String, Object>>> rsh = new MapListHandler();
+		try {
+			return runner.query(sql, rsh, Integer.valueOf(userId));
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}

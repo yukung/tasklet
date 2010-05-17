@@ -23,20 +23,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.yukung.tasklet.dto.ActivityDto;
+import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.entity.User;
-import org.yukung.tasklet.form.ModifyCategoryForm;
+import org.yukung.tasklet.form.ModifyActivityForm;
 import org.yukung.tasklet.service.ActivityService;
+import org.yukung.tasklet.service.TaskService;
 import org.yukung.tasklet.service.impl.ActivityServiceImpl;
+import org.yukung.tasklet.service.impl.TaskServiceImpl;
 
 /**
  * <p>
- * カテゴリ編集画面に遷移するアクションです。
+ * アクティビティ修正画面を表示するアクションです。
  * </p>
  * 
  * @author yukung
  * 
  */
-public class ModifyCategoryAction extends AbstractAction {
+public class ModifyActivityAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)
@@ -54,14 +58,23 @@ public class ModifyCategoryAction extends AbstractAction {
 		// ユーザ情報の取得
 		User user = (User) request.getSession().getAttribute("user");
 
-		// サービスの実行
+		// カテゴリ一覧の取得
 		ActivityService activityService = new ActivityServiceImpl();
-		Map<String, String> categories = activityService.getCategories(user
-				.getId());
+		Map<String, String> categories = activityService
+				.getCategoriesWithUncategorized(user.getId());
 
-		// プルダウンのセット
-		ModifyCategoryForm modifyCategoryForm = (ModifyCategoryForm) form;
-		modifyCategoryForm.setCategories(categories);
+		// カテゴリ一覧のセット
+		ModifyActivityForm modifyActivityForm = (ModifyActivityForm) form;
+		modifyActivityForm.setCategories(categories);
+		int activityId = Integer.parseInt(modifyActivityForm.getActivityId());
+		Category category = activityService.getCategory(activityId);
+		modifyActivityForm.setCategoryId(String.valueOf(category.getId())); // カテゴリの既定値
+
+		// アクティビティ名のセット
+		TaskService taskService = new TaskServiceImpl();
+		ActivityDto activity = taskService.getActivityInfo(activityId, user
+				.getId());
+		modifyActivityForm.setTitle(activity.getTitle());
 
 		saveToken(request);
 		return mapping.findForward(SUCCESS);

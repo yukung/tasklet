@@ -144,4 +144,26 @@ public interface ActivityService {
 	 */
 	public Map<String, String> getCategories(int userId);
 
+	/**
+	 * <p>
+	 * アクティビティIDに紐づいたカテゴリ情報を取得します。
+	 * </p>
+	 * 
+	 * @param activityId
+	 *            アクティビティID
+	 * @return カテゴリ情報Entity
+	 */
+	public Category getCategory(int activityId);
+
+	/**
+	 * <p>
+	 * カテゴリ「未分類」を含めてカテゴリ一覧を取得します。
+	 * </p>
+	 * 
+	 * @param userId
+	 *            ユーザID
+	 * @return カテゴリ一覧情報を持ったMap
+	 */
+	public Map<String, String> getCategoriesWithUncategorized(int userId);
+
 }
