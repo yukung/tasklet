@@ -26,6 +26,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.yukung.tasklet.common.Status;
 import org.yukung.tasklet.dto.ActivityDto;
 import org.yukung.tasklet.dto.DetailDto;
 import org.yukung.tasklet.dto.TaskDto;
@@ -78,6 +79,9 @@ public class UpdateTaskAction extends AbstractAction {
 		} catch (Exception e) {
 			// 不整合の場合はシステム例外としてStrutsに投げる
 			throw new DataAccessException(e.getMessage(), e);
+		}
+		if (updateTaskForm.isFinished()) {
+			task.setStatus(Status.FINISH); // 完了チェック
 		}
 
 		TaskService taskService = new TaskServiceImpl();

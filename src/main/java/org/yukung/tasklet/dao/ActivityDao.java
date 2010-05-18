@@ -252,4 +252,19 @@ public interface ActivityDao {
 	 */
 	public void modifyIndexes(Connection conn, Activity activity,
 			Category category) throws SQLException;
+
+	/**
+	 * <p>
+	 * アクティビティを更新します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param activityId
+	 *            アクティビティID
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void updateActivity(Connection conn, int activityId)
+			throws SQLException;
 }

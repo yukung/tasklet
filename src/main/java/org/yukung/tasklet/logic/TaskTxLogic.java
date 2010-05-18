@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.DbUtils;
+import org.yukung.tasklet.common.Status;
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.dao.MemoDao;
 import org.yukung.tasklet.dao.TaskDao;
@@ -118,8 +119,19 @@ public class TaskTxLogic {
 			conn = DaoFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
 
-			// tasksテーブルへタスクを更新
-			taskDao.updateTask(conn, task);
+			if (task.getStatus() == Status.FINISH) {
+				// 完了チェックがある場合は完了処理
+				taskDao.completeTask(conn, task);
+				int count = taskDao.getIncompleteCount(task.getActivityId())
+						.intValue();
+				if (count == 0) {
+					activityDao.completeActivity(conn, task.getActivityId());
+				}
+			} else {
+				// tasksテーブルへタスクを更新
+				taskDao.updateTask(conn, task);
+				activityDao.updateActivity(conn, task.getActivityId());
+			}
 
 			// メモ欄の入力があった場合はメモテーブルにデータを追加
 			if (!memo.getContents().equals("")) {

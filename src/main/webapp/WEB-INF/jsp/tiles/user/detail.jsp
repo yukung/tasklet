@@ -41,7 +41,7 @@
 				<c:if test="${not empty task.memos}">
 				<ul>
 					<c:forEach var="memo" items="${task.memos}" varStatus="status">
-					<li><c:out value="${memo.contents}" /></li>
+					<li><c:out value="${memo.contents}" /><span class="timestamp">（<fmt:formatDate value="${memo.createdOn}" pattern="yyyy/MM/dd HH:mm:ss"/>）</span></li>
 					</c:forEach>
 				</ul>
 				</c:if>
@@ -51,6 +51,8 @@
 					<p>
 						<label>今回の実績時間（現在までの実績に加算されます）</label>
 						<html:text property="actualTime" size="5" />
+						<label>完了チェック</label>
+						<html:checkbox property="finished" />
 						<label>メモの追加</label>
 						<html:textarea property="contents" />
 						<html:hidden property="id" value="${task.id}"/>

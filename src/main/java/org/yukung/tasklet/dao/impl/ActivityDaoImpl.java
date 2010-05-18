@@ -338,4 +338,18 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 				Integer.valueOf(activity.getId()) };
 		runner.update(conn, sql, params);
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#updateActivity(java.sql.Connection,
+	 * int)
+	 */
+	@Override
+	public void updateActivity(Connection conn, int activityId)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("updateActivity");
+		runner.update(conn, sql, Integer.valueOf(activityId));
+	}
 }

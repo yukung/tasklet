@@ -159,21 +159,30 @@ public class TaskServiceImpl implements TaskService {
 		task.setActualTime(accumulatedTime);
 
 		// タスク更新処理
-		TaskTxLogic tx = new TaskTxLogic(taskDao, memoDao);
+		TaskTxLogic tx = new TaskTxLogic(activityDao, taskDao, memoDao);
 		tx.update(task, memo);
 
 	}
 
 	/**
+	 * <p>
+	 * タスクの実績時間を計算します。
+	 * </p>
+	 * 
 	 * @param task
-	 * @return
+	 *            タスク情報Entity
+	 * @return 加算された実績時間
 	 */
 	private double calculateActualTime(Task task) {
 		// タスク実績時間の加算
 		double accumulatedTime = taskDao.getActualTimeByTaskId(task.getId())
 				.doubleValue();
 		accumulatedTime += task.getActualTime();
-		return accumulatedTime;
+		if (accumulatedTime < 0.0) {
+			return 0.0;
+		} else {
+			return accumulatedTime;
+		}
 	}
 
 	/*

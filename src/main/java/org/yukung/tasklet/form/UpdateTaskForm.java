@@ -17,7 +17,10 @@ package org.yukung.tasklet.form;
 
 import java.sql.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 import org.yukung.tasklet.utils.DateConverter;
 
@@ -38,6 +41,9 @@ public class UpdateTaskForm extends ValidatorForm {
 
 	/** 実績時間 */
 	private String actualTime;
+
+	/** 完了フラグ */
+	private boolean finished;
 
 	/** 内容 */
 	private String contents;
@@ -89,6 +95,25 @@ public class UpdateTaskForm extends ValidatorForm {
 	}
 
 	/**
+	 * 完了フラグを取得します。
+	 * 
+	 * @return 完了フラグ
+	 */
+	public boolean isFinished() {
+		return finished;
+	}
+
+	/**
+	 * 完了フラグを設定します。
+	 * 
+	 * @param finished
+	 *            完了フラグ
+	 */
+	public void setFinished(boolean isFinished) {
+		this.finished = isFinished;
+	}
+
+	/**
 	 * 内容を取得します。
 	 * 
 	 * @return 内容
@@ -105,5 +130,18 @@ public class UpdateTaskForm extends ValidatorForm {
 	 */
 	public void setContents(String contents) {
 		this.contents = contents;
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.apache.struts.validator.ValidatorForm#reset(org.apache.struts.action
+	 * .ActionMapping, javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		super.reset(mapping, request);
+		finished = false;
 	}
 }

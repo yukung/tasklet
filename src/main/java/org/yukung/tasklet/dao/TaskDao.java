@@ -166,4 +166,17 @@ public interface TaskDao {
 	public void deleteTasksFromActivity(Connection conn, String[] taskIds)
 			throws SQLException;
 
+	/**
+	 * <p>
+	 * タスクを完了します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param task
+	 *            タスク情報Entity
+	 * @exception DB更新エラー
+	 */
+	public void completeTask(Connection conn, Task task) throws SQLException;
+
 }

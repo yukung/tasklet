@@ -452,6 +452,7 @@ input.button[disabled="disabled"] {
 .clear { clear: both; }
 .attention { color: #F00; }
 .message { color: #AAA; font-style: italic; }
+.timestamp { color: #999; font-size: 75%; }
 
 /* jQuery UI Datepicker classes */
 .ui-datepicker-trigger {

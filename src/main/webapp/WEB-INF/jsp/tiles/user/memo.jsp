@@ -7,7 +7,7 @@
 				<c:if test="${not empty memos}">
 				<ul>
 				<c:forEach var="memo" items="${memos}" varStatus="status">
-					<li><c:out value="${memo.contents}"/></li>
+					<li><c:out value="${memo.contents}"/><span class="timestamp">（<fmt:formatDate value="${memo.createdOn}" pattern="yyyy/MM/dd HH:mm:ss" />）</span></li>
 				</c:forEach>
 				</ul>
 				</c:if>

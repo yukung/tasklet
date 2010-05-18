@@ -15,6 +15,8 @@
  */
 package org.yukung.tasklet.dto;
 
+import java.util.Date;
+
 /**
  * <p>
  * メモ一覧画面の表示用Beanクラスです。
@@ -30,6 +32,9 @@ public class MemoDto {
 
 	/** メモ内容 */
 	private String contents;
+
+	/** 作成タイムスタンプ */
+	private Date createdOn;
 
 	/**
 	 * メモIDを取得します。
@@ -67,6 +72,25 @@ public class MemoDto {
 	 */
 	public void setContents(String contents) {
 		this.contents = contents;
+	}
+
+	/**
+	 * 作成タイムスタンプを取得します。
+	 * 
+	 * @return 作成タイムスタンプ
+	 */
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	/**
+	 * 作成タイムスタンプを設定します。
+	 * 
+	 * @param createdOn
+	 *            作成タイムスタンプ
+	 */
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
 }
