@@ -99,6 +99,7 @@
 	</definition>
 
 	<definition name="categories" extends="base">
+		<put name="script" value="/WEB-INF/jsp/tiles/user/categoryScript.jsp" />
 		<put name="title" value="カテゴリの編集 - Tasklet" />
 		<put name="main" value="/WEB-INF/jsp/tiles/user/category.jsp" />
 		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/categoryInfo.jsp" />

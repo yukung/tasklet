@@ -170,6 +170,25 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 	 * (非 Javadoc)
 	 * 
 	 * @see
+	 * org.yukung.tasklet.dao.CategoryDao#updateCategory(org.yukung.tasklet.
+	 * entity.Category)
+	 */
+	@Override
+	public void updateCategoryName(Category category) throws TaskletException {
+		String sql = getSQLFromPropertyFile("updateCategoryName");
+		Object[] params = { category.getName(),
+				Integer.valueOf(category.getId()) };
+		try {
+			runner.update(sql, params);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
 	 * org.yukung.tasklet.dao.CategoryDao#findCategoriesByUserIdWithUncategorized
 	 * (int)
 	 */

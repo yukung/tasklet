@@ -96,4 +96,5 @@ public class ModifyCategoryForm extends ValidatorForm {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 }

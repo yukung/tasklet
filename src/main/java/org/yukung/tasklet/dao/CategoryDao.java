@@ -108,6 +108,18 @@ public interface CategoryDao {
 
 	/**
 	 * <p>
+	 * カテゴリを更新します。
+	 * </p>
+	 * 
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void updateCategoryName(Category category) throws TaskletException;
+
+	/**
+	 * <p>
 	 * 引数のユーザIDに紐づくカテゴリを取得します（カテゴリ「未分類」を含め）。
 	 * </p>
 	 * 

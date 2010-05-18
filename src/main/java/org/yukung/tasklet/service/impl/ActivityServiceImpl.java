@@ -221,6 +221,18 @@ public class ActivityServiceImpl implements ActivityService {
 	/*
 	 * (非 Javadoc)
 	 * 
+	 * @see
+	 * org.yukung.tasklet.service.ActivityService#updateCategory(org.yukung.
+	 * tasklet.entity.Category)
+	 */
+	@Override
+	public void updateCategory(Category category) throws TaskletException {
+		categoryDao.updateCategoryName(category);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
 	 * @see org.yukung.tasklet.service.ActivityService#getCategory(int)
 	 */
 	@Override

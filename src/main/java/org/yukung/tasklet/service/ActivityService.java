@@ -146,6 +146,18 @@ public interface ActivityService {
 
 	/**
 	 * <p>
+	 * カテゴリを更新します。
+	 * </p>
+	 * 
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @exception TaskletException
+	 *                DB更新時のエラー
+	 */
+	public void updateCategory(Category category) throws TaskletException;
+
+	/**
+	 * <p>
 	 * アクティビティIDに紐づいたカテゴリ情報を取得します。
 	 * </p>
 	 * 

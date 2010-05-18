@@ -160,6 +160,10 @@
     <action path="/modifyCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.ModifyCategoryAction" scope="request" validate="false">
       <forward name="success" path="categories"/>
     </action>
+    <!-- カテゴリを編集する。 -->
+    <action path="/operateCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.OperateCategoryAction" scope="request" validate="true" input="/modifyCategory.do" parameter="rename,delete,default=error">
+      <forward name="success" path="/config.do"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>
