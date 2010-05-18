@@ -88,7 +88,7 @@
       <forward name="success" path="activity"/>
     </action>
     <!-- アクティビティを修正する。 -->
-    <action path="/modifyActivity" name="modifyActivityForm" type="org.yukung.tasklet.action.ReviseAction" scope="request" validate="true">
+    <action path="/modifyActivity" name="modifyActivityForm" type="org.yukung.tasklet.action.ModifyActivityAction" scope="request" validate="true" input="/revise.do">
       <set-property property="cancellable" value="true"/>
       <forward name="success" path="activities"/>
     </action>

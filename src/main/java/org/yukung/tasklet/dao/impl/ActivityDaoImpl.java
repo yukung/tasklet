@@ -30,6 +30,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.yukung.tasklet.dao.AbstractDao;
 import org.yukung.tasklet.dao.ActivityDao;
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Category;
 import org.yukung.tasklet.exception.DataAccessException;
 
 /**
@@ -304,5 +305,37 @@ public class ActivityDaoImpl extends AbstractDao implements ActivityDao {
 		} catch (SQLException e) {
 			throw new DataAccessException(e.getMessage(), e);
 		}
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#modifyTitle(org.yukung.tasklet.entity
+	 * .Activity)
+	 */
+	@Override
+	public void modifyTitle(Connection conn, Activity activity)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("modifyTitle");
+		Object[] params = { activity.getTitle(),
+				Integer.valueOf(activity.getId()) };
+		runner.update(conn, sql, params);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.ActivityDao#modifyIndexes(org.yukung.tasklet.entity
+	 * .Activity, org.yukung.tasklet.entity.Category)
+	 */
+	@Override
+	public void modifyIndexes(Connection conn, Activity activity,
+			Category category) throws SQLException {
+		String sql = getSQLFromPropertyFile("modifyIndexes");
+		Object[] params = { Integer.valueOf(category.getId()),
+				Integer.valueOf(activity.getId()) };
+		runner.update(conn, sql, params);
 	}
 }

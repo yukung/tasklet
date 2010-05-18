@@ -166,4 +166,19 @@ public interface ActivityService {
 	 */
 	public Map<String, String> getCategoriesWithUncategorized(int userId);
 
+	/**
+	 * <p>
+	 * アクティビティ情報を修正します。
+	 * </p>
+	 * 
+	 * @param activity
+	 *            アクティビティ情報Entity
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void modify(Activity activity, Category category)
+			throws TaskletException;
+
 }

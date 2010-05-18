@@ -256,8 +256,37 @@ public class ActivityTxLogic {
 	 */
 	private int getSeq(Integer count) {
 		if (count == null) {
-			count = 0;
+			count = Integer.valueOf(0);
 		}
 		return count.intValue() + 1;
+	}
+
+	/**
+	 * <p>
+	 * アクティビティ情報を修正します。
+	 * </p>
+	 * 
+	 * @param activity
+	 *            アクティビティ情報Entity
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void modify(Activity activity, Category category)
+			throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			activityDao.modifyTitle(conn, activity);
+			activityDao.modifyIndexes(conn, activity, category);
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+		}
 	}
 }

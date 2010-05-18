@@ -256,4 +256,18 @@ public class ActivityServiceImpl implements ActivityService {
 		}
 		return ret;
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.ActivityService#modify(org.yukung.tasklet.
+	 * entity.Activity, org.yukung.tasklet.entity.Category)
+	 */
+	@Override
+	public void modify(Activity activity, Category category)
+			throws TaskletException {
+		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
+		tx.modify(activity, category);
+	}
 }

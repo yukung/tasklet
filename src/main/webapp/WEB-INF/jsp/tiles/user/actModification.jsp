@@ -8,7 +8,7 @@
 				<html:errors />
 				<h2>アクティビティの修正</h2>
 
-				<html:form action="/modifyActivity.do">
+				<html:form action="/modifyActivity">
 				<p>
 					<label>アクティビティ名</label>
 					<html:text property="title" />

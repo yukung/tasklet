@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.yukung.tasklet.entity.Activity;
+import org.yukung.tasklet.entity.Category;
 
 /**
  * <p>
@@ -219,4 +220,36 @@ public interface ActivityDao {
 	 * @return アクティビティEntityのリスト
 	 */
 	public List<Activity> getSortableInfo(int userId);
+
+	/**
+	 * <p>
+	 * アクティビティ名を修正します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param activity
+	 *            アクティビティ情報Entity
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void modifyTitle(Connection conn, Activity activity)
+			throws SQLException;
+
+	/**
+	 * <p>
+	 * アクティビティに対するカテゴリを修正します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param activity
+	 *            アクティビティ情報Entity
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void modifyIndexes(Connection conn, Activity activity,
+			Category category) throws SQLException;
 }
