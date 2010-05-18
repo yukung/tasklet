@@ -84,8 +84,13 @@
       <forward name="success" path="tasks"/>
     </action>
     <!-- アクティビティ修正画面に遷移する。 -->
-    <action path="/modifyActivity" name="modifyActivityForm" type="org.yukung.tasklet.action.ModifyActivityAction" scope="request" validate="false">
+    <action path="/revise" name="modifyActivityForm" type="org.yukung.tasklet.action.ReviseAction" scope="request" validate="false">
       <forward name="success" path="activity"/>
+    </action>
+    <!-- アクティビティを修正する。 -->
+    <action path="/modifyActivity" name="modifyActivityForm" type="org.yukung.tasklet.action.ReviseAction" scope="request" validate="true">
+      <set-property property="cancellable" value="true"/>
+      <forward name="success" path="activities"/>
     </action>
     <!-- アクティビティを削除する。 -->
     <action path="/deleteActivity" name="deleteActivityForm" type="org.yukung.tasklet.action.DeleteActivityAction" scope="request" validate="false">

@@ -40,7 +40,7 @@ import org.yukung.tasklet.service.impl.TaskServiceImpl;
  * @author yukung
  * 
  */
-public class ModifyActivityAction extends AbstractAction {
+public class ReviseAction extends AbstractAction {
 
 	/*
 	 * (非 Javadoc)

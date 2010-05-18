@@ -12,6 +12,7 @@
 				<p>
 					<label>アクティビティ名</label>
 					<html:text property="title" />
+					<html:hidden property="activityId" />
 					<label>カテゴリ名</label>
 					<html:select property="categoryId">
 						<html:optionsCollection property="categories" value="key" label="value" />
