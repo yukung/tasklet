@@ -17,7 +17,7 @@ package org.yukung.tasklet.form;
 
 import java.util.Map;
 
-import org.apache.struts.validator.ValidatorForm;
+import org.apache.struts.validator.ValidatorActionForm;
 
 /**
  * <p>
@@ -27,7 +27,7 @@ import org.apache.struts.validator.ValidatorForm;
  * @author yukung
  * 
  */
-public class ModifyCategoryForm extends ValidatorForm {
+public class ModifyCategoryForm extends ValidatorActionForm {
 
 	private static final long serialVersionUID = 1L;
 

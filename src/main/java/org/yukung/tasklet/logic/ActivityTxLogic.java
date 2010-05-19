@@ -289,4 +289,31 @@ public class ActivityTxLogic {
 			throw new TaskletException(e.getMessage(), e);
 		}
 	}
+
+	/**
+	 * <p>
+	 * 渡されたカテゴリの情報をcategoriesテーブル及びindexesテーブルから削除します。
+	 * </p>
+	 * 
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void delete(Category category) throws TaskletException {
+		Connection conn = null;
+		try {
+			conn = DaoFactory.getInstance().getConnection();
+			conn.setAutoCommit(false);
+
+			categoryDao.revertIndexes(conn, category);
+			categoryDao.deleteCategory(conn, category);
+
+			DbUtils.commitAndCloseQuietly(conn);
+		} catch (SQLException e) {
+			DbUtils.rollbackAndCloseQuietly(conn);
+			throw new TaskletException(e.getMessage(), e);
+
+		}
+	}
 }

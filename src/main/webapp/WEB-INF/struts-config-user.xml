@@ -160,8 +160,17 @@
     <action path="/modifyCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.ModifyCategoryAction" scope="request" validate="false">
       <forward name="success" path="categories"/>
     </action>
-    <!-- カテゴリを編集する。 -->
-    <action path="/operateCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.OperateCategoryAction" scope="request" validate="true" input="/modifyCategory.do" parameter="rename,delete,default=error">
+    <!-- カテゴリに対する操作を振り分ける。 -->
+    <action path="/operateCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.OperateCategoryAction" scope="request" validate="false" parameter="rename,delete,default=error">
+      <forward name="rename" path="/renameCategory.do"/>
+      <forward name="delete" path="/deleteCategory.do"/>
+    </action>
+    <!-- カテゴリをリネームする。 -->
+    <action path="/renameCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.RenameCategoryAction" scope="request" validate="true" input="/modifyCategory.do">
+      <forward name="success" path="/config.do"/>
+    </action>
+    <!-- カテゴリを削除する。 -->
+    <action path="/deleteCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.DeleteCategoryAction" scope="request" validate="false">
       <forward name="success" path="/config.do"/>
     </action>
   </action-mappings>

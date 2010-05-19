@@ -193,4 +193,15 @@ public interface ActivityService {
 	public void modify(Activity activity, Category category)
 			throws TaskletException;
 
+	/**
+	 * <p>
+	 * カテゴリを削除します。
+	 * </p>
+	 * 
+	 * @param category
+	 * @throws TaskletException
+	 *             DB更新時のエラー
+	 */
+	public void deleteCategory(Category category) throws TaskletException;
+
 }

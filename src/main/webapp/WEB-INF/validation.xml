@@ -326,17 +326,17 @@
         	</field>
         </form>
 
-        <!-- カテゴリ更新フォーム -->
-        <form name="modifyCategoryForm">
-        	<field property="name" depends="required,maxlength">
-        		<arg position="0" key="カテゴリ名" resource="false" />
-        		<arg position="1" key="${var:maxlength}" resource="false" />
-        		<var>
-        			<var-name>maxlength</var-name>
-        			<var-value>30</var-value>
-        		</var>
-        	</field>
-        </form>
+		<!-- カテゴリリネームフォーム -->
+		<form name="/renameCategory">
+			<field property="name" depends="required,maxlength">
+				<arg position="0" key="カテゴリ名" resource="false" />
+				<arg position="1" key="${var:maxlength}" resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+		</form>
 
         <!-- アクティビティ修正フォーム -->
         <form name="modifyActivityForm">

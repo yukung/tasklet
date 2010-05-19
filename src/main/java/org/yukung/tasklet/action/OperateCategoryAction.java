@@ -18,18 +18,10 @@ package org.yukung.tasklet.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.apache.struts.actions.EventDispatchAction;
-import org.yukung.tasklet.entity.Category;
-import org.yukung.tasklet.exception.TaskletException;
-import org.yukung.tasklet.form.ModifyCategoryForm;
-import org.yukung.tasklet.service.ActivityService;
-import org.yukung.tasklet.service.impl.ActivityServiceImpl;
 
 /**
  * <p>
@@ -41,16 +33,16 @@ import org.yukung.tasklet.service.impl.ActivityServiceImpl;
  */
 public class OperateCategoryAction extends EventDispatchAction {
 
-	/** アクションが成功した場合に使われるforward先の論理名 */
-	private static final String SUCCESS = "success";
-	/** アクションがエラーとなった場合に使われるforward先の論理名 */
+	/** 名前変更アクションを呼び出す場合のforward先の論理名 */
+	private static final String RENAME = "rename";
+	/** 削除アクションを呼び出す場合のforward先の論理名 */
+	private static final String DELETE = "delete";
+	/** GETメソッドで直接呼ばれた場合のforward先の論理名 */
 	private static final String ERROR = "error";
-	/** アクションが2度呼ばれた場合に使われるforward先の論理名 */
-	private static final String DOUBLE = "double";
 
 	/**
 	 * <p>
-	 * カテゴリ名をリネームします。
+	 * リネームアクションにフォワードします。
 	 * </p>
 	 * 
 	 * @param mapping
@@ -64,38 +56,12 @@ public class OperateCategoryAction extends EventDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		// ダブルポストのチェック
-		if (!isTokenValid(request, true)) {
-			return mapping.findForward(DOUBLE);
-		}
-		// ActionFormをEntityにマッピング
-		ModifyCategoryForm modifyCategoryForm = (ModifyCategoryForm) form;
-		Category category = new Category();
-		BeanUtils.copyProperties(category, modifyCategoryForm);
-
-		// サービス呼び出し
-		ActivityService activityService = new ActivityServiceImpl();
-		try {
-			activityService.updateCategory(category);
-			ActionMessages messages = new ActionMessages();
-			ActionMessage message = new ActionMessage("messages.update");
-			messages.add(ActionMessages.GLOBAL_MESSAGE, message);
-			saveMessages(request, messages);
-		} catch (TaskletException e) {
-			ActionMessages errors = new ActionMessages();
-			ActionMessage error = new ActionMessage("errors.update");
-			errors.add(ActionMessages.GLOBAL_MESSAGE, error);
-			saveErrors(request, errors);
-			return mapping.getInputForward();
-		}
-
-		saveToken(request);
-		return mapping.findForward(SUCCESS);
+		return mapping.findForward(RENAME);
 	}
 
 	/**
 	 * <p>
-	 * カテゴリを削除します。
+	 * 削除アクションにフォワードします。
 	 * </p>
 	 * 
 	 * @param mapping
@@ -109,7 +75,7 @@ public class OperateCategoryAction extends EventDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		return null;
+		return mapping.findForward(DELETE);
 	}
 
 	/**

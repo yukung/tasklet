@@ -132,6 +132,35 @@ public interface CategoryDao {
 	 *         </p>
 	 * 
 	 */
-	public List<Map<String, Object>> findCategoriesWithUncategorized(
-			int userId);
+	public List<Map<String, Object>> findCategoriesWithUncategorized(int userId);
+
+	/**
+	 * <p>
+	 * indexesテーブルのカテゴリを「未分類」に戻します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void revertIndexes(Connection conn, Category category)
+			throws SQLException;
+
+	/**
+	 * <p>
+	 * categoriesテーブルからカテゴリを削除します。
+	 * </p>
+	 * 
+	 * @param conn
+	 *            DB接続
+	 * @param category
+	 *            カテゴリ情報Entity
+	 * @throws SQLException
+	 *             DB更新エラー
+	 */
+	public void deleteCategory(Connection conn, Category category)
+			throws SQLException;
 }

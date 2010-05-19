@@ -186,7 +186,6 @@ public class ActivityServiceImpl implements ActivityService {
 	 */
 	@Override
 	public void addCategory(Category category) throws TaskletException {
-		// TODO 最新そーと順を取得して、setSeq(ソート順)を読んでセットする。
 		ActivityTxLogic tx = new ActivityTxLogic(categoryDao);
 		tx.addCategory(category);
 	}
@@ -281,5 +280,18 @@ public class ActivityServiceImpl implements ActivityService {
 			throws TaskletException {
 		ActivityTxLogic tx = new ActivityTxLogic(activityDao);
 		tx.modify(activity, category);
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.service.ActivityService#deleteCategory(org.yukung.
+	 * tasklet.entity.Category)
+	 */
+	@Override
+	public void deleteCategory(Category category) throws TaskletException {
+		ActivityTxLogic tx = new ActivityTxLogic(categoryDao);
+		tx.delete(category);
 	}
 }

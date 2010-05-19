@@ -203,4 +203,32 @@ public class CategoryDaoImpl extends AbstractDao implements CategoryDao {
 		}
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.CategoryDao#revertIndexes(java.sql.Connection,
+	 * org.yukung.tasklet.entity.Category)
+	 */
+	@Override
+	public void revertIndexes(Connection conn, Category category)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("revertIndexes");
+		runner.update(conn, sql, Integer.valueOf(category.getId()));
+	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.CategoryDao#deleteCategory(java.sql.Connection,
+	 * org.yukung.tasklet.entity.Category)
+	 */
+	@Override
+	public void deleteCategory(Connection conn, Category category)
+			throws SQLException {
+		String sql = getSQLFromPropertyFile("deleteCategory");
+		runner.update(conn, sql, Integer.valueOf(category.getId()));
+	}
+
 }
