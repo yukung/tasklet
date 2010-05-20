@@ -157,4 +157,23 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 			throw new TaskletException(e.getMessage(), e);
 		}
 	}
+
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see
+	 * org.yukung.tasklet.dao.UserDao#updateUserWithoutPassword(org.yukung.tasklet
+	 * .entity.User)
+	 */
+	@Override
+	public void updateUserWithoutPassword(User user) throws TaskletException {
+		String sql = getSQLFromPropertyFile("updateUserWithoutPassword");
+		Object[] params = { user.getEmail(), user.getDisplayName(),
+				user.getUserName() };
+		try {
+			runner.update(sql, params);
+		} catch (SQLException e) {
+			throw new TaskletException(e.getMessage(), e);
+		}
+	}
 }

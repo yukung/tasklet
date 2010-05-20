@@ -137,10 +137,15 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Override
 	public void update(User user) throws TaskletException {
-		// パスワードの暗号化
-		user.setPassword(PasswordUtil.encrypt(user.getPassword()));
-		// ユーザ登録
-		userDao.updateUser(user);
+		String password = user.getPassword();
+		if ((password == null) || (password.equals(""))) {
+			userDao.updateUserWithoutPassword(user);
+		} else {
+			// パスワードの暗号化
+			user.setPassword(PasswordUtil.encrypt(user.getPassword()));
+			// ユーザ登録
+			userDao.updateUser(user);
+		}
 	}
 
 }

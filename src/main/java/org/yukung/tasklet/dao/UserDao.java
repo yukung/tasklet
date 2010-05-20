@@ -98,4 +98,15 @@ public interface UserDao {
 	 *             DB更新エラー
 	 */
 	public void updateUser(User user) throws TaskletException;
+
+	/**
+	 * <p>
+	 * パスワードなしでユーザ情報を更新します。
+	 * </p>
+	 * 
+	 * @param user
+	 * @throws TaskletException
+	 *             DB更新エラー
+	 */
+	public void updateUserWithoutPassword(User user) throws TaskletException;
 }
