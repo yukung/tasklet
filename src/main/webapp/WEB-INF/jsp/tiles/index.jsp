@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <html:xhtml/>
 			<div id="main">
+				<h2>What is Tasklet?</h2>
 				<p><img class="float-right" src="/tasklet/images/image.png" alt="Tasklet" />
 				日々の仕事、膨大なタスク、迫ってくる納期…<br>
 				タスク管理、どうしてますか？<br>
