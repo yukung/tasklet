@@ -29,6 +29,9 @@
     <action path="/login" name="loginForm" type="org.yukung.tasklet.action.LoginAction" scope="request" validate="true" input="index">
       <forward name="success" module="/user" path="/activities.do"/>
     </action>
+    <!-- ヘルプ画面に遷移する。 -->
+    <action path="/help" forward="help">
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>

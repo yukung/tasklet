@@ -173,6 +173,8 @@
     <action path="/deleteCategory" name="modifyCategoryForm" type="org.yukung.tasklet.action.DeleteCategoryAction" scope="request" validate="false">
       <forward name="success" path="/config.do"/>
     </action>
+    <!-- ヘルプ画面に遷移する。 -->
+    <action path="/help" forward="help" />
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>

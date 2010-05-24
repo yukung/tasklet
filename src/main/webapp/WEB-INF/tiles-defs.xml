@@ -111,4 +111,10 @@
 		<put name="sidebar" value="/WEB-INF/jsp/tiles/user/actModificationInfo.jsp" />
 	</definition>
 
+	<definition name="help" extends="base">
+		<put name="title" value="ヘルプ - Tasklet" />
+		<put name="main" value="/WEB-INF/jsp/tiles/help.jsp" />
+		<put name="sidebar" value="/WEB-INF/jsp/includes/dummy.jsp" />
+	</definition>
+
 </tiles-definitions>
